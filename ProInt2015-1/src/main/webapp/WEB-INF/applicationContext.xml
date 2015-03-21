@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+        
+        <!-- BEANS  CONFIGURACION DATASOURCE-->
+        
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+            <property name="driverClassName">
+                    <value>oracle.jdbc.driver.OracleDriver</value>  
+            </property>
+            <property name="url">
+                    <value>jdbc:oracle:thin:@localhost:1521:XE</value>
+            </property>
+            <property name="username">
+                    <value>proint2014-2</value>
+            </property>
+            <property name="password"> 
+                    <value>proint2014-2</value>
+            </property>
+        </bean>
+        
+        <!-- BEANS CONFIGURACION HIBERNATE-->
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mappingResources">
+			<list>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudad.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisito.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamento.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentexnucleo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateria.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPais.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPersona.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisito.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipopersona.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuario.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstado.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacion.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacionxmicro.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriaxpensum.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivoxmicro.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtema.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemaxtema.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTema.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemaxunidad.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidad.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadxmicro.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActaxmicro.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActividadxmicro.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmAuditoria.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTabla.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
+			</list>
+		</property>
+            
+            <property name="hibernateProperties">
+                 <props>
+                      <prop key="hibernate.dialect">
+                              org.hibernate.dialect.Oracle10gDialect
+                      </prop>
+                      <prop key="hibernate.show_sql">
+                              false                                   
+                      </prop>
+                      <prop key="hibernate.transaction.factory_class">
+                              org.hibernate.transaction.JDBCTransactionFactory
+                      </prop>
+                 </props>
+            </property>      
+        </bean>
+		
+		
+		<!-- SE CREAN LOS BEANS CORRESPONDIENTES A LOS DAO's -->
+		
+		
+		<bean id="auditoriaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.AuditoriaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="ciudadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="correquisitoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="departamentoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="dependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DependenciaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="docentexNucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DocentexNucleoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="materiaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="nucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.NucleoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="paisDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PaisDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="personaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PersonaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="prerrequisitoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PrerrequisitoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="semestreDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="tablaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TablaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="tipoIdentificacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TipoIdentificacionDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="tipoPersonaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TipoPersonaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="unidadAcademicaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadAcademicaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="usuarioDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UsuarioDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="actaxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ActaxMicroDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="actividadxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ActividadxMicroDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+                
+        <bean id="bibliografiaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="biblioxUnidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.BiblioxUnidadDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="estadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EstadoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="evaluacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="evaluacionxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionxMicroDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="materiaxPensumDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriaxPensumDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="microcurriculoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="microxEstadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxEstadoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+                
+        <bean id="objetivoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="objetivoxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoxMicroDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="observacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObservacionDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="pensumDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PensumDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="guardarMicrocurriculoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.GuardarMicrocurriculoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="subtemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="subtemaxTemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaxTemaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="temaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TemaDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="temaxUnidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TemaxUnidadDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="unidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="unidadxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadxMicroDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+
+
+		<!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LA LOGICA -->
+		
+		<bean id="auditoriaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.AuditoriaNGCImpl">
+        	<property name="auditoriaDao" ref="auditoriaDao" />
+        </bean>
+        
+         <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl">
+        	<property name="paisDao" ref="paisDao" />
+        </bean>
+        
+        <bean id="departamentoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DepartamentoNGCImpl">
+        	<property name="paisDao" ref="paisDao" />
+        	<property name="departamentoDao" ref="departamentoDao" />
+        </bean>
+        
+        <bean id="ciudadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CiudadNGCImpl">
+        	<property name="ciudadDao" ref="ciudadDao" />
+        	<property name="departamentoDao" ref="departamentoDao" />
+        </bean>
+        
+        <bean id="correquisitoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CorrequisitoNGCImpl">
+        	<property name="correquisitoDao" ref="correquisitoDao" />
+        	<property name="materiaDao" ref="materiaDao" />
+        </bean>
+        
+        <bean id="dependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DependenciaNGCImpl">
+        	<property name="dependenciaDao" ref="dependenciaDao" />
+        	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
+        </bean>
+        
+        <bean id="docentexNucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DocentexNucleoNGCImpl">
+        	<property name="docentexNucleoDao" ref="docentexNucleoDao" />
+        	<property name="nucleoDao" ref="nucleoDao" />
+        	<property name="personaDao" ref="personaDao" />
+        </bean>
+        
+        <bean id="materiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriaNGCImpl">
+        	<property name="materiaDao" ref="materiaDao" />
+        	<property name="nucleoDao" ref="nucleoDao" />
+        </bean>
+        
+        <bean id="nucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl">
+        	<property name="nucleoDao" ref="nucleoDao" />
+        </bean>    
+        
+        <bean id="personaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl">
+        	<property name="personaDao" ref="personaDao" />
+        	<property name="tipoPersonaDao" ref="tipoPersonaDao" />
+        	<property name="ciudadDao" ref="ciudadDao" />
+        </bean>
+        
+        <bean id="prerrequisitoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PrerrequisitoNGCImpl">
+        	<property name="prerrequisitoDao" ref="prerrequisitoDao" />
+        	<property name="materiaDao" ref="materiaDao" />
+        </bean>
+        
+        <bean id="semestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
+        	<property name="semestreDao" ref="semestreDao" />
+        </bean>
+        
+        <bean id="tablaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TablaNGCImpl">
+        	<property name="tablaDao" ref="tablaDao" />
+        </bean>
+        
+        <bean id="tipoIdentificacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TipoIdentificacionNGCImpl">
+        	<property name="tipoIdentificacionDao" ref="tipoIdentificacionDao" />
+        </bean>
+        
+        <bean id="tipoPersonaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TipoPersonaNGCImpl">
+        	<property name="tipoPersonaDao" ref="tipoPersonaDao" />
+        </bean>
+        
+        <bean id="unidadAcademicaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadAcademicaNGCImpl">
+        	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
+        </bean>
+        
+        <bean id="usuarioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UsuarioNGCImpl">
+        	<property name="usuarioDao" ref="usuarioDao" />
+        </bean>
+        
+        <bean id="actaxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ActaxMicroNGCImpl">
+        	<property name="actaxMicroDao" ref="actaxMicroDao" />
+        </bean>
+        
+        <bean id="actividadxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ActividadxMicroNGCImpl">
+        	<property name="actividadxMicroDao" ref="actividadxMicroDao" />
+        </bean>
+        
+        <bean id="bibliografiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BibliografiaNGCImpl">
+        	<property name="bibliografiaDao" ref="bibliografiaDao" />
+        </bean>
+        
+        <bean id="biblioxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BiblioxUnidadNGCImpl">
+        	<property name="biblioxUnidadDao" ref="biblioxUnidadDao" />
+        	<property name="unidadDao" ref="unidadDao" />
+        </bean>
+        
+        <bean id="estadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EstadoNGCImpl">
+        	<property name="estadoDao" ref="estadoDao" />
+        </bean>
+        
+        <bean id="evaluacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionNGCImpl">
+        	<property name="evaluacionDao" ref="evaluacionDao" />
+        </bean>
+        
+        <bean id="evaluacionxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionxMicroNGCImpl">
+        	<property name="evaluacionxMicroDao" ref="evaluacionxMicroDao" />
+        	<property name="microcurriculoDao" ref="microcurriculoDao" />
+        	<property name="evaluacionDao" ref="evaluacionDao" />
+        </bean>
+        
+        <bean id="materiaxPensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriaxPensumNGCImpl">
+        	<property name="materiaxPensumDao" ref="materiaxPensumDao" />
+        </bean>
+        
+        <bean id="microcurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicrocurriculoNGCImpl">
+        	<property name="microcurriculoDao" ref="microcurriculoDao" />
+        	<property name="materiaDao" ref="materiaDao" />
+        	<property name="nucleoDao" ref="nucleoDao" />
+        	<property name="personaDao" ref="personaDao" />
+        </bean>
+        
+        <bean id="microxEstadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxEstadoNGCImpl">
+        	<property name="microxEstadoDao" ref="microxEstadoDao" />
+        	<property name="estadoDao" ref="estadoDao" />
+        </bean>
+        
+        <bean id="objetivoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoNGCImpl">
+        	<property name="objetivoDao" ref="objetivoDao" />
+        	<property name="microcurriculoDao" ref="microcurriculoDao" />
+        </bean>
+        
+        <bean id="objetivoxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoxMicroNGCImpl">
+        	<property name="objetivoxMicroDao" ref="objetivoxMicroDao" />
+        	<property name="microcurriculoDao" ref="microcurriculoDao" />
+        	<property name="objetivoDao" ref="objetivoDao" />
+        </bean>
+        
+        <bean id="observacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObservacionNGCImpl">
+        	<property name="observacionDao" ref="observacionDao" />
+        </bean>
+        
+       <bean id="pensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PensumNGCImpl">
+        	<property name="pensumDao" ref="pensumDao" />
+        </bean>
+        
+        <bean id="guardarMicrocurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.GuardarMicrocurriculoNGCImpl">
+        	<property name="guardarMicrocurriculoDao" ref="guardarMicrocurriculoDao" />
+        	<property name="microcurriculoDao" ref="microcurriculoDao" />
+        </bean>
+   
+   		<bean id="temaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaNGCImpl">
+        	<property name="temaDao" ref="temaDao" />
+        </bean>
+        
+        <bean id="subtemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaNGCImpl">
+        	<property name="subtemaDao" ref="subtemaDao" />
+        	<property name="temaDao" ref="temaDao" />
+        </bean>
+        
+        <bean id="subtemaxTemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaxTemaNGCImpl">
+        	<property name="subtemaxTemaDao" ref="subtemaxTemaDao" />
+        	<property name="temaDao" ref="temaDao" />
+        </bean>
+        
+        <bean id="temaxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaxUnidadNGCImpl">
+        	<property name="temaxUnidadDao" ref="temaxUnidadDao" />
+        	<property name="unidadDao" ref="unidadDao" />
+        	<property name="temaDao" ref="temaDao" />
+        </bean>
+        
+        <bean id="unidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadNGCImpl">
+        	<property name="unidadDao" ref="unidadDao" />
+        </bean>
+        
+        <bean id="unidadxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadxMicroNGCImpl">
+        	<property name="unidadxMicroDao" ref="unidadxMicroDao" />
+        	<property name="microcurriculoDao" ref="microcurriculoDao" />
+        </bean>
+		
+        
+        <!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LOS CONTROLADORES -->
+        
+        
+        <bean id="crearMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMicroCtrl" scope="prototype">
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="paisNGC" ref="paisNGC" />
+        	<property name="temaNGC" ref="temaNGC" />
+        	<property name="subtemaNGC" ref="subtemaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        </bean>
+        
+        <bean id="crearMateriaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMateriaCtrl" scope="prototype">
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
+        </bean>
+        
+        <bean id="modificarMateriaCtrl" class="com.udea.proint1.microcurriculo.ctrl.ModificarMateriaCtrl" scope="prototype">
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
+        </bean>
+        
+        
+<!--         Se deja comentado este Bean para verificar su funcionabilidad.  FAVOR DEJAR ASI A MENOS QUE REALMENTE SE NECESITE. -->
+<!-- 		 Los metodos aqui contenidos los pasé al controlador CargarDatosFormas con el fin de optimizar los procedimientos   -->
+<!-- 		 de guardarMicrocurriculo.  Antes hacian muchas busquedas en la BD ahora se trabaja con listas de objetos -->
+
+<!--         <bean id="validarDatosCtrl" class="com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl" scope="prototype"> -->
+<!--         	<property name="microcurriculoNGC" ref="microcurriculoNGC" /> -->
+<!--         	<property name="materiaNGC" ref="materiaNGC" /> -->
+<!--         	<property name="personaNGC" ref="personaNGC" /> -->
+<!--         	<property name="semestreNGC" ref="semestreNGC" />        	 -->
+<!--         	<property name="unidadNGC" ref="unidadNGC" /> -->
+<!--         	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" /> -->
+<!--         	<property name="estadoNGC" ref="estadoNGC" /> -->
+<!--         	<property name="temaNGC" ref="temaNGC" /> -->
+<!--         	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" /> -->
+<!--         	<property name="subtemaNGC" ref="subtemaNGC" /> -->
+<!--         	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" /> -->
+<!--         	<property name="evaluacionNGC" ref="evaluacionNGC" /> -->
+<!--         	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" /> -->
+<!--         	<property name="objetivoNGC" ref="objetivoNGC" /> -->
+<!--         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" /> -->
+<!--         	<property name="bibliografiaNGC" ref="bibliografiaNGC" /> -->
+<!--         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" /> -->
+<!--         	<property name="microxEstadoNGC" ref="microxEstadoNGC" /> -->
+<!--         	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" /> -->
+<!--         </bean> -->
+        
+        
+        <bean id="listarMateriasCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMateriasCtrl" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        </bean>
+        
+        <bean id="consultarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ConsultarMicroCtrl" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="estadoNGC" ref="estadoNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="microxestadoNGC" ref="microxEstadoNGC" />
+        	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
+        	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
+        	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
+        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
+        	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
+        	<property name="unidadNGC" ref="unidadNGC" />
+        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
+        </bean>
+        
+             
+        <bean id="cargarDatosFormas" class="com.udea.proint1.microcurriculo.ctrl.CargarDatosFormas" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="paisNGC" ref="paisNGC" />
+        	<property name="estadoNGC" ref="estadoNGC" />
+        	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
+        </bean>
+        
+        <bean id="cargarDatos" class="com.udea.proint1.microcurriculo.ctrl.CargarDatos" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        </bean>
+        
+        <bean id="crearPersonaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearPersonaCtrl" scope="prototype">
+        	<property name="personaNGC" ref="personaNGC"/>
+        	<property name="ciudadNGC" ref="ciudadNGC" />
+        	<property name="paisNGC" ref="paisNGC" />
+        	<property name="departamentoNGC" ref="departamentoNGC" />
+        	<property name="tipoIdentificacionNGC" ref="tipoIdentificacionNGC" />
+        	<property name="tipoPersonaNGC" ref="tipoPersonaNGC" />
+        </bean>
+        
+        <bean id="cargarDatosFormas2" class="com.udea.proint1.microcurriculo.ctrl.CargarDatosFormas2" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="paisNGC" ref="paisNGC" />
+        	<property name="estadoNGC" ref="estadoNGC" />
+        </bean>
+        
+        <bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
+        	<property name="estadoNGC" ref="estadoNGC" />
+        </bean>
+        
+        <bean id="duplicarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.DuplicarMicroCtrl" scope="prototype">
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
+        	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
+        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
+        	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
+        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
+        </bean>
+        
+        <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        </bean>            
+</beans>

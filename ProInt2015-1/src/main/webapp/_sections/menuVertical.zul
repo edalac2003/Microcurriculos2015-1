@@ -1,0 +1,52 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk xmlns:n="native">
+	<!-- Begin Menu -->
+	<hbox spacing="0">
+		<menubar id="menubar" autodrop="true" orient="vertical" apply="${menuPrincipalHorCtl}">
+			<menuitem label="Inicio" onClick="alert(self.label)" />
+			<menu label="Institucional">
+				<menupopup>
+					<menuitem label="Quienes somos" onClick="alert(self.label)" />
+					<menuitem label="Perfil profesional" onClick="alert(self.label)" />
+				</menupopup>
+			</menu>
+			<menu label="Estudiar Sistemas">
+				<menupopup>
+					<menuitem label="Programas Pregrado" onClick="alert(self.label)" />
+					<menuitem label="Programos Posgrado" onClick="alert(self.label)" />
+				</menupopup>
+			</menu>
+			<menu label="Servicios y productos">
+				<menupopup>
+					<menuitem id="btnReporteActividades" label="Reporte de actividades docentes"/>
+					<menu id="btnCurriculo" label="Gestionar micro-curriculo">
+						<menupopup>
+							<menuitem id="btnIngresarCurriculo" label="Ingresar micro curriculo" />
+							<menuitem id="btnAprobarCurriculo" label="Aprobar micro curriculo" />
+							<menuitem id="btnDevolverCurriculo" label="Devolver micro curriculo" />
+							<menuitem id="btnDuplicarCurriculo" label="Duplicar micro curriculo" />
+							<menuitem id="btnActualizarCurriculo" label="Actualizar estado micro curriculo" />
+							<menu id="btnReportes" label="Reportes">
+								<menupopup>
+									<menuitem id="btnReporteCurriculo" label="Crear reporte un micro curriculo" />
+									<menuitem id="btnReporteCurriculoNucleo" label="Crear reporte micro curriculo nucleo" />
+									<menuitem id="btnReporteCurriculoEstado" label="Crear reporte micro curriculo estado" />
+								</menupopup>
+							</menu>
+						</menupopup>
+					</menu>
+					<menuitem id="btnAdministracion" label="Administración" />
+				</menupopup>
+			</menu>
+			<menu label="Investigacion">
+				<menupopup>
+					<menuitem label="Grupos" onClick="alert(self.label)" />
+					<menuitem label="Producción académica" onClick="alert(self.label)" />
+				</menupopup>
+			</menu>
+		</menubar>
+	
+	</hbox>
+		
+	<!-- End Menu -->
+</zk>

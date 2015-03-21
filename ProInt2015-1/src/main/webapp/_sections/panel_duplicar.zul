@@ -1,0 +1,110 @@
+<zk>
+		<borderlayout id="formaPanelDuplicaMicro" height="558px" apply="${cargarDatosFormas2}">
+		
+			<north height="100px" border="0">
+				<include id="headerIdx2" src="/_sections/header.zul" />
+			</north>
+			
+			<center border="0">
+				<div align="center">
+					<borderlayout height="358px">
+					
+						<north border="0">
+							<div align="center">
+								<toolbar id="tb" sclass="vista" height="45px" width="960px" >
+									<toolbarbutton id="${labels.microcurriculo.toolbar.home}" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+									<toolbarbutton id="${labels.microcurriculo.toolbar.new}" label="Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
+									<toolbarbutton id="${labels.microcurriculo.toolbar.close}" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
+								</toolbar>
+							</div>
+						</north>
+						
+						<center border="0" apply="${eventosPanelDuplicarMicro}">
+							<div align="center">
+								<div height="10px"/>
+								<panel title="Seleccione Microcurriculo a duplicar" border="normal" width="960px" height="300px">
+									<panelchildren>
+										<div height="10px"/>
+										<div align="center" width="940px">
+											<toolbar>
+												<label value="Filtrar Busqueda"/>
+											</toolbar>
+											<grid>
+												<columns>
+													<column width="15%"/>
+													<column width="35%"/>
+													<column width="15%"/>
+													<column width="35%"/>
+												</columns>
+												<rows>
+													<row>
+						                				<label value="Unidad Académica" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbUnidadAcademica" />
+								                        </div>
+								                        <label value="Dependencia" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbDependencia" />
+								                        </div>
+							                		</row>
+							                		
+							                		<row>
+						                				<label value="Nucleo" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbNucleo" />
+								                        </div>
+								                        <label value="Materia" />
+									                    <div>
+									                        <combobox id="cmbMateria"/>
+									                    </div>
+							                		</row>
+							                	</rows>
+							                </grid>
+							                <div height="10px"/>
+							                <toolbar>
+							                	<label id="lblEncabezadoMicro" value="Seleccione microcurriculo y semestre a duplicar"/>
+							                </toolbar>
+							                <grid>
+							                	<columns>
+							                		<column width="20%"/>
+							                		<column width="80%"/>
+							                	</columns>
+							                	<rows>
+							                		<row>
+														<label value="Microcurriculo" />
+									                    <div>
+									                        <combobox id="cmbMicrocurriculo" />
+									                    </div>
+							                		</row>
+							                		
+							                		<row >
+														<label value="Semestre a Duplicar" />
+									                    <div>
+									                        <combobox id="cmbSemestre"/>
+									                    </div>
+							                		</row>
+												</rows>
+											</grid>
+										</div>
+									</panelchildren>
+									<toolbar>
+										<button id="btnDuplicar" label="Duplicar" style="margin:0 0 0 435px;" href="/microcurriculo/duplicarMic.zul"/>
+									</toolbar>
+								</panel>
+							</div>
+						</center>
+						
+					</borderlayout>
+				</div>
+			</center>
+			
+			<south height="100px" border="0">
+				<div>
+					<div height="10px" />
+					<div>
+						<include id="footerIdx2" src="/_sections/footer.zul" />
+					</div> 							
+				</div>
+			</south>
+		</borderlayout>
+</zk>

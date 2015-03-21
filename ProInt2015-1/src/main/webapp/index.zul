@@ -1,0 +1,65 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Pantalla Inicial Microcurriculos" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>	
+	<window id="index" border="0">	
+		<borderlayout height="700px">			
+			<north height="100px" border="0">
+				<include id="headerIdx" src="/_sections/header.zul" />							
+			</north>
+			<east width="180px" border="0">
+				<label value="" />
+			</east>			
+			<west width="180px" border="0">
+				<label value="" />
+			</west>
+			
+			<center border="0">
+				<div>
+					<div align="center">
+						<hbox align="center" height="90px">
+							<label value="SISTEMA DE GESTION DE MICROCURRICULOS" sclass="tituloFondo"/>
+						</hbox>
+					</div>
+					
+					<div align="center">
+						<vbox>
+							<hbox align="center" height="120px">
+								<a href="/microcurriculo/inicio_mic.zul" image="/_img/icons/128x128/microcurriculos.png" />
+								<vbox width="400px">
+									<a href="/microcurriculo/inicio_mic.zul" label="Microcurriculos" sclass="nombreSeccion" />
+									<div sclass="contenidoSeccion">
+										<label value="En este modulo se encuentran los procesos de creación, consulta, listado, clonación de microcurriculos." />
+									</div>	
+								</vbox>								
+							</hbox>
+							<hbox align="center" height="120px">
+								<a href="/_docente/inicio_docente.zul" image="/_img/icons/128x128/docentes.png" />
+								<vbox width="400px">
+									<a href="/docente/inicio_docente.zul" label="Docentes" sclass="nombreSeccion" />	
+									<div sclass="contenidoSeccion">
+										<label value="Esta sección proporciona acceso a la creación, modificación, consulta y listado de las personas y la asignación de roles." />
+									</div>	
+								</vbox>	
+							</hbox>
+							<hbox align="center" height="120px">
+								<a href="/materia/inicio_mat.zul" image="/_img/icons/128x128/materias.png" />
+								<vbox width="400px">
+									<a href="/materia/inicio_mat.zul" label="Materias" sclass="nombreSeccion" />
+									<div sclass="contenidoSeccion">
+										<label value="Este módulo permite crear, modificar, consultar y listar materias, conforme a los Nucleos registrados en el sistema." />
+									</div>	
+								</vbox>		
+							</hbox>
+						</vbox>
+					</div>
+				</div>
+			</center>
+			
+			<south border="0">		
+				<div> <include id="footerIdx" src="/_sections/footer.zul" /> </div>					
+			</south>
+		</borderlayout>
+	</window>
+</zk>

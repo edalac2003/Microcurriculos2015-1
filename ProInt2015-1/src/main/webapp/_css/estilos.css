@@ -1,0 +1,111 @@
+@CHARSET "ISO-8859-1";
+
+
+.estiloceldas{
+	font-size: 9px;
+	padding:0 5px;
+}
+
+.titulos{
+/* 	color: Red; */
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+	font-size: medium;
+	color : red;
+	margin: px;
+	padding: 5px;
+	text-align: center;
+	height: 40;
+	width: px;
+	font-style: normal
+}
+
+
+.resaltado{
+	color: Red;
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+	text-align: center;
+	font-style: normal;
+}
+
+.resaltadonormal{
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+}
+
+.campoobligatorio{
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+	color: Red;
+}
+
+
+.z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover {
+    background-color: transparent;
+	height: 35px;
+	padding: 2px;
+	font-style: normal;
+	font-weight: bold;
+}
+
+.vista {
+    background: #004000;
+    color: White;
+    padding-top: 4;
+	font-size: small;
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold;
+	height: 35px;
+	background-color: AliceBlue;
+	font-style: normal;
+	padding: 3px;
+	margin: 3
+}
+
+.p-vista .z-panel-children {
+    background-color: #400000;
+    border-bottom: 0 none;
+}
+
+.tituloFondo{
+	height: 10px;
+	text-align: center;
+	color: #004000;
+	font-size: x-large;
+	width: 900px;
+	margin: 5;
+	font-family: Calibri, Tahoma, Arial;
+	font-weight: bolder;
+	padding: 10;
+	border-bottom: 10
+}
+
+.nombreSeccion{
+	color: #FF8000;
+	font-size: 18px;
+	font-family: Arial Black, Arial, Calibri, Tahoma;
+	font-weight: bolder;
+	margin: 4px
+}
+
+.contenidoSeccion{
+	font-size: x-small;
+	font-family: Calibri, Calibri Light, Tahoma, Arial;
+	margin: 4px;
+	text-align: justify;
+}
+
+/**.z-div, .z-div-label{
+	margin: px;
+	padding: px;
+	color: Red;
+	font-size: large;
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold
+}**/
+
+/**.z-tabbox {
+	color: Green;
+	font-family: Arial, Tahoma, Verdana
+} **/

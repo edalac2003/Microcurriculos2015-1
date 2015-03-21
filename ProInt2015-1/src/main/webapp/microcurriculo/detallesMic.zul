@@ -1,0 +1,474 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Universidad de Antioquia" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+	<window id="formaDetallesMicro" border="0">
+		<borderlayout id="blyConsultarMicro" height="950px" apply="${duplicarMicroCtrl}">
+			
+			<north height="100px" border="0">
+				<include id="headerIdx" src="/_sections/header.zul" />			
+			</north>
+			
+			<center border="0" apply="${cargarDatosFormas2}">
+				<div align="center">
+					
+					<borderlayout height="870px">
+						
+						<north border="0"> 
+							<toolbar id="tb" sclass="vista" height="45px" width="960px">
+								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
+								<toolbarbutton id="tool_consulta_otro" label="Consultar Nuevo" image="/_img/icons/32x32/atras.png" />
+								<toolbarbutton id="tool_print" label="Imprimir" image="/_img/icons/32x32/printer.png" />
+								<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
+							</toolbar>
+						</north>
+						
+						<west width="180px" border="0">
+							<label></label>
+						</west>
+						
+						<east width="180px" border="0">
+							<label></label>
+						</east>
+						
+						<center autoscroll="true" border="0">
+							<div>
+								<div height="10px"/>
+								
+								<panel id="panelBuscarMicro" title="Seleccione Microcurriculo a buscar" border="normal" width="960px" height="260px" style="{font-size: 14px}">
+									<panelchildren>
+										<div height="10px"/>
+										<div align="center" width="940px">
+											<toolbar>
+												<label value="Filtrar Busqueda" style="font-size:13px; margin:0 0 0 413px;"/>
+											</toolbar>
+											<grid>
+												
+												<columns>
+													<column width="15%"/>
+													<column width="35%"/>
+													<column width="15%"/>
+													<column width="35%"/>
+												</columns>
+												
+												<rows>
+													<row>
+						                				<label value="Unidad Académica" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbUnidadAcademica2" />
+								                        </div>
+								                        <label value="Dependencia" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbDependencia2" />
+								                        </div>
+							                		</row>
+							                		
+							                		<row>
+						                				<label value="Nucleo" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbNucleo2" />
+								                        </div>
+								                        <label value="Materia" />
+									                    <div>
+									                        <combobox id="cmbMateria2"/>
+									                    </div>
+							                		</row>
+							                	</rows>
+							                	
+							                </grid>
+							                
+							                <div height="25px"/>
+							                <grid width="300px">
+							                	<columns>
+							                		<column width="40%"/>
+							                		<column width="60%"/>
+							                	</columns>
+							                	<rows>
+							                		<row>
+														<label value="Microcurriculo" />
+									                    <div align="center">
+									                        <combobox id="cmbMicrocurriculo2" />
+									                    </div>
+							                		</row>
+												</rows>
+											</grid>
+										</div>
+									</panelchildren>
+									<toolbar>
+										<button id="btnConsultar" label="Consultar" style="margin:0 0 0 435px;" href="/microcurriculo/detallesMic.zul"/>
+									</toolbar>
+								</panel>
+													
+								<tabbox id="fichaContenidos" sclass="tabbox" width="960px" visible="false">
+									<tabs style="">
+										<tab label="Información General" id="infoGeneral"/>
+										<tab label="Información Complementaria" id="infoComplemento"/>
+										<tab label="Unidades y Temas" id="infoUnidades"/>
+										<tab label="SubTemas" id="infoSubtema"/>
+										<tab label="Evaluaciones" id="infoEvaluacion"/>
+										<tab label="Referencias Bibliográficas" id="infoBibliografia"/>
+									</tabs>
+									<tabpanels>
+									
+										<tabpanel id="tabInfoBasica">
+											<grid >
+												<columns>
+													<column width="15%" />
+													<column width="60%" />												
+												</columns>
+												<rows>
+													<row>
+														<label value="Código Microcurriculo" />
+									                    <div>
+									                        <label id="lblIdMicrocurriculo" value="" sclass="titulos"/>									                        
+									                    </div>
+							                		</row>
+							                		<row>
+									                    <label value="Estado Actual" width="150px" />
+									                    <combobox id="cmbEstadoActual" disabled="true" droppable="2"/>
+							                		</row>
+							                		<row>
+														<label value="Docente Responsable" />
+									                    <div>
+									                        <combobox id="cmbDocente" width="25%" droppable="2"/>
+									                        <label id="lblNombreDocente" />
+									                    </div>
+							                		</row>
+													
+							                		<row>
+						                				<label value="Unidad Académica" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbUnidadAcademica" />
+								                        	<label id="lblNombreUnidadAcademica" />
+								                        </div>
+							                		</row>
+							                		<row>
+						                				<label value="Dependencia" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbDependencia" />
+								                        	<label id="lblNombreDependencia" />
+								                        </div>
+							                		</row>
+							                		
+							                		<row>
+						                				<label value="Nucleo" width="30%"/>
+								                        <div>
+								                        	<combobox id="cmbNucleo" />
+								                        	<label id="lblNombreNucleo" />
+								                        </div>
+							                		</row>
+							                		
+													<row>
+														<label value="Id Materia" />
+									                    <div>
+									                        <combobox id="cmbMateria" width="25%" />
+									                        <label id="lblNombreMateria" />
+									                    </div>
+							                		</row>
+							                		
+							                		<row>
+														<label value="Semestre" />
+									                    <div>
+									                        <combobox id="cmbSemestre" width="15%"/>									                        
+									                    </div>
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Créditos" />
+									                    <div>
+							                        		<label id="lblCreditosMateria" />
+							                    		</div>
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Horas Teóricas" />
+									                    <label id="lblHtMateria" />
+									                    		                    
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Horas Practicas " />
+									                    <label id="lblHpMateria" />		                    
+							                		</row>
+							                			
+							                		<row>
+									                    <label value="Horas Teorico-Prácticas " />
+									                    <label id="lblHtpMateria" />
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Horas Clase por Semestre " />
+									                    <label id="lblHoraClaseSemestral" />		                    
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Campo de Formación" />
+									                    <label id="lblCampoFormacion" />
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Validable" width="150px" />
+									                    <checkbox id="ckbValidable" />
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Habilitable" />
+									                    <checkbox id="ckbHabilitable" />
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Clasificable" width="150px" />
+									                    <checkbox id="ckbClasificable" />
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Prerequisitos" width="150px" />
+									                    <label id="lblPrerrequisitos" />
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Correquisitos" width="150px" />
+									                    <label id="lblCorrequisitos" multiline="true"/>
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Programas Vinculados" width="150px" />
+									                    <label id="lblProgramasVinculados" />
+							                		</row>
+												</rows>
+											</grid>
+										</tabpanel>
+										
+										<tabpanel id="tabInfoCompl">
+											<grid>
+												<columns>
+													<column value="" width="15%" />
+													<column value="" width="70%"/>
+												</columns>
+												<rows >
+												
+													<row>
+									                    <label value="Proposito del Curso" style="font-weight:bold"/>
+									                    <div>
+									                    	<textbox id="txtPropositoMicro"  value="Proposito" multiline="true" width="100%"/>
+									                    	<label id="lblPropositoMicro" multiline="true" />
+									                    </div>								                    
+									                </row>
+									                
+													<row>
+									                    <label value="Justificación" style="font-weight:bold"/>
+									                    <div>
+									                    	<textbox id="txtJustificacionMicro"  value="Justificacion" multiline="true" width="100%"/>
+									                   		<label id="lblJustificacionMicro" multiline="true" />
+									                    </div>								                    
+									                </row>
+									                
+									                <row>
+									                    <label value="Objetivo General" style="font-weight:bold"/>
+									                   	<div>
+										                    <textbox id="txtObjetivoGeneral"  value="Objetivo General" multiline="true" width="100%"/>
+										                    <label id="lblObjetivoGeneral" multiline="true" />
+									                    </div>								                    
+									                </row>
+									                
+									                <row valign="top">
+									                	<label value="Objetivos Especificos" style="font-weight:bold"/>
+									                	<div><listbox id="listaObjetivosEspecificos" />
+									                	</div>
+									                </row>
+									                
+									                <row>
+									                    <label value="Contenido Resumido" style="font-weight:bold"/>
+									                    <div>
+									                    	<textbox id="txtResumenMicro"  value="Resumen" multiline="true" width="100%"/>
+									                    	<label id="lblResumenMicro" multiline="true"/>
+									                    </div>
+									                </row>
+									                
+												</rows>
+											</grid>
+										</tabpanel>
+										
+										<tabpanel id="tabInfoUnidad">
+																						
+											<listbox  id="listaUnidades">
+												<listhead>
+													<listheader width="0%">
+													</listheader>
+													<listheader align="center">
+														<label value="Unidades" style="font-weight:bold"/>
+													</listheader>
+												</listhead>
+											</listbox>
+											
+											<separator />
+											<div>
+												<div height="25px">
+													<label value="TEMAS POR UNIDAD" sclass="titulos" />
+												</div>												
+											</div>
+											<separator />											
+											
+											<listbox id="listaTemas">
+												<listhead >
+													<listheader width="35%" align="center">
+														<div>
+															<label value="Unidad" style="font-weight:bold"/>
+															<label />
+														</div>														
+													</listheader>
+													<listheader width="35%" align="center">
+														<div>
+															<label value="Tema" style="font-weight:bold"/>
+														</div>
+														
+													</listheader>
+													<listheader width="25%" align="center">
+														<div>
+															<label value="Tiempo (Semanas)" style="font-weight:bold"/>
+														</div> 
+													</listheader>
+												</listhead>						
+											</listbox>
+											<separator />
+										</tabpanel>
+										
+										<tabpanel>
+											<div>
+												<div style="color:red;" height="25px">
+													<label value="SUBTEMAS POR TEMAS" sclass="titulos" />
+												</div>
+												<separator />
+												<listbox id="listaSubtemas">
+													<listhead>
+														<listheader width="25%" align="center">
+															<label value="Unidad" sclass="resaltadonormal"/>
+															<div>																
+															</div>
+														</listheader>
+														<listheader width="25%" align="center">
+															<label value="Tema" sclass="resaltadonormal"/>
+															<div>																
+															</div>	
+														</listheader>
+														<listheader width="50%" align="center">
+															<label value="Subtema" sclass="resaltadonormal"/>
+															<div>										                    	
+										                    </div>	
+														</listheader>
+													</listhead>
+												</listbox>
+											</div>
+											<separator />											
+										</tabpanel>			
+										
+										<tabpanel id="tabInfoEval">
+											<listbox id="listaEvaluaciones">
+												<listhead>
+													<listheader label="" align="center" sclass="resaltadonormal" width="60%">
+														<label value="Actividad" sclass="resaltadonormal"/>
+														<div>															
+														</div> 
+													</listheader>
+													<listheader label="" align="center" sclass="resaltadonormal" width="10%">
+														<label value="Porcentaje (%)" sclass="resaltadonormal"/>
+														<div>
+														</div>
+													</listheader>
+													<listheader label="" align="center" width="20%">
+														<label value="Fecha Estimada" sclass="resaltadonormal" />
+														<div>
+									                    </div>
+													</listheader>
+												</listhead>												
+											</listbox>										
+										</tabpanel>
+										
+										<tabpanel id="infoBiblioBas">
+											<listbox>
+												<listhead>
+													<listheader align="center">
+													</listheader>
+												</listhead>											
+											</listbox>
+											<separator />
+											
+											<div style="color:red" height="30px" >
+												<label value="REFERENCIAS BIBLIOGRÁFICAS" sclass="titulos" />					
+											</div>
+											
+											<listbox id="listaBibliografia">
+												<listhead>
+													<listheader align="center">
+														<label value="Referencia" sclass="resaltadonormal"/>
+														<div>
+														</div>
+													</listheader>
+													<listheader align="center">
+														<label value="Autor" sclass="resaltadonormal"/> 
+														<div>
+														</div> 
+													</listheader>
+													<listheader align="center">
+														<label value="ISBN" sclass="resaltadonormal"/>
+														<div>
+														</div> 
+													</listheader>
+													<listheader align="center" width="20%">
+														<label value="Tipo" sclass="resaltadonormal"/>
+														<div>
+									                    </div>
+													</listheader>
+												</listhead>
+											</listbox>
+											
+											<separator />
+											<div style="color:red" height="30px">
+												<label value="REFERENCIAS CIBERGRÁFICAS" sclass="titulos" />
+											</div>
+											<listbox id="listaCibergrafia">
+												<listhead>
+													<listheader align="center">
+														<label value="Nombre del Sitio" sclass="resaltadonormal"/>
+														<div>
+														</div>
+													</listheader>
+													<listheader align="center">
+														<label value="Sitio Web" sclass="resaltadonormal"/>
+														<div>
+														</div>
+													</listheader>
+													<listheader align="center" width="20%">
+														<label value="Tipo" sclass="resaltadonormal"/>
+														<div>
+									                    </div>
+													</listheader>
+												</listhead>
+											</listbox>
+										</tabpanel>
+									</tabpanels>
+								</tabbox>
+							</div>			
+						</center>
+						
+						<south border="0" height="130px">
+							<div>
+								<div height="20px" />
+								<div>
+									<include id="footerIdx" src="/_sections/footer.zul" />
+								</div> 							
+							</div>
+						</south>
+					</borderlayout>
+				</div>		
+			</center>
+			
+			<south border="0">		
+				<div>  </div>					
+			</south>
+		</borderlayout>
+	</window>
+</zk>

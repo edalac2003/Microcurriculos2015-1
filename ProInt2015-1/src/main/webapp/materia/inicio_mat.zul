@@ -1,0 +1,63 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Pantalla Inicial Microcurriculos" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>	
+	<window id="index" border="0">	
+		<borderlayout height="630px">			
+			<north height="100px" border="0">
+				<include id="headerIdx" src="/_sections/header.zul" />							
+			</north>
+			<east width="180px" border="0">
+				<label value="" />
+			</east>			
+			<west width="180px" border="0">
+				<label value="" />
+			</west>
+			
+			<center border="0">
+				<div align="center">
+					<hbox align="center" height="90px">
+						<label value="GESTION DE MICROCURRICULOS" sclass="tituloFondo"/>
+					</hbox>
+					<div align="center">
+						<vbox>
+							<hbox align="center" height="95px">
+								<a href="/materia/crearMateria.zul" image="/_img/icons/128x128/new.png" />
+								<vbox width="350px">
+									<a href="/materia/crearMateria.zul" label="Crear Materia" sclass="nombreSeccion" />
+									<div sclass="contenidoSeccion">
+										<label value="Diligencie el formulario para crear Materias." />
+									</div>	
+								</vbox>								
+							</hbox>
+							<hbox align="center" height="95px">
+								<a href="/materia/listarMaterias.zul" image="/_img/icons/128x128/list.png" />
+								<vbox width="350px">
+									<a href="/materia/listarMaterias.zul" label="Listar Materias" sclass="nombreSeccion" />	
+									<div sclass="contenidoSeccion">
+										<label value="Liste las Materias basándose en diferentes criterios de busqueda; 
+										desde este módulo puede tener información detallada de éstas." />
+									</div>	
+								</vbox>	
+							</hbox>							
+							<hbox align="center" height="95px">
+								<a href="/index.zul" image="/_img/icons/128x128/shutdown.png" />
+								<vbox width="350px">
+									<a href="/index.zul" label="Cerrar Microcurriculos" sclass="nombreSeccion" />
+									<div sclass="contenidoSeccion">
+										<label value="Regrese al Menú Principal." />
+									</div>	
+								</vbox>		
+							</hbox>
+						</vbox>
+					</div>
+				</div>
+			</center>
+			
+			<south border="0">		
+				<div> <include id="footerIdx" src="/_sections/footer.zul" /> </div>					
+			</south>
+		</borderlayout>
+	</window>
+</zk>

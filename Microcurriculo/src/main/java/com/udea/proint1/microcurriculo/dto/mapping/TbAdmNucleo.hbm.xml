@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" table="TB_ADM_NUCLEO">
+        <id name="vrIdnucleo" type="string">
+            <column name="VR_IDNUCLEO" length="7" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbAdmDependencia" class="com.udea.proint1.microcurriculo.dto.TbAdmDependencia" fetch="join" lazy="false">
+            <column name="VR_DEPENDENCIA" length="4" not-null="true" />
+        </many-to-one>
+        <property name="vrNombre" type="string">
+            <column name="VR_NOMBRE" length="128" />
+        </property>
+        <property name="vrModusuario" type="string">
+            <column name="VR_MODUSUARIO" length="20" />
+        </property>
+        <property name="vrModfecha" type="date">
+            <column name="VR_MODFECHA" length="7" />
+        </property>
+        <set name="tbAdmDocentesxnucleos" table="TB_ADM_DOCENTESXNUCLEO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="VR_NUCLEO" length="7" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo" />
+        </set>
+        <set name="tbAdmMateriases" table="TB_ADM_MATERIAS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="VR_NUCLEO" length="7" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmMateria" />
+        </set>
+    </class>
+</hibernate-mapping>

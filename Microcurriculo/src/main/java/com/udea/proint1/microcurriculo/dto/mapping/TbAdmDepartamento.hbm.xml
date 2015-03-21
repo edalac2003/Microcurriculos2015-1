@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.TbAdmDepartamento" table="TB_ADM_DEPARTAMENTO">
+        <id name="nbIddepartamento" type="int">
+            <column name="NB_IDDEPARTAMENTO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbAdmPais" class="com.udea.proint1.microcurriculo.dto.TbAdmPais" fetch="join" lazy="false">
+            <column name="NB_PAIS" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="vrNombres" type="string">
+            <column name="VR_NOMBRES" length="128" />
+        </property>
+        <property name="vrModusuario" type="string">
+            <column name="VR_MODUSUARIO" length="20" />
+        </property>
+        <property name="dtModfecha" type="date">
+            <column name="DT_MODFECHA" length="7" />
+        </property>
+        <set name="tbAdmCiudad" table="TB_ADM_CIUDAD" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NB_DEPARTAMENTO" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmCiudad" />
+        </set>
+    </class>
+</hibernate-mapping>

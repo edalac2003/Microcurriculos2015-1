@@ -1,0 +1,189 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Gestión de Materias" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+	<window id="formaCrearMateria" border="0" apply="${modificarMateriaCtrl}">
+		<borderlayout height="660px" apply="" >
+
+			<north border="0" height="100px">
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</north>
+
+			<center border="0" >
+				<div align="center">
+					<borderlayout height="470px">
+						<north border="0">
+							<toolbar id="tb" sclass="vista" height="45px" width="960px">
+								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+								<toolbarbutton id="tool_new" label="Nueva Materia" image="/_img/icons/32x32/new.png" href="/materia/CrearMateria.zul"/>
+								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" visible="false"/>
+								<toolbarbutton id="tool_back" label="Modificar otra" image="/_img/icons/32x32/atras.png" visible="false"/>
+								<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/materia/inicio_mat.zul"/>
+							</toolbar>
+						</north>
+						<center border="none">
+
+							<div align="center">
+								<separator />
+								<hlayout id="hlaSectorBuscar" width="100%">
+									<hbox spacing="15px">
+										<groupbox mold="3d" width="960px">
+											<caption image="/_img/materias.png" height="43px">
+													<label value="Seleccione Materia a Actualizar" />
+											</caption>
+
+											<hbox align="center">
+												<label value="Buscar por Codigo"></label>
+												<textbox instant="true" id="txtFiltrarCodigo" tabindex="1" />
+												<label value="Buscar por Nombre"></label>
+												<textbox instant="true" id="txtFiltrarNombre" tabindex="1" />
+												<button id="btnBuscar" label="Buscar"/>
+											</hbox>
+											<borderlayout height="300px">
+												<north height="40px" border="0">
+													<listbox style="margin-top:10px">
+														<listhead>
+															<listheader label="Codigo" width="15%"/>
+															<listheader label="Materias"/>
+														</listhead>
+														
+														<template name="model">
+															<listitem>
+																<listcell label="${each.vrNombre}"></listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</north>
+												<center border="normal" autoscroll="true">
+													<listbox id="listBoxMaterias" emptyMessage="Sin registros">
+														<listhead>
+															<listheader width="15%"/>
+															<listheader/>
+														</listhead>
+													</listbox>
+												</center>
+											</borderlayout>
+										</groupbox>
+									</hbox>
+								</hlayout>
+								
+								<hlayout id="hlaSectorModificar" visible="false">
+									<hbox spacing="15px">
+										<groupbox mold="3d" width="960px">
+											<caption image="/_img/crearMateria.png" >
+												<label value="Modificar Materia" ></label>
+											</caption>
+											<borderlayout height="345px">
+												<center autoscroll="true" border="0">
+													<grid>
+														<columns>
+															<column width="20%" />
+															<column width="80%" />
+														</columns>
+														
+														<rows>
+															
+															<row>
+																<label value="Código Materia"></label>
+																<div>
+																	<label id="lblCodigo"></label>
+																</div>
+															</row>
+															
+															<row>
+																<label value="Nombre Materia"></label>
+																<textbox id="txtNombreMateria" tabindex="5" width="50%" constraint="no empty" />
+															</row>
+															
+															<row>
+																<label value="Nivel o Semestre"></label>
+																<combobox id="cmbSemestre" width="25%"/>
+															</row>
+															
+															<row>
+																<label value="Créditos"></label>
+																<combobox id="cmbCreditos" tabindex="7" width="25%" />
+															</row>
+															
+															<row>
+																<label value="Habilitable"></label>
+																<checkbox id="ckbHabilitable"/>
+															</row>
+															
+															<row>
+																<label value="Validable"></label>
+																<checkbox id="ckbValidable"/>
+															</row>
+															
+															<row>
+																<label value="Clasificable"></label>
+																<checkbox id="ckbClasificable"/>
+															</row>
+															
+															<row>
+																<label value="Horas Teóricas"></label>
+																<longbox id="txtHt" tabindex="11" width="25%" />
+															</row>
+															
+															<row>
+																<label value="Horas Prácticas"></label>
+																<longbox id="txtHp" tabindex="12" width="25%" />
+															</row>
+		
+															<row>
+																<label value="Horas Teórico Prácticas"></label>
+																<longbox id="txtHtp" tabindex="13" width="25%" />
+															</row>
+															
+															<row>
+																<label value="Prerrequisitos"></label>
+																<combobox id="cmbPrerrequisito" width="37%"/>
+															</row>
+															
+															<row>
+																<label></label>
+																<listbox id="listPrerrequisito">
+																	<listhead>
+																		<listheader width="20%"></listheader>
+																		<listheader></listheader>
+																	</listhead>
+																</listbox>
+															</row>
+															
+															<row>
+																<label value="Correquisitos"></label>
+																<combobox id="cmbCorrequisito" width="37%"/>
+															</row>
+															
+															<row>
+																<label></label>
+																<listbox id="listCorrequisito">
+																	<listhead>
+																		<listheader width="20%"></listheader>
+																		<listheader></listheader>
+																	</listhead>
+																</listbox>
+															</row>
+															
+														</rows>
+													</grid>
+												</center>
+											</borderlayout>
+											<separator height="10px;" />
+										</groupbox>
+									</hbox>
+								</hlayout>
+							</div>
+						</center>
+					</borderlayout>
+				</div>
+			</center>
+
+			<south border="none">
+				<include id="footerIdx" src="/_sections/footer.zul" />
+			</south>
+		</borderlayout>
+	</window>
+</zk>

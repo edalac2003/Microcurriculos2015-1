@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/11/2014 10:32:22 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro" table="TB_MIC_EVALUACIONXMICRO">
+        <id name="nbId" type="int">
+            <column name="NB_ID" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="tbMicEvaluacion" class="com.udea.proint1.microcurriculo.dto.TbMicEvaluacion" fetch="join" lazy="false">
+            <column name="NB_IDEVALUACION" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbMicMicrocurriculo" class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo" fetch="join" lazy="false">
+            <column name="VR_IDMICROCURRICULO" length="20" not-null="true"/>
+        </many-to-one>
+        <property name="nbPorcentaje" type="int" access="field">
+            <column name="NB_PORCENTAJE" />
+        </property>
+        <property name="dtFechaestimada" type="java.util.Date" access="field">
+            <column name="DT_FECHAESTIMADA" />
+        </property>
+        <property name="vrModusuario" type="java.lang.String">
+            <column name="VR_MODUSUARIO" />
+        </property>
+        <property name="dtModfecha" type="java.util.Date">
+            <column name="DT_MODFECHA" />
+        </property>
+    </class>
+</hibernate-mapping>

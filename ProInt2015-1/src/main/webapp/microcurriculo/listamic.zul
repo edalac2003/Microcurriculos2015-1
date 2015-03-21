@@ -1,0 +1,127 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos2.css" ?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+<style src="estilos.css" />
+<window id="formaListarMicro" border="0" apply="${listarMicroCtrl}">
+	<borderlayout height="1000px" apply="${cargarDatosFormas2}">
+		<north border="0" height="100px">
+			<include id="headerIdx" src="/_sections/header.zul" />
+		</north>
+		
+		<east width="180px" border="0">
+			<label />
+		</east>
+		<west width="186px" border="0">
+			
+		</west>
+		
+		<center border="0">
+			<borderlayout height="1000px">
+				<north border="0" height="50px">
+<!-- 					<toolbar id="tb" sclass="vista" height="45px" width="960px" apply="${validarDatosCtrl}"> -->
+<!-- 						<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" /> -->
+<!-- 						<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul" /> -->
+<!-- 						<toolbarbutton id="tool_details" label="${labels.microcurriculo.toolbar.details}" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" /> -->
+<!-- 						<toolbarbutton id="tool_refresh" label="${labels.microcurriculo.toolbar.upload}" image="/_img/icons/32x32/reload.png" href="" /> -->
+<!-- 						<toolbarbutton id="tool_duplica" label="${labels.microcurriculo.toolbar.clone}" image="/_img/icons/32x32/clone.png" href="/microcurriculo/duplicarMic.zul" /> -->
+<!-- 						<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" href="" /> -->
+<!-- 						<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul" /> -->
+<!-- 					</toolbar> -->
+					<include id="MenuListado" src="/_sections/toolbar_micro_consulta.zul"/>
+				</north>
+				
+				
+				<center border="0">					
+					<div align="center">
+						<grid width="959px">
+							<rows>
+								<row>
+									<div>
+										<label value="U. Académica" />
+										<combobox id="cmbUnidadAcademica" width="60%" />
+										<label id="lblNombreUnidadAcademica" visible="false"/>
+									</div>
+									<div>
+										<label value="Dependencia" />
+										<combobox id="cmbDependencia" width="60%"/>
+										<label id="lblNombreDependencia" visible="false"/>
+									</div>
+									<div>
+										<label value="Nucleo" />
+										<combobox id="cmbNucleo" />
+										<label id="lblNombreNucleo" visible="false"/>
+									</div>		
+									<div>
+										<label value="Materia" />
+										<combobox id="cmbMateria" />
+										<label id="lblNombreMateria" visible="false"/>
+									</div>								
+								</row>
+								<row>									
+									<div>
+										<label value="Semestre" />
+										<combobox id="cmbSemestre" width="70%"/>
+										<label id="lblSemestre" />
+									</div>									
+									<div>
+										<label value="Responsable" />
+										<combobox id="cmbDocente" width="60%"/>
+										<label id="lblResponsable" />
+									</div>
+									<div>
+										<label value="Estado" />
+										<combobox id="cmbEstado" width="68%"/>
+									</div>
+									<div align="center">
+										<button id="btnBuscar" label="Iniciar Busqueda" />
+									</div>
+								</row>
+							</rows>											
+						</grid>
+						<separator />
+						
+						<div width="959px">
+							<borderlayout height="685px">
+								<north border="0" height="32px">
+									<listbox autopaging="true" >
+										<listhead>
+											<listheader label="Codigo"  align="center" width="12%"/>
+											<listheader label="Unidad" align="center"/>
+											<listheader label="Dependencia" align="center"/>
+											<listheader label="Nucleo" align="center"/>
+											<listheader label="Materia" align="center"/>
+											<listheader label="Responsable" align="center"/>
+											<listheader label="Estado" align="center"/>
+										</listhead>
+									</listbox>
+								</north>
+								<center autoscroll="true">
+									<listbox id="listaMicrocurriculo" autopaging="true" >
+										<listhead>
+											<listheader align="center" width="12%"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+										</listhead>
+									</listbox>
+								</center>
+							</borderlayout>			
+						</div> 
+						
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+		
+		<south border="0" height="80px">
+			<include id="footerIdx" src="/_sections/footer.zul" />
+		</south>
+	</borderlayout>
+</window>
+</zk>

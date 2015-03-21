@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.TbAdmMateria" table="TB_ADM_MATERIA">
+        <id name="vrIdmateria" type="string">
+            <column name="VR_IDMATERIA" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbAdmNucleo" class="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" fetch="join" lazy="false">
+            <column name="VR_NUCLEO" length="7" not-null="true" />
+        </many-to-one>
+        <property name="vrNombre" type="string">
+            <column name="VR_NOMBRE" />
+        </property>
+        <property name="nbSemestre" type="int">
+            <column name="NB_SEMESTRE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="nbCreditos" type="int">
+            <column name="NB_CREDITOS" precision="22" scale="0" />
+        </property>
+        <property name="blHabilitable" type="int">
+            <column name="BL_HABILITABLE" precision="22" scale="0" />
+        </property>
+        <property name="blValidable" type="int">
+            <column name="BL_VALIDABLE" precision="22" scale="0" />
+        </property>
+        <property name="blClasificable" type="int">
+            <column name="BL_CLASIFICABLE" precision="22" scale="0" />
+        </property>
+        <property name="nbHt" type="int">
+            <column name="NB_HT" precision="22" scale="0" />
+        </property>
+        <property name="nbHp" type="int">
+            <column name="NB_HP" precision="22" scale="0" />
+        </property>
+        <property name="nbHtp" type="int">
+            <column name="NB_HTP" precision="22" scale="0" />
+        </property>
+        <property name="vrModusuario" type="string">
+            <column name="VR_MODUSUARIO" length="20" />
+        </property>
+        <property name="dtModfecha" type="date">
+            <column name="DT_MODFECHA" length="7" />
+        </property>
+        <property name="blEstado" type="int">
+            <column name="BL_ESTADO" precision="22" scale="0" />
+        </property>
+        <set name="tbMicMicrocurriculo" table="TB_MIC_MICROCURRICULO" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="VR_MATERIA" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo" />
+        </set>
+        <set name="tbMicMateriasxpensums" table="TB_MIC_MATERIAXPENSUM" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="VR_MATERIA" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum" />
+        </set>
+        <set name="tbAdmPrerrequisitosesForVrMateria" table="TB_ADM_PRERREQUISITO" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="VR_MATERIA" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito" />
+        </set>
+        <set name="tbAdmCorrequisitosesForVrCorrequisito" table="TB_ADM_CORREQUISITO" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="VR_CORREQUISITO" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito" />
+        </set>
+        <set name="tbAdmPrerrequisitosesForVrPrerrequisito" table="TB_ADM_PRERREQUISITO" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="VR_PRERREQUISITO" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito" />
+        </set>
+        <set name="tbAdmCorrequisitosesForVrMateria" table="TB_ADM_CORREQUISITO" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="VR_MATERIA" length="10" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito" />
+        </set>
+    </class>
+</hibernate-mapping>

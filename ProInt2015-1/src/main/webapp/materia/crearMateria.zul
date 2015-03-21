@@ -1,0 +1,244 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Gestión de Materias" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+	<window id="formaCrearMateria" border="0" apply="${crearMateriaCtrl}">
+		<borderlayout height="860px" apply="" >
+
+			<north border="0" height="100px">
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</north>
+
+			<center border="0" >
+				<div align="center">
+					<borderlayout height="680px">
+						<north border="0">
+<!-- 							<include id="listMenu" src="/_sections/toolbar-materia.zul"/> -->
+							<toolbar id="tb" sclass="vista" height="45px" width="960px">
+								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" />
+								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" />
+								<toolbarbutton id="tool_update" label="Modificar Materia" image="/_img/icons/32x32/refresh.png" href="/materia/modificarMateria.zul"/>
+								<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/materia/inicio_mat.zul"/>
+							</toolbar>
+						</north>
+						<center border="none" autoscroll="true" >
+							<div align="center">
+								<separator />
+								<hlayout width="100%">
+									<hbox spacing="15px">
+										<groupbox mold="3d" width="255px">
+											<caption image="/_img/materias.png" height="43px">
+													<label value="Buscar Materia" />
+											</caption>
+
+											<hbox align="center">
+												<label value="Nombre"></label>
+												<textbox instant="true" id="txtFiltrarMateria" tabindex="1" />
+											</hbox>
+
+											<listbox id="listBoxMaterias" emptyMessage="Sin registros" height="86%" style="margin-top:10px" rows="9">
+												<listhead>
+													<listheader label="Materias"/>
+												</listhead>
+												
+												<template name="model">
+													<listitem>
+														<listcell label="${each.vrNombre}" style="font-size:11px"></listcell>
+													</listitem>
+												</template>
+											</listbox>
+										</groupbox>
+									</hbox>
+								
+									<hbox spacing="15px">
+										<groupbox mold="3d" width="700px">
+											<caption image="/_img/crearMateria.png" >
+												<label id="lblEncabezadoMateria" value="Crear Materia" ></label>
+											</caption>
+
+											<grid>
+												<columns>
+													<column width="20%" />
+													<column width="80%" />
+												</columns>
+												
+												<rows>
+												
+													<row>
+														<label value="Unidad Academica"></label>
+														<div>
+															<combobox id="cmbUnidadAcademica" width="25%"/>
+															<label id="lblUnidadAcademica"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Departamento"></label>
+														<div>
+															<combobox id="cmbDependencia" width="25%"/>
+															<label id="lblDependencia"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Núcleo"></label>
+														<div>
+															<combobox id="cmbNucleo" width="25%"/>
+															<label id="lblNucleo"></label>
+														</div>
+														<!-- <div width="50%"> 	<listbox
+																id="ltbNucleo" tabindex="4" width="100%" rows="1"
+																mold="select" height="20px" />
+																<textbox id="txtNucleo" tabindex="4" width="100%"
+																constraint="no empty" visible="false"></textbox>
+														</div>-->
+													</row>
+													
+													<row>
+														<label value="Código Materia"></label>
+														<div>
+															<longbox id="txtCodigo" width="25%" constraint="no empty"/>
+															<label id="lblCodigo"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Nombre Materia"></label>
+														<div>
+															<textbox id="txtNombreMateria" tabindex="5" width="50%" constraint="no empty" />
+															<label id="lblNombreMateria"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Nivel o Semestre"></label>
+														<div>
+															<combobox id="cmbSemestre" width="25%"/>
+															<label id="lblSemestre"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Créditos"></label>
+														<div>
+															<combobox id="cmbCreditos" tabindex="7" width="25%" />
+															<label id="lblCreditos"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Habilitable"></label>
+														<div>
+															<checkbox id="ckbHabilitable"/>
+															<label id="lblHabilitable"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Validable"></label>
+														<div>
+															<checkbox id="ckbValidable"/>
+															<label id="lblValidable"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Clasificable"></label>
+														<div>
+															<checkbox id="ckbClasificable"/>
+															<label id="lblClasificable"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Horas Teóricas"></label>
+														<div>
+															<longbox id="txtHt" tabindex="11" width="25%" />
+															<label id="lblHt"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Horas Prácticas"></label>
+														<div>
+															<longbox id="txtHp" tabindex="12" width="25%" />
+															<label id="lblHp"></label>
+														</div>
+													</row>
+
+													<row>
+														<label value="Horas Teórico Prácticas"></label>
+														<div>
+															<longbox id="txtHtp" tabindex="13" width="25%" />
+															<label id="lblHtp"></label>
+														</div>
+													</row>
+													
+													<row>
+														<label value="Prerrequisitos"></label>
+														<div>
+															<combobox id="cmbPrerrequisito" width="37%"/>
+															<listbox id="listPrerrequisito2" visible="false">
+																<listhead>
+																	<listheader width="20%"></listheader>
+																	<listheader></listheader>
+																</listhead>
+															</listbox>
+														</div>
+													</row>
+													
+													<row id="rowPrerrequisitos">
+														<label></label>
+														<listbox id="listPrerrequisito">
+															<listhead>
+																<listheader width="20%"></listheader>
+																<listheader></listheader>
+															</listhead>
+														</listbox>
+													</row>
+													
+													<row>
+														<label value="Correquisitos"></label>
+														<div>
+															<combobox id="cmbCorrequisito" width="37%"/>
+															<listbox id="listCorrequisito2" visible="false">
+																<listhead>
+																	<listheader width="20%"></listheader>
+																	<listheader></listheader>
+																</listhead>
+															</listbox>
+														</div>
+													</row>
+													
+													<row id="rowCorrequisitos">
+														<label></label>
+														<listbox id="listCorrequisito">
+															<listhead>
+																<listheader width="20%"></listheader>
+																<listheader></listheader>
+															</listhead>
+														</listbox>
+													</row>
+													
+												</rows>
+											</grid>
+											<separator height="10px;" />
+
+										</groupbox>
+									</hbox>
+								</hlayout>
+							</div>
+						</center>
+					</borderlayout>
+				</div>
+			</center>
+
+			<south border="none">
+				<include id="footerIdx" src="/_sections/footer.zul" />
+			</south>
+		</borderlayout>
+	</window>
+</zk>

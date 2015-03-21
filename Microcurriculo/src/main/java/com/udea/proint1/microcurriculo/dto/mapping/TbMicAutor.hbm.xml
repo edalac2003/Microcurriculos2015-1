@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.TbMicAutor" table="TB_MIC_AUTOR">
+        <id name="nbIdautor" type="int">
+            <column name="NB_IDAUTOR" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="vrNombres" type="string">
+            <column name="VR_NOMBRES" length="128" />
+        </property>
+        <property name="vrApellidos" type="string">
+            <column name="VR_APELLIDOS" length="128" />
+        </property>
+        <property name="nbPais" type="int">
+            <column name="NB_PAIS" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="vrModusuario" type="string">
+            <column name="VR_MODUSUARIO" length="20" />
+        </property>
+        <property name="dtModfecha" type="date">
+            <column name="DT_MODFECHA" length="7" />
+        </property>
+        <set name="tbMicAutorxbiblios" table="TB_MIC_AUTORXBIBLIO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NB_AUTOR" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicAutorxbiblio" />
+        </set>
+    </class>
+</hibernate-mapping>

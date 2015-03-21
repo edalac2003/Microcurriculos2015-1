@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+
+.z-label {
+	text-align: center;
+	font-family: Arial, Tahoma, Verdana;
+	font-weight: bold
+}
+
+.z-div {
+	font-size: large;
+	font-style: normal;
+	text-align: center;
+	font-weight: bold
+}
+
+.titulo {
+	font-size: large;
+	border-style: none;
+	color: Red
+}
+
+.z-vlayout {
+	height: 180px;
+	width: 180px;;
+}

@@ -1,0 +1,36 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+		<menubar width="73%">
+			<menu label="Microcurriculos">
+				<menupopup>
+					<menuitem label="Crear" href="microcurriculo/crearMic.zul"/>
+					<menu label="Busqueda">
+						<menupopup>
+							<menuitem label="Por ID" href="consultas/consultaMicID.zul"/>
+							<menuitem label="Listar Microcurriculos" href="/microcurriculo/listaMic.zul"/>
+						</menupopup>
+					</menu>
+				</menupopup>
+			</menu>
+			<menu label="Materias">
+				<menupopup>
+					<menuitem label="Crear" href="crearMateria.zul"/>
+					<menu label="Busqueda">
+						<menupopup>
+							<menuitem label="Por ID" />
+							<menuitem label="Listar Materias" href="listarMaterias.zul"/>								
+						</menupopup>
+					</menu>
+				</menupopup>
+			</menu>
+			<menu label="Docentes">
+				<menupopup>
+					<menuitem label="Crear" />
+					<menuitem label="Busqueda" />
+				</menupopup>
+			</menu>
+		</menubar>
+	</div>
+</zk>

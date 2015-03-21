@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/11/2014 10:32:22 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.TbMicEvaluacion" table="TB_MIC_EVALUACION">
+        <id name="nbIdevaluacion" type="java.lang.Integer">
+            <column name="NB_IDEVALUACION" precision="22" scale="0"/>
+            <generator class="increment" />
+        </id>
+        <property name="vrDescripcion" type="java.lang.String">
+            <column name="VR_DESCRIPCION" />
+        </property>
+        <property name="vrModusuario" type="java.lang.String">
+            <column name="VR_MODUSUARIO" />
+        </property>
+        <property name="dtModfecha" type="java.util.Date">
+            <column name="DT_MODFECHA" />
+        </property>
+        <set name="tbMicMicroxevaluaciones" table="TB_MIC_EVALUACIONXMICRO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NB_IDEVALUACION" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro" />
+        </set>
+    </class>
+</hibernate-mapping>

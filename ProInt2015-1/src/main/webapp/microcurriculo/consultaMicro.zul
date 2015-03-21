@@ -1,0 +1,310 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+<zk>
+<window id="formaConsultarMicro" border="normal" >	
+	<borderlayout height="950px" >
+		<north border="0" height="100px">
+			<include id="headerIdx" src="/_sections/header.zul" />
+		</north>
+		
+		<center border="0" apply="${consultarMicroCtrl}">
+			<div align="center" >
+				<borderlayout height="870px" >
+					<north border="0">
+						<include id="listMenu" src="/_sections/toolbar_micro_consulta.zul"/>
+					</north>
+					<west width="180px" border="0">
+						<label></label>
+					</west>
+					<east width="180px" border="0">
+						<label></label>
+					</east>
+				
+					<center autoscroll="true" border="0" >
+						<div id="consultarMicro" align="center">
+							
+							<separator /> 
+							<separator />
+							<div apply="${cargarDatosFormas}">
+								<tabbox >
+									<tabs style="" >
+										<tab label="Información General" id="infoGeneral"/>
+										<tab label="Información Complementaria" id="infoComplemento"/>
+										<tab label="Unidades y Temas" id="infoUnidades"/>
+										<tab label="SubTemas" id="infoSubtema"/>
+										<tab label="Evaluaciones" id="infoEvaluacion"/>
+										<tab label="Referencias Bibliográficas" id="infoBibliografia"/>
+									</tabs>
+									<tabpanels>
+										<tabpanel id="tabInfoBasica">
+											<grid >
+												<columns>
+													<column width="15%" />
+													<column width="60%"/>												
+												</columns>
+												<rows>
+													<row>
+						                				<label value="Unidad Academica" width="30%"/>
+						                				<div>
+								                        	<combobox id="cmbUnidadAcademica" width="25%"/>
+								                        	<label id="lblNombreUnidadAcademica"/>
+								                        </div>
+							                		</row>
+							                		<row>
+						                				<label value="Dependencia" width="30%"/>
+						                				<div>
+								                        	<combobox id="cmbDependencia" width="25%"/>
+								                        	<label id="lblNombreDependencia"/>
+								                        </div>
+							                		</row>
+								                		<row>
+						                				<label value="Nucleo" width="30%"/>
+						                				<div>
+								                        	<combobox id="cmbNucleo" width="25%"/>
+								                        	<label id="lblNombreNucleo"/>
+								                        </div>
+							                		</row>
+													<row>
+														<label value="Materia" />
+									                    <div>
+									                        <combobox id="cmbMateria" width="25%" />
+									                        <label id="lblNombreMateria" />   
+									                    </div>
+							                		</row>
+							                		<row>
+														<label value="Semestre" />
+									                    <div>
+									                        <combobox id="cmbSemestre" width="25%"/>									                        
+									                    </div>
+							                		</row>
+							                		<row>
+						                				<label value="Microcurriculo" width="30%"/>
+								                        <combobox id="cmbMicrocurriculo" width="25%"/>
+							                		</row>
+							                		<row>
+						                				<label value="Estado" width="30%"/>
+						                				<div>
+								                        	<combobox id="cmbEstado" width="25%"/>
+								                        	<label id="lblNombreEstado"/>
+								                        </div>
+							                		</row>
+							                		<row>
+														<label value="Docente Responsable" />
+									                    <div>
+									                        <combobox id="cmbDocente" width="25%"/>
+									                    </div>
+							                		</row>
+							                		
+							                		
+							                		<row>
+									                    <label value="Créditos" />
+									                    <div>
+							                        		<label id="lblCreditosMateria" />
+							                    		</div>
+							                		</row>
+							                		<row>
+									                    <label value="Horas Teóricas" />
+									                    <label id="lblHtMateria" />
+									                    		                    
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Horas Practicas " />
+									                    <label id="lblHpMateria" />		                    
+							                		</row>
+							                			
+							                		<row>
+									                    <label value="Horas Teorico-Prácticas " />
+									                    <label id="lblHtpMateria" />
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Horas Clase por Semestre " />
+									                    <label id="lblHoraClaseSemestral" />		                    
+							                		</row>
+							                		<row>
+									                    <label value="Campo de Formación" />
+									                    <label id="lblCampoFormacion" />
+							                		</row>
+							                		<row>
+									                    <label value="Validable" width="150px" />
+									                    <checkbox id="ckbValidable" />									                    
+							                		</row>
+							                		
+							                		<row>
+									                    <label value="Habilitable" />
+									                    <checkbox id="ckbHabilitable" />
+							                		</row>
+							                		<row>
+									                    <label value="Clasificable" width="150px" />
+									                    <checkbox id="ckbClasificable" />
+							                		</row>
+							                		<row>
+									                    <label value="Prerequisitos" width="150px" />
+									                    <label id="lblPrerrequisitos" multiline="true"/>
+							                		</row>
+							                		<row>
+									                    <label value="Correquisitos" width="150px" />
+									                    <label id="lblCorrequisitos" multiline="true"/>
+							                		</row>
+							                		<row>
+									                    <label value="Programas Vinculados" width="150px" />
+									                    <label id="lblProgramasVinculados" />
+							                		</row>
+												</rows>
+											</grid>
+										</tabpanel>
+										
+										<tabpanel id="tabInfoCompl">
+											<grid>
+												<columns>
+													<column value="" width="15%" />
+													<column value="" width="70%"/>
+													
+												</columns>
+												<rows >
+													<row>
+									                    <label value="Proposito del Curso" />
+									                    <label id="lblPropositoMicro" width="100%"/>									                    
+									                </row>
+													<row>
+									                    <label value="Justificación" />
+									                    <label id="lblJustificacionMicro" width="100%"/>									                    
+									                </row>
+									                <row>
+									                    <label value="Objetivo General" />
+									                    <label id="lblObjetivoGeneral" multiline="true" width="100%"/>									                    
+									                </row>
+									                <row>
+									                    <label value="Objetivos Especificos" />
+									                    <listbox id="listaObjetivosEspecificos">
+									                	</listbox>
+									                </row>
+									                
+									                <row>
+									                    <label value="Contenido Resumido" />
+									                    <label id="lblResumenMicro" multiline="true" width="100%"/>
+									                </row>
+									                
+												</rows>
+											</grid>
+										</tabpanel>
+										
+										<tabpanel id="tabInfoUnidad">											
+											<div style="" height="25px">
+												<label value="Unidades" sclass="titulos"/>
+											</div>
+											<listbox id="listaUnidades">
+						                		<listhead>
+													<listheader width="100%" align="center"/>
+												</listhead>
+						                	</listbox>
+											<separator />
+											<div>
+												<div style="" height="25px">
+													<label value="Temas por Unidad" sclass="titulos"/>
+												</div>
+												
+												<listbox id="listaTemas">
+													<listhead>
+														<listheader label="Unidad" width="18%" align="center"/>
+														<listheader label="Tema" width="60" align="center"/>
+														<listheader label="Tiempo (Semanas)" width="18%" align="center"/>
+													</listhead>					
+												</listbox>	
+											</div>
+											<separator />
+										
+										</tabpanel>
+										<tabpanel>
+										<div>
+											<div style="color:red;" height="25px">
+												<label value="SUBTEMAS POR TEMAS" sclass="titulos" />
+											</div>
+											<separator />
+											<listbox id="listaSubtemas">
+												<listhead>
+													<listheader width="25%">
+														<label value="Unidad" sclass="resaltadonormal"/>
+														
+													</listheader>
+													<listheader width="25%">
+														<label value="Tema" sclass="resaltadonormal"/>
+														
+													</listheader>
+													<listheader width="50%">
+														<label value="Subtema" sclass="resaltadonormal"/>
+															
+													</listheader>
+												</listhead>
+											</listbox>
+										</div>
+										<separator />											
+									</tabpanel>										
+									<tabpanel id="tabInfoEval">
+										<listbox id="listaEvaluaciones">
+											<listhead>
+												<listheader label="Actividad" width="60%" align="center"/>
+												<listheader label="Porcentaje" width="10%" align="center"/>
+												<listheader label="Fecha Estimada" width="30%" align="center"/>
+											</listhead>												
+										</listbox>
+									</tabpanel>
+										
+										<tabpanel id="infoBiblioBas">
+											<div style="" height="30px">
+												<label value="REFERENCIAS BIBLIOGRÁFICAS" sclass="titulos"/>					
+											</div>
+																						
+											<listbox id="listaBibliografia">
+												<listhead>
+													<listheader label="Unidad" />
+													<listheader label="Referencia"/>
+													<listheader label="Autor"/>
+													<listheader label="ISBN"/>
+													<listheader label="Pais"/>
+													<listheader label="Tipo"/>
+												</listhead>
+											</listbox>
+											<separator />
+											<div style="" height="30px">
+												<label value="REFERENCIAS CIBERGRÁFICAS" sclass="titulos"/>
+											</div>
+											
+											<listbox id="listaCibergrafia">
+												<listhead>
+													<listheader label="Unidad" width="20%" />
+													<listheader label="Nombre Sitio" width="30"/>
+													<listheader label="URL Sitio" width="30%"/>
+													<listheader label="Tipo" width="20%"/>
+												</listhead>
+											</listbox>
+										</tabpanel>
+					
+					
+									</tabpanels>
+								</tabbox>
+							</div>
+						</div>			
+					</center>	
+					<south border="0" height="130px">
+							<div>
+								<div height="20px" />
+								<div>
+									<include id="footerIdx" src="/_sections/footer.zul" />
+								</div> 							
+							</div>
+						</south>
+				</borderlayout>
+			</div>		
+		</center>
+		
+		<south border="none">
+			
+		</south>
+	</borderlayout>
+</window>
+
+</zk>

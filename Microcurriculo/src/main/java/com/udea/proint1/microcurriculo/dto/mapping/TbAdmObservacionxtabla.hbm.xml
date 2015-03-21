@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/12/2014 06:23:11 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.udea.proint1.microcurriculo.dto.TbAdmObservacionxtabla" table="TB_ADM_OBSERVACIONXTABLA">
+        <id name="nbIdobservaciones" type="int">
+            <column name="NB_IDOBSERVACIONES" precision="7"/>
+            <generator class="assigned" />
+        </id>
+        <property name="vrObservaciones" type="java.lang.String">
+            <column name="VR_OBSERVACIONES" length="512"/>
+        </property>
+    </class>
+</hibernate-mapping>

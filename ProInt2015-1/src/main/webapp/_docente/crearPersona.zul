@@ -1,0 +1,154 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+<window title="" border="normal">
+	<borderlayout height="700px">
+		<north border="none" height="100px">
+			<include id="headerIdx" src="/_sections/header.zul" />
+		</north>
+		<west width="180px" border="none">
+			<label />
+		</west>
+		<east width="180px" border="none">
+			<label />
+		</east>
+		<center border="none">
+			<div id="crearPersona">
+				<borderlayout height="600px" apply="${crearPersonaCtrl}">
+					<north border="none">
+						<include id="listMenu" src="/_sections/toolbar-docente.zul"/>
+					</north>
+					
+					<center border="none">
+						<div>
+							<separator />
+							<hlayout>
+								
+								<hbox >
+									<groupbox mold="3d" width="300px" >
+										<caption image="/_img/icons/32x32/users.png" height="43px">
+											<label value="Listado de Personas" />
+										</caption>
+										
+										<hbox align="center" height="35px">
+											<label value="Buscar" />
+											<textbox id="txtBuscarNombre" />
+										</hbox>
+										
+										<listbox id="listaPersona" emptyMessage="Sin Registros" height="330px">
+											<listhead>
+												<listheader label="Personas"/>
+											</listhead>
+										</listbox>
+									</groupbox>
+								</hbox>
+								<vlayout width="7px"></vlayout>
+								
+								<hbox>
+									<hlayout>
+										<groupbox mold="3d" width="640px">
+											<caption image="/_img/icons/32x32/user_add.png" height="43px">
+												<label value="Adicionar Persona" />
+											</caption>
+											
+											<hbox>
+												<grid>
+													<columns>
+														<column width="25%" />
+														<column width="75%" />
+													</columns>
+													
+													<rows>
+														<row>
+															<label value="Tipo de Identificación" />
+															<div>
+																<combobox id="cmbTipoID" />															
+															</div>
+														</row>
+														
+														<row>
+															<label value="Numero"></label>
+															<div>
+																<intbox id="txtNumeroID" constraint="no negative,no zero" />
+															</div>
+														</row>	
+														<row>
+															<label value="Apellidos"/>
+															<div>
+																<textbox id="txtApellidos" width="50%"/>
+															</div>
+														</row>	
+														<row>
+															<label value="Nombres" />
+															<div>
+																<textbox id="txtNombres" width="50%" />
+															</div>
+														</row>	
+														<row>
+															<label value="Direccion"/>
+															<div>
+																<textbox id="txtDireccion" width="50%"/>
+															</div>
+														</row>	
+														<row>
+															<label value="Telefono"/>
+															<div>
+																<intbox id="txtTelefono" constraint="no negative,no zero" />
+															</div>
+														</row>	
+														<row>
+															<label value="Pais" />
+															<div>
+																<combobox id="cmbPais" />
+																<label value="Departamento" />
+																<combobox id="cmbDepartamento" />
+															</div>
+														</row>	
+														<row>
+															<label value="Ciudad"></label>
+															<div>
+																<combobox id="cmbCiudad" />
+															</div>
+														</row>	
+														<row>
+															<label value="e-mail" />
+															<div>
+																<textbox id="txtEmail" width="50%" value="usuario@dominio.com"
+	                													constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address" />
+															</div>
+														</row>
+														<row>
+															<label value="Estado"></label>
+															<div>
+																<combobox id="cmbEstado" value="ACTIVADO">
+																	<comboitem label="ACTIVADO" />
+																	<comboitem label="DESACTIVADO" />
+																</combobox>
+															</div>
+														</row>
+														<row>
+															<label value="Rol"></label>
+															<div>
+																<combobox id="cmbRol" />
+															</div>
+														</row>		
+													</rows>																								
+												</grid>
+											</hbox>
+										</groupbox>
+									</hlayout>
+								</hbox>
+							</hlayout>
+						</div>
+					</center>
+					<south>
+						<include id="footerIdx" src="/_sections/footer.zul" />
+					</south>
+				</borderlayout>
+			</div>
+		</center>
+	</borderlayout>
+</window>
+</zk>

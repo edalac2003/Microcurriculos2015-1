@@ -1,0 +1,137 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Listado de Materias" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+	<window border="0" width="100%" apply="${listarMateriasCtrl}">
+		<borderlayout height="650px" apply="">
+		
+			<north border="0" height="100px">
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</north>
+			
+			<center border="0">
+				<div align="center">
+					<borderlayout height="680px">
+							<north border="0">
+								<toolbar id="tb" sclass="vista" height="45px" width="960px">
+									<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+									<toolbarbutton id="tool_new" label="Nueva Busqueda" image="/_img/icons/32x32/new.png" />
+									<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/materia/inicio_mat.zul"/>
+								</toolbar>
+							</north>
+						<center border="none" autoscroll="true">
+							<div align="center">
+								<separator />
+								<div width="960px">
+								
+									<grid width="960px">
+										<rows>
+										
+											<row>
+												<div>
+													<label value="Unidad Academica"/>
+													<combobox id="cmbUnidadAcademica"/>
+												</div>
+												<div>
+													<label value="Dependencia"/>
+													<combobox id="cmbDependencia"/>
+												</div>
+												<div>
+													<label value="Nucleo"/>
+													<combobox id="cmbNucleo"/>
+												</div>
+											</row>
+											
+											<row>
+												<div>
+													<label value="Codigo Materia"/>
+													<combobox id="cmbMateria" width="175px"/>
+												</div>
+												<div>
+													<label value="Nombre Materia"/>
+													<textbox id="txtMateria" width="140px"/>
+												</div>
+												<div align="center">
+													<button id="btnBuscar" label="Buscar"/>
+												</div>
+											</row>
+										
+										</rows>
+									</grid>
+								
+<!-- 									<listbox> -->
+<!-- 										<listhead> -->
+<!-- 											<listheader label="" align="center"/> -->
+<!-- 										</listhead> -->
+<!-- 										<listitem> -->
+<!-- 											<listcell> -->
+<!-- 												<label value="Criterio de Busqueda" /> -->
+<!-- 												<combobox id="cmbCriterioBusqueda"> -->
+<!-- 													<comboitem label="Nucleo" /> -->
+<!-- 													<comboitem label="Estado" />											 -->
+<!-- 												</combobox> -->
+<!-- 											</listcell> -->
+<!-- 											<listcell> -->
+<!-- 												<label value="Valor a Buscar" /> -->
+<!-- 												<combobox id="cmbValorBusqueda" > -->
+<!-- 													<comboitem label="201001" /> -->
+<!-- 													<comboitem label="201002" /> -->
+<!-- 													<comboitem label="201003" /> -->
+<!-- 												</combobox> -->
+<!-- 												<button id="btnBuscarMaterias" label="Buscar" /> -->
+<!-- 											</listcell>								 -->
+<!-- 										</listitem> -->
+<!-- 									</listbox> -->
+								</div>
+								<separator />
+								<div width="960px">
+									<borderlayout height="334px">
+										<north height="33px" border="0">
+											<listbox autopaging="true">
+												<listhead>
+													<listheader label="Cod Materia" align="center" width="15%" />
+													<listheader label="Nombre" align="center" width="30%"/>
+													<listheader label="Nucleo" align="center" width="15%" />
+													<listheader label="Sem" align="center" width="5%" />
+													<listheader label="HT" align="center" width="5%" />
+													<listheader label="HP" align="center" width="5%" />
+													<listheader label="HTP" align="center" width="5%" />
+													<listheader label="Microcurriculo" align="center" width="20%"/>									
+												</listhead>
+											</listbox>
+										</north>
+										<center border="0" autoscroll="true">
+											<listbox id="listaMaterias" autopaging="true">
+												<listhead>
+													<listheader align="center" width="15%" />
+													<listheader align="center" width="30%"/>
+													<listheader align="center" width="15%" />
+													<listheader align="center" width="5%" />
+													<listheader align="center" width="5%" />
+													<listheader align="center" width="5%" />
+													<listheader align="center" width="5%" />
+													<listheader align="center" width="20%"/>									
+												</listhead>
+											</listbox>
+										</center>
+									</borderlayout>
+								</div>
+							</div>
+							
+						</center>
+					
+					</borderlayout>
+				</div>
+			</center>
+			
+			<south border="none">
+				<div>
+					<separator />
+					<include id="footerIdx" src="/_sections/footer.zul" />
+				</div>		
+			</south>	
+		</borderlayout>
+	</window>
+</zk>
