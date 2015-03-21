@@ -1,5 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?page title="Gestión de Materias" contentType="text/html;charset=UTF-8"?>
+<?page title="Universidad de Antioquia" contentType="text/html;charset=UTF-8"?>
 
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
@@ -15,7 +15,6 @@
 				<div align="center">
 					<borderlayout height="680px">
 						<north border="0">
-<!-- 							<include id="listMenu" src="/_sections/toolbar-materia.zul"/> -->
 							<toolbar id="tb" sclass="vista" height="45px" width="960px">
 								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
 								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" />
@@ -29,7 +28,7 @@
 								<separator />
 								<hlayout width="100%">
 									<hbox spacing="15px">
-										<groupbox mold="3d" width="255px">
+										<groupbox mold="3d" width="255px" height="490px">
 											<caption image="/_img/materias.png" height="43px">
 													<label value="Buscar Materia" />
 											</caption>
@@ -39,7 +38,7 @@
 												<textbox instant="true" id="txtFiltrarMateria" tabindex="1" />
 											</hbox>
 
-											<listbox id="listBoxMaterias" emptyMessage="Sin registros" height="86%" style="margin-top:10px" rows="9">
+											<listbox id="listBoxMaterias" emptyMessage="Sin registros" height="385px" style="margin-top:10px" rows="9">
 												<listhead>
 													<listheader label="Materias"/>
 												</listhead>
@@ -68,37 +67,31 @@
 												<rows>
 												
 													<row>
-														<label value="Unidad Academica"></label>
+														<label value="Unidad Academica" sclass="campoobligatorio"></label>
 														<div>
-															<combobox id="cmbUnidadAcademica" width="25%"/>
+															<combobox id="cmbUnidadAcademica" width="50%"/>
 															<label id="lblUnidadAcademica"></label>
 														</div>
 													</row>
 													
 													<row>
-														<label value="Departamento"></label>
+														<label value="Departamento" sclass="campoobligatorio"></label>
 														<div>
-															<combobox id="cmbDependencia" width="25%"/>
+															<combobox id="cmbDependencia" width="50%"/>
 															<label id="lblDependencia"></label>
 														</div>
 													</row>
 													
 													<row>
-														<label value="Núcleo"></label>
+														<label value="Núcleo" sclass="campoobligatorio"></label>
 														<div>
-															<combobox id="cmbNucleo" width="25%"/>
+															<combobox id="cmbNucleo" width="50%"/>
 															<label id="lblNucleo"></label>
 														</div>
-														<!-- <div width="50%"> 	<listbox
-																id="ltbNucleo" tabindex="4" width="100%" rows="1"
-																mold="select" height="20px" />
-																<textbox id="txtNucleo" tabindex="4" width="100%"
-																constraint="no empty" visible="false"></textbox>
-														</div>-->
 													</row>
 													
 													<row>
-														<label value="Código Materia"></label>
+														<label value="Código Materia" sclass="campoobligatorio"></label>
 														<div>
 															<longbox id="txtCodigo" width="25%" constraint="no empty"/>
 															<label id="lblCodigo"></label>
@@ -106,7 +99,7 @@
 													</row>
 													
 													<row>
-														<label value="Nombre Materia"></label>
+														<label value="Nombre Materia" sclass="campoobligatorio"></label>
 														<div>
 															<textbox id="txtNombreMateria" tabindex="5" width="50%" constraint="no empty" />
 															<label id="lblNombreMateria"></label>
@@ -114,7 +107,7 @@
 													</row>
 													
 													<row>
-														<label value="Nivel o Semestre"></label>
+														<label value="Nivel o Semestre" sclass="campoobligatorio"></label>
 														<div>
 															<combobox id="cmbSemestre" width="25%"/>
 															<label id="lblSemestre"></label>
@@ -122,7 +115,7 @@
 													</row>
 													
 													<row>
-														<label value="Créditos"></label>
+														<label value="Créditos" sclass="campoobligatorio"></label>
 														<div>
 															<combobox id="cmbCreditos" tabindex="7" width="25%" />
 															<label id="lblCreditos"></label>
@@ -132,7 +125,7 @@
 													<row>
 														<label value="Habilitable"></label>
 														<div>
-															<checkbox id="ckbHabilitable"/>
+															<checkbox id="ckbHabilitable" />
 															<label id="lblHabilitable"></label>
 														</div>
 													</row>
@@ -154,25 +147,25 @@
 													</row>
 													
 													<row>
-														<label value="Horas Teóricas"></label>
+														<label value="Horas Teóricas" sclass="campoobligatorio"></label>
 														<div>
-															<longbox id="txtHt" tabindex="11" width="25%" />
+															<longbox id="txtHt" tabindex="11" width="25%" constraint="no empty"/>
 															<label id="lblHt"></label>
 														</div>
 													</row>
 													
 													<row>
-														<label value="Horas Prácticas"></label>
+														<label value="Horas Prácticas" sclass="campoobligatorio"></label>
 														<div>
-															<longbox id="txtHp" tabindex="12" width="25%" />
+															<longbox id="txtHp" tabindex="12" width="25%" constraint="no empty"/>
 															<label id="lblHp"></label>
 														</div>
 													</row>
 
 													<row>
-														<label value="Horas Teórico Prácticas"></label>
+														<label value="Horas Teórico Prácticas" sclass="campoobligatorio"></label>
 														<div>
-															<longbox id="txtHtp" tabindex="13" width="25%" />
+															<longbox id="txtHtp" tabindex="13" width="25%" constraint="no empty"/>
 															<label id="lblHtp"></label>
 														</div>
 													</row>
@@ -180,7 +173,7 @@
 													<row>
 														<label value="Prerrequisitos"></label>
 														<div>
-															<combobox id="cmbPrerrequisito" width="37%"/>
+															<combobox id="cmbPrerrequisito" width="50%"/>
 															<listbox id="listPrerrequisito2" visible="false">
 																<listhead>
 																	<listheader width="20%"></listheader>
@@ -203,7 +196,7 @@
 													<row>
 														<label value="Correquisitos"></label>
 														<div>
-															<combobox id="cmbCorrequisito" width="37%"/>
+															<combobox id="cmbCorrequisito" width="50%"/>
 															<listbox id="listCorrequisito2" visible="false">
 																<listhead>
 																	<listheader width="20%"></listheader>

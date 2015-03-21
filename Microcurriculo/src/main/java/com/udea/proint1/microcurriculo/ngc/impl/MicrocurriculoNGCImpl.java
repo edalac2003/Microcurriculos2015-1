@@ -54,10 +54,10 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 			try {
 				microcurriculo = microcurriculoDao.obtenerMicrocurriculo(idMicrocurriculo);
 			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("NGC : Ocurri� un error al intentar obtener el microcurriculo.");
+				throw new ExcepcionesLogica("NGC : Ocurrió un error al intentar obtener el microcurriculo.");
 			}			
 		}else{
-			throw new ExcepcionesLogica("La informaci�n de IdMicrocurriculo no es v�lida o est� vacia.");
+			throw new ExcepcionesLogica("La información de IdMicrocurriculo no es válida o está vacia.");
 		}
 		
 		return microcurriculo;
@@ -67,7 +67,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	@Override
 	public void guardarMicrocurriculos(TbMicMicrocurriculo microcurriculo) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto Microcurriculo no est� Vacio.
+		 * Comprobamos que el objeto Microcurriculo no esté Vacio.
 		 */
 		System.out.println("INGRESO AL GUARDAR MICROCURRICULO EN LA PARTE DE NEGOCIO.");
 		
@@ -83,7 +83,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 				throw new ExcepcionesLogica();
 			}			
 		}else{
-			throw new ExcepcionesLogica("No es posible guardar. El objeto Microcurriculo no contiene informaci�n v�lida.");
+			throw new ExcepcionesLogica("No es posible guardar. El objeto Microcurriculo no contiene información válida.");
 		}
 	}
 	
@@ -91,10 +91,10 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	@Override
 	public void actualizarMicrocurriculos(TbMicMicrocurriculo microcurriculo) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no esté vacio
+		 * Comprobamos que el objeto id no estÃ© vacio
 		 */
 //		if(microcurriculo == null){
-//			throw new ExcepcionesLogica("El objeto microcurriculo está vacio");
+//			throw new ExcepcionesLogica("El objeto microcurriculo estÃ¡ vacio");
 //		}
 //		try {
 //			String id = microcurriculo.getVrIdmicrocurriculo();
@@ -105,7 +105,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 //			}
 //		
 //		} catch (ExcepcionesDAO e) {
-//			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
+//			log.error("fallÃ³ al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
 //		}
 //		
 //		try {
@@ -113,7 +113,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 //			microcurriculoDao.modificarMicrocurriculo(microcurriculo);
 //		
 //		} catch (ExcepcionesDAO e) {
-//			log.error("falló al invocar el metodo modificarMicrocurriculo de la clase microcurriculoDao: "+ e);
+//			log.error("fallÃ³ al invocar el metodo modificarMicrocurriculo de la clase microcurriculoDao: "+ e);
 //		}
 	}
 
@@ -123,11 +123,11 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculos();
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMicrocurriculos de la clase microcurriculoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo listarMicrocurriculos de la clase microcurriculoDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		if(listaMicrocurriculos == null){
 			throw new ExcepcionesLogica("No se encontraron microcurriculos en la tabla TbMicMicrocurriculos");
@@ -147,11 +147,11 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorSemestre(idSemestre);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMicrocurriculosPorSemestre de la clase microcurriculoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo listarMicrocurriculosPorSemestre de la clase microcurriculoDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		return listaMicrocurriculos;
 	}
@@ -169,7 +169,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			nucleo = nucleoDao.obtenerNucleo(idNucleo);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
 		}
 		
 		if(nucleo == null){
@@ -179,11 +179,11 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorNucleo(nucleo);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMicrocurriculosPorNucleo de la clase microcurriculoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo listarMicrocurriculosPorNucleo de la clase microcurriculoDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		return listaMicrocurriculos;
 	}
@@ -198,7 +198,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			materias = materiaDao.buscarMaterias(idMateria);
 		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+			log.error("falló al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
 		}
 		
 		if(materias != null){
@@ -216,12 +216,45 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		return listaTodosMicrocurriculos;
 	}
 	
-
+	/*@Override
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica{
+		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
+		
+		TbAdmMateria materia= null;
+		
+		try {
+			materia = materiaDao.obtenerMateria(idMateria);
+		} catch (ExcepcionesDAO e) {
+			log.error("falló al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+		}
+		
+		if(materia != null){
+			try {
+				listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorMateria(materia);
+			} catch (ExcepcionesDAO e) {
+				throw new ExcepcionesLogica("Se presentaron problemas "+e);
+			}			
+		} else {
+			throw new ExcepcionesLogica("NO existe materia a consultar"); 
+		}
+		
+//		try {
+//			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorMateria(idMateria);
+//		} catch (ExcepcionesDAO e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
+		 
+		return listaMicrocurriculos;
+	}*/
+	
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(String idResponsable) throws ExcepcionesLogica{
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
@@ -231,7 +264,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			responsable = personaDao.obtenerPersona(idResponsable);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerPersona de la clase personaDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo obtenerPersona de la clase personaDao: "+ e);
 		}
 		
 		if(responsable == null){
@@ -241,11 +274,11 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorResponsable(responsable);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMicrocurriculosPorResponsable de la clase microcurriculoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo listarMicrocurriculosPorResponsable de la clase microcurriculoDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		return listaMicrocurriculos;
 	}

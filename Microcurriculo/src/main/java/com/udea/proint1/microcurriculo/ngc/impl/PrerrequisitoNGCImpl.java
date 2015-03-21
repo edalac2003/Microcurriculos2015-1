@@ -34,39 +34,39 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 	@Override
 	public void guardarPrerrequisito(TbAdmPrerrequisito prerrequisito) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no esté vacio
+		 * Comprobamos que el objeto id no estÃ© vacio
 		 */
 		if(prerrequisito == null){
-			throw new ExcepcionesLogica("El objeto prerrequisito está vacio");
+			throw new ExcepcionesLogica("El objeto prerrequisito estÃ¡ vacio");
 		}
-		try {
-			int id = prerrequisito.getNbId();
-			TbAdmPrerrequisito prerrequisitoConsulta = prerrequisitoDao.obtenerPrerrequisito(id);
-		
-			if(prerrequisitoConsulta != null){
-				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
-		}
+//		try {
+//			int id = prerrequisito.getNbId();
+//			TbAdmPrerrequisito prerrequisitoConsulta = prerrequisitoDao.obtenerPrerrequisito(id);
+//		
+//			if(prerrequisitoConsulta != null){
+//				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("fallÃ³ al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
+//		}
 		
 		try {
 			
 			prerrequisitoDao.guardarPrerrequisito(prerrequisito);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarPrerrequisito de la clase prerrequisitoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo guardarPrerrequisito de la clase prerrequisitoDao: "+ e);
 		}
 	}
 
 	@Override
 	public void actualizarPrerrequisito(TbAdmPrerrequisito prerrequisito) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no esté vacio
+		 * Comprobamos que el objeto id no estÃ© vacio
 		 */
 		if(prerrequisito == null){
-			throw new ExcepcionesLogica("El objeto prerrequisito está vacio");
+			throw new ExcepcionesLogica("El objeto prerrequisito estÃ¡ vacio");
 		}
 		try {
 			int id = prerrequisito.getNbId();
@@ -77,7 +77,7 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 			}
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
 		}
 		
 		try {
@@ -85,7 +85,7 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 			prerrequisitoDao.actualizarPrerrequisito(prerrequisito);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarPrerrequisito de la clase prerrequisitoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo actualizarPrerrequisito de la clase prerrequisitoDao: "+ e);
 		}
 	}
 
@@ -95,11 +95,11 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 		try {
 			listaPrerrequisitos = prerrequisitoDao.listarPrerrequisitos();
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarPrerrequisitos de la clase prerrequisitoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo listarPrerrequisitos de la clase prerrequisitoDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		if(listaPrerrequisitos == null){
 			throw new ExcepcionesLogica("No se encontraron prerrequisitos en la tabla TbAdmPrerrequisitos");
@@ -114,7 +114,7 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de prerrequisito, está vacia");
+			throw new ExcepcionesLogica("No se ha ingresado una identificaciÃ³n de prerrequisito, estÃ¡ vacia");
 		}
 		TbAdmPrerrequisito prerrequisito = null;
 		
@@ -122,15 +122,15 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			prerrequisito = prerrequisitoDao.obtenerPrerrequisito(id);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		if(prerrequisito == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró prerrequisito con el id "+ id);
+			//si estÃ¡ vacio tira una excepciÃ³n
+			throw new ExcepcionesLogica("No se encontrÃ³ prerrequisito con el id "+ id);
 		}else{
 			//si no esta vacio retorna la ciudad
 			return prerrequisito;
@@ -146,18 +146,18 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 		try {
 			materia = materiaDao.obtenerMateria(id);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
 		}
 		
 		
 		try {
 			listaPrerrequisitos = prerrequisitoDao.listarPrerrequisitosxMateria(materia);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarCorrequisitosxmateria de la clase correquisitosDao: "+ e);
+			log.error("fallÃ³ al invocar el metodo listarCorrequisitosxmateria de la clase correquisitosDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		return listaPrerrequisitos;
 	}

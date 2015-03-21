@@ -491,6 +491,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
         	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
         </bean>
         
         <bean id="consultarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ConsultarMicroCtrl" scope="prototype">
@@ -524,6 +526,9 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="paisNGC" ref="paisNGC" />
         	<property name="estadoNGC" ref="estadoNGC" />
         	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
+<!--         	<property name="correquisitoNGC" ref="correquisitoNGC" /> -->
+<!--         	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" /> -->
+<!--         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" /> -->
         </bean>
         
         <bean id="cargarDatos" class="com.udea.proint1.microcurriculo.ctrl.CargarDatos" scope="prototype">
@@ -561,7 +566,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="estadoNGC" ref="estadoNGC" />
         </bean>
         
-        <bean id="duplicarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.DuplicarMicroCtrl" scope="prototype">
+        <bean id="detallesMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.DetallesMicroCtrl" scope="prototype">
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
         	<property name="personaNGC" ref="personaNGC" />
@@ -573,10 +578,36 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
         	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        </bean>
+        
+        <bean id="modificarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ModificarMicroCtrl" scope="prototype">
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
+        	<property name="correquisitoNGC" ref="correquisitoNGC" />
+        	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" />
+        	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
+        	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
+        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
+        	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
+        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
         </bean>
         
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
-        </bean>            
+        </bean>
+        
+        <bean id="borrarVariablesSession" class="com.udea.proint1.microcurriculo.ctrl.BorrarVariablesSession" scope="prototype">
+        	
+        </bean>
 </beans>

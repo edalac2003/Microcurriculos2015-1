@@ -1,15 +1,21 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Toolbarbutton;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
@@ -52,6 +58,25 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	Combobox cmbMicrocurriculo2;
 	Combobox cmbDocente;
 	Combobox cmbEstado;
+	
+	Button btnBuscar;
+	
+	Listbox listaMicrocurriculo;
+	
+	Toolbarbutton tool_duplica;
+	
+	/**
+	 * Listados para manejar las consultas
+	 */
+
+	public static List<TbAdmUnidadAcademica> listaUnidadAcademica;
+	public static List<TbAdmDependencia> listaDependencias;
+	public static List<TbAdmNucleo> listaNucleos;
+	public static List<TbAdmMateria> listaMaterias;
+	public static List<TbAdmPersona> listaDocentes;
+	public static List<TbAdmSemestre> listaSemestre;
+	public static List<TbMicEstado> listaEstados;
+	public static List<TbMicMicrocurriculo> listaMicrocurriculos;
 	
 	Label lblEncabezadoMicro;
 	
@@ -137,31 +162,247 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 		this.estadoNGC = estadoNGC;
 	}
 	
+	/*********************************************************************************************
+	 * Aqui comienzan los metodos de listado
+	 */
+	
+	/**
+	 * ante el evento click en el boton buscar, el metodo procede a revisar los filtros diligenciados
+	 * y se muestran todos los microcurriculos relacionados con la busqueda
+	 */
+	public void onClick$btnBuscar(){
+		List<TbMicMicrocurriculo> microcurriculosEncontrados;		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoSemestre;		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable;		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoEstado = new ArrayList<TbMicMicrocurriculo>();
+		
+		/**
+		 * Verifica los campos de busqueda por dependencias y los prioriza en orden para proceder a llamar el metodo que hará la carga
+		 * de los microcurriculos en la lista
+		 */
+		
+		if(!"[Seleccione]".equals(cmbMateria.getValue().toString())&&(!"".equals(cmbMateria.getValue().toString()))){
+			TbAdmMateria materia = listaMaterias.get(cmbMateria.getSelectedIndex()-1);
+			String busca = materia.getVrIdmateria();
+			busca = busca + "%";
+			microcurriculosEncontrados = consultarMicrocurriculos(busca);
+		}else{
+			if(!"[Seleccione]".equals(cmbNucleo.getValue().toString())&&(!"".equals(cmbNucleo.getValue().toString()))){
+				TbAdmNucleo nucleo = listaNucleos.get(cmbNucleo.getSelectedIndex()-1);
+				String busca = nucleo.getVrIdnucleo();
+				busca = busca + "%";
+				microcurriculosEncontrados = consultarMicrocurriculos(busca);
+			}else{
+				if(!"[Seleccione]".equals(cmbDependencia.getValue().toString())&&(!"".equals(cmbDependencia.getValue().toString()))){
+					TbAdmDependencia dependencia = listaDependencias.get(cmbDependencia.getSelectedIndex()-1);
+					String busca = dependencia.getVrIddependencia();
+					busca = busca + "%";
+					microcurriculosEncontrados = consultarMicrocurriculos(busca);
+				}else{
+					if(!"[Seleccione]".equals(cmbUnidadAcademica.getValue().toString())&&(!"".equals(cmbUnidadAcademica.getValue().toString()))){
+						TbAdmUnidadAcademica unidadAcademica = listaUnidadAcademica.get(cmbUnidadAcademica.getSelectedIndex()-1);
+						String busca = unidadAcademica.getVrIdunidad();
+						busca = busca + "%";
+						microcurriculosEncontrados = consultarMicrocurriculos(busca);
+					}else{
+						microcurriculosEncontrados = consultarMicrocurriculos("%");
+					}
+				}
+			}
+		}
+		
+		/**
+		 * Una vez se tiene el microcurriculo se procede a filtrar por los campos especiales semestre, docente responsable y estado
+		 */
+		
+		microcurriculosFiltradoSemestre = filtrarMicrocurriculosPorSemestre(microcurriculosEncontrados);
+		microcurriculosFiltradoResponsable = filtrarMicrocurriculosPorResponsable(microcurriculosFiltradoSemestre);
+		microcurriculosFiltradoEstado = filtrarMicrocurriculosPorEstado(microcurriculosFiltradoResponsable);
+		
+		/**
+		 * se llama al metodo para que liste los microcurriculos que se le pasaran por un objeto, el cual ya
+		 * se encuentra filtrado para mostrar
+		 */
+		
+		listarMicrocurriculos(microcurriculosFiltradoEstado);
+	}
+	
+	/**
+	 * El metodo pide a la capa del negocio que le retorne todos los microcurriculos con el concepto de busqueda
+	 * @param materiaBuscar cadena de caracteres concodigo de materia a buscar como like (coincidan primeros digitos)
+	 * @return objeto array list con microcurriculos encontrados
+	 */
+	
+	public List<TbMicMicrocurriculo> consultarMicrocurriculos(String materiaBuscar){
+		List<TbMicMicrocurriculo> microcurriculosEncontrados = null;
+		
+		try{
+			microcurriculosEncontrados = microcurriculoNGC.listarMicrocurriculosPorMateria(materiaBuscar);
+			listaMicrocurriculo.getItems().clear();
+			
+		}catch(ExcepcionesLogica e){
+			logger.error("error al invocar metodo listarMicrocurriculosPorMateria de la clase MicrocurriculoNGC: "+e);
+		}
+		return microcurriculosEncontrados;
+	}
+	
+	/**
+	 * Hace la busqueda de los microcurriculos que coinciden con la busqueda de filtrado por semestre
+	 * @param microcurriculosEncontrados objeto array list con microcurriculos a filtrar
+	 * @return objeto array list con microcurriculos filtrados por semestre
+	 */
+	public List<TbMicMicrocurriculo> filtrarMicrocurriculosPorSemestre(List<TbMicMicrocurriculo> microcurriculosEncontrados){
+		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoSemestre = new ArrayList<TbMicMicrocurriculo>();
+		
+		if("[Seleccione]".equals(cmbSemestre.getValue().toString()) || ("".equals(cmbSemestre.getValue().toString()))){
+			microcurriculosFiltradoSemestre = microcurriculosEncontrados;
+		}else{
+			if(microcurriculosEncontrados != null){
+				TbAdmSemestre semestre = listaSemestre.get(cmbSemestre.getSelectedIndex()-1);
+				String idSemestre = semestre.getVrIdsemestre();
+				for(TbMicMicrocurriculo microcurriculo: microcurriculosEncontrados){
+					if(microcurriculo.getTbAdmSemestre().getVrIdsemestre().equals(idSemestre)){
+						microcurriculosFiltradoSemestre.add(microcurriculo);
+					}
+				}
+			}
+		}
+		return microcurriculosFiltradoSemestre;
+	}
+	
+	/**
+	 * Hace la busqueda de los microcurriculos que coinciden con la busqueda de filtrado por docente responsable
+	 * @param microcurriculosFiltradoSemestre objeto array list con microcurriculos a filtrar
+	 * @return objeto array list con microcurriculos filtrados por responsable del microcurriculo
+	 */
+	public List<TbMicMicrocurriculo> filtrarMicrocurriculosPorResponsable(List<TbMicMicrocurriculo> microcurriculosFiltradoSemestre){
+		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable = new ArrayList<TbMicMicrocurriculo>();
+		
+		if("[Seleccione]".equals(cmbDocente.getValue().toString()) || ("".equals(cmbDocente.getValue().toString()))){
+			microcurriculosFiltradoResponsable = microcurriculosFiltradoSemestre;
+		}else{
+			if(microcurriculosFiltradoSemestre != null){
+				TbAdmPersona docente = listaDocentes.get(cmbDocente.getSelectedIndex()-1);
+				String idDocente = docente.getVrIdpersona();
+				for(TbMicMicrocurriculo microcurriculo: microcurriculosFiltradoSemestre){
+					if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idDocente)){
+						microcurriculosFiltradoResponsable.add(microcurriculo);
+					}
+				}
+			}
+		}
+		return microcurriculosFiltradoResponsable;
+	}
+	
+	/**
+	 * Hace la busqueda de los microcurriculos que coinciden con la busqueda de filtrado por estado
+	 * @param microcurriculosFiltradoResponsable objeto array list con microcurriculos a filtrar
+	 * @return objeto array list con microcurriculos filtrados por estado actual del microcurriculo
+	 */
+	public List<TbMicMicrocurriculo> filtrarMicrocurriculosPorEstado(List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable){
+		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoEstado = new ArrayList<TbMicMicrocurriculo>();
+		
+		if("[Seleccione]".equals(cmbEstado.getValue().toString()) || ("".equals(cmbEstado.getValue().toString()))){
+			microcurriculosFiltradoEstado = microcurriculosFiltradoResponsable;
+		}else{
+			TbMicEstado estado = listaEstados.get(cmbEstado.getSelectedIndex()-1);
+			int idEstado = estado.getNbIdestado();
+			if(microcurriculosFiltradoResponsable != null){
+				for(TbMicMicrocurriculo microcurriculo: microcurriculosFiltradoResponsable){
+					if(idEstado == microcurriculo.getTbMicEstado().getNbIdestado()){
+						microcurriculosFiltradoEstado.add(microcurriculo);
+					}
+				}
+			}
+		}
+		return microcurriculosFiltradoEstado;
+	}
+	
+	 /**
+	  * Procede a mostrar el listado de los microcurriculos encontrados
+	  * @param microsListar objeto array list con microcurriculos ya filtrados y los cuales se listaran
+	  */
+	public void listarMicrocurriculos(List<TbMicMicrocurriculo> microsListar){
+		if(microsListar != null){
+			
+			for(TbMicMicrocurriculo micro: microsListar){
+				final Listitem listaItem = new Listitem();
+				
+				Listcell celdaCodigo = new Listcell(micro.getVrIdmicrocurriculo().toString());
+				Listcell celdaUnidad = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
+				Listcell celdaDependencia = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getVrNombre());
+				Listcell celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrNombre());
+				Listcell celdaMateria = new Listcell(micro.getTbAdmMateria().getVrNombre());
+				Listcell celdaResponsable = new Listcell(micro.getTbAdmPersona().getVrNombres()+" "+micro.getTbAdmPersona().getVrApellidos());
+				Listcell celdaEstado = new Listcell(micro.getTbMicEstado().getVrDescripcion());
+				
+				celdaCodigo.setStyle("font-size:10px");
+				celdaUnidad.setStyle("font-size:10px");
+				celdaDependencia.setStyle("font-size:10px");
+				celdaNucleo.setStyle("font-size:10px");
+				celdaMateria.setStyle("font-size:10px");
+				celdaResponsable.setStyle("font-size:10px");
+				celdaEstado.setStyle("font-size:10px");
+				
+				listaItem.appendChild(celdaCodigo);
+				listaItem.appendChild(celdaUnidad);
+				listaItem.appendChild(celdaDependencia);
+				listaItem.appendChild(celdaNucleo);
+				listaItem.appendChild(celdaMateria);
+				listaItem.appendChild(celdaResponsable);
+				listaItem.appendChild(celdaEstado);
+				
+				listaMicrocurriculo.appendChild(listaItem);
+			}
+		}
+	}
+	
+	/**
+	 * Ante el evento click en el listbox listaMicrocurriculo, procede a verificar que elemento del listbox fue
+	 * seleccionado, para guardar en la session la variable que identificará al microcurriculo al cual se le 
+	 * implemntará las acciones de consulta, duplicado, actualizacion o impresion.  
+	 */
+	public void onClick$listaMicrocurriculo(){
+		Listitem itemSelect = listaMicrocurriculo.getSelectedItem();
+		if(itemSelect != null){
+			Listcell celdaIdMicro = (Listcell) itemSelect.getChildren().get(0);
+			String idMicro = celdaIdMicro.getLabel();
+			Executions.getCurrent().getSession().setAttribute("idMicro", idMicro);
+			TbMicMicrocurriculo microcurriculo = null;
+			try {
+				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
+			} catch (ExcepcionesLogica e) {
+				logger.error(e);
+			}
+			if(microcurriculo.getTbMicEstado().getNbIdestado()!=6){
+				tool_duplica.setDisabled(true);
+			}else{
+				tool_duplica.setDisabled(false);
+			}
+		}
+	}
+	
+	/*********************************************************************************************
+	 * Hasta aqui van los metodos de listado
+	 */
+	
 	/**
 	 * Solicita de la capa del negocio todas las unidades existentes y las ubica en el combobox cmbUnidadAcademica
 	 * Si existe el combobox cmbUnidadAcademica se procede a llenar dicho elemento tambien
 	 */
 	private void cargarUnidades(){
 		try {
-			List<TbAdmUnidadAcademica> listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
+			listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
 			if (listaUnidadAcademica != null){			
 				cmbUnidadAcademica.appendChild(new Comboitem("[Seleccione]"));
-				if(cmbUnidadAcademica2 != null){
-					cmbUnidadAcademica2.appendChild(new Comboitem("[Seleccione]"));
-				}
-				System.out.println();
 				for(TbAdmUnidadAcademica unidad : listaUnidadAcademica){
-					Comboitem item = new Comboitem(unidad.getVrIdunidad());
-					item.setDescription(unidad.getVrNombre());
+					Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+ unidad.getVrNombre());
 					cmbUnidadAcademica.appendChild(item);
-					if(cmbUnidadAcademica2 != null){
-						cmbUnidadAcademica2.appendChild(item);
-					}
 				}
 				cmbUnidadAcademica.setValue("[Seleccione]");
-				if(cmbUnidadAcademica2 != null){
-					cmbUnidadAcademica2.setValue("[Seleccione]");
-				}
 			}
 		} catch (ExcepcionesLogica e) {
 			logger.error("Se presentaron problemas al Obtener los registros de la tabla <Tb_Adm_UnidadAcademica>.  "+e);
@@ -172,29 +413,30 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todas las dependencias existentes y las ubica en el combobox cmbDependencia
 	 * Si existe el combobox cmbDependencia2 se procede a llenar dicho elemento tambien
 	 */
-	private void cargarDependencias(){
-		try {
-			List<TbAdmDependencia> listaDependencias = dependenciaNGC.listarDependencias();
-			if (listaDependencias != null){
-				cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
-				if(cmbDependencia2 != null){
-					cmbDependencia2.appendChild(new Comboitem("[Seleccione]"));
-				}
-				for(TbAdmDependencia dependencia : listaDependencias){
-					Comboitem item = new Comboitem(dependencia.getVrIddependencia());
-					item.setDescription(dependencia.getVrNombre());
-					cmbDependencia.appendChild(item);
-					if(cmbDependencia2 != null){
-						cmbDependencia2.appendChild(item);
-					}
-				}
-				cmbDependencia.setValue("[Seleccione]");
-				if(cmbDependencia2 != null){
-					cmbDependencia2.setValue("[Seleccione]");
-				}
+	private void cargarDependencias(String unidad){
+		if(!"".equals(unidad)){
+			try {
+				unidad = unidad + "%";
+				listaDependencias = dependenciaNGC.buscarDepedencias(unidad);
+			} catch (ExcepcionesLogica e) {
+				logger.error("Se presentaron Errores al buscar registros de la tabla <Tb_Adm_Dependencia>.  "+e);
 			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
+		}else{
+			try {
+				listaDependencias = dependenciaNGC.listarDependencias();
+			} catch (ExcepcionesLogica e) {
+				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
+			}
+		}
+		
+		cmbDependencia.getItems().clear();
+		if (listaDependencias != null){
+			cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmDependencia dependencia : listaDependencias){
+				Comboitem item = new Comboitem(dependencia.getVrIddependencia()+" - "+dependencia.getVrNombre());
+				cmbDependencia.appendChild(item);
+			}
+			cmbDependencia.setValue("[Seleccione]");
 		}		
 	}
 	
@@ -202,64 +444,62 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todas los nucleos existentes y las ubica en el combobox cmbNucleo
 	 * Si existe el combobox cmbNucleo2 se procede a llenar dicho elemento tambien
 	 */
-	private void cargarNucleos(){
-		try {
-			List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleos();
-			listaNucleos = nucleoNGC.listarNucleos();
-			if (listaNucleos != null){
-				cmbNucleo.appendChild(new Comboitem("[Seleccione]"));
-				if(cmbNucleo2 != null){
-					cmbNucleo2.appendChild(new Comboitem("[Seleccione]"));
-				}
-				for(TbAdmNucleo nucleo : listaNucleos){
-					Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
-					item.setDescription(nucleo.getVrNombre());
-					cmbNucleo.appendChild(item);
-					if(cmbNucleo2 != null){
-						cmbNucleo2.appendChild(item);
-					}
-				}
-				cmbNucleo.setValue("[Seleccione]");
-				if(cmbNucleo2 != null){
-					cmbNucleo2.setValue("[Seleccione]");
-				}
+	private void cargarNucleos(String dependencia){
+		if(!"".equals(dependencia)){
+			try {
+				dependencia = dependencia + "%";
+				listaNucleos = nucleoNGC.buscarNucleos(dependencia);
+			} catch (ExcepcionesLogica e) {
+				logger.error("Se presentaron Errores al buscar registros de la tabla <Tb_Adm_Nucleo>.  "+e);
 			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
-		}		
+		}else{
+			try {
+				listaNucleos = nucleoNGC.listarNucleos();
+			} catch (ExcepcionesLogica e) {
+				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
+			}
+		}
+		
+		cmbNucleo.getItems().clear();
+		if (listaNucleos != null){
+			cmbNucleo.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmNucleo nucleo : listaNucleos){
+				Comboitem item = new Comboitem(nucleo.getVrIdnucleo()+" - "+nucleo.getVrNombre());
+				cmbNucleo.appendChild(item);
+			}
+			cmbNucleo.setValue("[Seleccione]");
+		}
+			
 	}
 	
 	/**
 	 * Solicita de la capa del negocio todas las materias existentes y las ubica en el combobox cmbMateria
 	 * Si existe el combobox cmbMateria2 se procede a llenar dicho elemento tambien
 	 */
-	public void cargarMaterias(){
-		try {
-			List<TbAdmMateria> listaMaterias = materiaNGC.listarMaterias();
-			cmbMateria.getItems().clear();
-			
-			if(listaMaterias != null){
-				cmbMateria.appendChild(new Comboitem("[Seleccione]"));
-				if(cmbMateria2 != null){
-					cmbMateria2.appendChild(new Comboitem("[Seleccione]"));
-				}
-				for(TbAdmMateria materia: listaMaterias){
-					Comboitem item = new Comboitem(materia.getVrIdmateria());
-					item.setDescription(materia.getVrNombre());
-					cmbMateria.appendChild(item);
-					if(cmbMateria2 != null){
-						cmbMateria2.appendChild(item);
-					}
-				}
-				cmbMateria.setValue("[Seleccione]");
-				if(cmbMateria2 != null){
-					cmbMateria2.setValue("[Seleccione]");
-				}
-			}else{
-				Messagebox.show("No se hallaron materias");
+	public void cargarMaterias(String nucleo){
+		if (!nucleo.equals("") && (nucleo.length() > 1)){
+			try {
+				nucleo = nucleo + "%";
+				listaMaterias = materiaNGC.buscarMaterias(nucleo);
+			} catch (ExcepcionesLogica e) {
+				logger.error(e.getMessage());
 			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("error al invocar metodo listarMaterias de la clase MateriaNGC: "+e);
+		} else {
+			try {
+				listaMaterias = materiaNGC.listarMaterias();
+			} catch (ExcepcionesLogica e) {
+				logger.error(e.getMessage());
+			}
+		}
+				
+		cmbMateria.getItems().clear();
+		if(listaMaterias != null){
+			cmbMateria.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmMateria materia : listaMaterias){
+				Comboitem item = new Comboitem(materia.getVrIdmateria()+" - "+materia.getVrNombre());
+				cmbMateria.appendChild(item);
+			}
+			cmbMateria.setValue("[Seleccione]");
 		}
 	}
 	
@@ -268,7 +508,7 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	 */
 	private void cargarSemestres(){
 		try {
-			List<TbAdmSemestre> listaSemestre = semestreNGC.listarSemestres();
+			listaSemestre = semestreNGC.listarSemestres();
 			cmbSemestre.getItems().clear();
 			if (listaSemestre != null){
 				cmbSemestre.appendChild(new Comboitem("[Seleccione]"));
@@ -280,7 +520,7 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 			} else
 				Messagebox.show("No se Encontraron Registros de Semestres");
 		} catch (ExcepcionesLogica e) {
-			logger.error("error al invocar metodo listarSemestres de la clase SemestreNGC: "+e);
+			e.printStackTrace();
 		}
 	}
 	
@@ -311,42 +551,75 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todos los docentes existentes y los ubica en el combobox cmbDocente
 	 */
 	private void cargarDocentes(){
+		cmbDocente.getItems().clear();
 		try {
-			List<TbAdmPersona> listaDocentes = personaNGC.obtenerDocentes();
-			cmbDocente.getItems().clear();
+			listaDocentes = personaNGC.obtenerDocentes();			
 			if (listaDocentes != null){
+				cmbDocente.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmPersona docente : listaDocentes){
-					Comboitem item = new Comboitem(docente.getVrIdpersona());
-					item.setDescription(docente.getVrApellidos()+" "+docente.getVrNombres());
+					Comboitem item = new Comboitem(docente.getVrIdpersona()+" - "+ docente.getVrApellidos()+" "+docente.getVrNombres());
 					cmbDocente.appendChild(item);
 				}
 			} else
 				Messagebox.show("No Se Hallaron Registros de Docentes");
 		} catch (ExcepcionesLogica e) {
-			logger.error("error al invocar metodo obtenerDocentes de la clase PersonaNGC: "+e);
+			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Solicita de la capa del negocio todos los estados existentes y los ubica en el combobox cmbEstado
+	 */
+	private void cargarEstados2(){
+		cmbEstado.getItems().clear();
+		try {
+			 listaEstados = estadoNGC.listarEstados();
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		
+		if(listaEstados != null){
+			cmbEstado.appendChild(new Comboitem("[Seleccione]"));
+			for(TbMicEstado estado: listaEstados){
+				Comboitem item = new Comboitem(estado.getVrDescripcion());
+				cmbEstado.appendChild(item);
+			}
+			cmbEstado.setValue("[Seleccione]");
+		}		
 	}
 	
 	/**
 	 * Solicita de la capa del negocio todos los microcurriculos existentes y los ubica en el combobox cmbMicrocurriculo
 	 */
-	private void cargarMicrocurriculos(){
-		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
-		try {
-			listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculos();
-		} catch (ExcepcionesLogica e) {
-			logger.error("error al invocar metodo listarMicrocurriculos de la clase MicrocurriculoNGC: "+e);
-		}
-		
-		if(listaMicrocurriculos != null){
-			for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
-				if(microcurriculo.getTbMicEstado().getNbIdestado()==6){
-					Comboitem item2 = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
-					cmbMicrocurriculo.appendChild(item2);
+	private void cargarMicrocurriculos(String buscaMicro){
+		if(cmbMicrocurriculo != null){
+			if (!buscaMicro.equals("")){
+				try {
+					buscaMicro = buscaMicro + "%";
+					listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculosPorMateria(buscaMicro);
+				} catch (ExcepcionesLogica e) {
+					logger.error(e.getMessage());
+				}
+			} else {
+				try {
+					listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculos();
+				} catch (ExcepcionesLogica e) {
+					logger.error(e.getMessage());
+				}
+			}
+					
+			cmbMicrocurriculo.getItems().clear();
+			if(listaMaterias != null){
+				cmbMicrocurriculo.appendChild(new Comboitem("[Seleccione]"));
+				for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
+					if(microcurriculo.getTbMicEstado().getNbIdestado()==6){
+						Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
+						cmbMicrocurriculo.appendChild(item);
+					}
+					cmbMicrocurriculo.setValue("[Seleccione]");
 				}
 			}
 		}
-		cmbMicrocurriculo.setValue("[Seleccione]");
 	}
 	
 	/**
@@ -370,256 +643,76 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Hace la busqueda de las dependencias existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param unidad contiene indicio de id para busquedas de dependencias que coincidan
-	 */
-	private void recargarDependencias(String unidad){
-		if(!cmbDependencia.getValue().toString().equals("[Seleccione]")){
-			try {		
-				List<TbAdmDependencia> listaDependencias = dependenciaNGC.listarDependenciasPorUnidad(unidad);
-				cmbDependencia.getItems().clear();
-				cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
-				if (listaDependencias != null){
-					for(TbAdmDependencia dependencia : listaDependencias){
-						Comboitem item = new Comboitem(dependencia.getVrIddependencia());
-						item.setDescription(dependencia.getVrNombre());
-						cmbDependencia.appendChild(item);
-					}
-				}
-				cmbDependencia.setValue("[Seleccione]");
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
-			}
-		}
-	}
-	
-	/**
-	 * Hace la busqueda de las dependencias existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param unidad contiene indicio de id para busquedas de dependencias que coincidan
-	 */
-	private void recargarDependencias2(String unidad){
-		if(!cmbDependencia2.getValue().toString().equals("[Seleccione]")){
-			try {		
-				List<TbAdmDependencia> listaDependencias = dependenciaNGC.listarDependenciasPorUnidad(unidad);
-				cmbDependencia2.getItems().clear();
-				cmbDependencia2.appendChild(new Comboitem("[Seleccione]"));
-				if (listaDependencias != null){
-					for(TbAdmDependencia dependencia : listaDependencias){
-						Comboitem item = new Comboitem(dependencia.getVrIddependencia());
-						item.setDescription(dependencia.getVrNombre());
-						cmbDependencia2.appendChild(item);
-					}
-				}
-				cmbDependencia2.setValue("[Seleccione]");
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
-			}
-		}
-	}
-	
-	/**
-	 * Hace la busqueda de los nucleos existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param dependencia contiene indicio de id para busquedas de nucleos que coincidan
-	 */
-	private void recargarNucleos(String dependencia){
-		if(!cmbNucleo.getValue().toString().equals("[Seleccione]")){
-			try {
-				List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleosPorDependencia(dependencia);
-				cmbNucleo.getItems().clear();
-				if (listaNucleos != null){
-					cmbNucleo.appendChild(new Comboitem("[Seleccione]"));
-					for(TbAdmNucleo nucleo : listaNucleos){
-						Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
-						item.setDescription(nucleo.getVrNombre());
-						cmbNucleo.appendChild(item);
-					}
-				}
-				cmbNucleo.setValue("[Seleccione]");
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
-			}
-		}
-	}
-	
-	/**
-	 * Hace la busqueda de los nucleos existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param dependencia contiene indicio de id para busquedas de nucleos que coincidan
-	 */
-	private void recargarNucleos2(String dependencia){
-		if(!cmbNucleo2.getValue().toString().equals("[Seleccione]")){
-			try {
-				List<TbAdmNucleo> listaNucleos = nucleoNGC.listarNucleosPorDependencia(dependencia);
-				cmbNucleo2.getItems().clear();
-				if (listaNucleos != null){
-					cmbNucleo2.appendChild(new Comboitem("[Seleccione]"));
-					for(TbAdmNucleo nucleo : listaNucleos){
-						Comboitem item = new Comboitem(nucleo.getVrIdnucleo());
-						item.setDescription(nucleo.getVrNombre());
-						cmbNucleo2.appendChild(item);
-					}
-				}
-				cmbNucleo2.setValue("[Seleccione]");
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
-			}
-		}
-	}
-	
-	/**
-	 * Hace la busqueda de las materias existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param nucleo contiene indicio de id para busquedas de materias que coincidan
-	 */
-	private void recargarMaterias(String nucleo){
-		if(!cmbMateria.getValue().toString().equals("[Seleccione]")){
-			try {
-				List<TbAdmMateria> listaMateria = materiaNGC.listarMateriasxNucleo(nucleo);
-				if (listaMateria != null){
-					cmbMateria.getItems().clear();
-					for(TbAdmMateria materia : listaMateria){
-						Comboitem item = new Comboitem(materia.getVrIdmateria());
-						item.setDescription(materia.getVrNombre());
-						cmbMateria.appendChild(item);
-					}
-				}
-				cmbMateria.setValue("[Seleccione]");
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Materia>.  "+e);
-			}
-		}
-	}
-	
-	/**
-	 * Hace la busqueda de las materias existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param nucleo contiene indicio de id para busquedas de materias que coincidan
-	 */
-	private void recargarMaterias2(String nucleo){
-		if(!cmbMateria2.getValue().toString().equals("[Seleccione]")){
-			try {
-				List<TbAdmMateria> listaMateria = materiaNGC.listarMateriasxNucleo(nucleo);
-				if (listaMateria != null){
-					cmbMateria2.getItems().clear();
-					for(TbAdmMateria materia : listaMateria){
-						Comboitem item = new Comboitem(materia.getVrIdmateria());
-						item.setDescription(materia.getVrNombre());
-						cmbMateria2.appendChild(item);
-					}
-				}
-				cmbMateria2.setValue("[Seleccione]");
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Materia>.  "+e);
-			}
-		}
-	}
-	
-	/**
-	 * Hace la busqueda de los microcurriculos existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param buscaMicrocurriculos contiene indicio de id para busquedas de microcurriculos que coincidan
-	 */
-	public void recargarMicrocurriculos(String buscaMicrocurriculos){
-		if(cmbMicrocurriculo != null){
-			try {
-				buscaMicrocurriculos = buscaMicrocurriculos + "%";
-				List<TbMicMicrocurriculo> listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
-				cmbMicrocurriculo.getItems().clear();
-				
-				if(listaMicrocurriculos != null){
-					for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
-						if(microcurriculo.getTbMicEstado().getNbIdestado()==6){
-							Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
-							cmbMicrocurriculo.appendChild(item);
-						}
-					}
-				}else{
-					Messagebox.show("No se hallaron microcurriculos");
-				}
-			} catch (ExcepcionesLogica e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
-	 * Hace la busqueda de los microcurriculos existentes que contengan el parametro id que llega
-	 * por argumento en el metodo
-	 * @param buscaMicrocurriculos contiene indicio de id para busquedas de microcurriculos que coincidan
-	 */
-	public void recargarMicrocurriculos2(String buscaMicrocurriculos){
-		if(cmbMicrocurriculo2 != null){
-			try {
-				buscaMicrocurriculos = buscaMicrocurriculos + "%";
-				List<TbMicMicrocurriculo> listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculosPorMateria(buscaMicrocurriculos);
-				cmbMicrocurriculo2.getItems().clear();
-				
-				if(listaMicrocurriculos != null){
-					for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
-						Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
-						cmbMicrocurriculo2.appendChild(item);
-					}
-				}else{
-					Messagebox.show("No se hallaron microcurriculos");
-				}
-			} catch (ExcepcionesLogica e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
 	 * Ante el evento seleccion en el combobox cmbUnidadAcademica este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
 	public void onSelect$cmbUnidadAcademica(){
-		recargarDependencias(cmbUnidadAcademica.getValue());
-		recargarNucleos(cmbUnidadAcademica.getValue());
-		recargarMaterias(cmbUnidadAcademica.getValue());
-		recargarMicrocurriculos(cmbUnidadAcademica.getValue());
+		if(cmbUnidadAcademica.getSelectedIndex() != 0){
+			TbAdmUnidadAcademica unidad = listaUnidadAcademica.get(cmbUnidadAcademica.getSelectedIndex()-1);
+			cargarDependencias(unidad.getVrIdunidad());
+			cargarNucleos(unidad.getVrIdunidad());
+			cargarMaterias(unidad.getVrIdunidad());
+			cargarMicrocurriculos(unidad.getVrIdunidad());
+		}else{
+			cargarDependencias("");
+			cargarNucleos("");
+			cargarMaterias("");
+			cargarMicrocurriculos("");
+		}
 	}
 	
 	/**
 	 * Ante el evento seleccion en el combobox cmbUnidadAcademica2 este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
-	public void onSelect$cmbUnidadAcademica2(){
-		recargarDependencias2(cmbUnidadAcademica2.getValue());
-		recargarNucleos2(cmbUnidadAcademica2.getValue());
-		recargarMaterias2(cmbUnidadAcademica2.getValue());
-		recargarMicrocurriculos2(cmbUnidadAcademica2.getValue());
-	}
+//	public void onSelect$cmbUnidadAcademica2(){
+//		recargarDependencias2(cmbUnidadAcademica2.getValue());
+//		recargarNucleos2(cmbUnidadAcademica2.getValue());
+//		recargarMaterias2(cmbUnidadAcademica2.getValue());
+//		recargarMicrocurriculos2(cmbUnidadAcademica2.getValue());
+//	}
 	
 	/**
 	 * Ante el evento seleccion en el combobox cmbDependencia este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
 	public void onSelect$cmbDependencia(){
-		recargarNucleos(cmbDependencia.getValue());
-		recargarMaterias(cmbDependencia.getValue());
-		recargarMicrocurriculos(cmbDependencia.getValue());
+		if(cmbDependencia.getSelectedIndex() != 0){
+			TbAdmDependencia dependencia = listaDependencias.get(cmbDependencia.getSelectedIndex()-1); 
+			cargarNucleos(dependencia.getVrIddependencia());
+			cargarMaterias(dependencia.getVrIddependencia());
+			cargarMicrocurriculos(dependencia.getVrIddependencia());
+		}else{
+			cargarNucleos("");
+			cargarMaterias("");
+			cargarMicrocurriculos("");
+		}
 	}
 	
 	/**
 	 * Ante el evento seleccion en el combobox cmbDependencia2 este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
-	public void onSelect$cmbDependencia2(){
-		recargarNucleos2(cmbDependencia2.getValue());
-		recargarMaterias2(cmbDependencia2.getValue());
-		recargarMicrocurriculos2(cmbDependencia2.getValue());
-	}
+//	public void onSelect$cmbDependencia2(){
+//		TbAdmNucleo nucleo = listaNucleos.get(cmbNucleo.getSelectedIndex()-1);
+//		recargarNucleos2(nucleo.getVrIdnucleo());
+//		recargarMaterias2(nucleo.getVrIdnucleo());
+//		recargarMicrocurriculos2(nucleo.getVrIdnucleo());
+//	}
 	
 	/**
 	 * Ante el evento seleccion en el combobox cmbNucleo este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
 	public void onSelect$cmbNucleo(){
-		recargarMaterias(cmbNucleo.getValue());
-		recargarMicrocurriculos(cmbNucleo.getValue());
+		if(cmbNucleo.getSelectedIndex() != 0){
+			TbAdmNucleo nucleo = listaNucleos.get(cmbNucleo.getSelectedIndex()-1);
+			cargarMaterias(nucleo.getVrIdnucleo());
+			cargarMicrocurriculos(nucleo.getVrIdnucleo());
+		}else{
+			cargarMaterias("");
+			cargarMicrocurriculos("");
+		}
 		
 	}
 	
@@ -627,27 +720,32 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	 * Ante el evento seleccion en el combobox cmbNucleo2 este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
-	public void onSelect$cmbNucleo2(){
-		recargarMaterias2(cmbNucleo2.getValue());
-		recargarMicrocurriculos2(cmbNucleo2.getValue());
-		
-	}
+//	public void onSelect$cmbNucleo2(){
+//		recargarMaterias2(cmbNucleo2.getValue());
+//		recargarMicrocurriculos2(cmbNucleo2.getValue());
+//		
+//	}
 	
 	/**
 	 * Ante el evento seleccion en el combobox cmbMateria este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
 	public void onSelect$cmbMateria(){
-		recargarMicrocurriculos(cmbMateria.getValue());
+		if(cmbMateria.getSelectedIndex() != 0){
+			TbAdmMateria materia = listaMaterias.get(cmbMateria.getSelectedIndex()-1);
+			cargarMicrocurriculos(materia.getVrIdmateria());
+		}else{
+			cargarMicrocurriculos("");
+		}
 	}
 	
 	/**
 	 * Ante el evento seleccion en el combobox cmbMateria2 este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
-	public void onSelect$cmbMateria2(){
-		recargarMicrocurriculos2(cmbMateria2.getValue());
-	}
+//	public void onSelect$cmbMateria2(){
+//		recargarMicrocurriculos2(cmbMateria2.getValue());
+//	}
 	/**
 	 * Ante el evento seleccion en el combobox cmbMicrocurriculo2 el metodo procede a guardar en la sesion el
 	 * microcurriculo seleccionado
@@ -681,24 +779,25 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 		super.doAfterCompose(comp);
 		if (comp.getParent().getId().equals("formaListarMicro")){
 			inicializarFormaListado();
-			cargarMaterias();
+			cargarMaterias("");
 			cargarUnidades();
-			cargarDependencias();
-			cargarNucleos();
+			cargarDependencias("");
+			cargarNucleos("");
 			cargarSemestres();
 			cargarDocentes();
+			cargarEstados2();
 		} else if(comp.getParent().getId().equals("panelDuplicarMicro")){
-			cargarMaterias();
+			cargarMaterias("");
 			cargarUnidades();
-			cargarDependencias();
-			cargarNucleos();
-			cargarMicrocurriculos();
+			cargarDependencias("");
+			cargarNucleos("");
+			cargarMicrocurriculos("");
 			cargarSemestres();
 		} else if(comp.getParent().getId().equals("blyConsultarMicro")){
-			cargarMaterias();
+			cargarMaterias("");
 			cargarUnidades();
-			cargarDependencias();
-			cargarNucleos();
+			cargarDependencias("");
+			cargarNucleos("");
 			cargarMicrocurriculos2();
 		}
 	}

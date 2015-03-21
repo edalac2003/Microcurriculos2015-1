@@ -1,6 +1,6 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
-import java.awt.Window;
+//import java.awt.Window;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +9,12 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Toolbarbutton;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
-import com.udea.proint1.microcurriculo.dto.TbMicEstado;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
-import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
@@ -40,7 +35,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 
 	private static Logger logger = Logger.getLogger(ListarMicroCtrl.class);
 	
-	Window formaCrearMateria;
+//	Window formaCrearMateria;
 	
 	Combobox cmbMateria;
 	Combobox cmbNucleo;
@@ -61,7 +56,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	EstadoNGC estadoNGC;
 	
 	/**
-	 * Metodo set para la inyecci�n de dependencia y gestionar datos en la tabla TbMicMicrocurriculo
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicMicrocurriculo
 	 * @param microcurriculoNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
@@ -69,7 +64,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyecci�n de dependencia y gestionar datos en la tabla TbMicMicroxEstado
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicMicroxEstado
 	 * @param microxEstadoNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setMicroxEstadoNGC(MicroxEstadoNGC microxEstadoNGC) {
@@ -77,7 +72,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyecci�n de dependencia y gestionar datos en la tabla TbAdmMateria
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmMateria
 	 * @param materiaNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setMateriaNGC(MateriaNGC materiaNGC) {
@@ -85,7 +80,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Metodo set para la inyecci�n de dependencia y gestionar datos en la tabla TbMicEstado
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicEstado
 	 * @param estadoNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setEstadoNGC(EstadoNGC estadoNGC) {
@@ -93,41 +88,20 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Solicita de la capa del negocio todos los estados existentes y los ubica en el combobox cmbEstado
-	 */
-	public void cargarEstados(){
-		try {
-			List<TbMicEstado> listaEstados = estadoNGC.listarEstados();
-			cmbEstado.getItems().clear();
-			
-			if(listaEstados != null){
-				cmbEstado.appendChild(new Comboitem("[Seleccione]"));
-				for(TbMicEstado estado: listaEstados){
-					Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
-					item.setDescription(estado.getVrDescripcion());
-					cmbEstado.appendChild(item);
-				}
-				cmbEstado.setValue("[Seleccione]");
-			}else{
-				//Messagebox.show("No se hallaron estados");
-			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("error al invocar metodo listarEstados de la clase EstadoNGC: "+e);
-		}
-	}
-	
-	/**
 	 * ante el evento click en el boton buscar, el metodo procede a revisar los filtros diligenciados
 	 * y se muestran todos los microcurriculos relacionados con la busqueda
 	 */
 	public void onClick$btnBuscar(){
-		List<TbMicMicrocurriculo> microcurriculosEncontrados;		
-		List<TbMicMicrocurriculo> microcurriculosFiltradoSemestre;		
-		List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable;		
+		List<TbMicMicrocurriculo> microcurriculosEncontrados;
+		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoSemestre;
+		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable;
+		
 		List<TbMicMicrocurriculo> microcurriculosFiltradoEstado = new ArrayList<TbMicMicrocurriculo>();
 		
 		/**
-		 * Verifica los campos de busqueda por dependencias y los prioriza en orden para proceder a llamar el metodo que har� la carga
+		 * Verifica los campos de busqueda por dependencias y los prioriza en orden para proceder a llamar el metodo que hará la carga
 		 * de los microcurriculos en la lista
 		 */
 		
@@ -305,8 +279,8 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	
 	/**
 	 * Ante el evento click en el listbox listaMicrocurriculo, procede a verificar que elemento del listbox fue
-	 * seleccionado, para guardar en la session la variable que identificar� al microcurriculo al cual se le 
-	 * implemntar� las acciones de consulta, duplicado, actualizacion o impresion.  
+	 * seleccionado, para guardar en la session la variable que identificará al microcurriculo al cual se le 
+	 * implemntará las acciones de consulta, duplicado, actualizacion o impresion.  
 	 */
 	public void onClick$listaMicrocurriculo(){
 		Listitem itemSelect = listaMicrocurriculo.getSelectedItem();
@@ -318,13 +292,12 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Metodo de inicio al cargar p�gina
+	 * Metodo de inicio al cargar página
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {		
 		
 		super.doAfterCompose(comp);
-		cargarEstados();
 	}
 }

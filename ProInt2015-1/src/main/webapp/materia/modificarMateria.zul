@@ -1,5 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?page title="Gestión de Materias" contentType="text/html;charset=UTF-8"?>
+<?page title="Universidad de Antioquia" contentType="text/html;charset=UTF-8"?>
 
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 

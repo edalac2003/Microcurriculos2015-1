@@ -55,6 +55,7 @@ import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
+
 public class CargarDatosFormas extends GenericForwardComposer{
 
 	private static Logger logger = Logger.getLogger(CargarDatosFormas.class);
@@ -150,7 +151,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 
 	/**
-	 * Aqui se definen los objetos de tipos NGC los cuales se les har·n las solicitudes de datos
+	 * Aqui se definen los objetos de tipos NGC los cuales se les har√°n las solicitudes de datos
 	 */
 		
 	UnidadAcademicaNGC unidadAcademicaNGC;
@@ -541,7 +542,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	
 	private void mostrarInfoMateria(String idMateria){
-		TbAdmMateria materia = listaMateriaxNucleo.get(cmbMateria.getSelectedIndex());
+		TbAdmMateria materia = listaMateriaxNucleo.get(cmbMateria.getSelectedIndex()-1);
 		if (materia != null ){
 			lblCreditosMateria.setValue(Integer.toString(materia.getNbCreditos()));
 			lblHtMateria.setValue(Integer.toString(materia.getNbHt()));
@@ -620,21 +621,21 @@ public class CargarDatosFormas extends GenericForwardComposer{
 				Messagebox.show("El Microcurriculo se ha guardado correctamente. Su estado inicial es <Borrador>. \n Para cambiar el estado, el Microcurriculo "+
 						"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
 			} else{
-				Messagebox.show("Errores al guardar.  Revise la informaciÛn.");
+				Messagebox.show("Errores al guardar.  Revise la informaci√≥n.");
 			}				
 		} else{
-			Messagebox.show("El formulario no cumple con la informaciÛn minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
+			Messagebox.show("El formulario no cumple con la informaci√≥n minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
 		}
 	}
 
 	
 	/*
-	 * Este mÈtodo se encarga de empaquetar la informaciÛn y devolver un Objeto de tipo Microcurriculo
+	 * Este m√©todo se encarga de empaquetar la informaci√≥n y devolver un Objeto de tipo Microcurriculo
 	 *  
 	 * @return Objeto de Tipo Microcurriculo.
 	 */
 	private TbMicMicrocurriculo empaquetarMicrocurriculo(){
-		TbMicMicrocurriculo microcurriculo = null;;
+		TbMicMicrocurriculo microcurriculo = null;
 		String codigoMicrocurriculo = "";
 		TbAdmMateria materia = null;
 		TbAdmSemestre semestre = null;
@@ -643,14 +644,53 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		
 		if(cmbMateria.getSelectedIndex() > 0)
 			materia = listaMateriaxNucleo.get(cmbMateria.getSelectedIndex()-1);
-		
+		else{
+			if(!"".equals(cmbMateria.getValue().toString()) && (!"[Seleccione]".equals(cmbMateria.getValue().toString()))){
+				String comboMateria = cmbMateria.getValue().toString();
+				String[] cadenaMateria = comboMateria.split(" - ");
+				try {
+					materia = materiaNGC.obtenerMateria(cadenaMateria[0]);
+				} catch (ExcepcionesLogica e) {
+					logger.error(e);
+				}
+			}
+		}
 		if(cmbSemestre.getSelectedIndex() > 0)
 			semestre = listaSemestre.get(cmbSemestre.getSelectedIndex()-1);
+		else{
+			if(!"".equals(cmbSemestre.getValue().toString()) && (!"[Seleccione]".equals(cmbSemestre.getValue().toString()))){
+				String comboSemestre = cmbSemestre.getValue().toString();
+				try {
+					semestre = semestreNGC.obtenerSemestre(comboSemestre);
+				} catch (ExcepcionesLogica e) {
+					logger.error(e);
+				}
+			}
+		}
 		
-		if (cmbDocente.getSelectedIndex() > 0)
+		if (cmbDocente.getSelectedIndex() > 0 && (listaDocentes != null))
 			responsable = listaDocentes.get(cmbDocente.getSelectedIndex()-1);
-
-		estado = listaEstados.get(0);
+		else{
+			if(!"".equals(cmbDocente.getValue().toString()) && (!"[Seleccione]".equals(cmbDocente.getValue().toString()))){
+				String comboDocente = cmbDocente.getValue().toString();
+				String[] cadenaDocente = comboDocente.split(" - ");
+				try {
+					responsable = personaNGC.obtenerPersona(cadenaDocente[0]);
+				} catch (ExcepcionesLogica e) {
+					logger.error(e);
+				}
+			}
+		}
+		
+		if(listaEstados != null)
+			estado = listaEstados.get(0);
+		else{
+			try {
+				estado = estadoNGC.obtenerEstados(1);
+			} catch (ExcepcionesLogica e) {
+				logger.error(e);
+			}
+		}
 		
 		if (materia != null){
 			if (semestre != null){
@@ -659,7 +699,8 @@ public class CargarDatosFormas extends GenericForwardComposer{
 					if (responsable != null){						
 						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, semestre, txtPropositoMicro.getValue().toString(), 
 								txtJustificacionMicro.getValue().toString(), txtResumenMicro.getValue().toString(), responsable, estado, modUsuario, modFecha);
-						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
+						if(lblidMicrocurriculo != null)
+							lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
 					}
 				} else
 					Messagebox.show("No se pudo crear el objeto Microcurriculo");				
@@ -673,11 +714,28 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		TbMicEstado estado = null;
 		TbAdmPersona responsable = null;
 		
-		if(listaEstados.size() > 0)
-			estado = listaEstados.get(0);
-		if (cmbDocente.getSelectedIndex() > 0)
-			responsable = listaDocentes.get(cmbDocente.getSelectedIndex()-1);
-				
+		if(listaEstados != null){
+			if(listaEstados.size() > 0)
+				estado = listaEstados.get(0);
+		}else{
+			try {
+				estado = estadoNGC.obtenerEstados(1);
+			} catch (ExcepcionesLogica e) {
+				logger.error(e);
+			}
+		}
+		if(listaDocentes != null){
+			if (cmbDocente.getSelectedIndex() > 0)
+				responsable = listaDocentes.get(cmbDocente.getSelectedIndex()-1);
+		}else{
+			String comboDocente = cmbDocente.getValue().toString();
+			String[] cadenaDocente = comboDocente.split(" - ");
+			try {
+				responsable = personaNGC.obtenerPersona(cadenaDocente[0]);
+			} catch (ExcepcionesLogica e) {
+				logger.error(e);
+			}
+		}	
 		if(estado != null){
 			microxEstado = new TbMicMicroxestado(estado, modFecha, microcurriculo, responsable, modUsuario, modFecha);
 		}		
@@ -685,7 +743,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo se encarga de tomar la informaciÛn de la ListaObjetivosEspecificos y empaquetar ListaObjetivos y ListadoObjetivosxMicrocurriculo.
+	 * Este metodo se encarga de tomar la informaci√≥n de la ListaObjetivosEspecificos y empaquetar ListaObjetivos y ListadoObjetivosxMicrocurriculo.
 	 * @param microcurriculo
 	 * @return Lista con objetos de Tipo Objetivos
 	 */
@@ -710,7 +768,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 				listadoObjetivosxMicro.add(objetivosxMicro);
 			}
 		} else {
-			Messagebox.show("Sin InformaciÛn en el Campo Objetivo General.");
+			Messagebox.show("Sin Informaci√≥n en el Campo Objetivo General.");
 			txtObjetivoGeneral.setFocus(true);
 		}		
 	}
@@ -891,7 +949,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	
 	/**
-	 * Este mÈtodo se encarga de validar la informaciÛn ingresada y clasifica el estado en el que se guardar· el Microcurriculo.
+	 * Este m√©todo se encarga de validar la informaci√≥n ingresada y clasifica el estado en el que se guardar√° el Microcurriculo.
 	 * @return
 	 */
 	public int verificarCampos(){
@@ -912,7 +970,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo verifica que los campos de la PestaÒa InformaciÛn General no esten vacios.
+	 * Este metodo verifica que los campos de la Pesta√±a Informaci√≥n General no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -932,7 +990,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	
 	/**
-	 * Este metodo verifica que los Componentes de la PestaÒa InformaciÛn Complementaria no esten vacios.
+	 * Este metodo verifica que los Componentes de la Pesta√±a Informaci√≥n Complementaria no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -955,7 +1013,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo verifica que los Componentes de la PestaÒa Unidades Detalladas no esten vacios.
+	 * Este metodo verifica que los Componentes de la Pesta√±a Unidades Detalladas no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -973,7 +1031,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo verifica que los componentes de la PestaÒa Evaluaciones no esten vacios.
+	 * Este metodo verifica que los componentes de la Pesta√±a Evaluaciones no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -985,7 +1043,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo verifica que los componentes de la PestaÒa Bibliogr·ficas no esten vacios.
+	 * Este metodo verifica que los componentes de la Pesta√±a Bibliogr√°ficas no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */

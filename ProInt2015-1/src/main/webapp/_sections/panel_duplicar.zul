@@ -12,9 +12,9 @@
 						<north border="0">
 							<div align="center">
 								<toolbar id="tb" sclass="vista" height="45px" width="960px" >
-									<toolbarbutton id="${labels.microcurriculo.toolbar.home}" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
-									<toolbarbutton id="${labels.microcurriculo.toolbar.new}" label="Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
-									<toolbarbutton id="${labels.microcurriculo.toolbar.close}" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
+									<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+									<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
+									<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
 								</toolbar>
 							</div>
 						</north>
@@ -27,7 +27,7 @@
 										<div height="10px"/>
 										<div align="center" width="940px">
 											<toolbar>
-												<label value="Filtrar Busqueda"/>
+												<label value="Filtrar Busqueda" style="font-size:13px; margin:0 0 0 413px;"/>
 											</toolbar>
 											<grid>
 												<columns>
@@ -60,27 +60,27 @@
 							                		</row>
 							                	</rows>
 							                </grid>
-							                <div height="10px"/>
-							                <toolbar>
-							                	<label id="lblEncabezadoMicro" value="Seleccione microcurriculo y semestre a duplicar"/>
-							                </toolbar>
-							                <grid>
+							                <div height="30px"/>
+<!-- 							                <toolbar> -->
+<!-- 							                	<label id="lblEncabezadoMicro" value="Seleccione microcurriculo y semestre a duplicar"/> -->
+<!-- 							                </toolbar> -->
+							                <grid width="320px">
 							                	<columns>
-							                		<column width="20%"/>
-							                		<column width="80%"/>
+							                		<column width="40%"/>
+							                		<column width="60%"/>
 							                	</columns>
 							                	<rows>
 							                		<row>
 														<label value="Microcurriculo" />
 									                    <div>
-									                        <combobox id="cmbMicrocurriculo" />
+									                        <combobox id="cmbMicrocurriculo" width="100%"/>
 									                    </div>
 							                		</row>
 							                		
 							                		<row >
 														<label value="Semestre a Duplicar" />
 									                    <div>
-									                        <combobox id="cmbSemestre"/>
+									                        <combobox id="cmbSemestre" width="100%"/>
 									                    </div>
 							                		</row>
 												</rows>

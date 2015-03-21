@@ -3,15 +3,11 @@ package com.udea.proint1.microcurriculo.ctrl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
-import javassist.expr.NewArray;
 
 import org.apache.log4j.Logger;
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.WrongValueException;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -23,23 +19,16 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
-import org.zkoss.zul.ext.Selectable;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
-import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
-import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
@@ -49,7 +38,6 @@ import com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
-import com.udea.proint1.microcurriculo.util.exception.Validaciones;
 
 public class ModificarMateriaCtrl extends GenericForwardComposer{
 
@@ -129,14 +117,14 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	private List<TbAdmMateria> listaFiltradaNombre = new ArrayList<TbAdmMateria>();
 	private List<TbAdmMateria> listaMaterias;
 	
-	private void cargarMaterias() throws ExcepcionesLogica {
+	private void cargarMaterias(){
 		try {
 			listaMaterias = materiaNGC.listarMaterias();
 			
 			listarMaterias(listaMaterias);
 			
 		} catch (Exception e) {
-			throw new ExcepcionesLogica("No se pudo cargar la lista de materias");
+			logger.error(e);
 		}
 	}
 
@@ -172,6 +160,16 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 				llenarDatos(materia);
 			}
 		}
+	}
+	
+	public TbAdmMateria estraerMateria(String idMateria){
+		TbAdmMateria materia = null;
+		try {
+			materia = materiaNGC.obtenerMateria(idMateria);
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		return materia;
 	}
 	
 	public void cargarCoPrerrequisitos(){
@@ -364,11 +362,8 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	
 	public void onClick$tool_back(){
 		limpiarCampos();
-		try {
-			cargarMaterias();
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
-		}
+		Executions.getCurrent().getSession().removeAttribute("materia");
+		cargarMaterias();
 		tool_back.setVisible(false);
 		tool_save.setVisible(false);
 		hlaSectorBuscar.setVisible(true);
@@ -483,11 +478,6 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 		TbAdmMateria materiaActualizar = verificarDatos();
 		actualizarMateria(materiaActualizar);
 	}
-//	
-//	public void onClick$tool_save() throws ExcepcionesLogica{
-//		TbAdmMateria materiaGuardar = verificarDatos();
-//		guardarMateria(materiaGuardar);
-//	}
 	
 	public TbAdmMateria verificarDatos(){
 		TbAdmMateria materiaNueva = new TbAdmMateria();
@@ -528,15 +518,15 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 					
 					return materiaNueva;
 				}else{
-					Messagebox.show("Se requiere información del campo <Creditos>");
+					Messagebox.show("Se requiere informaciÃ³n del campo <Creditos>");
 					return null;
 				}
 			}else{
-				Messagebox.show("Se requiere información del campo <Nivel o Semestre>");
+				Messagebox.show("Se requiere informaciÃ³n del campo <Nivel o Semestre>");
 				return null;
 			}
 		}else{
-			Messagebox.show("Se requiere información del campo <Nombre Materia>");
+			Messagebox.show("Se requiere informaciÃ³n del campo <Nombre Materia>");
 			return null;
 		}
 					
@@ -545,9 +535,9 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	public void guardarMateria(TbAdmMateria materiaGuardar) throws ExcepcionesLogica{
 		try{
 			materiaNGC.guardarMateria(materiaGuardar);
-			Messagebox.show("Se guardó exitosamente la materia");
+			Messagebox.show("Se guardÃ³ exitosamente la materia");
 		}catch(ExcepcionesLogica e){
-			Messagebox.show("No se guardó la materia");
+			Messagebox.show("No se guardÃ³ la materia");
 		}
 		
 		try{
@@ -570,7 +560,7 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 				prerrequisitoNGC.guardarPrerrequisito(nuevoPrerrequisito);
 			}
 		}catch(ExcepcionesLogica e){
-			Messagebox.show("No se guardó la materia");
+			Messagebox.show("No se guardÃ³ la materia");
 		}
 		cargarMaterias();
 		limpiarCampos();
@@ -579,7 +569,7 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	public void actualizarMateria(TbAdmMateria materiaActualizar)throws ExcepcionesLogica{
 		try{
 			materiaNGC.actualizarMateria(materiaActualizar);
-			Messagebox.show("Se actualizó materia exitosamente");
+			Messagebox.show("Se actualizÃ³ materia exitosamente");
 			cargarMaterias();
 		}catch(ExcepcionesLogica e){
 			Messagebox.show("No se pudo actualizar la Materia");
@@ -588,6 +578,21 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
+		if(Executions.getCurrent().getSession().hasAttribute("materia")){
+			tool_back.setVisible(true);
+			tool_save.setVisible(true);
+			hlaSectorBuscar.setVisible(false);
+			hlaSectorModificar.setVisible(true);
+			TbAdmMateria materia = estraerMateria(Executions.getCurrent().getSession().getAttribute("materia").toString());
+			if(materia != null){
+				llenarDatos(materia);
+			}else{
+				tool_back.setVisible(false);
+				tool_save.setVisible(false);
+				hlaSectorBuscar.setVisible(true);
+				hlaSectorModificar.setVisible(false);
+			}
+		}
 		cargarMaterias();
 		cargarCoPrerrequisitos();
 		cargarSemestres();

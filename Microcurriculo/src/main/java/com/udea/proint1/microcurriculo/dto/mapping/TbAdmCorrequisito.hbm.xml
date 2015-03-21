@@ -6,7 +6,7 @@
     <class name="com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito" table="TB_ADM_CORREQUISITO">
         <id name="nbId" type="int">
             <column name="NB_ID" precision="22" scale="0" />
-            <generator class="sequence" />
+            <generator class="increment" />
         </id>
         <many-to-one name="tbAdmMateriasByVrMateria" class="com.udea.proint1.microcurriculo.dto.TbAdmMateria" fetch="join" lazy="false">
             <column name="VR_MATERIA" length="10" not-null="true" />

@@ -1,5 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?page title="Listado de Materias" contentType="text/html;charset=UTF-8"?>
+<?page title="Universidad de Antioquia" contentType="text/html;charset=UTF-8"?>
 
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
@@ -32,26 +32,26 @@
 											<row>
 												<div>
 													<label value="Unidad Academica"/>
-													<combobox id="cmbUnidadAcademica"/>
+													<combobox id="cmbUnidadAcademica" width="65%"/>
 												</div>
 												<div>
 													<label value="Dependencia"/>
-													<combobox id="cmbDependencia"/>
+													<combobox id="cmbDependencia" width="75%"/>
 												</div>
 												<div>
 													<label value="Nucleo"/>
-													<combobox id="cmbNucleo"/>
+													<combobox id="cmbNucleo" width="85%"/>
 												</div>
 											</row>
 											
 											<row>
 												<div>
 													<label value="Codigo Materia"/>
-													<combobox id="cmbMateria" width="175px"/>
+													<combobox id="cmbMateria" width="222px"/>
 												</div>
 												<div>
 													<label value="Nombre Materia"/>
-													<textbox id="txtMateria" width="140px"/>
+													<textbox id="txtMateria" width="70%"/>
 												</div>
 												<div align="center">
 													<button id="btnBuscar" label="Buscar"/>
@@ -61,29 +61,6 @@
 										</rows>
 									</grid>
 								
-<!-- 									<listbox> -->
-<!-- 										<listhead> -->
-<!-- 											<listheader label="" align="center"/> -->
-<!-- 										</listhead> -->
-<!-- 										<listitem> -->
-<!-- 											<listcell> -->
-<!-- 												<label value="Criterio de Busqueda" /> -->
-<!-- 												<combobox id="cmbCriterioBusqueda"> -->
-<!-- 													<comboitem label="Nucleo" /> -->
-<!-- 													<comboitem label="Estado" />											 -->
-<!-- 												</combobox> -->
-<!-- 											</listcell> -->
-<!-- 											<listcell> -->
-<!-- 												<label value="Valor a Buscar" /> -->
-<!-- 												<combobox id="cmbValorBusqueda" > -->
-<!-- 													<comboitem label="201001" /> -->
-<!-- 													<comboitem label="201002" /> -->
-<!-- 													<comboitem label="201003" /> -->
-<!-- 												</combobox> -->
-<!-- 												<button id="btnBuscarMaterias" label="Buscar" /> -->
-<!-- 											</listcell>								 -->
-<!-- 										</listitem> -->
-<!-- 									</listbox> -->
 								</div>
 								<separator />
 								<div width="960px">
@@ -91,28 +68,32 @@
 										<north height="33px" border="0">
 											<listbox autopaging="true">
 												<listhead>
-													<listheader label="Cod Materia" align="center" width="15%" />
+													<listheader label="Codigo" align="center" width="10%" />
 													<listheader label="Nombre" align="center" width="30%"/>
 													<listheader label="Nucleo" align="center" width="15%" />
-													<listheader label="Sem" align="center" width="5%" />
+													<listheader label="Nivel" align="center" width="5%" />
+													<listheader label="Cred" align="center" width="5%" />
 													<listheader label="HT" align="center" width="5%" />
 													<listheader label="HP" align="center" width="5%" />
 													<listheader label="HTP" align="center" width="5%" />
-													<listheader label="Microcurriculo" align="center" width="20%"/>									
+													<listheader label="Prerrequisitos" align="center" width="10%"/>
+													<listheader label="Correquisitos" align="center" width="10%"/>									
 												</listhead>
 											</listbox>
 										</north>
 										<center border="0" autoscroll="true">
 											<listbox id="listaMaterias" autopaging="true">
 												<listhead>
-													<listheader align="center" width="15%" />
+													<listheader align="center" width="10%" />
 													<listheader align="center" width="30%"/>
 													<listheader align="center" width="15%" />
 													<listheader align="center" width="5%" />
 													<listheader align="center" width="5%" />
 													<listheader align="center" width="5%" />
 													<listheader align="center" width="5%" />
-													<listheader align="center" width="20%"/>									
+													<listheader align="center" width="5%" />
+													<listheader align="center" width="10%"/>
+													<listheader align="center" width="10%"/>									
 												</listhead>
 											</listbox>
 										</center>

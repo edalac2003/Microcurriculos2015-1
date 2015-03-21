@@ -6,13 +6,13 @@
 <zk>
 	<window id="formaDuplicarMicro" border="0" >
 		<include id="panelDuplicarMicro" src="/_sections/panel_duplicar.zul" visible="false"/>
-		<borderlayout id="blyDuplicarMicro" height="950px" apply="${duplicarMicroCtrl}">
+		<borderlayout id="blyDuplicarMicro" height="950px" apply="${detallesMicroCtrl}">
 			
 			<north height="100px" border="0">
 				<include id="headerIdx" src="/_sections/header.zul" />			
 			</north>
 			
-			<center border="0" apply="${validarDatosCtrl}">
+			<center border="0" apply="${cargarDatosFormas}">
 				<div align="center">
 					<borderlayout height="870px">
 						<north border="0"> 
@@ -72,12 +72,12 @@
 							                		</row>
 							                		<row>
 									                    <label value="Estado Actual" width="150px" />
-									                    <combobox id="cmbEstadoActual" disabled="true" droppable="2"/>
+									                    <combobox id="cmbEstado" disabled="true" droppable="2"/>
 							                		</row>
 							                		<row>
-														<label value="Docente Responsable" />
+														<label value="Docente Responsable" sclass="campoobligatorio"/>
 									                    <div>
-									                        <combobox id="cmbDocente" width="25%" droppable="2"/>
+									                        <combobox id="cmbDocente" width="35%" droppable="2"/>
 									                        <label id="lblNombreDocente" />
 									                    </div>
 							                		</row>
@@ -85,14 +85,14 @@
 							                		<row>
 						                				<label value="Unidad Académica" width="30%"/>
 								                        <div>
-								                        	<combobox id="cmbUnidadAcademica" />
+								                        	<combobox id="cmbUnidadAcademica" width="35%"/>
 								                        	<label id="lblNombreUnidadAcademica" />
 								                        </div>
 							                		</row>
 							                		<row>
 						                				<label value="Dependencia" width="30%"/>
 								                        <div>
-								                        	<combobox id="cmbDependencia" />
+								                        	<combobox id="cmbDependencia" width="35%"/>
 								                        	<label id="lblNombreDependencia" />
 								                        </div>
 							                		</row>
@@ -100,7 +100,7 @@
 							                		<row>
 						                				<label value="Nucleo" width="30%"/>
 								                        <div>
-								                        	<combobox id="cmbNucleo" />
+								                        	<combobox id="cmbNucleo" width="35%"/>
 								                        	<label id="lblNombreNucleo" />
 								                        </div>
 							                		</row>
@@ -108,14 +108,14 @@
 													<row>
 														<label value="Id Materia" />
 									                    <div>
-									                        <combobox id="cmbMateria" width="25%" />
+									                        <combobox id="cmbMateria" width="35%" />
 									                        <label id="lblNombreMateria" />
 									                    </div>
 							                		</row>
 							                		<row>
 														<label value="Semestre" />
 									                    <div>
-									                        <combobox id="cmbSemestre" width="15%"/>									                        
+									                        <combobox id="cmbSemestre" width="35%"/>									                        
 									                    </div>
 							                		</row>
 							                		<row>
@@ -185,19 +185,19 @@
 												</columns>
 												<rows >
 													<row>
-									                    <label value="Proposito del Curso" />
+									                    <label value="Proposito del Curso" sclass="campoobligatorio"/>
 									                    <textbox id="txtPropositoMicro"  value="Proposito" multiline="true" width="100%"/>									                    
 									                </row>
 													<row>
-									                    <label value="Justificación" />
+									                    <label value="Justificación" sclass="campoobligatorio"/>
 									                    <textbox id="txtJustificacionMicro"  value="Justificacion" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
-									                    <label value="Objetivo General" />
+									                    <label value="Objetivo General" sclass="campoobligatorio"/>
 									                    <textbox id="txtObjetivoGeneral"  value="Objetivo General" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
-									                    <label value="Objetivos Especificos" />
+									                    <label value="Objetivos Especificos" sclass="campoobligatorio"/>
 									                    <div>
 										                    <textbox id="txtObjetivoEspecifico"  multiline="true"   width="84%"/>
 										                    <button id="btnAddObjetivo" label="Adicionar" width="15%"/>
@@ -210,7 +210,7 @@
 									                	
 									                </row>
 									                <row>
-									                    <label value="Contenido Resumido" />
+									                    <label value="Contenido Resumido" sclass="campoobligatorio"/>
 									                    <textbox id="txtResumenMicro"  value="Resumen" multiline="true" width="100%"/>
 									                </row>
 												</rows>
@@ -219,7 +219,9 @@
 										
 										
 										<tabpanel id="tabInfoUnidad">
-																						
+											<separator />									
+												<label value="UNIDADES" sclass="titulos" />	
+											<separator />										
 											<listbox  id="listaUnidades">
 												<listhead>
 													<listheader width="15%">
@@ -233,11 +235,7 @@
 											</listbox>
 											
 											<separator />
-											<div>
-												<div height="25px">
-													<label value="TEMAS POR UNIDAD" sclass="titulos" />
-												</div>												
-											</div>
+												<label value="TEMAS POR UNIDAD" sclass="titulos" />	
 											<separator />											
 											
 											<listbox id="listaTemas">
@@ -270,9 +268,8 @@
 										
 										<tabpanel>
 											<div>
-												<div style="color:red;" height="25px">
+												<separator />
 													<label value="SUBTEMAS POR TEMAS" sclass="titulos" />
-												</div>
 												<separator />
 												<listbox id="listaSubtemas">
 													<listhead>
@@ -302,6 +299,10 @@
 										</tabpanel>			
 										
 										<tabpanel id="tabInfoEval">
+										<div>
+											<separator />
+												<label value="EVALUACIONES" sclass="titulos" />
+											<separator />
 											<listbox id="listaEvaluaciones">
 												<listhead>
 													<listheader label="" align="center" sclass="resaltadonormal" width="60%">
@@ -325,9 +326,9 @@
 									                    </div>
 													</listheader>
 												</listhead>												
-											</listbox>										
+											</listbox>
+										</div>									
 										</tabpanel>
-										
 										
 										<tabpanel id="infoBiblioBas">
 											<listbox>
@@ -338,11 +339,10 @@
 													</listheader>
 												</listhead>											
 											</listbox>
-											<separator />
 											
-											<div style="color:red" height="30px" >
-												<label value="REFERENCIAS BIBLIOGRÁFICAS" sclass="titulos" />					
-											</div>
+											<separator />
+												<label value="REFERENCIAS BIBLIOGRÁFICAS" sclass="titulos" />
+											<separator />
 											
 											<listbox id="listaBibliografia">
 												<listhead>
@@ -379,9 +379,8 @@
 											</listbox>
 											
 											<separator />
-											<div style="color:red" height="30px">
 												<label value="REFERENCIAS CIBERGRÁFICAS" sclass="titulos" />
-											</div>
+											<separator />
 											<listbox id="listaCibergrafia">
 												<listhead>
 													<listheader align="center">

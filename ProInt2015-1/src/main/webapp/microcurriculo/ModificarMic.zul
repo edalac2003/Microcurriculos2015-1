@@ -4,32 +4,29 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-	<window id="formaDetallesMicro" border="0">
-		<borderlayout id="blyConsultarMicro" height="950px" apply="${detallesMicroCtrl}">
+	<window id="formaModificarMicro" border="0" >
+		<borderlayout id="blyModificarMicro" height="950px" apply="${modificarMicroCtrl}">
 			
 			<north height="100px" border="0">
 				<include id="headerIdx" src="/_sections/header.zul" />			
 			</north>
 			
-			<center border="0" apply="${cargarDatosFormas2}">
+			<center border="0" apply="">
 				<div align="center">
-					
 					<borderlayout height="870px">
-						
 						<north border="0"> 
 							<toolbar id="tb" sclass="vista" height="45px" width="960px">
 								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
 								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
-								<toolbarbutton id="tool_consulta_otro" label="Consultar Nuevo" image="/_img/icons/32x32/atras.png" />
+								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" />
+								<toolbarbutton id="tool_modifica_otro" label="Modificar Otro" image="/_img/icons/32x32/atras.png" />
 								<toolbarbutton id="tool_print" label="Imprimir" image="/_img/icons/32x32/printer.png" />
 								<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
 							</toolbar>
 						</north>
-						
 						<west width="180px" border="0">
 							<label></label>
 						</west>
-						
 						<east width="180px" border="0">
 							<label></label>
 						</east>
@@ -37,8 +34,7 @@
 						<center autoscroll="true" border="0">
 							<div>
 								<div height="10px"/>
-								
-								<panel id="panelBuscarMicro" title="Seleccione Microcurriculo a consultar" border="normal" width="960px" height="260px" style="font-size: 14px">
+								<panel id="panelModificarMicro" title="Seleccione Microcurriculo a modificar" border="normal" width="960px" height="260px" style="font-size: 14px">
 									<panelchildren>
 										<div height="10px"/>
 										<div align="center" width="940px">
@@ -90,7 +86,7 @@
 							                		<row>
 														<label value="Microcurriculo" />
 									                    <div align="center">
-									                        <combobox id="cmbMicrocurriculo2" width="100%"/>
+									                        <combobox id="cmbMicrocurriculo" width="100%"/>
 									                    </div>
 							                		</row>
 												</rows>
@@ -98,7 +94,7 @@
 										</div>
 									</panelchildren>
 									<toolbar>
-										<button id="btnConsultar" label="Consultar" style="margin:0 0 0 435px;" href="/microcurriculo/detallesMic.zul"/>
+										<button id="btnModificar" label="Modificar" style="margin:0 0 0 435px;" href="/microcurriculo/modificarMic.zul"/>
 									</toolbar>
 								</panel>
 													
@@ -112,7 +108,6 @@
 										<tab label="Referencias Bibliográficas" id="infoBibliografia"/>
 									</tabs>
 									<tabpanels>
-									
 										<tabpanel id="tabInfoBasica">
 											<grid >
 												<columns>
@@ -128,10 +123,10 @@
 							                		</row>
 							                		<row>
 									                    <label value="Estado Actual" width="150px" />
-									                    <combobox id="cmbEstado" droppable="2"/>
+									                    <combobox id="cmbEstado" disabled="true" droppable="2"/>
 							                		</row>
 							                		<row>
-														<label value="Docente Responsable" />
+														<label value="Docente Responsable" sclass="campoobligatorio"/>
 									                    <div>
 									                        <combobox id="cmbDocente" width="35%" droppable="2"/>
 									                        <label id="lblNombreDocente" />
@@ -168,21 +163,18 @@
 									                        <label id="lblNombreMateria" />
 									                    </div>
 							                		</row>
-							                		
 							                		<row>
 														<label value="Semestre" />
 									                    <div>
 									                        <combobox id="cmbSemestre" width="35%"/>									                        
 									                    </div>
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Créditos" />
 									                    <div>
 							                        		<label id="lblCreditosMateria" />
 							                    		</div>
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Horas Teóricas" />
 									                    <label id="lblHtMateria" />
@@ -203,12 +195,10 @@
 									                    <label value="Horas Clase por Semestre " />
 									                    <label id="lblHoraClaseSemestral" />		                    
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Campo de Formación" />
 									                    <label id="lblCampoFormacion" />
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Validable" width="150px" />
 									                    <checkbox id="ckbValidable" />
@@ -218,22 +208,18 @@
 									                    <label value="Habilitable" />
 									                    <checkbox id="ckbHabilitable" />
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Clasificable" width="150px" />
 									                    <checkbox id="ckbClasificable" />
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Prerequisitos" width="150px" />
-									                    <label id="lblPrerrequisitos" multiline="true"/>
+									                    <label id="lblPrerrequisitos" />
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Correquisitos" width="150px" />
 									                    <label id="lblCorrequisitos" multiline="true"/>
 							                		</row>
-							                		
 							                		<row>
 									                    <label value="Programas Vinculados" width="150px" />
 									                    <label id="lblProgramasVinculados" />
@@ -249,82 +235,80 @@
 													<column value="" width="70%"/>
 												</columns>
 												<rows >
-												
 													<row>
-									                    <label value="Proposito del Curso" style="font-weight:bold"/>
-									                    <div>
-									                    	<label id="lblPropositoMicro" multiline="true" />
-									                    </div>								                    
+									                    <label value="Proposito del Curso" sclass="campoobligatorio"/>
+									                    <textbox id="txtPropositoMicro"  value="Proposito" multiline="true" width="100%"/>									                    
 									                </row>
-									                
 													<row>
-									                    <label value="Justificación" style="font-weight:bold"/>
-									                    <div>
-									                   		<label id="lblJustificacionMicro" multiline="true" />
-									                    </div>								                    
+									                    <label value="Justificación" sclass="campoobligatorio"/>
+									                    <textbox id="txtJustificacionMicro"  value="Justificacion" multiline="true" width="100%"/>									                    
 									                </row>
-									                
 									                <row>
-									                    <label value="Objetivo General" style="font-weight:bold"/>
-									                   	<div>
-										                    <label id="lblObjetivoGeneral" multiline="true" />
-									                    </div>								                    
+									                    <label value="Objetivo General" sclass="campoobligatorio"/>
+									                    <textbox id="txtObjetivoGeneral"  value="Objetivo General" multiline="true" width="100%"/>									                    
 									                </row>
-									                
-									                <row valign="top">
-									                	<label value="Objetivos Especificos" style="font-weight:bold"/>
-									                	<div><listbox id="listaObjetivosEspecificos" />
-									                	</div>
-									                </row>
-									                
 									                <row>
-									                    <label value="Contenido Resumido" style="font-weight:bold"/>
+									                    <label value="Objetivos Especificos" sclass="campoobligatorio"/>
 									                    <div>
-									                    	<label id="lblResumenMicro" multiline="true"/>
+										                    <textbox id="txtObjetivoEspecifico"  multiline="true"   width="84%"/>
+										                    <button id="btnAddObjetivo" label="Adicionar" width="15%"/>
 									                    </div>
 									                </row>
-									                
+									                <row>
+									                	<div />
+									                	<div><listbox id="listaObjetivosEspecificos" />
+									                	</div>
+									                	
+									                </row>
+									                <row>
+									                    <label value="Contenido Resumido" sclass="campoobligatorio"/>
+									                    <textbox id="txtResumenMicro"  value="Resumen" multiline="true" width="100%"/>
+									                </row>
 												</rows>
 											</grid>
 										</tabpanel>
 										
+										
 										<tabpanel id="tabInfoUnidad">
-																						
+											<separator />									
+												<label value="UNIDADES" sclass="titulos" />	
+											<separator />										
 											<listbox  id="listaUnidades">
 												<listhead>
-													<listheader width="0%">
+													<listheader width="15%">
+														<label value="Nombre de la Unidad" sclass="resaltado"/>
 													</listheader>
-													<listheader align="center">
-														<label value="Unidades" style="font-weight:bold"/>
+													<listheader>
+														<textbox id="txtNombreUnidad" width="80%"/>
+														<button id="btnAddUnidad" label="Adicionar" />
 													</listheader>
 												</listhead>
 											</listbox>
 											
 											<separator />
-											<div>
-												<div height="25px">
-													<label value="TEMAS POR UNIDAD" sclass="titulos" />
-												</div>												
-											</div>
+												<label value="TEMAS POR UNIDAD" sclass="titulos" />	
 											<separator />											
 											
 											<listbox id="listaTemas">
 												<listhead >
-													<listheader width="35%" align="center">
+													<listheader width="35%">
 														<div>
 															<label value="Unidad" style="font-weight:bold"/>
-															<label />
+															<combobox id="cmbIdUnidad" width="85%" tabindex="5" />
 														</div>														
 													</listheader>
-													<listheader width="35%" align="center">
+													<listheader width="35%">
 														<div>
 															<label value="Tema" style="font-weight:bold"/>
+															<textbox id="txtNombreTema" width="85%" tabindex="5" />
 														</div>
 														
 													</listheader>
-													<listheader width="25%" align="center">
+													<listheader width="25%">
 														<div>
 															<label value="Tiempo (Semanas)" style="font-weight:bold"/>
+															<longbox id="txtNumeroSemanas" width="20%" />
+															<button label="Adicionar" id="btnAddTemas" />
 														</div> 
 													</listheader>
 												</listhead>						
@@ -332,27 +316,31 @@
 											<separator />
 										</tabpanel>
 										
+										
 										<tabpanel>
 											<div>
-												<div style="color:red;" height="25px">
+												<separator />
 													<label value="SUBTEMAS POR TEMAS" sclass="titulos" />
-												</div>
 												<separator />
 												<listbox id="listaSubtemas">
 													<listhead>
-														<listheader width="25%" align="center">
+														<listheader width="25%">
 															<label value="Unidad" sclass="resaltadonormal"/>
 															<div>																
+																<combobox id="cmbListaUnidades" width="75%"/>
 															</div>
 														</listheader>
-														<listheader width="25%" align="center">
+														<listheader width="25%">
 															<label value="Tema" sclass="resaltadonormal"/>
 															<div>																
+																<combobox id="cmbListaTemas" width="75%"/>																
 															</div>	
 														</listheader>
-														<listheader width="50%" align="center">
+														<listheader width="50%">
 															<label value="Subtema" sclass="resaltadonormal"/>
 															<div>										                    	
+											                    <textbox id="txtSubTemas" width="70%" />
+											                    <button id="btnAddSubTema" label="Adicionar" />
 										                    </div>	
 														</listheader>
 													</listhead>
@@ -362,84 +350,111 @@
 										</tabpanel>			
 										
 										<tabpanel id="tabInfoEval">
+										<div>
+											<separator />
+												<label value="EVALUACIONES" sclass="titulos" />
+											<separator />
 											<listbox id="listaEvaluaciones">
 												<listhead>
 													<listheader label="" align="center" sclass="resaltadonormal" width="60%">
 														<label value="Actividad" sclass="resaltadonormal"/>
 														<div>															
+															<textbox id="txtActividadMicro" width="100%" />
 														</div> 
 													</listheader>
 													<listheader label="" align="center" sclass="resaltadonormal" width="10%">
 														<label value="Porcentaje (%)" sclass="resaltadonormal"/>
 														<div>
+															<longbox id="txtPorcentajeActividad" width="50%"/>
 														</div>
+														
 													</listheader>
 													<listheader label="" align="center" width="20%">
 														<label value="Fecha Estimada" sclass="resaltadonormal" />
 														<div>
+									                    	<datebox id="dtFechaEvaluacion" cols="12" format="short " width="60%" />
+									                    	<button id="btnAddEvaluacion" label="Adicionar" width="35%"/>
 									                    </div>
 													</listheader>
 												</listhead>												
-											</listbox>										
+											</listbox>
+										</div>									
 										</tabpanel>
 										
 										<tabpanel id="infoBiblioBas">
 											<listbox>
 												<listhead>
 													<listheader align="center">
+														<label value="SELECCIONE LA UNIDAD" sclass="resaltado"/>
+														<combobox id="cmbListaUnidadBiblio" width="50%" />
 													</listheader>
 												</listhead>											
 											</listbox>
-											<separator />
 											
-											<div style="color:red" height="30px" >
-												<label value="REFERENCIAS BIBLIOGRÁFICAS" sclass="titulos" />					
-											</div>
+											<separator />
+												<label value="REFERENCIAS BIBLIOGRÁFICAS" sclass="titulos" />
+											<separator />
 											
 											<listbox id="listaBibliografia">
 												<listhead>
 													<listheader align="center">
 														<label value="Referencia" sclass="resaltadonormal"/>
 														<div>
+															<textbox id="txtReferenciaBiblio" width="100%" />
 														</div>
 													</listheader>
 													<listheader align="center">
 														<label value="Autor" sclass="resaltadonormal"/> 
 														<div>
+															<textbox id="txtAutorBiblio" width="100%" />
 														</div> 
 													</listheader>
 													<listheader align="center">
 														<label value="ISBN" sclass="resaltadonormal"/>
 														<div>
+															<textbox id="txtISBNBiblio" width="100%" />
 														</div> 
 													</listheader>
+													
 													<listheader align="center" width="20%">
 														<label value="Tipo" sclass="resaltadonormal"/>
 														<div>
+										                    <combobox id="cmbTipoBibliografia" width="50%" >
+										                    	<comboitem label="BASICA" />
+										                    	<comboitem label="COMPLEMENTARIA" />
+										                    </combobox>         
+										                    <button id="btnAddBibliografia" label="Adicionar" width="45%" />
 									                    </div>
 													</listheader>
 												</listhead>
 											</listbox>
 											
 											<separator />
-											<div style="color:red" height="30px">
 												<label value="REFERENCIAS CIBERGRÁFICAS" sclass="titulos" />
-											</div>
+											<separator />
 											<listbox id="listaCibergrafia">
 												<listhead>
 													<listheader align="center">
 														<label value="Nombre del Sitio" sclass="resaltadonormal"/>
 														<div>
+															<textbox id="txtNombreSitioCiber" width="100%"/>
 														</div>
+														
 													</listheader>
 													<listheader align="center">
 														<label value="Sitio Web" sclass="resaltadonormal"/>
 														<div>
+															<textbox id="txtURLSitioCiber" width="100%"/>
 														</div>
 													</listheader>
 													<listheader align="center" width="20%">
 														<label value="Tipo" sclass="resaltadonormal"/>
 														<div>
+										                    <combobox id="cmbTipoCibergrafia" width="55%" >
+										                    	<comboitem label="BASICA" />
+										                    	<comboitem label="COMPLEMENTARIA" />
+										                    </combobox>         
+										                    <button id="btnAddCibergrafia" label="Adicionar" width="40%"/>
 									                    </div>
 													</listheader>
 												</listhead>

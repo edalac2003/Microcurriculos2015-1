@@ -15,5 +15,6 @@ public class BorrarVariablesSession extends GenericForwardComposer{
 		super.doAfterCompose(comp);
 		Executions.getCurrent().getSession().removeAttribute("idMicro");
 		Executions.getCurrent().getSession().removeAttribute("semestre");
+		Executions.getCurrent().getSession().removeAttribute("materia");
 	}
 }
