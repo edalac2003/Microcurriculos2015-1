@@ -1,18 +1,15 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page title="" contentType="text/html; charset=UTF-8"?>
-<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>	
 	<window id="formaCrearMicro" border="none" apply="${crearMicroCtrl}">	
-		<borderlayout height="950px" apply="${cargarDatosFormas}">
-			
+		<borderlayout height="950px" apply="${cargarDatosFormas}">			
 			<north height="100px" border="0">
-				<include id="headerIdx" src="/_sections/header.zul" />
-							
+				<include id="headerIdx" src="/_sections/header.zul" />							
 			</north>
 			
-			<center border="0">
+			<center border="none">
 				<div align="center">
 					<borderlayout height="870px">
 						<north border="none">
@@ -25,7 +22,7 @@
 							<label />
 						</east>
 						
-						<center autoscroll="true" border="0">							
+						<center autoscroll="true" border="none">							
 							<tabbox id="fichaContenidos" sclass="tabbox" width="99%">
 								<tabs>
 									<tab label="${labels.microcurriculo.tab1}" id="infoGeneral"/>
@@ -36,11 +33,11 @@
 									<tab label="${labels.microcurriculo.tab6}" id="infoBibliografia"/>
 								</tabs>
 								<tabpanels id="paneles">
-									<tabpanel id="tabInfoBasica" sclass="tabcompleto">
+									<tabpanel id="tabInfoBasica">
 										<grid >
 											<columns>
-												<column width="15%" />
-												<column width="60%" />												
+												<column width="25%" />
+												<column width="75%" />												
 											</columns>
 											<rows>
 												<row>
@@ -57,7 +54,6 @@
 													<label value="${labels.microcurriculo.docente}" sclass="campoobligatorio"/>
 								                    <div>
 								                        <combobox id="cmbDocente" width="35%" />
-<!-- 								                        <label id="lblNombreDocente" /> -->
 								                    </div>
 						                		</row>
 												
@@ -65,14 +61,12 @@
 					                				<label value="${labels.microcurriculo.u_academica}" width="30%" sclass="campoobligatorio"/>
 							                        <div>
 							                        	<combobox id="cmbUnidadAcademica" width="35%"/>
-<!-- 							                        	<label id="lblNombreUnidadAcademica" /> -->
 							                        </div>
 						                		</row>
 						                		<row>
 					                				<label value="${labels.microcurriculo.dependencia}" width="30%"  sclass="campoobligatorio"/>
 							                        <div>
 							                        	<combobox id="cmbDependencia" width="35%"/>
-<!-- 							                        	<label id="lblNombreDependencia" /> -->
 							                        </div>
 						                		</row>
 						                		
@@ -80,7 +74,6 @@
 					                				<label value="${labels.microcurriculo.nucleo}" width="30%"  sclass="campoobligatorio"/>
 							                        <div>
 							                        	<combobox id="cmbNucleo" width="35%"/>
-<!-- 							                        	<label id="lblNombreNucleo" /> -->
 							                        </div>
 						                		</row>
 						                		
@@ -88,7 +81,6 @@
 													<label value="${labels.microcurriculo.idmateria}" sclass="campoobligatorio"/>
 								                    <div>
 								                        <combobox id="cmbMateria" width="35%" />
-<!-- 								                        <label id="lblNombreMateria" /> -->
 								                    </div>
 						                		</row>
 						                		<row>

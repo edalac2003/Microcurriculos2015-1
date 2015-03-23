@@ -3,9 +3,9 @@
 
 <zk>
 <!-- 	<toolbar id="toolbar_consulta" sclass="vista" height="45px" width="960px" apply="${consultarMicroCtrl}"> -->
-	<toolbar id="toolbar_consulta" sclass="vista" height="45px" width="960px" apply="${validarDatosCtrl}">
+	<toolbar id="toolbar_consulta" sclass="vista" height="40px" width="960px" apply="${validarDatosCtrl}">
 		<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
-		<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul" />
+		<toolbarbutton id="tool_nuevo" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul" />
 		<toolbarbutton id="tool_details" label="${labels.microcurriculo.toolbar.details}" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" />
 		<toolbarbutton id="tool_refresh" label="${labels.microcurriculo.toolbar.upload}" image="/_img/icons/32x32/reload.png" href="" />
 		<toolbarbutton id="tool_duplica" label="${labels.microcurriculo.toolbar.clone}" image="/_img/icons/32x32/clone.png" href="/microcurriculo/duplicarMic.zul" />

@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
@@ -23,8 +22,20 @@ import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
+import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
@@ -58,8 +69,6 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	Combobox cmbMicrocurriculo2;
 	Combobox cmbDocente;
 	Combobox cmbEstado;
-	
-	Button btnBuscar;
 	
 	Listbox listaMicrocurriculo;
 	
@@ -171,9 +180,12 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	 * y se muestran todos los microcurriculos relacionados con la busqueda
 	 */
 	public void onClick$btnBuscar(){
-		List<TbMicMicrocurriculo> microcurriculosEncontrados;		
-		List<TbMicMicrocurriculo> microcurriculosFiltradoSemestre;		
-		List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable;		
+		List<TbMicMicrocurriculo> microcurriculosEncontrados;
+		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoSemestre;
+		
+		List<TbMicMicrocurriculo> microcurriculosFiltradoResponsable;
+		
 		List<TbMicMicrocurriculo> microcurriculosFiltradoEstado = new ArrayList<TbMicMicrocurriculo>();
 		
 		/**
@@ -777,6 +789,7 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
+//		System.out.println(comp.getParent().getId().toString());
 		if (comp.getParent().getId().equals("formaListarMicro")){
 			inicializarFormaListado();
 			cargarMaterias("");

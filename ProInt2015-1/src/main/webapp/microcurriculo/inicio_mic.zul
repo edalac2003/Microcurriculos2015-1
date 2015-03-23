@@ -1,5 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?page title="Pantalla Inicial Microcurriculos" contentType="text/html;charset=UTF-8"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>	
@@ -15,26 +15,26 @@
 				<label value="" />
 			</west>
 			
-			<center border="normal">
+			<center border="none">
 				<div align="center">
 					<hbox align="center" height="90px">
-						<label value="GESTION DE MICROCURRICULOS" sclass="tituloFondo"/>
+						<label value="${labels.microcurriculo.titulo}" sclass="tituloFondo"/>
 					</hbox>
 					<div align="center">
 						<vbox>
 							<hbox align="center" height="95px">
-								<a href="/microcurriculo/crearMic.zul" image="/_img/icons/128x128/new.png" />
+								<a href="/microcurriculo/crearMic.zul" image="/_img/icons/128x128/new.png" width="75px"/>
 								<vbox width="350px">
-									<a href="/microcurriculo/crearMic.zul" label="Crear Microcurriculos" sclass="nombreSeccion" />
+									<a href="/microcurriculo/crearMic.zul" label="${labels.microcurriculo.tituloCrear}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
 										<label value="Diligencie el formulario para crear Microcurriculos." />
 									</div>	
 								</vbox>								
 							</hbox>
 							<hbox align="center" height="95px">
-								<a href="/microcurriculo/listamic.zul" image="/_img/icons/128x128/list.png" />
+								<a href="/microcurriculo/listamic.zul" image="/_img/icons/128x128/list.png" width="75px"/>
 								<vbox width="350px">
-									<a href="/microcurriculo/listamic.zul" label="Listar Microcurriculos" sclass="nombreSeccion" />	
+									<a href="/microcurriculo/listamic.zul" label="${labels.microcurriculo.tituloListar}" sclass="nombreSeccion" />	
 									<div sclass="contenidoSeccion">
 										<label value="Liste los Microcurriculos basándose en diferentes criterios de busqueda; 
 										desde este módulo puede tener accesos a consultas y duplicado de estos. " />
@@ -42,16 +42,16 @@
 								</vbox>	
 							</hbox>
 							<hbox align="center" height="95px">
-								<a href="" image="/_img/icons/128x128/print.png" />
+								<a href="" image="/_img/icons/128x128/print.png" width="75px"/>
 								<vbox width="350px">
-									<a href="" label="Imprimir Microcurriculos" sclass="nombreSeccion" />
+									<a href="" label="${labels.microcurriculo.tituloImprimir}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
 										<label value="Genere listados y reportes de los microcurriculos." />
 									</div>	
 								</vbox>		
 							</hbox>
 							<hbox align="center" height="95px">
-								<a href="/index.zul" image="/_img/icons/128x128/shutdown.png" />
+								<a href="/index.zul" image="/_img/icons/128x128/shutdown.png" width="75px"/>
 								<vbox width="350px">
 									<a href="/index.zul" label="Cerrar Microcurriculos" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">

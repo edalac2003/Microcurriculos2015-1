@@ -26,7 +26,7 @@
 					<div align="center">
 						<vbox>
 							<hbox align="center" height="120px">
-								<a href="/microcurriculo/inicio_mic.zul" image="/_img/icons/128x128/microcurriculos.png" />
+								<a href="/microcurriculo/inicio_mic.zul" image="/_img/icons/128x128/microcurriculos.png" width="80px"/>
 								<vbox width="400px">
 									<a href="/microcurriculo/inicio_mic.zul" label="Microcurriculos" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
@@ -35,16 +35,16 @@
 								</vbox>								
 							</hbox>
 							<hbox align="center" height="120px">
-								<a href="/_docente/inicio_docente.zul" image="/_img/icons/128x128/docentes.png" />
+								<a href="/_docente/inicio_docente.zul" image="/_img/icons/128x128/docentes.png" width="80px"/>
 								<vbox width="400px">
-									<a href="/docente/inicio_docente.zul" label="Docentes" sclass="nombreSeccion" />	
+									<a href="/_docente/inicio_docente.zul" label="Docentes" sclass="nombreSeccion" />	
 									<div sclass="contenidoSeccion">
 										<label value="Esta sección proporciona acceso a la creación, modificación, consulta y listado de las personas y la asignación de roles." />
 									</div>	
 								</vbox>	
 							</hbox>
 							<hbox align="center" height="120px">
-								<a href="/materia/inicio_mat.zul" image="/_img/icons/128x128/materias.png" />
+								<a href="/materia/inicio_mat.zul" image="/_img/icons/128x128/materias.png" width="80px"/>
 								<vbox width="400px">
 									<a href="/materia/inicio_mat.zul" label="Materias" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">

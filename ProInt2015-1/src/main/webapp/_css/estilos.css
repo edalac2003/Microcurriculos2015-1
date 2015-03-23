@@ -1,6 +1,5 @@
 @CHARSET "ISO-8859-1";
 
-
 .estiloceldas{
 	font-size: 9px;
 	padding:0 5px;
@@ -40,13 +39,16 @@
 	color: Red;
 }
 
-
 .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover {
-    background-color: transparent;
-	height: 35px;
-	padding: 2px;
+    background-color: AliceBlue;
+	height: 40px;
+	padding: 5px;
 	font-style: normal;
 	font-weight: bold;
+	color: Black;
+	font-family: Tahoma, Calibri, Arial;
+	font-size: x-small;
+	margin: 2
 }
 
 .vista {
@@ -84,8 +86,8 @@
 .nombreSeccion{
 	color: #FF8000;
 	font-size: 18px;
-	font-family: Arial Black, Arial, Calibri, Tahoma;
-	font-weight: bolder;
+	font-family: Arial, Calibri, Tahoma;
+	font-weight: normal;
 	margin: 4px
 }
 

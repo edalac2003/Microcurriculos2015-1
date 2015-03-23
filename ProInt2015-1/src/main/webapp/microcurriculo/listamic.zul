@@ -6,7 +6,7 @@
 <zk>
 <style src="estilos.css" />
 <window id="formaListarMicro" border="0" >
-	<borderlayout height="1000px" apply="${cargarDatosFormas2}">
+	<borderlayout height="1050px" apply="${cargarDatosFormas2}">
 		<north border="0" height="100px">
 			<include id="headerIdx" src="/_sections/header.zul" />
 		</north>
@@ -21,15 +21,15 @@
 		<center border="0">
 			<borderlayout height="1000px">
 				<north border="0" height="50px">
-<!-- 					<toolbar id="tb" sclass="vista" height="45px" width="960px" apply="${validarDatosCtrl}"> -->
-<!-- 						<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" /> -->
-<!-- 						<toolbarbutton id="tool_new" label="Crear Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul" /> -->
-<!-- 						<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" /> -->
-<!-- 						<toolbarbutton id="tool_refresh" label="Actualizar" image="/_img/icons/32x32/reload.png" href="/microcurriculo/modificarMic.zul" /> -->
-<!-- 						<toolbarbutton id="tool_duplica" label="Duplicar" image="/_img/icons/32x32/clone.png" href="/microcurriculo/duplicarMic.zul" /> -->
-<!-- 						<toolbarbutton id="tool_print" label="Imprimir" image="/_img/icons/32x32/printer.png" href="" /> -->
-<!-- 						<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul" /> -->
-<!-- 					</toolbar> -->
+					<toolbar id="tb" sclass="vista" height="45px" width="960px" apply="${validarDatosCtrl}">
+						<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+						<toolbarbutton id="tool_new" label="Crear Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul" />
+						<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" />
+						<toolbarbutton id="tool_refresh" label="Actualizar" image="/_img/icons/32x32/reload.png" href="/microcurriculo/modificarMic.zul" />
+						<toolbarbutton id="tool_duplica" label="Duplicar" image="/_img/icons/32x32/clone.png" href="/microcurriculo/duplicarMic.zul" />
+						<toolbarbutton id="tool_print" label="Imprimir" image="/_img/icons/32x32/printer.png" href="" />
+						<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul" />
+					</toolbar>
 <!-- 					<include id="listMenu" src="/_sections/toolbar_micro2.zul"/> -->
 				</north>
 				

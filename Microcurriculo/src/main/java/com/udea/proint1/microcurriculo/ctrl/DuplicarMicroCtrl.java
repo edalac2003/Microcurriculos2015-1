@@ -55,7 +55,8 @@ import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
-public class CargarDatosFormas extends GenericForwardComposer{
+@SuppressWarnings("rawtypes")
+public class DuplicarMicroCtrl extends GenericForwardComposer{
 
 	/**
 	 * 

@@ -56,7 +56,13 @@ import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
+@SuppressWarnings("rawtypes")
 public class CargarDatosFormas extends GenericForwardComposer{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(CargarDatosFormas.class);
 	
