@@ -19,7 +19,7 @@
 				<div>
 					<div align="center">
 						<hbox align="center" height="90px">
-							<label value="SISTEMA DE GESTION DE MICROCURRICULOS" sclass="tituloFondo"/>
+							<label value="${labels.microcurriculo.tituloIndex}" sclass="tituloFondo"/>
 						</hbox>
 					</div>
 					
@@ -28,27 +28,27 @@
 							<hbox align="center" height="120px">
 								<a href="/microcurriculo/inicio_mic.zul" image="/_img/icons/128x128/microcurriculos.png" width="80px"/>
 								<vbox width="400px">
-									<a href="/microcurriculo/inicio_mic.zul" label="Microcurriculos" sclass="nombreSeccion" />
+									<a href="/microcurriculo/inicio_mic.zul" label="${labels.microcurriculo.tituloMicro}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="En este modulo se encuentran los procesos de creación, consulta, listado, clonación de microcurriculos." />
+										<label value="${labels.microcurriculo.mensajeMicro}" />
 									</div>	
 								</vbox>								
 							</hbox>
 							<hbox align="center" height="120px">
 								<a href="/_docente/inicio_docente.zul" image="/_img/icons/128x128/docentes.png" width="80px"/>
 								<vbox width="400px">
-									<a href="/_docente/inicio_docente.zul" label="Docentes" sclass="nombreSeccion" />	
+									<a href="/_docente/inicio_docente.zul" label="${labels.microcurriculo.tituloDocente}" sclass="nombreSeccion" />	
 									<div sclass="contenidoSeccion">
-										<label value="Esta sección proporciona acceso a la creación, modificación, consulta y listado de las personas y la asignación de roles." />
+										<label value="${labels.microcurriculo.mensajeDocente}" />
 									</div>	
 								</vbox>	
 							</hbox>
 							<hbox align="center" height="120px">
 								<a href="/materia/inicio_mat.zul" image="/_img/icons/128x128/materias.png" width="80px"/>
 								<vbox width="400px">
-									<a href="/materia/inicio_mat.zul" label="Materias" sclass="nombreSeccion" />
+									<a href="/materia/inicio_mat.zul" label="${labels.microcurriculo.tituloDocente}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="Este módulo permite crear, modificar, consultar y listar materias, conforme a los Nucleos registrados en el sistema." />
+										<label value="" />
 									</div>	
 								</vbox>		
 							</hbox>

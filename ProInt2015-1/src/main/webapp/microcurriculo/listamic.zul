@@ -36,47 +36,47 @@
 				
 				<center border="0">					
 					<div align="center">
-						<grid width="959px">
+						<grid width="959px" sclass="fuenteChica">
 							<rows>
 								<row>
 									<div>
-										<label value="U. Académica" />
+										<label value="${labels.microcurriculo.u_academica}" />
 										<combobox id="cmbUnidadAcademica" width="60%" />
 										<label id="lblNombreUnidadAcademica" visible="false"/>
 									</div>
 									<div>
-										<label value="Dependencia" />
+										<label value="${labels.microcurriculo.dependencia}" />
 										<combobox id="cmbDependencia" width="60%"/>
 										<label id="lblNombreDependencia" visible="false"/>
 									</div>
 									<div>
-										<label value="Nucleo" />
+										<label value="${labels.microcurriculo.nucleo}" />
 										<combobox id="cmbNucleo" />
 										<label id="lblNombreNucleo" visible="false"/>
 									</div>		
 									<div>
-										<label value="Materia" />
+										<label value="${labels.microcurriculo.idmateria}" />
 										<combobox id="cmbMateria" />
 										<label id="lblNombreMateria" visible="false"/>
 									</div>								
 								</row>
 								<row>									
 									<div>
-										<label value="Semestre" />
+										<label value="${labels.microcurriculo.semestre}" />
 										<combobox id="cmbSemestre" width="70%"/>
 										<label id="lblSemestre" />
 									</div>									
 									<div>
-										<label value="Responsable" />
+										<label value="${labels.microcurriculo.docente}" />
 										<combobox id="cmbDocente" width="60%"/>
 										<label id="lblResponsable" />
 									</div>
 									<div>
-										<label value="Estado" />
+										<label value="${labels.microcurriculo.estados}" />
 										<combobox id="cmbEstado" width="68%"/>
 									</div>
 									<div align="center">
-										<button id="btnBuscar" label="Iniciar Busqueda" />
+										<button id="btnBuscar" label="${labels.microcurriculo.buscar}" />
 									</div>
 								</row>
 							</rows>											
@@ -88,13 +88,13 @@
 								<north border="0" height="32px">
 									<listbox autopaging="true" >
 										<listhead>
-											<listheader label="Codigo"  align="center" width="12%"/>
-											<listheader label="Unidad" align="center"/>
-											<listheader label="Dependencia" align="center"/>
-											<listheader label="Nucleo" align="center"/>
-											<listheader label="Materia" align="center"/>
-											<listheader label="Responsable" align="center"/>
-											<listheader label="Estado" align="center"/>
+											<listheader label="${labels.microcurriculo.headerCodigo}"  align="center" width="12%"/>
+											<listheader label="${labels.microcurriculo.u_academica}" align="center"/>
+											<listheader label="${labels.microcurriculo.dependencia}" align="center"/>
+											<listheader label="${labels.microcurriculo.nucleo}" align="center"/>
+											<listheader label="${labels.microcurriculo.idmateria}" align="center"/>
+											<listheader label="${labels.microcurriculo.docente}" align="center"/>
+											<listheader label="${labels.microcurriculo.estados}" align="center"/>
 										</listhead>
 									</listbox>
 								</north>

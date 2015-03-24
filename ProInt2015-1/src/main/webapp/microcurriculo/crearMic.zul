@@ -220,7 +220,7 @@
 												</listheader>
 												<listheader width="35%">
 													<div>
-														<label value="Tema" style="font-weight:bold"/>
+														<label value="${labels.microcurriculo.tema}" style="font-weight:bold"/>
 														<textbox id="txtNombreTema" width="85%" tabindex="5" />
 													</div>
 													
@@ -325,7 +325,7 @@
 													</div>
 												</listheader>
 												<listheader align="center">
-													<label value="Autor${labels.microcurriculo.autor}" sclass="resaltadonormal"/> 
+													<label value="${labels.microcurriculo.autor}" sclass="resaltadonormal"/> 
 													<div>
 														<textbox id="txtAutorBiblio" width="100%" />
 													</div> 

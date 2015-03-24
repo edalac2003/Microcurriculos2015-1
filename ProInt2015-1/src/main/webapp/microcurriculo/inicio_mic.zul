@@ -27,7 +27,7 @@
 								<vbox width="350px">
 									<a href="/microcurriculo/crearMic.zul" label="${labels.microcurriculo.tituloCrear}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="Diligencie el formulario para crear Microcurriculos." />
+										<label value="${labels.microcurriculo.mensajeCrear}" />
 									</div>	
 								</vbox>								
 							</hbox>
@@ -36,8 +36,7 @@
 								<vbox width="350px">
 									<a href="/microcurriculo/listamic.zul" label="${labels.microcurriculo.tituloListar}" sclass="nombreSeccion" />	
 									<div sclass="contenidoSeccion">
-										<label value="Liste los Microcurriculos basándose en diferentes criterios de busqueda; 
-										desde este módulo puede tener accesos a consultas y duplicado de estos. " />
+										<label value="${labels.microcurriculo.mensajeListar}" />
 									</div>	
 								</vbox>	
 							</hbox>
@@ -46,16 +45,16 @@
 								<vbox width="350px">
 									<a href="" label="${labels.microcurriculo.tituloImprimir}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="Genere listados y reportes de los microcurriculos." />
+										<label value="${labels.microcurriculo.mensajeImprimir}" />
 									</div>	
 								</vbox>		
 							</hbox>
 							<hbox align="center" height="95px">
 								<a href="/index.zul" image="/_img/icons/128x128/shutdown.png" width="75px"/>
 								<vbox width="350px">
-									<a href="/index.zul" label="Cerrar Microcurriculos" sclass="nombreSeccion" />
+									<a href="/index.zul" label="${labels.microcurriculo.tituloCerrar}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="Regrese al Menú Principal." />
+										<label value="${labels.microcurriculo.mensajeCerrar}" />
 									</div>	
 								</vbox>		
 							</hbox>

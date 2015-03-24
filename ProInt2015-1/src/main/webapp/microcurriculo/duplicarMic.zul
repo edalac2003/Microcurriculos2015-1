@@ -17,25 +17,25 @@
 					<borderlayout height="870px">
 						<north border="0"> 
 							<toolbar id="tb" sclass="vista" height="45px" width="960px">
-								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
-								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
-								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" />
+								<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
+								<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
+								<toolbarbutton id="tool_save" label="${labesl.microcurriculo.toolbar.save}" image="/_img/icons/32x32/save.png" />
 								<toolbarbutton id="tool_duplica_otro" label="Duplicar Otro" image="/_img/icons/32x32/atras.png" />
-								<toolbarbutton id="tool_print" label="Imprimir" image="/_img/icons/32x32/printer.png" />
-								<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
+								<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" />
+								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
 							</toolbar>
 						</north>
 						<west width="180px" border="0">
-							<label></label>
+							<label />
 						</west>
 						<east width="180px" border="0">
-							<label></label>
+							<label />
 						</east>
 						
 						<center autoscroll="true" border="0">
 							<div>
 								<div height="10px"/>
-								<panel id="panelSemestre" title="Seleccione semestre a duplicar" border="normal" width="300px" height="130px">
+								<panel id="panelSemestre" title="${labels.microcurriculo.solicitaSemestre}" border="normal" width="300px" height="160px">
 									<panelchildren>
 										<div height="17px"/>
 										<div align="center">
@@ -43,18 +43,18 @@
 										</div>
 									</panelchildren>
 									<toolbar>
-										<button id="btnDuplicar" label="Duplicar" style="margin:0 0 0 120px;" href="/microcurriculo/duplicarMic.zul"/>
+										<button id="btnDuplicar" label="${labels.microcurriculo.duplicar}" style="margin:0 0 0 120px;" href="/microcurriculo/duplicarMic.zul"/>
 									</toolbar>
 								</panel>
 													
 								<tabbox id="fichaContenidos" sclass="tabbox" width="960px" visible="false">
 									<tabs style="">
-										<tab label="Información General" id="infoGeneral"/>
-										<tab label="Información Complementaria" id="infoComplemento"/>
-										<tab label="Unidades y Temas" id="infoUnidades"/>
-										<tab label="SubTemas" id="infoSubtema"/>
-										<tab label="Evaluaciones" id="infoEvaluacion"/>
-										<tab label="Referencias Bibliográficas" id="infoBibliografia"/>
+										<tab label="${labels.microcurriculo.tab1}" id="infoGeneral"/>
+										<tab label="${labels.microcurriculo.tab2}" id="infoComplemento"/>
+										<tab label="${labels.microcurriculo.tab3}" id="infoUnidades"/>
+										<tab label="${labels.microcurriculo.tab4}" id="infoSubtema"/>
+										<tab label="${labels.microcurriculo.tab5}" id="infoEvaluacion"/>
+										<tab label="${labels.microcurriculo.tab6}" id="infoBibliografia"/>
 									</tabs>
 									<tabpanels>
 										<tabpanel id="tabInfoBasica">
@@ -65,17 +65,17 @@
 												</columns>
 												<rows>
 													<row>
-														<label value="Código Microcurriculo" />
+														<label value="${labels.microcurriculo.idMicro}" />
 									                    <div>
 									                        <label id="lblIdMicrocurriculo" value="" sclass="titulos"/>									                        
 									                    </div>
 							                		</row>
 							                		<row>
-									                    <label value="Estado Actual" width="150px" />
+									                    <label value="${labels.microcurriculo.estados}" width="150px" />
 									                    <combobox id="cmbEstado" disabled="true" droppable="2"/>
 							                		</row>
 							                		<row>
-														<label value="Docente Responsable" sclass="campoobligatorio"/>
+														<label value="${labels.microcurriculo.docente}" sclass="campoobligatorio"/>
 									                    <div>
 									                        <combobox id="cmbDocente" width="35%" droppable="2"/>
 									                        <label id="lblNombreDocente" />
@@ -83,14 +83,14 @@
 							                		</row>
 													
 							                		<row>
-						                				<label value="Unidad Académica" width="30%"/>
+						                				<label value="${labels.microcurriculo.u_academica}" width="30%"/>
 								                        <div>
 								                        	<combobox id="cmbUnidadAcademica" width="35%"/>
 								                        	<label id="lblNombreUnidadAcademica" />
 								                        </div>
 							                		</row>
 							                		<row>
-						                				<label value="Dependencia" width="30%"/>
+						                				<label value="${labels.microcurriculo.dependencia}" width="30%"/>
 								                        <div>
 								                        	<combobox id="cmbDependencia" width="35%"/>
 								                        	<label id="lblNombreDependencia" />
@@ -98,7 +98,7 @@
 							                		</row>
 							                		
 							                		<row>
-						                				<label value="Nucleo" width="30%"/>
+						                				<label value="${labels.microcurriculo.nucleo}" width="30%"/>
 								                        <div>
 								                        	<combobox id="cmbNucleo" width="35%"/>
 								                        	<label id="lblNombreNucleo" />
@@ -106,71 +106,71 @@
 							                		</row>
 							                		
 													<row>
-														<label value="Id Materia" />
+														<label value="${labels.microcurriculo.idmateria}" />
 									                    <div>
 									                        <combobox id="cmbMateria" width="35%" />
 									                        <label id="lblNombreMateria" />
 									                    </div>
 							                		</row>
 							                		<row>
-														<label value="Semestre" />
+														<label value="${labels.microcurriculo.semestre}" />
 									                    <div>
 									                        <combobox id="cmbSemestre" width="35%"/>									                        
 									                    </div>
 							                		</row>
 							                		<row>
-									                    <label value="Créditos" />
+									                    <label value="${labels.microcurriculo.creditos}" />
 									                    <div>
 							                        		<label id="lblCreditosMateria" />
 							                    		</div>
 							                		</row>
 							                		<row>
-									                    <label value="Horas Teóricas" />
+									                    <label value="${labels.microcurriculo.ht}" />
 									                    <label id="lblHtMateria" />
 									                    		                    
 							                		</row>
 							                		
 							                		<row>
-									                    <label value="Horas Practicas " />
+									                    <label value="${labels.microcurriculo.hp}" />
 									                    <label id="lblHpMateria" />		                    
 							                		</row>
 							                			
 							                		<row>
-									                    <label value="Horas Teorico-Prácticas " />
+									                    <label value="${labels.microcurriculo.htp}" />
 									                    <label id="lblHtpMateria" />
 							                		</row>
 							                		
 							                		<row>
-									                    <label value="Horas Clase por Semestre " />
+									                    <label value="${labels.microcurriculo.hcs}" />
 									                    <label id="lblHoraClaseSemestral" />		                    
 							                		</row>
 							                		<row>
-									                    <label value="Campo de Formación" />
+									                    <label value="${labels.microcurriculo.campo}" />
 									                    <label id="lblCampoFormacion" />
 							                		</row>
 							                		<row>
-									                    <label value="Validable" width="150px" />
+									                    <label value="${labels.microcurriculo.valida}" width="150px" />
 									                    <checkbox id="ckbValidable" />
 							                		</row>
 							                		
 							                		<row>
-									                    <label value="Habilitable" />
+									                    <label value="${labels.microcurriculo.habilita}" />
 									                    <checkbox id="ckbHabilitable" />
 							                		</row>
 							                		<row>
-									                    <label value="Clasificable" width="150px" />
+									                    <label value="${labels.microcurriculo.clasifica}" width="150px" />
 									                    <checkbox id="ckbClasificable" />
 							                		</row>
 							                		<row>
-									                    <label value="Prerequisitos" width="150px" />
+									                    <label value="${labels.microcurriculo.pre}" width="150px" />
 									                    <label id="lblPrerrequisitos" />
 							                		</row>
 							                		<row>
-									                    <label value="Correquisitos" width="150px" />
+									                    <label value="${labels.microcurriculo.co}" width="150px" />
 									                    <label id="lblCorrequisitos" multiline="true"/>
 							                		</row>
 							                		<row>
-									                    <label value="Programas Vinculados" width="150px" />
+									                    <label value="${labels.microcurriculo.vinculos}" width="150px" />
 									                    <label id="lblProgramasVinculados" />
 							                		</row>
 												</rows>
@@ -185,19 +185,19 @@
 												</columns>
 												<rows >
 													<row>
-									                    <label value="Proposito del Curso" sclass="campoobligatorio"/>
+									                    <label value="${labels.microcurriculo.proposito}" sclass="campoobligatorio"/>
 									                    <textbox id="txtPropositoMicro"  value="Proposito" multiline="true" width="100%"/>									                    
 									                </row>
 													<row>
-									                    <label value="Justificación" sclass="campoobligatorio"/>
+									                    <label value="${labels.microcurriculo.justifica}" sclass="campoobligatorio"/>
 									                    <textbox id="txtJustificacionMicro"  value="Justificacion" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
-									                    <label value="Objetivo General" sclass="campoobligatorio"/>
+									                    <label value="${labels.microcurriculo.general}" sclass="campoobligatorio"/>
 									                    <textbox id="txtObjetivoGeneral"  value="Objetivo General" multiline="true" width="100%"/>									                    
 									                </row>
 									                <row>
-									                    <label value="Objetivos Especificos" sclass="campoobligatorio"/>
+									                    <label value="${labels.microcurriculo.especificos}" sclass="campoobligatorio"/>
 									                    <div>
 										                    <textbox id="txtObjetivoEspecifico"  multiline="true"   width="84%"/>
 										                    <button id="btnAddObjetivo" label="Adicionar" width="15%"/>
@@ -206,11 +206,10 @@
 									                <row>
 									                	<div />
 									                	<div><listbox id="listaObjetivosEspecificos" />
-									                	</div>
-									                	
+									                	</div>									                	
 									                </row>
 									                <row>
-									                    <label value="Contenido Resumido" sclass="campoobligatorio"/>
+									                    <label value="${labels.microcurriculo.resumen}" sclass="campoobligatorio"/>
 									                    <textbox id="txtResumenMicro"  value="Resumen" multiline="true" width="100%"/>
 									                </row>
 												</rows>
@@ -220,12 +219,12 @@
 										
 										<tabpanel id="tabInfoUnidad">
 											<separator />									
-												<label value="UNIDADES" sclass="titulos" />	
+												<label value="${labels.microcurriculo.titulo1}" sclass="titulos" />	
 											<separator />										
 											<listbox  id="listaUnidades">
 												<listhead>
 													<listheader width="15%">
-														<label value="Nombre de la Unidad" sclass="resaltado"/>
+														<label value="${labels.microcurriculo.unidad}" sclass="resaltado"/>
 													</listheader>
 													<listheader>
 														<textbox id="txtNombreUnidad" width="80%"/>
@@ -235,29 +234,29 @@
 											</listbox>
 											
 											<separator />
-												<label value="TEMAS POR UNIDAD" sclass="titulos" />	
+												<label value="${labels.microcurriculo.titulo2}" sclass="titulos" />	
 											<separator />											
 											
 											<listbox id="listaTemas">
 												<listhead >
 													<listheader width="35%">
 														<div>
-															<label value="Unidad" style="font-weight:bold"/>
+															<label value="${labels.microcurriculo.unidad}" style="font-weight:bold"/>
 															<combobox id="cmbIdUnidad" width="85%" tabindex="5" />
 														</div>														
 													</listheader>
 													<listheader width="35%">
 														<div>
-															<label value="Tema" style="font-weight:bold"/>
+															<label value="${labels.microcurriculo.tema}" style="font-weight:bold"/>
 															<textbox id="txtNombreTema" width="85%" tabindex="5" />
 														</div>
 														
 													</listheader>
 													<listheader width="25%">
 														<div>
-															<label value="Tiempo (Semanas)" style="font-weight:bold"/>
+															<label value="${labels.microcurriculo.tiempo}" style="font-weight:bold"/>
 															<longbox id="txtNumeroSemanas" width="20%" />
-															<button label="Adicionar" id="btnAddTemas" />
+															<button label="${labels.microcurriculo.add}" id="btnAddTemas" />
 														</div> 
 													</listheader>
 												</listhead>						
@@ -269,27 +268,27 @@
 										<tabpanel>
 											<div>
 												<separator />
-													<label value="SUBTEMAS POR TEMAS" sclass="titulos" />
+													<label value="${labels.microcurriculo.titulo3}" sclass="titulos" />
 												<separator />
 												<listbox id="listaSubtemas">
 													<listhead>
 														<listheader width="25%">
-															<label value="Unidad" sclass="resaltadonormal"/>
+															<label value="${labels.microcurriculo.unidad}" sclass="resaltadonormal"/>
 															<div>																
 																<combobox id="cmbListaUnidades" width="75%"/>
 															</div>
 														</listheader>
 														<listheader width="25%">
-															<label value="Tema" sclass="resaltadonormal"/>
+															<label value="${labels.microcurriculo.tema}" sclass="resaltadonormal"/>
 															<div>																
 																<combobox id="cmbListaTemas" width="75%"/>																
 															</div>	
 														</listheader>
 														<listheader width="50%">
-															<label value="Subtema" sclass="resaltadonormal"/>
+															<label value="${labels.microcurriculo.subtema}" sclass="resaltadonormal"/>
 															<div>										                    	
 											                    <textbox id="txtSubTemas" width="70%" />
-											                    <button id="btnAddSubTema" label="Adicionar" />
+											                    <button id="btnAddSubTema" label="${labels.microcurriculo.add}" />
 										                    </div>	
 														</listheader>
 													</listhead>
@@ -301,28 +300,28 @@
 										<tabpanel id="tabInfoEval">
 										<div>
 											<separator />
-												<label value="EVALUACIONES" sclass="titulos" />
+												<label value="${labels.microcurriculo.titulo4}" sclass="titulos" />
 											<separator />
 											<listbox id="listaEvaluaciones">
 												<listhead>
 													<listheader label="" align="center" sclass="resaltadonormal" width="60%">
-														<label value="Actividad" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.actividad}" sclass="resaltadonormal"/>
 														<div>															
 															<textbox id="txtActividadMicro" width="100%" />
 														</div> 
 													</listheader>
 													<listheader label="" align="center" sclass="resaltadonormal" width="10%">
-														<label value="Porcentaje (%)" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.porcentaje}" sclass="resaltadonormal"/>
 														<div>
 															<longbox id="txtPorcentajeActividad" width="50%"/>
 														</div>
 														
 													</listheader>
 													<listheader label="" align="center" width="20%">
-														<label value="Fecha Estimada" sclass="resaltadonormal" />
+														<label value="${labels.microcurriculo.fecha}" sclass="resaltadonormal" />
 														<div>
 									                    	<datebox id="dtFechaEvaluacion" cols="12" format="short " width="60%" />
-									                    	<button id="btnAddEvaluacion" label="Adicionar" width="35%"/>
+									                    	<button id="btnAddEvaluacion" label="${labels.microcurriculo.add}" width="35%"/>
 									                    </div>
 													</listheader>
 												</listhead>												
@@ -334,76 +333,76 @@
 											<listbox>
 												<listhead>
 													<listheader align="center">
-														<label value="SELECCIONE LA UNIDAD" sclass="resaltado"/>
+														<label value="${labels.microcurriculo.unidad}" sclass="resaltado"/>
 														<combobox id="cmbListaUnidadBiblio" width="50%" />
 													</listheader>
 												</listhead>											
 											</listbox>
 											
 											<separator />
-												<label value="REFERENCIAS BIBLIOGRÁFICAS" sclass="titulos" />
+												<label value="${labels.microcurriculo.titulo5}" sclass="titulos" />
 											<separator />
 											
 											<listbox id="listaBibliografia">
 												<listhead>
 													<listheader align="center">
-														<label value="Referencia" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.referencia}" sclass="resaltadonormal"/>
 														<div>
 															<textbox id="txtReferenciaBiblio" width="100%" />
 														</div>
 													</listheader>
 													<listheader align="center">
-														<label value="Autor" sclass="resaltadonormal"/> 
+														<label value="${labels.microcurriculo.autor}" sclass="resaltadonormal"/> 
 														<div>
 															<textbox id="txtAutorBiblio" width="100%" />
 														</div> 
 													</listheader>
 													<listheader align="center">
-														<label value="ISBN" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.isbn}" sclass="resaltadonormal"/>
 														<div>
 															<textbox id="txtISBNBiblio" width="100%" />
 														</div> 
 													</listheader>
 													
 													<listheader align="center" width="20%">
-														<label value="Tipo" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.tipo}" sclass="resaltadonormal"/>
 														<div>
 										                    <combobox id="cmbTipoBibliografia" width="50%" >
 										                    	<comboitem label="BASICA" />
 										                    	<comboitem label="COMPLEMENTARIA" />
 										                    </combobox>         
-										                    <button id="btnAddBibliografia" label="Adicionar" width="45%" />
+										                    <button id="btnAddBibliografia" label="${labels.microcurriculo.add}" width="45%" />
 									                    </div>
 													</listheader>
 												</listhead>
 											</listbox>
 											
 											<separator />
-												<label value="REFERENCIAS CIBERGRÁFICAS" sclass="titulos" />
+												<label value="${labels.microcurriculo.titulo6}" sclass="titulos" />
 											<separator />
 											<listbox id="listaCibergrafia">
 												<listhead>
 													<listheader align="center">
-														<label value="Nombre del Sitio" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.nombresitio}" sclass="resaltadonormal"/>
 														<div>
 															<textbox id="txtNombreSitioCiber" width="100%"/>
 														</div>
 														
 													</listheader>
 													<listheader align="center">
-														<label value="Sitio Web" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.url}" sclass="resaltadonormal"/>
 														<div>
 															<textbox id="txtURLSitioCiber" width="100%"/>
 														</div>
 													</listheader>
 													<listheader align="center" width="20%">
-														<label value="Tipo" sclass="resaltadonormal"/>
+														<label value="${labels.microcurriculo.tipo}" sclass="resaltadonormal"/>
 														<div>
 										                    <combobox id="cmbTipoCibergrafia" width="55%" >
 										                    	<comboitem label="BASICA" />
 										                    	<comboitem label="COMPLEMENTARIA" />
 										                    </combobox>         
-										                    <button id="btnAddCibergrafia" label="Adicionar" width="40%"/>
+										                    <button id="btnAddCibergrafia" label="${labels.microcurriculo.add}" width="40%"/>
 									                    </div>
 													</listheader>
 												</listhead>
