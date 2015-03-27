@@ -29,79 +29,119 @@ public class MateriaNGCImpl implements MateriaNGC {
 
 	
 	@Override
-	public void guardarMateria(TbAdmMateria materia) throws ExcepcionesLogica {
+	public void guardarMateria(TbAdmMateria materia) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		
 		if(materia == null){
-			throw new ExcepcionesLogica("El objeto materias está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Materia esta vacio");
+			throw expLog;
 		}
 		try {
 			String id = materia.getVrIdmateria();
 			log.info("Id materia:" + id);
 			TbAdmMateria materiasConsulta = materiaDao.obtenerMateria(id);
 			if(materiasConsulta != null){
-				throw new ExcepcionesLogica("La materia a insertar ya existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("No se pudo guardar, La materia ya existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenermaterias de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Materia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			materiaDao.guardarMateria(materia);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarMateria de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Materia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarMateria(TbAdmMateria materia) throws ExcepcionesLogica {
+	public void actualizarMateria(TbAdmMateria materia) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(materia == null){
-			throw new ExcepcionesLogica("El objeto materias está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Materia esta vacio");
+			throw expLog;
 		}
 		try {
 			String id = materia.getVrIdmateria();
 			TbAdmMateria materiaConsulta = materiaDao.obtenerMateria(id);
 		
 			if(materiaConsulta == null){
-				throw new ExcepcionesLogica("El materias a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La Materia a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMaterias de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Materia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			materiaDao.actualizarMateria(materia);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarDependencia de la clase dependenciaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Materia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbAdmMateria obtenerMateria(String id) throws ExcepcionesLogica {
+	public TbAdmMateria obtenerMateria(String id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		TbAdmMateria materias = null;
 		
 		if("".equals(id) || (id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado un ID de Materia Valido.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Materia, no se ha encontrado id de consulta");
+			throw expLog;
 		} else {
 			try {
 				//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 				materias = materiaDao.obtenerMateria(id);
-			} catch (ExcepcionesDAO e) {
-				log.error("falló al invocar el metodo obtenerMaterias de la clase materiaDao: "+ e);
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo obtener Materia");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 		}
 				
@@ -110,7 +150,7 @@ public class MateriaNGCImpl implements MateriaNGC {
 		 */
 		if(materias == null){
 			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontr� Materia con el id "+ id);
+			throw new ExcepcionesLogica("No se encontr� Materia con el id "+ id);
 		}else{
 			//si no esta vacio retorna la ciudad
 			return materias;
@@ -118,12 +158,18 @@ public class MateriaNGCImpl implements MateriaNGC {
 	}
 
 	@Override
-	public List<TbAdmMateria> listarMaterias() throws ExcepcionesLogica {
+	public List<TbAdmMateria> listarMaterias() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbAdmMateria> listaMaterias = null;
 		try {
 			listaMaterias = materiaDao.listarMaterias();
-		} catch (ExcepcionesDAO e) {
-			log.error("Fall� al invocar el metodo listarMaterias de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Materias");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -137,21 +183,33 @@ public class MateriaNGCImpl implements MateriaNGC {
 	}
 	
 	@Override
-	public List<TbAdmMateria> listarMateriasxNucleo(String nucleo) throws ExcepcionesLogica{
+	public List<TbAdmMateria> listarMateriasxNucleo(String nucleo) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbAdmMateria> listaMaterias = null;
 		
 		TbAdmNucleo nucleoConsulta = null;
 		
 		try {
 			nucleoConsulta = nucleoDao.obtenerNucleo(nucleo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerNucleo de la clase NucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Materia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			listaMaterias = materiaDao.listarMateriasPorNucleo(nucleoConsulta);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMateriasPorNucleo de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Materias");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 			return listaMaterias;
@@ -160,55 +218,81 @@ public class MateriaNGCImpl implements MateriaNGC {
 	
 	
 	@Override
-	public List<TbAdmMateria> listarMateriasxNucleo(TbAdmNucleo nucleo)	throws ExcepcionesLogica {
+	public List<TbAdmMateria> listarMateriasxNucleo(TbAdmNucleo nucleo)	throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbAdmMateria> listaMaterias = null;
 		
 		if (nucleo != null){
 			try {
 				listaMaterias = materiaDao.listarMateriasPorNucleo(nucleo);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica(e);
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo listar Materias");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 		} else {
-			throw new ExcepcionesLogica("El objeto <Tb_Adm_Nucleo> est� Vacio.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Materias");
+			throw expLog;
 		}
 		
 		return listaMaterias;
 	}
 
 	@Override
-	public List<TbAdmMateria> listarMateriasxSemetre(int semestre) throws ExcepcionesLogica{
+	public List<TbAdmMateria> listarMateriasxSemetre(int semestre) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbAdmMateria> listaMaterias = null;
 		
 		if(semestre == 0){
-			throw new ExcepcionesLogica("No se ingreso un semestre");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se ingreso Id de semestre valido");
+			throw expLog;
 		}
 		
 		try{
 			listaMaterias = materiaDao.listarMateriasPorSemestre(semestre);
-		}catch (ExcepcionesDAO e){
-			log.error("Falló al invocar el metodo listarMateriasPorSemestre de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Materias");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		return listaMaterias;
 	}
 	
 	@Override
-	public List<TbAdmMateria> buscarMaterias(String buscar) throws ExcepcionesLogica{
+	public List<TbAdmMateria> buscarMaterias(String buscar) throws ExcepcionesLogica, ExcepcionesDAO{
 		if(buscar.equals("")||(buscar.equals(null))){
-			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontro Id de busqueda para materias");
+			throw expLog;
 		}
 		List<TbAdmMateria> listaMaterias = null;
 		try {
 			listaMaterias = materiaDao.buscarMaterias(buscar);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo buscarMaterias de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo buscar Materia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaMaterias == null){
-			throw new ExcepcionesLogica("No se encontraron materias en la tabla TbAdmMaterias");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Materias");
+			throw expLog;
 		}else{
 			return listaMaterias;
 		}

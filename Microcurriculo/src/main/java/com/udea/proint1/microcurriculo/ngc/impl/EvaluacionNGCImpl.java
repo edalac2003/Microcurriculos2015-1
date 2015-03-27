@@ -21,104 +21,145 @@ public class EvaluacionNGCImpl implements EvaluacionNGC {
 	}
 
 	@Override
-	public void guardarEvaluacion(TbMicEvaluacion evaluacion) throws ExcepcionesLogica {
+	public void guardarEvaluacion(TbMicEvaluacion evaluacion) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto no esté vacio
 		 */
 		if(evaluacion == null){
-			throw new ExcepcionesLogica("El objeto evaluacion está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Evaluacion esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = evaluacion.getNbIdevaluacion();
-			TbMicEvaluacion evaluacionConsulta = evaluacionDao.obtenerEvaluaciones(id);
-		
-			if(evaluacionConsulta != null){
-				throw new ExcepcionesLogica("La evaluacion a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEvaluaciones de la clase evaluacionDao: "+ e);
-		}
+//		try {
+//			int id = evaluacion.getNbIdevaluacion();
+//			TbMicEvaluacion evaluacionConsulta = evaluacionDao.obtenerEvaluaciones(id);
+//		
+//			if(evaluacionConsulta != null){
+//				throw new ExcepcionesLogica("La evaluacion a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo obtenerEvaluaciones de la clase evaluacionDao: "+ e);
+//		}
 		
 		try {
 			
 			evaluacionDao.guardarEvaluaciones(evaluacion);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarEvaluaciones de la clase evaluacionDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Evaluacion");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarEvaluacion(TbMicEvaluacion evaluacion) throws ExcepcionesLogica {
+	public void actualizarEvaluacion(TbMicEvaluacion evaluacion) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto no esté vacio
 		 */
 		if(evaluacion == null){
-			throw new ExcepcionesLogica("El objeto evaluacion está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Evaluacion esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = evaluacion.getNbIdevaluacion();
 			TbMicEvaluacion evaluacionConsulta = evaluacionDao.obtenerEvaluaciones(id);
 		
 			if(evaluacionConsulta == null){
-				throw new ExcepcionesLogica("La evaluacion a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La Evaluacion a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEvaluaciones de la clase evaluacionDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Evaluacion");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			evaluacionDao.actualizarEvaluaciones(evaluacion);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarEvaluaciones de la clase evaluacionDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Evaluacion");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbMicEvaluacion obtenerEvaluacion(int id) throws ExcepcionesLogica {
+	public TbMicEvaluacion obtenerEvaluacion(int id) throws ExcepcionesLogica, ExcepcionesDAO{
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id==0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de evaluacion, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Evaluacion, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicEvaluacion evaluacion = null;
 		
 		try {
 			evaluacion = evaluacionDao.obtenerEvaluaciones(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEvaluaciones de la clase evaluacionDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Evaluacion");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(evaluacion == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró evaluacion con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Evaluacion con Id");
+			throw expLog;
 		}else{
 			return evaluacion;
 		}
 	}
 
 	@Override
-	public List<TbMicEvaluacion> listarEvaluacion() throws ExcepcionesLogica {
+	public List<TbMicEvaluacion> listarEvaluacion() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicEvaluacion> listaEvaluaciones = null;
 		try {
 			listaEvaluaciones = evaluacionDao.listarEvaluaciones();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarEvaluaciones de la clase evaluacionDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Evaluaciones");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaEvaluaciones == null){
-			throw new ExcepcionesLogica("No se encontraron evaluaciones en la tabla TbMicEvaluaciones");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Evaluaciones");
+			throw expLog;
 		}else{
 			return listaEvaluaciones;
 		}

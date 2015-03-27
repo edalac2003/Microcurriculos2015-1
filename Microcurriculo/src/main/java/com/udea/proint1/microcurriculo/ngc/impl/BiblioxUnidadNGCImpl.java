@@ -34,87 +34,120 @@ public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 
 	@Override
 	public void guardarBiblioxUnidad(TbMicBiblioxunidad biblioxUnidad)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
-		 * Comprobamos que el objeto id no est� vacio
+		 * Comprobamos que el objeto id no est� vacio
 		 */
 		if(biblioxUnidad == null){
-			throw new ExcepcionesLogica("El objeto biblioxUnidad est� vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Bibliografia x Unidad esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = biblioxUnidad.getNbId();
-			TbMicBiblioxunidad biblioxUnidadConsulta = biblioxUnidadDao.obtenerBiblioxUnidad(id);
-		
-			if(biblioxUnidadConsulta != null){
-				throw new ExcepcionesLogica("La Bibliografia x Unidad a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerBiblioxUnidad de la clase biblioxUnidadDao: "+ e);
-		}
+//		try {
+//			int id = biblioxUnidad.getNbId();
+//			TbMicBiblioxunidad biblioxUnidadConsulta = biblioxUnidadDao.obtenerBiblioxUnidad(id);
+//		
+//			if(biblioxUnidadConsulta != null){
+//				throw new ExcepcionesLogica("La Bibliografia x Unidad a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("fall� al invocar el metodo obtenerBiblioxUnidad de la clase biblioxUnidadDao: "+ e);
+//		}
 		
 		try {
 			
 			biblioxUnidadDao.guardarBiblioxUnidad(biblioxUnidad);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo guardarBiblioxUnidad de la clase biblioxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Bibliografia x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
 	public void modificarBiblioxUnidad(TbMicBiblioxunidad biblioxUnidad)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(biblioxUnidad == null){
-			throw new ExcepcionesLogica("El objeto biblioxUnidad está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Bibliografia esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = biblioxUnidad.getNbId();
 			TbMicBiblioxunidad biblioxUnidadConsulta = biblioxUnidadDao.obtenerBiblioxUnidad(id);
 		
 			if(biblioxUnidadConsulta == null){
-				throw new ExcepcionesLogica("La Bibliografia x Unidad a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La Bibliografia x Unidad a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerBiblioxUnidad de la clase biblioxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Bibliografia x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			biblioxUnidadDao.modificarBiblioxUnidad(biblioxUnidad);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo modificarBiblioxUnidad de la clase biblioxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Bibliografia x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbMicBiblioxunidad obtenerBiblioxUnidad(int id) throws ExcepcionesLogica {
+	public TbMicBiblioxunidad obtenerBiblioxUnidad(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de bibliosxUnidad, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Bibliografia x Unidad, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicBiblioxunidad bibliosxUnidad = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			bibliosxUnidad = biblioxUnidadDao.obtenerBiblioxUnidad(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerBiblioxUnidad de la clase biblioxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Bibliografia x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(bibliosxUnidad == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró Bibliografia x Unidad con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Bibliografia x Unidad con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return bibliosxUnidad;
@@ -123,19 +156,27 @@ public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 
 	@Override
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad()
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicBiblioxunidad> listaBibliosxUnidad = null;
 		try {
 			listaBibliosxUnidad = biblioxUnidadDao.listadoBiblioxUnidad();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listadoBiblioxUnidad de la clase biblioxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Bibliografias x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaBibliosxUnidad == null){
-			throw new ExcepcionesLogica("No se encontraron bibliografias x unidad en la tabla TbMicBiblioxunidad");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Bibliografias x Unidad");
+			throw expLog;
 		}else{
 			return listaBibliosxUnidad;
 		}
@@ -143,22 +184,34 @@ public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 
 	@Override
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(int idUnidad)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicBiblioxunidad> listaBibliosxUnidad = null;
 		
 		TbMicUnidad unidad= null;
 		
 		try {
 			unidad = unidadDao.obtenerUnidad(idUnidad);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Bibliografias x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaBibliosxUnidad = biblioxUnidadDao.listadoBiblioxUnidad(unidad);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listadoBiblioxUnidad(TbMicUnidades) de la clase biblioxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Bibliografias x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

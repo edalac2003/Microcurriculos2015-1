@@ -30,28 +30,37 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 
 	@Override
 	public TbMicObjetivo obtenerObjetivo(int id)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de objetivo, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Objetivo, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicObjetivo objetivo = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			objetivo = objetivoDao.obtenerObjetivo(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerObjetivo de la clase objetivoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(objetivo == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró objetivo con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Objetivo con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return objetivo;
@@ -59,94 +68,134 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 	}
 
 	@Override
-	public void guardarObjetivo(TbMicObjetivo objetivo) throws ExcepcionesLogica {
+	public void guardarObjetivo(TbMicObjetivo objetivo) throws ExcepcionesLogica, ExcepcionesDAO {
 		TbMicObjetivo objetivosTMP = null;
 		
 		if (objetivo != null){
 			
 			try {
 				objetivosTMP = objetivoDao.obtenerObjetivo(objetivo.getNbIdobjetivo());		
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("No fue posible comprobar la existencia del Obejtivo.");
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 			if (objetivosTMP == null){
 				try {
 					objetivoDao.guardarObjetivo(objetivo);
-				} catch (ExcepcionesDAO e) {
-					throw new ExcepcionesLogica("Se presentaron problemas al momento de intentar Guardar el registor <OBJETIVO>");
+				} catch(ExcepcionesDAO expDAO){
+					throw expDAO;
+				} catch(Exception exp){
+					ExcepcionesLogica expLog = new ExcepcionesLogica();
+					expLog.setMsjUsuario("Error al invocar el metodo guardar Objetivo");
+					expLog.setMsjTecnico(exp.getMessage());
+					expLog.setOrigen(exp);
+					throw expLog;
 				}
 			}else {
-				throw new ExcepcionesLogica("El objeto de tipo <Objetivo> ya se Encuentra en la Base de Datos.");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("No se pudo guardar, El objeto Objetivo ya existe");
+				throw expLog;
 			}
 		} else {
-			throw new ExcepcionesLogica("EL Objeto <Objetivo> est� vacio.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Objetivo esta vacio");
+			throw expLog;
 		}
 	}
 
 /*		
 	@Override
-	public void guardarObjetivos(List<TbMicObjetivos> listaObjetivo) throws ExcepcionesLogica {
+	public void guardarObjetivos(List<TbMicObjetivos> listaObjetivo) throws ExcepcionesLogica, ExcepcionesDAO {
 		if (listaObjetivo != null){
 			for(TbMicObjetivos objetivo:listaObjetivo){
 				guardarObjetivos(objetivo);
 			}
 		} else{
-			throw new ExcepcionesLogica("El objeto <Lista Objetivos> no tiene informaci�n v�lida.");
+			throw new ExcepcionesLogica("El objeto <Lista Objetivos> no tiene informaci�n v�lida.");
 		}
 	}
 */
 	
 	@Override
 	public void actualizarObjetivos(TbMicObjetivo objetivo)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(objetivo == null){
-			throw new ExcepcionesLogica("El objeto objetivo está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo actualizar, El objeto Objetivo esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = objetivo.getNbIdobjetivo();
 			TbMicObjetivo objetivoConsulta = objetivoDao.obtenerObjetivo(id);
 		
 			if(objetivoConsulta == null){
-				throw new ExcepcionesLogica("El Objetivo a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("No se pudo actualizar, El objeto Objetivo no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerObjetivo de la clase objetivoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Objetivo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			objetivoDao.modificarObjetivo(objetivo);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo modificarObjetivo de la clase objetivoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Objetivo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public List<TbMicObjetivo> listarObjetivos() throws ExcepcionesLogica {
+	public List<TbMicObjetivo> listarObjetivos() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicObjetivo> listaObjetivos = null;
 		try {
 			listaObjetivos = objetivoDao.listarObjetivos();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarObjetivos de la clase objetivoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Objetivo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaObjetivos == null){
-			throw new ExcepcionesLogica("No se encontraron objetivos en la tabla TbMicObjetivos");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Objetivos");
+			throw expLog;
 		}else{
 			return listaObjetivos;
 		}
 	}
 
 //	@Override
-//	public int numeroRegistros() throws ExcepcionesLogica {
+//	public int numeroRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int numeroRegistro = 0;
 //		try {
 //			numeroRegistro = objetivoDao.numeroRegistros();
@@ -158,21 +207,33 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 //	}
 
 	@Override
-	public List<TbMicObjetivo> listarObjetivosPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesLogica{
+	public List<TbMicObjetivo> listarObjetivosPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicObjetivo> listaObjetivos = null;
 		
 		TbMicMicrocurriculo microcurriculo = null;
 		
 		try {
 			microcurriculo = microcurriculoDao.obtenerMicrocurriculo(idMicrocurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			listaObjetivos = objetivoDao.listarObjetivosPorMicrocurriculo(microcurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarObjetivosPorMicrocurriculo(TbMicMicrocurriculos) de la clase objetivoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Objetivos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -182,13 +243,19 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 	}
 	
 	@Override
-	public List<TbMicObjetivo> listarObjetivosPorTipo(char tipo) throws ExcepcionesLogica{
+	public List<TbMicObjetivo> listarObjetivosPorTipo(char tipo) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicObjetivo> listaObjetivos = null;
 		
 		try {
 			listaObjetivos = objetivoDao.listarObjetivosPorTipo(tipo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarObjetivosPorTipo(char tipo) de la clase objetivoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Objetivos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.

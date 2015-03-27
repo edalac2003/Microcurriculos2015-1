@@ -32,12 +32,14 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 	}
 
 	@Override
-	public void guardarPrerrequisito(TbAdmPrerrequisito prerrequisito) throws ExcepcionesLogica {
+	public void guardarPrerrequisito(TbAdmPrerrequisito prerrequisito) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no estÃ© vacio
 		 */
 		if(prerrequisito == null){
-			throw new ExcepcionesLogica("El objeto prerrequisito estÃ¡ vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Prerrequisito esta vacio");
+			throw expLog;
 		}
 //		try {
 //			int id = prerrequisito.getNbId();
@@ -55,82 +57,121 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 			
 			prerrequisitoDao.guardarPrerrequisito(prerrequisito);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo guardarPrerrequisito de la clase prerrequisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Prerrequisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarPrerrequisito(TbAdmPrerrequisito prerrequisito) throws ExcepcionesLogica {
+	public void actualizarPrerrequisito(TbAdmPrerrequisito prerrequisito) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no estÃ© vacio
 		 */
 		if(prerrequisito == null){
-			throw new ExcepcionesLogica("El objeto prerrequisito estÃ¡ vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el prerrequisito esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = prerrequisito.getNbId();
 			TbAdmPrerrequisito prerrequisitoConsulta = prerrequisitoDao.obtenerPrerrequisito(id);
 		
 			if(prerrequisitoConsulta == null){
-				throw new ExcepcionesLogica("El prerrequisito a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("El prerrequisito a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Prerrequisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			prerrequisitoDao.actualizarPrerrequisito(prerrequisito);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo actualizarPrerrequisito de la clase prerrequisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Prerrequisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public List<TbAdmPrerrequisito> listarPrerrequisitos() throws ExcepcionesLogica {
+	public List<TbAdmPrerrequisito> listarPrerrequisitos() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbAdmPrerrequisito> listaPrerrequisitos = null;
 		try {
 			listaPrerrequisitos = prerrequisitoDao.listarPrerrequisitos();
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo listarPrerrequisitos de la clase prerrequisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Prerrequisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		if(listaPrerrequisitos == null){
-			throw new ExcepcionesLogica("No se encontraron prerrequisitos en la tabla TbAdmPrerrequisitos");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Prerrequisitos");
+			throw expLog;
 		}else{
 			return listaPrerrequisitos;
 		}
 	}
 
 	@Override
-	public TbAdmPrerrequisito obtenerPrerrequisito(int id) throws ExcepcionesLogica {
+	public TbAdmPrerrequisito obtenerPrerrequisito(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificaciÃ³n de prerrequisito, estÃ¡ vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Prerrequisito, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbAdmPrerrequisito prerrequisito = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			prerrequisito = prerrequisitoDao.obtenerPrerrequisito(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo obtenerPrerrequisito de la clase prerrequisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Prerrequisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		if(prerrequisito == null){
-			//si estÃ¡ vacio tira una excepciÃ³n
-			throw new ExcepcionesLogica("No se encontrÃ³ prerrequisito con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Prerrequisito con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return prerrequisito;
@@ -138,22 +179,34 @@ public class PrerrequisitoNGCImpl implements PrerrequisitoNGC {
 	}
 	
 	@Override
-	public List<TbAdmPrerrequisito> listarPrerrequisitosxMateria(String id) throws ExcepcionesDAO{
+	public List<TbAdmPrerrequisito> listarPrerrequisitosxMateria(String id)throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbAdmPrerrequisito> listaPrerrequisitos = null;
 		
 		TbAdmMateria materia= null;
 		
 		try {
 			materia = materiaDao.obtenerMateria(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Prerrequisito x Materia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaPrerrequisitos = prerrequisitoDao.listarPrerrequisitosxMateria(materia);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo listarCorrequisitosxmateria de la clase correquisitosDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Prerrequisitos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

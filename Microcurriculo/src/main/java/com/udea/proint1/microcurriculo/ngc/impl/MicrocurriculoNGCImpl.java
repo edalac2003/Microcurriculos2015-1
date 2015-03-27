@@ -44,7 +44,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 
 	
 	@Override
-	public TbMicMicrocurriculo obtenerMicrocurriculos(String idMicrocurriculo) throws ExcepcionesLogica {
+	public TbMicMicrocurriculo obtenerMicrocurriculos(String idMicrocurriculo) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
@@ -53,11 +53,19 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		if(!("".equals(idMicrocurriculo)) && (idMicrocurriculo.trim().length() > 0) ){
 			try {
 				microcurriculo = microcurriculoDao.obtenerMicrocurriculo(idMicrocurriculo);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("NGC : Ocurrió un error al intentar obtener el microcurriculo.");
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo obtener Microcurriculo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}			
 		}else{
-			throw new ExcepcionesLogica("La información de IdMicrocurriculo no es válida o está vacia.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("La información de IdMicrocurriculo no es válida o está vacia");
+			throw expLog;
 		}
 		
 		return microcurriculo;
@@ -65,7 +73,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 
 	
 	@Override
-	public void guardarMicrocurriculos(TbMicMicrocurriculo microcurriculo) throws ExcepcionesLogica {
+	public void guardarMicrocurriculos(TbMicMicrocurriculo microcurriculo) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto Microcurriculo no esté Vacio.
 		 */
@@ -79,17 +87,25 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 				}else{
 					throw new ExcepcionesLogica("El Microcurriculo que desea guardar ya se encuentra en la Base de Datos.");
 				}
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica();
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo guardar Microcurriculo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}			
 		}else{
-			throw new ExcepcionesLogica("No es posible guardar. El objeto Microcurriculo no contiene información válida.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No es posible guardar. El objeto Microcurriculo no contiene información válida");
+			throw expLog;
 		}
 	}
 	
 
 	@Override
-	public void actualizarMicrocurriculos(TbMicMicrocurriculo microcurriculo) throws ExcepcionesLogica {
+	public void actualizarMicrocurriculos(TbMicMicrocurriculo microcurriculo) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no estÃ© vacio
 		 */
@@ -118,36 +134,52 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	}
 
 	@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculos() throws ExcepcionesLogica {
+	public List<TbMicMicrocurriculo> listarMicrocurriculos() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculos();
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo listarMicrocurriculos de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
 		 */
 		if(listaMicrocurriculos == null){
-			throw new ExcepcionesLogica("No se encontraron microcurriculos en la tabla TbMicMicrocurriculos");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Microcurriculos");
+			throw expLog;
 		}else{
 			return listaMicrocurriculos;
 		}
 	}
 	
 	@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculosPorSemestre(String idSemestre) throws ExcepcionesLogica{
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorSemestre(String idSemestre) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
 			
 		if(idSemestre.equals("")||(idSemestre.equals(null))){
-			throw new ExcepcionesLogica("No se envio un id de semestre a consultar"); 
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Microcurriculo, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorSemestre(idSemestre);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo listarMicrocurriculosPorSemestre de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -157,29 +189,45 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	}
 	
 	@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculosPorNucleo(String idNucleo) throws ExcepcionesLogica{
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorNucleo(String idNucleo) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
 		
 		TbAdmNucleo nucleo= null;
 		
 		if(idNucleo.equals("")||(idNucleo.equals(null))){
-			throw new ExcepcionesLogica("No se envio un id de nucleo a consultar"); 
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo buscar Microcurriculo, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		
 		try {
 			nucleo = nucleoDao.obtenerNucleo(idNucleo);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		if(nucleo == null){
-			throw new ExcepcionesLogica("NO existe nucleo a consultar"); 
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No existe Nucleo a Consultar");
+			throw expLog; 
 		}
 		
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorNucleo(nucleo);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo listarMicrocurriculosPorNucleo de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -189,7 +237,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	}
 	
 	@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica{
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicMicrocurriculo> listaTodosMicrocurriculos = new ArrayList<TbMicMicrocurriculo>();
 		List<TbMicMicrocurriculo> listaMicrocurriculo = null;
 		
@@ -197,8 +245,14 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		
 		try {
 			materias = materiaDao.buscarMaterias(idMateria);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		if(materias != null){
@@ -206,12 +260,20 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 				try {
 					listaMicrocurriculo = microcurriculoDao.listarMicrocurriculosPorMateria(materia);
 					listaTodosMicrocurriculos.addAll(listaMicrocurriculo);
-				} catch (ExcepcionesDAO e) {
-					throw new ExcepcionesLogica("Se presentaron problemas "+e);
+				} catch(ExcepcionesDAO expDAO){
+					throw expDAO;
+				} catch(Exception exp){
+					ExcepcionesLogica expLog = new ExcepcionesLogica();
+					expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+					expLog.setMsjTecnico(exp.getMessage());
+					expLog.setOrigen(exp);
+					throw expLog;
 				}
 			}
 		} else {
-			throw new ExcepcionesLogica("NO existe materia a consultar"); 
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No existe Materia a Consultar");
+			throw expLog;
 		}
 		
 		
@@ -222,7 +284,7 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	}
 	
 	/*@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica{
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String idMateria) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
 		
 		TbAdmMateria materia= null;
@@ -256,25 +318,39 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 	}*/
 	
 	@Override
-	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(String idResponsable) throws ExcepcionesLogica{
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(String idResponsable) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
 		
 		TbAdmPersona responsable= null;
 		
 		try {
 			responsable = personaDao.obtenerPersona(idResponsable);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo obtenerPersona de la clase personaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Persona Responsable");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		if(responsable == null){
-			throw new ExcepcionesLogica("NO existe responsable a consultar"); 
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No existe responsable a consultar");
+			throw expLog;
 		}
 		
 		try {
 			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorResponsable(responsable);
-		} catch (ExcepcionesDAO e) {
-			log.error("fallÃ³ al invocar el metodo listarMicrocurriculosPorResponsable de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

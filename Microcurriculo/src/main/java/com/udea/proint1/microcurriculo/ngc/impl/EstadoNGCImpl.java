@@ -1,3 +1,4 @@
+
 package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
@@ -25,28 +26,37 @@ public class EstadoNGCImpl implements EstadoNGC {
 	}
 
 	@Override
-	public TbMicEstado obtenerEstados(int idEstado) throws ExcepcionesLogica {
+	public TbMicEstado obtenerEstados(int idEstado) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(idEstado == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de estado, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Estado, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicEstado estado = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			estado = estadoDao.obtenerEstado(idEstado);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEstado de la clase estadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(estado == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró estado con el id "+ idEstado);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Estado con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return estado;
@@ -54,36 +64,42 @@ public class EstadoNGCImpl implements EstadoNGC {
 	}
 
 	@Override
-	public void guardarEstados(TbMicEstado estado) throws ExcepcionesLogica {
+	public void guardarEstados(TbMicEstado estado) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
-		 * Comprobamos que el objeto id no est� vacio
+		 * Comprobamos que el objeto id no est� vacio
 		 */
 		if(estado == null){
-			throw new ExcepcionesLogica("El objeto estado est� vacio");
+			throw new ExcepcionesLogica("El objeto estado est� vacio");
 		}
-		try {
-			int id = estado.getNbIdestado();
-			TbMicEstado estadoConsulta = estadoDao.obtenerEstado(id);
-		
-			if(estadoConsulta != null){
-				throw new ExcepcionesLogica("El estado a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerEstado de la clase estadoDao: "+ e);
-		}
+//		try {
+//			int id = estado.getNbIdestado();
+//			TbMicEstado estadoConsulta = estadoDao.obtenerEstado(id);
+//		
+//			if(estadoConsulta != null){
+//				throw new ExcepcionesLogica("El estado a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("fall� al invocar el metodo obtenerEstado de la clase estadoDao: "+ e);
+//		}
 		
 		try {
 			
 			estadoDao.guardarEstado(estado);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo guardarEstado de la clase estadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarEstados(TbMicEstado estado) throws ExcepcionesLogica {
+	public void actualizarEstados(TbMicEstado estado) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
@@ -112,32 +128,46 @@ public class EstadoNGCImpl implements EstadoNGC {
 	}
 
 	@Override
-	public List<TbMicEstado> listarEstados() throws ExcepcionesLogica {
+	public List<TbMicEstado> listarEstados() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicEstado> listaEstados = null;
 		try {
 			listaEstados = estadoDao.listarEstados();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarEstados de la clase estadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Estados");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaEstados == null){
-			throw new ExcepcionesLogica("No se encontraron estados en la tabla TbMicEstados");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de unidades x Microcurriculo");
+			throw expLog;
 		}else{
 			return listaEstados;
 		}
 	}
 	
 	@Override
-	public List<TbMicEstado> obtenerEstadoxNombre(String nombre) throws ExcepcionesLogica{
+	public List<TbMicEstado> obtenerEstadoxNombre(String nombre) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicEstado> listaEstados = null;
 		
 		try {
 			listaEstados = estadoDao.obtenerEstadoxNombre(nombre);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listadoBiblioxUnidad(TbMicUnidades) de la clase biblioxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo buscar Estados x nombre");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

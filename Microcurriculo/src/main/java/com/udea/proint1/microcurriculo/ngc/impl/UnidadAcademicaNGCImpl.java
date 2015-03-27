@@ -54,7 +54,7 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			throw expDAO;
 		} catch(Exception exp){
 			ExcepcionesLogica expLog = new ExcepcionesLogica();
-			expLog.setMsjUsuario("Error al invocar el metodo guardar Unidad x Academica");
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Unidad Academica");
 			expLog.setMsjTecnico(exp.getMessage());
 			expLog.setOrigen(exp);
 			throw expLog;
@@ -68,7 +68,7 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 		 */
 		if(unidadAcademica == null){
 			ExcepcionesLogica expLog = new ExcepcionesLogica();
-			expLog.setMsjUsuario("No se pudo modificar, el objeto unidad x microcurriculo esta vacio");
+			expLog.setMsjUsuario("No se pudo modificar, el objeto unidad Academica esta vacio");
 			throw expLog;
 		}
 		try {
@@ -76,19 +76,33 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(id);
 		
 			if(unidadAcademicaConsulta == null){
-				throw new ExcepcionesLogica("La unidadAcademica a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La unidad Academica a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Unidad Academica");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			unidadAcademicaDao.modificarUnidad(unidadAcademica);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo actualizarUnidadAcademica de la clase unidadAcademicaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Unidad Academica");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
@@ -98,22 +112,31 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if((id.equals(""))||(id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificaci�n de unidadAcademica, est� vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Unidad Academica, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbAdmUnidadAcademica unidadAcademica = null;
 		
 		try {
 			unidadAcademica = unidadAcademicaDao.obtenerUnidad(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el obtener modificar Unidad Academica");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en �l.
 		 */
 		if(unidadAcademica == null){
-			//si est� vacio tira una excepci�n
-			throw new ExcepcionesLogica("No se encontr� unidadAcademica con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró unidad Academica con Id");
+			throw expLog;
 		}else{
 			return unidadAcademica;
 		}
@@ -124,15 +147,23 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 		List<TbAdmUnidadAcademica> listaUnidadAcademicas = null;
 		try {
 			listaUnidadAcademicas = unidadAcademicaDao.listarUnidades();
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo listarUnidadesAcademicas de la clase unidadAcademicaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Unidades Academicas");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en �l.
 		 */
 		if(listaUnidadAcademicas == null){
-			throw new ExcepcionesLogica("No se encontraron Unidades Academicas en la tabla TbAdmUnidadAcademica");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de unidades Academicas");
+			throw expLog;
 		}else{
 			return listaUnidadAcademicas;
 		}

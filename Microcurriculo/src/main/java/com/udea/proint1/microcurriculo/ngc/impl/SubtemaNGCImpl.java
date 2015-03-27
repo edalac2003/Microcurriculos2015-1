@@ -28,112 +28,159 @@ public class SubtemaNGCImpl implements SubtemaNGC {
 	}
 
 	@Override
-	public TbMicSubtema obtenerSubtemas(int id) throws ExcepcionesLogica {
+	public TbMicSubtema obtenerSubtemas(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de subtema, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Subtema, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicSubtema subtema = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			subtema = subtemaDao.obtenerSubtemas(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerSubtema de la clase subtemaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(subtema == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró subtema con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Subtema con Id");
+			throw expLog;
 		}else{
 			return subtema;
 		}
 	}
 
 	@Override
-	public void guardarSubtemas(TbMicSubtema subtema) throws ExcepcionesLogica {
+	public void guardarSubtemas(TbMicSubtema subtema) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(subtema == null){
-			throw new ExcepcionesLogica("El objeto subtema está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Subtema esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = subtema.getNbIdsubtema();
-			TbMicSubtema subtemaConsulta = subtemaDao.obtenerSubtemas(id);
-		
-			if(subtemaConsulta != null){
-				throw new ExcepcionesLogica("El subtemaConsulta a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerSubtema de la clase subtemaDao: "+ e);
-		}
+//		try {
+//			int id = subtema.getNbIdsubtema();
+//			TbMicSubtema subtemaConsulta = subtemaDao.obtenerSubtemas(id);
+//		
+//			if(subtemaConsulta != null){
+//				throw new ExcepcionesLogica("El subtemaConsulta a insertar ya existe");
+//			}
+//		
+//		} catch(ExcepcionesDAO expDAO){
+//			throw expDAO;
+//		} catch(Exception exp){
+//			ExcepcionesLogica expLog = new ExcepcionesLogica();
+//			expLog.setMsjUsuario("Error al invocar el metodo obtener Subtema");
+//			expLog.setMsjTecnico(exp.getMessage());
+//			expLog.setOrigen(exp);
+//			throw expLog;
+//		}
 		
 		try {
 			
 			subtemaDao.guardarSubtema(subtema);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarSubtema de la clase subtemaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 	
 	@Override
-	public void actualizarSubtemas(TbMicSubtema subtema) throws ExcepcionesLogica {
+	public void actualizarSubtemas(TbMicSubtema subtema) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(subtema == null){
-			throw new ExcepcionesLogica("El objeto subtema está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Subtema esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = subtema.getNbIdsubtema();
 			TbMicSubtema subtemaConsulta = subtemaDao.obtenerSubtemas(id);
 		
 			if(subtemaConsulta == null){
-				throw new ExcepcionesLogica("El subtema a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("El Subtema a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerSubtema de la clase subtemaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			subtemaDao.modificarSubtema(subtema);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarSubtema de la clase subtemaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public List<TbMicSubtema> listarSubtemas() throws ExcepcionesLogica {
+	public List<TbMicSubtema> listarSubtemas() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicSubtema> listaSubtemas = null;
 		try {
 			listaSubtemas = subtemaDao.listarSubtemas();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarSubtemas de la clase subtemaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaSubtemas == null){
-			throw new ExcepcionesLogica("No se encontraron subtemas en la tabla TbMicSubtemas");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Subtemas");
+			throw expLog;
 		}else{
 			return listaSubtemas;
 		}
 	}
 
 //	@Override
-//	public int contarRegistros() throws ExcepcionesLogica {
+//	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int registro = 0;
 //		
 //		try {
@@ -147,22 +194,34 @@ public class SubtemaNGCImpl implements SubtemaNGC {
 //	}
 	
 	@Override
-	public List<TbMicSubtema> listarSubtemasxTema(int idTema) throws ExcepcionesLogica{
+	public List<TbMicSubtema> listarSubtemasxTema(int idTema) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicSubtema> listaSubtemas = null;
 		
 		TbMicTema tema= null;
 		
 		try {
 			tema = temaDao.obtenerTema(idTema);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTema de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaSubtemas = subtemaDao.listarSubtemasxTema(tema);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarSubtemasxTema(tema) de la clase subtemaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

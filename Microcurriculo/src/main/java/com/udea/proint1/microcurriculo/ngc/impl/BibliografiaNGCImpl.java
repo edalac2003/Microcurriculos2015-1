@@ -23,57 +23,74 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 
 	@Override
 	public void guardarBibliografia(TbMicBibliografia bibliografia)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
-		 * Comprobamos que el objeto id no est� vacio
+		 * Comprobamos que el objeto id no est� vacio
 		 */
 		if(bibliografia == null){
-			throw new ExcepcionesLogica("El objeto bibliografia est� vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Bibliografia esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = bibliografia.getNbIdbibliografia();
-			TbMicBibliografia bibliografiaConsulta = bibliografiaDao.obtenerBibliografia(id);
-		
-			if(bibliografiaConsulta != null){
-				throw new ExcepcionesLogica("La bibliografia a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerBibliografia de la clase bibliografiaDao: "+ e);
-		}
+//		try {
+//			int id = bibliografia.getNbIdbibliografia();
+//			TbMicBibliografia bibliografiaConsulta = bibliografiaDao.obtenerBibliografia(id);
+//		
+//			if(bibliografiaConsulta != null){
+//				throw new ExcepcionesLogica("La bibliografia a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("fall� al invocar el metodo obtenerBibliografia de la clase bibliografiaDao: "+ e);
+//		}
 		
 		try {
 			
 			bibliografiaDao.guardarBibliografia(bibliografia);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo guardarBibliografia de la clase bibliografiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Bibliografia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbMicBibliografia obtenerBibliografia(int id) throws ExcepcionesLogica{
+	public TbMicBibliografia obtenerBibliografia(int id) throws ExcepcionesLogica, ExcepcionesDAO{
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de bibliografia, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Bibliografia, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicBibliografia bibliografia = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			bibliografia = bibliografiaDao.obtenerBibliografia(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerBibliografia de la clase bibliografiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Bibliografia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(bibliografia == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró bibliografia con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Bibliografia con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return bibliografia;
@@ -82,49 +99,73 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 	
 	@Override
 	public void modificarBibliografia(TbMicBibliografia bibliografia)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(bibliografia == null){
-			throw new ExcepcionesLogica("El objeto bibliografia está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Bibliografia esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = bibliografia.getNbIdbibliografia();
 			TbMicBibliografia bibliografiaConsulta = bibliografiaDao.obtenerBibliografia(id);
 		
 			if(bibliografiaConsulta == null){
-				throw new ExcepcionesLogica("La bibliografia a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La Bibliografia actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerBibliografia de la clase bibliografiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Bibliografia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			bibliografiaDao.modificarBibliografia(bibliografia);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerBibliografia de la clase bibliografiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Bibliografia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
 	public List<TbMicBibliografia> listarBibliografia(String idMicrocurriculo)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicBibliografia> listaBibliografias = null;
 		try {
 			listaBibliografias = bibliografiaDao.listarBibliografias();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarBibliografias de la clase bibliografiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Bibliografias");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaBibliografias == null){
-			throw new ExcepcionesLogica("No se encontraron bibliografias en la tabla TbMicBibliografia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Bibliografias");
+			throw expLog;
 		}else{
 			return listaBibliografias;
 		}
@@ -132,19 +173,27 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 
 	@Override
 	public List<TbMicBibliografia> listarBibliografia(char tipo)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicBibliografia> listaBibliografias = null;
 		try {
 			listaBibliografias = bibliografiaDao.listarBibliografiaxTipo(tipo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarBibliografias de la clase bibliografiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Bibliografias");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaBibliografias == null){
-			throw new ExcepcionesLogica("No se encontraron bibliografias en la tabla TbMicBibliografia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Bibliografias");
+			throw expLog;
 		}else{
 			return listaBibliografias;
 		}

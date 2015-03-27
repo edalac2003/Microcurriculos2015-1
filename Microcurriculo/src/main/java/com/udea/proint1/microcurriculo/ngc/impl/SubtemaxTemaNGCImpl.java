@@ -29,16 +29,24 @@ public class SubtemaxTemaNGCImpl implements SubtemaxTemaNGC {
 	}
 
 	@Override
-	public void guardar(TbMicSubtemaxtema subtemaxTema)	throws ExcepcionesLogica {
+	public void guardar(TbMicSubtemaxtema subtemaxTema)	throws ExcepcionesLogica, ExcepcionesDAO {
 		
 		if (subtemaxTema != null){
 			try {
 				subtemaxTemaDao.guardar(subtemaxTema);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("NGC : No se puede guardar el registro <SubtemaxTema>.   "+e.getMessage());
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo guardar Subtema");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 		} else{
-			Messagebox.show("El Objeto SubTemaxTema no contiene informaciÛn v·lida. \n Por favor corrijala."+"Error Guardar"+Messagebox.ERROR);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Subtema x Tema esta vacio");
+			throw expLog;
 		}
 
 	}
@@ -46,50 +54,62 @@ public class SubtemaxTemaNGCImpl implements SubtemaxTemaNGC {
 	
 	@Override
 	public void modificar(TbMicSubtemaxtema subtemaxTema)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public TbMicSubtemaxtema obtenerSubtema(int idSubtema)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public TbMicSubtemaxtema obtenerSubtema_Tema(int idTema)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<TbMicSubtemaxtema> listarSubtemaxTema()
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<TbMicSubtemaxtema> listarSubtemaxTema_Tema(int idTema)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicSubtemaxtema> listaSubtemasxtema = null;
 		
 		TbMicTema tema= null;
 		
 		try {
 			tema = temaDao.obtenerTema(idTema);
-		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo obtenerTema de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo buscar Subtemas x Tema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaSubtemasxtema = subtemaxTemaDao.listarSubtemaxTema_Tema(tema);
-		} catch (ExcepcionesDAO e) {
-			log.error("fall√≥ al invocar el metodo listarSubtemaxTema_Tema de la clase subtemaxTemaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Subtemas x Tema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -99,7 +119,7 @@ public class SubtemaxTemaNGCImpl implements SubtemaxTemaNGC {
 	}
 
 //	@Override
-//	public int contarRegistros() throws ExcepcionesLogica {
+//	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int registro = 0;
 //		
 //		try {

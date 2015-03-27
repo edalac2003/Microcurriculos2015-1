@@ -36,93 +36,128 @@ public class ObjetivoxMicroNGCImpl implements ObjetivoxMicroNGC {
 	}
 
 	@Override
-	public void guardarObjetivosxMicro(TbMicObjetivoxmicro objetivoxMicro)	throws ExcepcionesLogica {
+	public void guardarObjetivosxMicro(TbMicObjetivoxmicro objetivoxMicro)	throws ExcepcionesLogica, ExcepcionesDAO {
 		TbMicObjetivoxmicro objetivosxMicroTMP = null;
+		
+//		if(objetivoxMicro != null){
+//			try {
+//				objetivosxMicroTMP = objetivoxMicroDao.obtenerObjetivoxMicro(objetivoxMicro.getNbId());
+//			} catch (ExcepcionesDAO e) {
+//				throw new ExcepcionesLogica("Error al intentar obtener el objeto <ObjetivoxMicro>");
+//			}
+//		}else{
+//			ExcepcionesLogica expLog = new ExcepcionesLogica();
+//			expLog.setMsjUsuario("No se pudo guardar, El objeto Objetivo x Microcurriculo esta vacio");
+//			throw expLog;
+//		}
 		
 		if(objetivoxMicro != null){
 			try {
-				objetivosxMicroTMP = objetivoxMicroDao.obtenerObjetivoxMicro(objetivoxMicro.getNbId());
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("Error al intentar obtener el objeto <ObjetivoxMicro>");
-			}
-		}else{
-			throw new ExcepcionesLogica("El Objeto <ObjetivoxMicro> est� vacio.");
-		}
-		
-		if(objetivosxMicroTMP == null){
-			try {
 				objetivoxMicroDao.guardarObjetivosxMicro(objetivoxMicro);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("Error al intentar guardar el objeto <ObjetivoxMicro>");
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo guardar Objetivo x Microcurriculo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 		}else{
-			throw new ExcepcionesLogica("El objeto <ObjetivoxMicro> ya Existe.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Objetivo x microcurriculo esta vacio");
+			throw expLog;
 		}
 	}
 
 	/*@Override
-	public void guardarObjetivosxMicro(List<TbMicObjetivosxmicro> listaObjetivoxMicro) throws ExcepcionesLogica {
+	public void guardarObjetivosxMicro(List<TbMicObjetivosxmicro> listaObjetivoxMicro) throws ExcepcionesLogica, ExcepcionesDAO {
 		if (listaObjetivoxMicro != null){
 			for(TbMicObjetivosxmicro objetivoxMicro : listaObjetivoxMicro){
 				guardarObjetivosxMicro(objetivoxMicro);				
 			}
 		}else{
-			throw new ExcepcionesLogica("El objeto <Lista ObjetivoxMicrocurriculo no tiene informaci�n v�lida.");
+			throw new ExcepcionesLogica("El objeto <Lista ObjetivoxMicrocurriculo no tiene informaci�n v�lida.");
 		}
 	}*/
 
 	@Override
-	public void modificarObjetivoxMicro(TbMicObjetivoxmicro objetivoxMicro)throws ExcepcionesLogica {
+	public void modificarObjetivoxMicro(TbMicObjetivoxmicro objetivoxMicro)throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(objetivoxMicro == null){
-			throw new ExcepcionesLogica("El objeto objetivoxMicro está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Objetivo x Microcurriculo esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = objetivoxMicro.getNbId();
 			TbMicObjetivoxmicro biblioxUnidadConsulta = objetivoxMicroDao.obtenerObjetivoxMicro(id);
 		
 			if(biblioxUnidadConsulta == null){
-				throw new ExcepcionesLogica("El Objetivo x micro a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La Objetivo x Microcurriculo a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerObjetivoxMicro de la clase objetivoxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			objetivoxMicroDao.modificarObjetivoxMicro(objetivoxMicro);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo modificarObjetivoxMicro de la clase objetivoxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Objetivo x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbMicObjetivoxmicro obtenerObjetivoxMicro(int id) throws ExcepcionesLogica {
+	public TbMicObjetivoxmicro obtenerObjetivoxMicro(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de objetivosxMicro, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Objetivo x Microcurriculo, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicObjetivoxmicro objetivosxMicro = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			objetivosxMicro = objetivoxMicroDao.obtenerObjetivoxMicro(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerObjetivoxMicro de la clase objetivoxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(objetivosxMicro == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró Objetivos x Micro con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Objetivo x Microcurriculo con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return objetivosxMicro;
@@ -130,7 +165,7 @@ public class ObjetivoxMicroNGCImpl implements ObjetivoxMicroNGC {
 	}
 	
 	@Override
-	public TbMicObjetivoxmicro obtenerObjetivosxMicroxObjetivo(int idObjetivo) throws ExcepcionesLogica {
+	public TbMicObjetivoxmicro obtenerObjetivosxMicroxObjetivo(int idObjetivo) throws ExcepcionesLogica, ExcepcionesDAO {
 		TbMicObjetivoxmicro objetivoxMicro = null;
 		
 		try {
@@ -140,27 +175,41 @@ public class ObjetivoxMicroNGCImpl implements ObjetivoxMicroNGC {
 			else
 				return null;
 			
-		} catch (ExcepcionesDAO e) {
-			throw new ExcepcionesLogica("Error al intentar objetener el Objeto <ObjetivoxMicrocurriculo>");
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 	}
 
 	@Override
 	public List<TbMicObjetivoxmicro> listarObjetivosxMicro()
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicObjetivoxmicro> listaObjetivosxMicro = null;
 		try {
 			listaObjetivosxMicro = objetivoxMicroDao.listarObjetivosxMicro();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarObjetivosxMicro de la clase objetivoxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Objetivos x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaObjetivosxMicro == null){
-			throw new ExcepcionesLogica("No se encontraron objetivos x microcurriculos en la tabla TbMicObjetivosxmicro");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Objetivos x Microcurriculo");
+			throw expLog;
 		}else{
 			return listaObjetivosxMicro;
 		}
@@ -168,22 +217,34 @@ public class ObjetivoxMicroNGCImpl implements ObjetivoxMicroNGC {
 
 	@Override
 	public List<TbMicObjetivoxmicro> obtenerObjetivosxMicroxMicro(
-			String idMicrocurriculo) throws ExcepcionesLogica {
+			String idMicrocurriculo) throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicObjetivoxmicro> listaObjetivosxMicro = null;
 		
 		TbMicMicrocurriculo microcurriculo= null;
 		
 		try {
 			microcurriculo = microcurriculoDao.obtenerMicrocurriculo(idMicrocurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaObjetivosxMicro = objetivoxMicroDao.obtenerObjetivosxMicroxMicro(microcurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerObjetivosxMicroxMicro de la clase objetivoxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -193,7 +254,7 @@ public class ObjetivoxMicroNGCImpl implements ObjetivoxMicroNGC {
 	}
 
 //	@Override
-//	public int contarRegistros() throws ExcepcionesLogica {
+//	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int registro = 0;
 //		
 //		try {

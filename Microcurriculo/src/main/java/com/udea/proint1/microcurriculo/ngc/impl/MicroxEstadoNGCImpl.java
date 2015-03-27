@@ -28,7 +28,7 @@ public class MicroxEstadoNGCImpl implements MicroxEstadoNGC {
 	}
 	
 	@Override
-	public void guardarMicroxestado(TbMicMicroxestado microxEstado) throws ExcepcionesLogica {
+	public void guardarMicroxestado(TbMicMicroxestado microxEstado) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
@@ -37,79 +37,120 @@ public class MicroxEstadoNGCImpl implements MicroxEstadoNGC {
 		if(microxEstado != null){
 			try {
 				microxEstadoConsulta = microxEstadoDao.obtenerMicroxestado(microxEstado.getNbId());
-			} catch (ExcepcionesDAO e1) {
-				throw new ExcepcionesLogica();
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo obtener Microcurriculo x Estado");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 			
 			if(microxEstadoConsulta == null){
 				
 				try {
 					microxEstadoDao.guardarMicroxestado(microxEstado);
-				} catch (ExcepcionesDAO e) {
-					throw new ExcepcionesLogica();
+				} catch(ExcepcionesDAO expDAO){
+					throw expDAO;
+				} catch(Exception exp){
+					ExcepcionesLogica expLog = new ExcepcionesLogica();
+					expLog.setMsjUsuario("Error al invocar el metodo guardar Microcurriculo x Estado");
+					expLog.setMsjTecnico(exp.getMessage());
+					expLog.setOrigen(exp);
+					throw expLog;
 				}
 				
 			} else {
-				throw new ExcepcionesLogica("El Registro que desea guardar ya existe en la Base de Datos.");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("No se pudo guardar, El objeto Microcurriculo x Estado ya existe");
+				throw expLog;
 			}
 		} else {
-			throw new ExcepcionesLogica("El registro que desea ingresar no contiene informaci�n v�lida.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Microcurriculo x Estado esta vacio");
+			throw expLog;
 		}
 	}
 
 	@Override
 	public void actualizarMicroxestado(TbMicMicroxestado microxEstado)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(microxEstado == null){
-			throw new ExcepcionesLogica("El objeto microxEstado está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo actualizar, El objeto Microcurriculo x Estado esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = microxEstado.getNbId();
 			TbMicMicroxestado microxEstadoConsulta = microxEstadoDao.obtenerMicroxestado(id);
 		
 			if(microxEstadoConsulta == null){
-				throw new ExcepcionesLogica("El micro x estado a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("No se pudo actualizar, El objeto Microcurriculo x Estado no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMicroxestado de la clase microxEstadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Microcurriculo x Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			microxEstadoDao.actualizarMicroxestado(microxEstado);;
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarMicroxestado de la clase microxEstadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Microcurriculo x Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
 	public TbMicMicroxestado obtenerMicroxestado(int id)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de microxEstado, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Microcurriculo x Estado esta vacio");
+			throw expLog;
 		}
 		TbMicMicroxestado microxEstado = null;
 		
 		try {
 			microxEstado = microxEstadoDao.obtenerMicroxestado(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMicroxestado de la clase microxEstadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Microcurriculo x Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(microxEstado == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró microxEstado con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("La Microcurriculo x Estado a actualizar no existe");
+			throw expLog;
 		}else{
 			return microxEstado;
 		}
@@ -117,19 +158,27 @@ public class MicroxEstadoNGCImpl implements MicroxEstadoNGC {
 
 	@Override
 	public List<TbMicMicroxestado> listarMicroxestado()
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicMicroxestado> listaMicrosxestado = null;
 		try {
 			listaMicrosxestado = microxEstadoDao.listarMicroxestado();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMicroxestado de la clase microxEstadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculo x Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaMicrosxestado == null){
-			throw new ExcepcionesLogica("No se encontraron Micros x Estado en la tabla TbMicMicroxestado");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Microcurriculos Estado");
+			throw expLog;
 		}else{
 			return listaMicrosxestado;
 		}
@@ -137,40 +186,54 @@ public class MicroxEstadoNGCImpl implements MicroxEstadoNGC {
 
 	@Override
 	public List<TbMicMicroxestado> listarMicrosxestado(int idEstado)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicMicroxestado> listaMicrosxestado = null;
 		
 		TbMicEstado estado = null;
 		
 		try {
 			estado = estadoDao.obtenerEstado(idEstado);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEstado de la clase estadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Microcurriculo x Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			listaMicrosxestado = microxEstadoDao.listarMicrosxestado(estado);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarMicrosxestado de la clase microxEstadoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculo x Estado");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaMicrosxestado == null){
-			throw new ExcepcionesLogica("No se encontraron Micros x estado de tipo estado en la tabla TbMicMicroxestado");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Microcurriculos Estado");
+			throw expLog;
 		}else{
 			return listaMicrosxestado;
 		}
 	}
 
 //	@Override
-//	public int contarRegistros() throws ExcepcionesLogica {
+//	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int registro = 0;		
 //		try {
 //			registro = microxEstadoDao.contarRegistros();
 //		} catch (ExcepcionesDAO e) {
-//			throw new ExcepcionesLogica("NGC : Ocurri� un error al contar los registros de MicroxEstado.");
+//			throw new ExcepcionesLogica("NGC : Ocurri� un error al contar los registros de MicroxEstado.");
 //		}
 //		
 //		return registro;

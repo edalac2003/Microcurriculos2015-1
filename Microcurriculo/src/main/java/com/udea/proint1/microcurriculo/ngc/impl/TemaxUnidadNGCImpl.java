@@ -36,28 +36,37 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 
 	
 	@Override
-	public TbMicTemaxunidad obtenerTemasxUnidad(int id) throws ExcepcionesLogica {
+	public TbMicTemaxunidad obtenerTemasxUnidad(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de temaxunidad, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Tema x Unidad, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicTemaxunidad temaxUnidad = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			temaxUnidad = temaxUnidadDao.obtenerTemaXunidad(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTemaXunidad de la clase temaxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Tema x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(temaxUnidad == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró Tema x Unidad con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Tema x Unidad con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return temaxUnidad;
@@ -65,34 +74,48 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 	}
 
 	@Override
-	public void guardarTemasxUnidad(TbMicTemaxunidad temasxunidad) throws ExcepcionesLogica {
+	public void guardarTemasxUnidad(TbMicTemaxunidad temasxunidad) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		TbMicTemaxunidad temaxUnidadTmp = null;
-		if (temasxunidad != null){
-			try {
-				temaxUnidadTmp = temaxUnidadDao.obtenerTemaXunidad(temasxunidad.getNbId());
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica();
-			}			
-		}else{
-			throw new ExcepcionesLogica();
-		}
+//		if (temasxunidad != null){
+//			try {
+//				temaxUnidadTmp = temaxUnidadDao.obtenerTemaXunidad(temasxunidad.getNbId());
+//			} catch(ExcepcionesDAO expDAO){
+//				throw expDAO;
+//			} catch(Exception exp){
+//				ExcepcionesLogica expLog = new ExcepcionesLogica();
+//				expLog.setMsjUsuario("Error al invocar el metodo obtener Tema x Unidad");
+//				expLog.setMsjTecnico(exp.getMessage());
+//				expLog.setOrigen(exp);
+//				throw expLog;
+//			}			
+//		}else{
+//			throw new ExcepcionesLogica();
+//		}
 		
-		if(temaxUnidadTmp == null){
+		if(temasxunidad != null){
 			try {
 				temaxUnidadDao.guardarTemasXUnidad(temasxunidad);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica();
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo guardar Tema x Unidad");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 		}else{
-			throw new ExcepcionesLogica();
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Tema x Unidad esta vacio");
+			throw expLog;
 		}
 	}
 	
   /*@Override
-	public void guardarTemasxUnidad(List<TbMicTemasxunidad> listaTemasxUnidad) throws ExcepcionesLogica {
+	public void guardarTemasxUnidad(List<TbMicTemasxunidad> listaTemasxUnidad) throws ExcepcionesLogica, ExcepcionesDAO {
 		if (listaTemasxUnidad != null){
 			for(TbMicTemasxunidad txU : listaTemasxUnidad)
 				guardarTemasxUnidad(txU);
@@ -101,7 +124,7 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 	}*/
 
 	@Override
-	public void actualizarTemaxUnidad(TbMicTemaxunidad temasxunidad) throws ExcepcionesLogica {
+	public void actualizarTemaxUnidad(TbMicTemaxunidad temasxunidad) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
@@ -133,26 +156,34 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 
 	@Override
 	public List<TbMicTemaxunidad> listarTemasxUnidad()
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicTemaxunidad> listatemasxunidad = null;
 		try {
 			listatemasxunidad = temaxUnidadDao.ListarTemasXunidad();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo ListarTemasXunidad de la clase temaxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Temas x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listatemasxunidad == null){
-			throw new ExcepcionesLogica("No se encontraron temas x unidad en la tabla TbMicTemasxunidad");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Temas x Unidad");
+			throw expLog;
 		}else{
 			return listatemasxunidad;
 		}
 	}
 
 //	@Override
-//	public int contarRegistros() throws ExcepcionesLogica {
+//	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int registro = 0;
 //		
 //		try {
@@ -165,22 +196,34 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 //		return registro;
 //	}
 	
-	public List<TbMicTemaxunidad> ListarTemasxUnidadxUnidad(int idUnidad) throws ExcepcionesLogica{
+	public List<TbMicTemaxunidad> ListarTemasxUnidadxUnidad(int idUnidad) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicTemaxunidad> listaTemasxUnidad = null;
 		
 		TbMicUnidad unidad= null;
 		
 		try {
 			unidad = unidadDao.obtenerUnidad(idUnidad);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Tema x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaTemasxUnidad = temaxUnidadDao.ListarTemasxUnidadxUnidad(unidad);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo ListarTemasxUnidadxUnidad(TbMicUnidades) de la clase temaxUnidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Temas x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

@@ -57,15 +57,21 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			List<TbMicBiblioxunidad> biblioxunidad,
 			List<TbMicEvaluacion> evaluaciones,
 			List<TbMicEvaluacionxmicro> evaluacionxMicro)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		
 		String idMicro = microcurriculo.getVrIdmicrocurriculo();;
 		TbMicMicrocurriculo consulta = null;
 		
 		try{
 			consulta = microcurriculoDao.obtenerMicrocurriculo(idMicro);
-		}catch(ExcepcionesDAO e){
-			logger.error("Error al intentar Obtener la informacion del registro de Microcurriculo.",e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al intentar obtener información del Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		if (consulta == null){
@@ -73,8 +79,14 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 				guardarMicrocurriculoDao.guardarMicroxlotes(microcurriculo, microxEstado, temas, subtemas, 
 						subtemaxTema, temasxunidad, unidades, unidadesxmicro, objetivos, objetivosxmicro, 
 						bibliografia, biblioxunidad, evaluaciones, evaluacionxMicro);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("Error al intentar Guardar el registro de Microcurriculo."+e.getMessage());
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al intentar guardar el registro del Microcurriculo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 		}else{
 //			throw new ExcepcionesLogica("El Microcurriculo ya existe.");
@@ -82,8 +94,14 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 				guardarMicrocurriculoDao.actualizarMicroxlotes(microcurriculo, microxEstado, temas, subtemas, subtemaxTema, 
 						temasxunidad, unidades, unidadesxmicro, objetivos, objetivosxmicro, bibliografia, biblioxunidad, 
 						evaluaciones, evaluacionxMicro);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica("Error al intentar Guardar el registro de Microcurriculo."+e.getMessage());
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al intentar guardar el registro del Microcurriculo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 			
 		}

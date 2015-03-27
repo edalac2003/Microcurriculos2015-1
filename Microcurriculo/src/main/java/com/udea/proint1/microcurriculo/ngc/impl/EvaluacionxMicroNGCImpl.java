@@ -36,97 +36,136 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 	
 	
 	@Override
-	public void guardarEvaluacionxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesLogica {
+	public void guardarEvaluacionxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto no esté vacio
 		 */
 		if(evaluacionxMicro == null){
-			throw new ExcepcionesLogica("El objeto evaluacionxMicro está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Evaluacion x Microcurriculo esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = evaluacionxMicro.getNbId();
-			TbMicEvaluacionxmicro evaluacionxMicroConsulta = evaluacionxMicroDao.obtenerEvaluacionesxmicro(id);
-		
-			if(evaluacionxMicroConsulta != null){
-				throw new ExcepcionesLogica("La evaluacionxMicro a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEvaluacionesxmicro de la clase evaluacionxmicroDao: "+ e);
-		}
+//		try {
+//			int id = evaluacionxMicro.getNbId();
+//			TbMicEvaluacionxmicro evaluacionxMicroConsulta = evaluacionxMicroDao.obtenerEvaluacionesxmicro(id);
+//		
+//			if(evaluacionxMicroConsulta != null){
+//				throw new ExcepcionesLogica("La evaluacionxMicro a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo obtenerEvaluacionesxmicro de la clase evaluacionxmicroDao: "+ e);
+//		}
 		
 		try {
 			
 			evaluacionxMicroDao.guardarEvaluacionesxmicro(evaluacionxMicro);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarEvaluacionesxmicro de la clase evaluacionxmicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Evaluacion x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarEvaluacionxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesLogica {
+	public void actualizarEvaluacionxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto no esté vacio
 		 */
 		if(evaluacionxMicro == null){
-			throw new ExcepcionesLogica("El objeto evaluacionxMicro está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Evaluacion x Microcurriculo esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = evaluacionxMicro.getNbId();
 			TbMicEvaluacionxmicro evaluacionxMicroConsulta = evaluacionxMicroDao.obtenerEvaluacionesxmicro(id);
 		
 			if(evaluacionxMicroConsulta == null){
-				throw new ExcepcionesLogica("La evaluacionxmicroDao a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La Evaluacion x Microcurriculo a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEvaluacionesxmicro de la clase evaluacionxmicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Evaluacion x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			evaluacionxMicroDao.actualizarEvaluacionesxmicro(evaluacionxMicro);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarEvaluacionesxmicro de la clase evaluacionxmicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Evaluacion x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbMicEvaluacionxmicro obtenerEvaluacionxmicro(int id) throws ExcepcionesLogica {
+	public TbMicEvaluacionxmicro obtenerEvaluacionxmicro(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id==0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de evaluacionxMicro, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Evaluacion x Microcurriculo, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicEvaluacionxmicro evaluacionxMicro = null;
 		
 		try {
 			evaluacionxMicro = evaluacionxMicroDao.obtenerEvaluacionesxmicro(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerEvaluacionesxmicro de la clase evaluacionxmicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Evaluacion x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(evaluacionxMicro == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró evaluacionxMicro con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Evaluacion x Microcurriculo con Id");
+			throw expLog;
 		}else{
 			return evaluacionxMicro;
 		}
 	}
 
 	@Override
-	public List<TbMicEvaluacionxmicro> actualizarEvaluacionesxmicro() throws ExcepcionesLogica {
+	public List<TbMicEvaluacionxmicro> actualizarEvaluacionesxmicro() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicEvaluacionxmicro> listaEvaluacionesxMicro = null;
 		try {
 			listaEvaluacionesxMicro = evaluacionxMicroDao.listarEvaluacionesxmicro();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarEvaluaciones de la clase evaluacionxmicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Evaluaciones x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -140,7 +179,7 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 	}
 
 //	@Override
-//	public int obtenerRegistros() throws ExcepcionesLogica {
+//	public int obtenerRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int registro = 0;
 //		
 //		try {
@@ -153,26 +192,38 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 //	}
 	
 	@Override
-	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(String idMicrocurriculo) throws ExcepcionesLogica {
+	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(String idMicrocurriculo) throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicEvaluacionxmicro> listaEvaluacionesxMicro = null;
 		
 		TbMicMicrocurriculo microcurriculo= null;
 		
 		try {
 			microcurriculo = microcurriculoDao.obtenerMicrocurriculo(idMicrocurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Evaluacion x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaEvaluacionesxMicro = evaluacionxMicroDao.ListarEvaluacionxMicroxMicro(microcurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo ListarEvaluacionxMicroxMicro de la clase evaluacionxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Evaluaciones x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en �l.
+		 * Confirmamos si el objeto retornado tiene elementos en �l.
 		 */
 		return listaEvaluacionesxMicro;
 	}

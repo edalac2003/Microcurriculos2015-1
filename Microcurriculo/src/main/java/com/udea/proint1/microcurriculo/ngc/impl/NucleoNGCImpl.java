@@ -31,104 +31,153 @@ public class NucleoNGCImpl implements NucleoNGC {
 	}
 
 	@Override
-	public void guardarNucleo(TbAdmNucleo nucleo) throws ExcepcionesLogica {
+	public void guardarNucleo(TbAdmNucleo nucleo) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(nucleo == null){
-			throw new ExcepcionesLogica("El objeto nucleo está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Nucleo esta vacio");
+			throw expLog;
 		}
 		try {
 			String id = nucleo.getVrIdnucleo();
 			TbAdmNucleo nucleoConsulta = nucleoDao.obtenerNucleo(id);
 		
 			if(nucleoConsulta != null){
-				throw new ExcepcionesLogica("El nucleo a insertar ya existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("No se pudo guardar, El objeto Nucleo ya existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Nucleo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			nucleoDao.guardarNucleo(nucleo);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarNucleo de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Nucleo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarNucleo(TbAdmNucleo nucleo) throws ExcepcionesLogica {
+	public void actualizarNucleo(TbAdmNucleo nucleo) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(nucleo == null){
-			throw new ExcepcionesLogica("El objeto nucleo está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Nucleo esta vacio");
+			throw expLog;
 		}
 		try {
 			String id = nucleo.getVrIdnucleo();
 			TbAdmNucleo nucleoConsulta = nucleoDao.obtenerNucleo(id);
 		
 			if(nucleoConsulta == null){
-				throw new ExcepcionesLogica("El nucleo a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("El Nucleo a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Nucleo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			nucleoDao.actualizarNucleo(nucleo);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Nucleo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbAdmNucleo obtenerNucleo(String id) throws ExcepcionesLogica {
+	public TbAdmNucleo obtenerNucleo(String id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if((id.equals(""))||(id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de nucleo, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Nucleo, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbAdmNucleo nucleo = null;
 		
 		try {
 			nucleo = nucleoDao.obtenerNucleo(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerNucleo de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Nucleo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(nucleo == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró nucleo con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Nucleo con Id");
+			throw expLog;
 		}else{
 			return nucleo;
 		}
 	}
 
 	@Override
-	public List<TbAdmNucleo> listarNucleos() throws ExcepcionesLogica {
+	public List<TbAdmNucleo> listarNucleos() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbAdmNucleo> listaNucleos = null;
 		try {
 			listaNucleos = nucleoDao.listarNucleos();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarNucleos de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Nucleo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaNucleos == null){
-			throw new ExcepcionesLogica("No se encontraron dependencias en la tabla TbAdmDependencia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Nucleos");
+			throw expLog;
 		}else{
 			return listaNucleos;
 		}
@@ -136,22 +185,32 @@ public class NucleoNGCImpl implements NucleoNGC {
 	
 	
 	@Override
-	public List<TbAdmNucleo> listarNucleosPorDependencia(String dependencia) throws ExcepcionesLogica {
+	public List<TbAdmNucleo> listarNucleosPorDependencia(String dependencia) throws ExcepcionesLogica, ExcepcionesDAO {
 		if(dependencia.equals("") || (dependencia.length() < 1)){
-			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo listar Nucleos x dependencia, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		List<TbAdmNucleo> listaNucleos = null;
 		try {
 			listaNucleos = nucleoDao.listarNucleoPorDependencia(dependencia);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo buscarNucleos de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Nucleo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaNucleos == null){
-			throw new ExcepcionesLogica("No se encontraron nucleos en la tabla TbAdmNucleo");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Nucleos");
+			throw expLog;
 		}else{
 			return listaNucleos;
 		}
@@ -160,38 +219,54 @@ public class NucleoNGCImpl implements NucleoNGC {
 	
 	
 	@Override
-	public List<TbAdmNucleo> listarNucleosPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica {
+	public List<TbAdmNucleo> listarNucleosPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbAdmNucleo> listaNucleos = null;
 		
 		if(dependencia != null){
 			try {
 				listaNucleos = nucleoDao.listarNucleoPorDependencia(dependencia);
-			} catch (ExcepcionesDAO e) {
-				throw new ExcepcionesLogica(e);
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo listar Nucleo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
 			}
 		} else {
-			throw new ExcepcionesLogica("El Objeto <Tb_Adm_Dependencia> est� Vacio.");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudieron listar los nucleos, el objeto de busqueda esta vacio");
+			throw expLog;
 		}		
 		return listaNucleos;
 	}
 
 	@Override
-	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesLogica{
+	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesLogica, ExcepcionesDAO{
 //		if(buscar.equals("")||(buscar.equals(null))){
 //			throw new ExcepcionesLogica("Error no hay id de busqueda identificado");
 //		}
 		List<TbAdmNucleo> listaNucleos = null;
 		try {
 			listaNucleos = nucleoDao.buscarNucleos(buscar);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo buscarNucleos de la clase nucleoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo buscar Nucleos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaNucleos == null){
-			throw new ExcepcionesLogica("No se encontraron nucleos en la tabla TbAdmNucleo");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Nucleos");
+			throw expLog;
 		}else{
 			return listaNucleos;
 		}

@@ -21,28 +21,37 @@ public class TemaNGCImpl implements TemaNGC {
 	}
 	
 	@Override
-	public TbMicTema obtenerTemas(int id) throws ExcepcionesLogica {
+	public TbMicTema obtenerTemas(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de Tema, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Tema, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicTema tema = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			tema = temaDao.obtenerTema(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTema de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Tema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(tema == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró tema con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontro Tema con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return tema;
@@ -50,81 +59,119 @@ public class TemaNGCImpl implements TemaNGC {
 	}
 
 	@Override
-	public void guardarTemas(TbMicTema tema) throws ExcepcionesLogica {
+	public void guardarTemas(TbMicTema tema) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(tema == null){
-			throw new ExcepcionesLogica("El objeto prerrequisito está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Tema esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = tema.getNbIdtema();
-			TbMicTema temasConsulta = temaDao.obtenerTema(id);
-		
-			if(temasConsulta != null){
-				throw new ExcepcionesLogica("El tema a insertar ya existe");
-			}		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTema de la clase temaDao: "+ e);
-		}
+//		try {
+//			int id = tema.getNbIdtema();
+//			TbMicTema temasConsulta = temaDao.obtenerTema(id);
+//		
+//			if(temasConsulta != null){
+//				throw new ExcepcionesLogica("El tema a insertar ya existe");
+//			}		
+//		} catch(ExcepcionesDAO expDAO){
+//			throw expDAO;
+//		} catch(Exception exp){
+//			ExcepcionesLogica expLog = new ExcepcionesLogica();
+//			expLog.setMsjUsuario("Error al invocar el metodo obtener Tema");
+//			expLog.setMsjTecnico(exp.getMessage());
+//			expLog.setOrigen(exp);
+//			throw expLog;
+//		}
 		
 		try {			
 			temaDao.guardarTema(tema);		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarTema de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Tema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarTema(TbMicTema tema) throws ExcepcionesLogica {
+	public void actualizarTema(TbMicTema tema) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(tema == null){
-			throw new ExcepcionesLogica("El objeto tema está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Tema esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = tema.getNbIdtema();
 			TbMicTema temaConsulta = temaDao.obtenerTema(id);
 		
 			if(temaConsulta == null){
-				throw new ExcepcionesLogica("El tema a actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La Tema a actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTema de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Tema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			temaDao.modificarTema(tema);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo modificarTema de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Tema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public List<TbMicTema> listarTemas() throws ExcepcionesLogica {
+	public List<TbMicTema> listarTemas() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicTema> listaTemas = null;
 		try {
 			listaTemas = temaDao.listarTemas();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarTemas de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Temas");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaTemas == null){
-			throw new ExcepcionesLogica("No se encontraron temas en la tabla TbMicTemas");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Temas");
+			throw expLog;
 		}else{
 			return listaTemas;
 		}
 	}
 
 //	@Override
-//	public int contarRegistros() throws ExcepcionesLogica {
+//	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO {
 //		int registro = 0;
 //		
 //		try {
@@ -137,13 +184,19 @@ public class TemaNGCImpl implements TemaNGC {
 //	}
 	
 	@Override
-	public List<TbMicTema> obtenerTemaxNombre(String nombre) throws ExcepcionesLogica{
+	public List<TbMicTema> obtenerTemaxNombre(String nombre) throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicTema> listaTemas = null;
 		
 		try {
 			listaTemas = temaDao.obtenerTemaxNombre(nombre);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTemaxNombre(nombre) de la clase temaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo buscar Temas");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

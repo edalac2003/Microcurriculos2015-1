@@ -32,41 +32,51 @@ public class CorrequisitoNGCImpl implements CorrequisitoNGC {
 	}
 
 	@Override
-	public void guardarCorrequisito(TbAdmCorrequisito correquisito) throws ExcepcionesLogica {
+	public void guardarCorrequisito(TbAdmCorrequisito correquisito) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(correquisito == null){
-			throw new ExcepcionesLogica("El objeto correquisito está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Correquisito esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = correquisito.getNbId();
-			TbAdmCorrequisito correquisitoConsulta = correquisitoDao.obtenerCorrequisitos(id);
-		
-			if(correquisitoConsulta != null){
-				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerCorrequisitos de la clase correquisitoDao: "+ e);
-		}
+//		try {
+//			int id = correquisito.getNbId();
+//			TbAdmCorrequisito correquisitoConsulta = correquisitoDao.obtenerCorrequisitos(id);
+//		
+//			if(correquisitoConsulta != null){
+//				throw new ExcepcionesLogica("La prerrequisito a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo obtenerCorrequisitos de la clase correquisitoDao: "+ e);
+//		}
 		
 		try {
 			
 			correquisitoDao.guardarCorrequisito(correquisito);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarCorrequisito de la clase correquisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Correquisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarCorrequisito(TbAdmCorrequisito correquisito) throws ExcepcionesLogica {
+	public void actualizarCorrequisito(TbAdmCorrequisito correquisito) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(correquisito == null){
-			throw new ExcepcionesLogica("El objeto correquisito está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto Correquisito esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = correquisito.getNbId();
@@ -76,61 +86,90 @@ public class CorrequisitoNGCImpl implements CorrequisitoNGC {
 				throw new ExcepcionesLogica("El correquisito a actualizar no existe");
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerCorrequisito de la clase correquisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Correquisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			correquisitoDao.actualizarCorrequisito(correquisito);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarPrerrequisito de la clase prerrequisitosDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Correquisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public List<TbAdmCorrequisito> listarCorrequisitos() throws ExcepcionesLogica {
+	public List<TbAdmCorrequisito> listarCorrequisitos() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbAdmCorrequisito> listaCorrequisitos = null;
 		try {
 			listaCorrequisitos = correquisitoDao.listarCorrequisitos();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarCorrequisitos de la clase correquisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Correquisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaCorrequisitos == null){
-			throw new ExcepcionesLogica("No se encontraron Correquisitos en la tabla TbAdmCorrequisitos");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Correquisitos");
+			throw expLog;
 		}else{
 			return listaCorrequisitos;
 		}
 	}
 
 	@Override
-	public TbAdmCorrequisito obtenerCorrequisito(int id) throws ExcepcionesLogica {
+	public TbAdmCorrequisito obtenerCorrequisito(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de correquisito, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Correquisito, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbAdmCorrequisito correquisito = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			correquisito = correquisitoDao.obtenerCorrequisitos(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerCorrequisitos de la clase correquisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Correquisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(correquisito == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró correquisito con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró Correquisito con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return correquisito;
@@ -138,7 +177,7 @@ public class CorrequisitoNGCImpl implements CorrequisitoNGC {
 	}
 	
 	@Override
-	public List<TbAdmCorrequisito> listarCorrequisitosxMateria(String id) throws ExcepcionesLogica{
+	public List<TbAdmCorrequisito> listarCorrequisitosxMateria(String id) throws ExcepcionesLogica, ExcepcionesDAO{
 		
 		List<TbAdmCorrequisito> listaCorrequisitos = null;
 		
@@ -146,18 +185,32 @@ public class CorrequisitoNGCImpl implements CorrequisitoNGC {
 		
 		try {
 			materia = materiaDao.obtenerMateria(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMateria de la clase materiaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Correquisito");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		if(materia == null){
-			throw new ExcepcionesLogica("NO existe materia a consultar"); 
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de Correquisitos");
+			throw expLog;
 		}
 		
 		try {
 			listaCorrequisitos = correquisitoDao.listarCorrequisitosxMateria(materia);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarCorrequisitosxmateria de la clase correquisitoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Correquisitos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
