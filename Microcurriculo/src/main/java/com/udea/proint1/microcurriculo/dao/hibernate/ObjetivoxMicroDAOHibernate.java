@@ -28,8 +28,13 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 			session = getSession();
 			session.save(objetivoxMicro);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Objetivo x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -44,8 +49,13 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 			session = getSession();
 			this.getHibernateTemplate().update(objetivoxMicro);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Objetivo x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -60,8 +70,13 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 			session = getSession();
 			objetivosxMicro = (TbMicObjetivoxmicro) session.get(TbMicObjetivoxmicro.class, id);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Objetivo x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -83,9 +98,14 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
         	query.setEntity("objetivo", objetivo);
                
         	objetivosxMicro = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Objetivos x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return objetivosxMicro;
@@ -106,9 +126,14 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
         	query.setEntity("microcurriculo", microcurriculo);
                
         	objetivosxMicro = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Objetivo x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return objetivosxMicro;
@@ -125,9 +150,13 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 			Criteria criteria = session.createCriteria(TbMicObjetivoxmicro.class);
 			
 			objetivosxMicro = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Objetivos x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

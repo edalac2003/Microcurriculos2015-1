@@ -122,7 +122,7 @@
 							                		</row>
 							                		<row>
 									                    <label value="${labels.microcurriculo.estados}" width="150px" />
-									                    <combobox id="cmbEstado" disabled="true" droppable="2"/>
+									                    <combobox id="cmbEstado" droppable="2"/>
 							                		</row>
 							                		<row>
 														<label value="${labels.microcurriculo.docente}" sclass="campoobligatorio"/>

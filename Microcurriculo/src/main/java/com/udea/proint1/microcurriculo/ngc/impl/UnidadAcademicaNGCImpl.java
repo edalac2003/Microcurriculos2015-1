@@ -25,41 +25,51 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 	}
 
 	@Override
-	public void guardarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica {
+	public void guardarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
-		 * Comprobamos que el objeto id no esté vacio
+		 * Comprobamos que el objeto id no estï¿½ vacio
 		 */
 		if(unidadAcademica == null){
-			throw new ExcepcionesLogica("El objeto unidadAcademica está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto unidad Academica esta vacio");
+			throw expLog;
 		}
-		try {
-			String id = unidadAcademica.getVrIdunidad();
-			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(id);
-		
-			if(unidadAcademicaConsulta != null){
-				throw new ExcepcionesLogica("La unidadAcademica a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
-		}
+//		try {
+//			String id = unidadAcademica.getVrIdunidad();
+//			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(id);
+//		
+//			if(unidadAcademicaConsulta != null){
+//				throw new ExcepcionesLogica("La unidadAcademica a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("fallï¿½ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+//		}
 		
 		try {
 			
 			unidadAcademicaDao.guardarUnidad(unidadAcademica);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo guardarUnidad de la clase unidadAcademicaDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Unidad x Academica");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public void actualizarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica {
+	public void actualizarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
-		 * Comprobamos que el objeto id no esté vacio
+		 * Comprobamos que el objeto id no estï¿½ vacio
 		 */
 		if(unidadAcademica == null){
-			throw new ExcepcionesLogica("El objeto unidadAcademica está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto unidad x microcurriculo esta vacio");
+			throw expLog;
 		}
 		try {
 			String id = unidadAcademica.getVrIdunidad();
@@ -70,7 +80,7 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			}
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+			log.error("fallï¿½ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
 		}
 		
 		try {
@@ -78,48 +88,48 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			unidadAcademicaDao.modificarUnidad(unidadAcademica);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo actualizarUnidadAcademica de la clase unidadAcademicaDao: "+ e);
+			log.error("fallï¿½ al invocar el metodo actualizarUnidadAcademica de la clase unidadAcademicaDao: "+ e);
 		}
 	}
 
 	@Override
-	public TbAdmUnidadAcademica obtenerUnidadAcademica(String id) throws ExcepcionesLogica {
+	public TbAdmUnidadAcademica obtenerUnidadAcademica(String id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if((id.equals(""))||(id.equals(null))){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de unidadAcademica, está vacia");
+			throw new ExcepcionesLogica("No se ha ingresado una identificaciï¿½n de unidadAcademica, estï¿½ vacia");
 		}
 		TbAdmUnidadAcademica unidadAcademica = null;
 		
 		try {
 			unidadAcademica = unidadAcademicaDao.obtenerUnidad(id);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
+			log.error("fallï¿½ al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en ï¿½l.
 		 */
 		if(unidadAcademica == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró unidadAcademica con el id "+ id);
+			//si estï¿½ vacio tira una excepciï¿½n
+			throw new ExcepcionesLogica("No se encontrï¿½ unidadAcademica con el id "+ id);
 		}else{
 			return unidadAcademica;
 		}
 	}
 
 	@Override
-	public List<TbAdmUnidadAcademica> listarUnidadAcademicas() throws ExcepcionesLogica {
+	public List<TbAdmUnidadAcademica> listarUnidadAcademicas() throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbAdmUnidadAcademica> listaUnidadAcademicas = null;
 		try {
 			listaUnidadAcademicas = unidadAcademicaDao.listarUnidades();
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarUnidadesAcademicas de la clase unidadAcademicaDao: "+ e);
+			log.error("fallï¿½ al invocar el metodo listarUnidadesAcademicas de la clase unidadAcademicaDao: "+ e);
 		}
 		
 		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
+		 * Confirmamos si el objeto retornado tiene elementos en ï¿½l.
 		 */
 		if(listaUnidadAcademicas == null){
 			throw new ExcepcionesLogica("No se encontraron Unidades Academicas en la tabla TbAdmUnidadAcademica");

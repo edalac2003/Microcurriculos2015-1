@@ -23,8 +23,13 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 			session = getSession();
 			session.save(actividadxMicro);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Actividad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -40,8 +45,13 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 			session = getSession();
 			actividadxmicro = (TbMicActividadxmicro) session.get(TbMicActividadxmicro.class, id);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Actividad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -59,9 +69,13 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 			Criteria criteria = session.createCriteria(TbMicActividadxmicro.class);
 			
 			actividadxmicro = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Actividad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -77,8 +91,13 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 			session = getSession();
 			this.getHibernateTemplate().update(actividadxMicro);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Actividad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

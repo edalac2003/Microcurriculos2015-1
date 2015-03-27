@@ -34,8 +34,13 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			session.save(materia);
 			session.flush();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Materia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -51,8 +56,13 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			session = getSession();
 			materia = (TbAdmMateria)session.get(TbAdmMateria.class, idMateria);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Materia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -68,8 +78,13 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbAdmMateria.class);
 			materias = criteria.list();			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Materias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -87,8 +102,13 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			Query query = session.createQuery("FROM TbAdmMateria where tbAdmNucleo = :nucleo");
 			query.setEntity("nucleo", nucleo);
             materias = query.list();			
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Materias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}	
@@ -110,9 +130,14 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
                
                 materias = query.list();
                 
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Materias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return materias;
@@ -128,8 +153,13 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 			session = getSession();
 			this.getHibernateTemplate().update(materia);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Materia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -148,9 +178,14 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 //                Query query = session.createQuery("from TbAdmMaterias mat where mat.vrNucleo = :materia");                               
                 query.setString("materia", buscar);               
                 materias = query.list();                
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar buscar Materias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return materias;

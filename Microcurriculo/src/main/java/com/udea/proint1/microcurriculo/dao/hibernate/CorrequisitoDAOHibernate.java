@@ -30,8 +30,13 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			session.save(correquisitos);
 			tx.commit();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Correquisito");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -46,8 +51,13 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			session = getSession();
 			this.getHibernateTemplate().update(correquisitos);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Correquisito");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -63,8 +73,13 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			session = getSession();
 			correquisitos = (TbAdmCorrequisito)session.get(TbAdmCorrequisito.class, id);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Correquisito");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -83,8 +98,13 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
 			
 			correquisitos = criteria.list();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Correquisitos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -106,9 +126,14 @@ public class CorrequisitoDAOHibernate extends HibernateDaoSupport implements Cor
                
                 correquisitos = query.list();
                 
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Correquisitos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return correquisitos;

@@ -21,7 +21,7 @@ public class ActaxMicroNGCImpl implements ActaxMicroNGC {
 	private static Logger log=Logger.getLogger(ActaxMicroNGCImpl.class);
 
 	@Override
-	public TbMicActaxmicro obtenerActaxmicro(int id) throws ExcepcionesLogica {
+	public TbMicActaxmicro obtenerActaxmicro(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
@@ -33,8 +33,14 @@ public class ActaxMicroNGCImpl implements ActaxMicroNGC {
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			actaxMicro = actaxMicroDao.obtenerActaxMicro(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerActaxMicro de la clase actaxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error validando persona");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*

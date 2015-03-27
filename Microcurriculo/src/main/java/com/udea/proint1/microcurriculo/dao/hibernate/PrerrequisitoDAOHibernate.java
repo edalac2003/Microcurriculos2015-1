@@ -37,9 +37,14 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
                
                 prerrequisitos = query.list();
                 
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Prerrequisitos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return prerrequisitos;
@@ -56,9 +61,13 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 			Criteria criteria = session.createCriteria(TbAdmPrerrequisito.class);
 			
 			prerrequisitos = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Prerrequisitos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -74,8 +83,13 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 			session = getSession();
 			prerrequisito = (TbAdmPrerrequisito) session.load(TbAdmPrerrequisito.class, id);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Prerrequisito");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -91,8 +105,13 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 			session = getSession();
 			session.save(prerrequisito);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Prerrequisito");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -107,8 +126,13 @@ public class PrerrequisitoDAOHibernate extends HibernateDaoSupport implements Pr
 			session = getSession();
 			this.getHibernateTemplate().update(prerrequisito);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Prerrequisito");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

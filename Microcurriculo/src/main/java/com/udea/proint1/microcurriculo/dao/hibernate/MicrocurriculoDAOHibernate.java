@@ -51,8 +51,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			session = getSession();
 			microcurriculo = (TbMicMicrocurriculo)session.get(TbMicMicrocurriculo.class, idMicrocurriculo);
 		
-		} catch (HibernateException e){
-			throw new ExcepcionesDAO("DAO : Error al Intentar Obtener el Registro Microcurriculo en la Base de Datos."+e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -66,8 +71,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		try {
 			session = getSession();
 			this.getHibernateTemplate().update(microcurriculo);
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -82,8 +92,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicMicrocurriculo.class);
 			microcurriculos = criteria.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -102,8 +117,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			query.setString("semestre", idSemestre);
 			microcurriculos = query.list();
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -122,8 +142,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			Query query = session.createQuery("from TbMicMicrocurriculo where tbAdmNucleo = :buscarNucleo");
 			query.setEntity("buscarNucleo", nucleo);
 			microcurriculos = query.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -141,8 +166,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			Query query = session.createQuery("from TbMicMicrocurriculo where tbAdmMateria = :buscarMateria");
 			query.setEntity("buscarMateria", materia);
 			microcurriculos = query.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -165,8 +195,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			Query query = session.createQuery(sql);
 			//query.setEntity("buscarMateria", materia);
 			microcurriculos = query.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("Se presentaron problemas al intentar Listar los Microcurriculos por Materia.");
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -189,8 +224,13 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 			query.setEntity("buscarResponsable", responsable);
 
 			microcurriculos = query.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

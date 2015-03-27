@@ -26,8 +26,13 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 			session.save(evaluacionxMicro);
 			session.flush();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Evaluacion x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -42,8 +47,13 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 			session = getSession();
 			evaluacionxMicro = (TbMicEvaluacionxmicro)session.get(TbMicEvaluacionxmicro.class, id);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Evaluacion x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -59,8 +69,13 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicEvaluacionxmicro.class);
 			evaluacionesxMicro = criteria.list();			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Evaluaciones x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -78,8 +93,13 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 			session = getSession();
 			this.getHibernateTemplate().update(evaluacionxMicro);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar "+e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Evaluacion x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -121,9 +141,14 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
         	query.setEntity("microcurriculo", microcurriculo);
                
         	evaluacionesxMicro = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Evaluaciones x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return evaluacionesxMicro;

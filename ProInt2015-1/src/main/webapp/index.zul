@@ -46,9 +46,9 @@
 							<hbox align="center" height="120px">
 								<a href="/materia/inicio_mat.zul" image="/_img/icons/128x128/materias.png" width="80px"/>
 								<vbox width="400px">
-									<a href="/materia/inicio_mat.zul" label="${labels.microcurriculo.tituloDocente}" sclass="nombreSeccion" />
+									<a href="/materia/inicio_mat.zul" label="${labels.microcurriculo.tituloMateria}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="" />
+										<label value="${labels.microcurriculo.mensajeMateria}" />
 									</div>	
 								</vbox>		
 							</hbox>

@@ -27,8 +27,13 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 			session = getSession();
 			session.save(unidadXmicro);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al guardar Unidad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -43,8 +48,15 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 			session = getSession();
 			this.getHibernateTemplate().update(unidadXmicro);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al modificar Unidad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
 		}
 	}
 
@@ -61,8 +73,13 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 			else
 				return null;
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al obtener Unidad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -82,9 +99,14 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
         	query.setEntity("microcurriculo", microcurriculo);
                
         	unidadesXMicro = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al listar Unidades x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return unidadesXMicro;
@@ -101,9 +123,13 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 			Criteria criteria = session.createCriteria(TbAdmUnidadAcademica.class);
 			
 			unidadesXMicro = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al listar Unidades x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

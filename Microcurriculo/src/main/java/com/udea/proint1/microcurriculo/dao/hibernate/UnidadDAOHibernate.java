@@ -25,8 +25,13 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 			session = getSession();
 			session.save(unidad);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -41,8 +46,13 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 			session = getSession();
 			unidad = (TbMicUnidad)session.get(TbMicUnidad.class, idUnidad);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -59,8 +69,13 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 			session = getSession();
 			this.getHibernateTemplate().update(unidad);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -77,7 +92,7 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 ////			Criteria criteria = session.createCriteria(TbMicUnidad.class);
 ////			registro = criteria.list().size();			
 //		} catch(HibernateException e){
-//			throw new ExcepcionesDAO("No Devolvió Ningun Numero de Registro "+e);
+//			throw new ExcepcionesDAO("No Devolviï¿½ Ningun Numero de Registro "+e);
 //		} finally{
 //			session.close();
 //		}	
@@ -96,8 +111,13 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 			
 			unidades = criteria.list();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Unidades");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

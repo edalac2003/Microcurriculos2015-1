@@ -25,8 +25,13 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
 			session.save(subtemaxTema);
 			session.flush();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO("DAO : Se presentaron problemas al guardar registro de <SubtemaxTema>.  "+e.getMessage());
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Subtema x Tema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -74,9 +79,14 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
         	query.setEntity("tema", tema);
                
         	subtemaxTema = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Subtemas x Tema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return subtemaxTema;

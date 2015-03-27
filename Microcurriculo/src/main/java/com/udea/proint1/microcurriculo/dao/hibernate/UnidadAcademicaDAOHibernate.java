@@ -27,8 +27,13 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 			session = getSession();
 			session.save(unidadAcademica);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Unidad Academica");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -43,8 +48,13 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 			session = getSession();
 			unidad = (TbAdmUnidadAcademica) session.get(TbAdmUnidadAcademica.class, idUnidad);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Unidad Academica");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -59,8 +69,13 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 			session = getSession();
 			this.getHibernateTemplate().update(unidad);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Unidad Academica");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -75,9 +90,13 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbAdmUnidadAcademica.class);			
 			unidadesAcademicas = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Unidades Academica");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

@@ -22,57 +22,74 @@ private static Logger log = Logger.getLogger(UnidadNGCImpl.class);
 
 	
 	@Override
-	public void guardarUnidades(TbMicUnidad unidad) throws ExcepcionesLogica {
+	public void guardarUnidades(TbMicUnidad unidad)  throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
-		 * Comprobamos que el objeto id no est� vacio
+		 * Comprobamos que el objeto id no est� vacio
 		 */
 		if(unidad == null){
-			throw new ExcepcionesLogica("El objeto unidad est� vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto unidad esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = unidad.getNbIdunidad();
-			TbMicUnidad unidadConsulta = unidadDao.obtenerUnidad(id);
-		
-			if(unidadConsulta != null){
-				throw new ExcepcionesLogica("La Unidad a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerUnidad de la clase unidadDao: "+ e);
-		}
+//		try {
+//			int id = unidad.getNbIdunidad();
+//			TbMicUnidad unidadConsulta = unidadDao.obtenerUnidad(id);
+//		
+//			if(unidadConsulta != null){
+//				throw new ExcepcionesLogica("La Unidad a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("fall� al invocar el metodo obtenerUnidad de la clase unidadDao: "+ e);
+//		}
 		
 		try {
 			
 			unidadDao.guardarUnidad(unidad);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo guardarUnidad de la clase unidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbMicUnidad obtenerUnidades(int idUnidad) throws ExcepcionesLogica {
+	public TbMicUnidad obtenerUnidades(int idUnidad)  throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(idUnidad == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de unidad, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Unidad, no se ha encontrado id de consulta");
+			throw expLog;
 		}
 		TbMicUnidad unidad = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			unidad = unidadDao.obtenerUnidad(idUnidad);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(unidad == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró Unidad con el id "+ idUnidad);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró unidad con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return unidad;
@@ -80,12 +97,14 @@ private static Logger log = Logger.getLogger(UnidadNGCImpl.class);
 	}
 
 	@Override
-	public void actualizarUnidades(TbMicUnidad unidad) throws ExcepcionesLogica {
+	public void actualizarUnidades(TbMicUnidad unidad)  throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(unidad == null){
-			throw new ExcepcionesLogica("El objeto unidad está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto unidad esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = unidad.getNbIdunidad();
@@ -95,33 +114,53 @@ private static Logger log = Logger.getLogger(UnidadNGCImpl.class);
 				throw new ExcepcionesLogica("La Unidad a actualizar no existe");
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidad de la clase unidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			unidadDao.modificarUnidad(unidad);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo modificarUnidad de la clase unidadDao: "+ e);
+		}catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public List<TbMicUnidad> listarUnidades() throws ExcepcionesLogica {
+	public List<TbMicUnidad> listarUnidades()  throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicUnidad> listaUnidades = null;
 		try {
 			listaUnidades = unidadDao.listarUnidades();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarUnidades de la clase unidadDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Unidades");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaUnidades == null){
-			throw new ExcepcionesLogica("No se encontraron unidades en la tabla TbMicUnidades");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de unidades");
+			throw expLog;
 		}else{
 			return listaUnidades;
 		}

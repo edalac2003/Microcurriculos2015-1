@@ -28,8 +28,13 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 			session.save(evaluacion);
 			session.flush();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Evaluacion");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -44,8 +49,13 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 			session = getSession();
 			evaluacion = (TbMicEvaluacion)session.get(TbMicEvaluacion.class, id);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Evaluacion");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -61,8 +71,13 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicEvaluacion.class);
 			evaluaciones = criteria.list();			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Evaluaciones");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -97,8 +112,13 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 			session = getSession();
 			this.getHibernateTemplate().update(evaluacion);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar "+ e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Evaluacion");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

@@ -1,6 +1,8 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -37,17 +39,24 @@ import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
+import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
@@ -165,8 +174,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	
 	Toolbarbutton tool_save;
 	Toolbarbutton tool_print;
-	Toolbarbutton tool_duplica_otro;
-	Toolbarbutton tool_consulta_otro;
+	Toolbarbutton tool_modifica_otro;
 	
 	/**
 	 * definición de formato de fecha corta
@@ -174,8 +182,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	DateFormat formatoFecha = DateFormat.getDateInstance(DateFormat.MEDIUM);
 	
 	/**
+	 * microcurriculo editado
+	 */
+	TbMicMicrocurriculo microcurriculoGuardar;
+	
+	/**
 	 * listas de guardado de datos
 	 */
+	
 	public static List<TbAdmUnidadAcademica> listaUnidadAcademica;
 	public static List<TbAdmDependencia> listaDependencias;
 	public static List<TbAdmNucleo> listaNucleos;
@@ -184,6 +198,28 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	public static List<TbAdmSemestre> listaSemestre;
 	public static List<TbMicEstado> listaEstados;
 	public static List<TbMicMicrocurriculo> listaMicrocurriculos;
+	
+	/**
+	 * Listas manejo de datos a modificar
+	 */
+	
+	public static List<TbMicObjetivoxmicro> listaObjetivosxMicroGuardar = new ArrayList<TbMicObjetivoxmicro>();
+	public static List<TbMicObjetivoxmicro> listaObjetivosxMicroBorrar = new ArrayList<TbMicObjetivoxmicro>();
+	public static List<TbMicUnidadxmicro> listaUnidadesxMicroGuardar = new ArrayList<TbMicUnidadxmicro>();
+	public static List<TbMicUnidadxmicro> listaUnidadesxMicroBorrar = new ArrayList<TbMicUnidadxmicro>();
+	public static List<TbMicTemaxunidad> listaTemasxUnidadGuardar = new ArrayList<TbMicTemaxunidad>();
+	public static List<TbMicTemaxunidad> listaTemasxUnidadBorrar = new ArrayList<TbMicTemaxunidad>();
+	public static List<TbMicSubtemaxtema> listaSubtemasxTemaGuardar = new ArrayList<TbMicSubtemaxtema>();
+	public static List<TbMicSubtemaxtema> listaSubtemasxTemaBorrar = new ArrayList<TbMicSubtemaxtema>();
+	public static List<TbMicEvaluacionxmicro> listaEvaluacionesxMicroGuardar = new ArrayList<TbMicEvaluacionxmicro>();
+	public static List<TbMicEvaluacionxmicro> listaEvaluacionesxMicroBorrar = new ArrayList<TbMicEvaluacionxmicro>();
+	public static List<TbMicBiblioxunidad> listaBibliosxUnidadGuardar = new ArrayList<TbMicBiblioxunidad>();
+	public static List<TbMicBiblioxunidad> listaBibliosxUnidadBorrar = new ArrayList<TbMicBiblioxunidad>();
+	
+	/**
+	 * Variable de control de porcentaje, que no sobrepase el 100%
+	 */
+	int porcentajeEvaluacion = 0;
 	
 	MicrocurriculoNGC microcurriculoNGC;
 	SemestreNGC semestreNGC;
@@ -200,27 +236,47 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	DependenciaNGC dependenciaNGC;
 	NucleoNGC nucleoNGC;
 	MateriaNGC materiaNGC;
+	EstadoNGC estadoNGC;
 	
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmUnidadAcademica
+	 * @param unidadAcademicaNGC variable de acceso a los metodos de la capa del negocio
+	 */
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
 	}
 
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmDependencia
+	 * @param dependenciaNGC variable de acceso a los metodos de la capa del negocio
+	 */
 	public void setDependenciaNGC(DependenciaNGC dependenciaNGC) {
 		this.dependenciaNGC = dependenciaNGC;
 	}
 
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmNucleo
+	 * @param nucleoNGC variable de acceso a los metodos de la capa del negocio
+	 */
 	public void setNucleoNGC(NucleoNGC nucleoNGC) {
 		this.nucleoNGC = nucleoNGC;
 	}
 
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmMateria
+	 * @param materiaNGC variable de acceso a los metodos de la capa del negocio
+	 */
 	public void setMateriaNGC(MateriaNGC materiaNGC) {
 		this.materiaNGC = materiaNGC;
 	}
 	
 	/**
-	 * Variable de control de porcentaje, que no sobrepase el 100%
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicEstado
+	 * @param estadoNGC variable de acceso a los metodos de la capa del negocio
 	 */
-	int porcentajeEvaluacion = 0;
+	public void setEstadoNGC(EstadoNGC estadoNGC) {
+		this.estadoNGC = estadoNGC;
+	}
 	
 	/**
 	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicMicrocurriculo
@@ -308,6 +364,21 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 */
 	public void setBiblioxUnidadNGC(BiblioxunidadNGC biblioxUnidadNGC) {
 		this.biblioxUnidadNGC = biblioxUnidadNGC;
+	}
+	
+	private void reiniciarListas(){
+		listaObjetivosxMicroGuardar.clear();
+		listaObjetivosxMicroBorrar.clear();
+		listaUnidadesxMicroGuardar.clear();
+		listaUnidadesxMicroBorrar.clear();
+		listaTemasxUnidadGuardar.clear();
+		listaTemasxUnidadBorrar.clear();
+		listaSubtemasxTemaGuardar.clear();
+		listaSubtemasxTemaBorrar.clear();
+		listaEvaluacionesxMicroGuardar.clear();
+		listaEvaluacionesxMicroBorrar.clear();
+		listaBibliosxUnidadGuardar.clear();
+		listaBibliosxUnidadBorrar.clear();
 	}
 	
 	/**
@@ -457,6 +528,46 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
+	 * Solicita de la capa del negocio todos los docentes existentes y los ubica en el combobox cmbDocente
+	 */
+	private void cargarDocentes(){
+		cmbDocente.getItems().clear();
+		try {
+			listaDocentes = personaNGC.obtenerDocentes();			
+			if (listaDocentes != null){
+				cmbDocente.appendChild(new Comboitem("[Seleccione]"));
+				for(TbAdmPersona docente : listaDocentes){
+					Comboitem item = new Comboitem(docente.getVrIdpersona()+" - "+ docente.getVrApellidos()+" "+docente.getVrNombres());
+					cmbDocente.appendChild(item);
+				}
+			} else
+				Messagebox.show("No Se Hallaron Registros de Docentes");
+		} catch (ExcepcionesLogica e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Hace la busqueda de estados y los ubica en el cmbEstado
+	 */
+	private void cargarEstados(){
+		cmbEstado.getItems().clear();
+		try {
+			 listaEstados = estadoNGC.listarEstados();
+		} catch (ExcepcionesLogica e) {
+			logger.error(e);
+		}
+		
+		if(listaEstados != null){
+			cmbEstado.appendChild(new Comboitem("[Seleccione]"));
+			for(TbMicEstado estado: listaEstados){
+				Comboitem item = new Comboitem(estado.getVrDescripcion());
+				cmbEstado.appendChild(item);
+			}
+		}		
+	}
+	
+	/**
 	 * Ante el evento seleccion en el combobox cmbUnidadAcademica este procede a invocar metodos
 	 * que hacen el filtrado de los demas combobox relacionados
 	 */
@@ -536,9 +647,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * El Metodo gestiona el llenado de datos a duplicar en el nuevo microcurriculo
+	 * El Metodo gestiona el llenado de datos a modificar en el nuevo microcurriculo
 	 * @param idMicro cadena de caracteres con identificacion de microcurriculo
-	 * @param idSemestre cadena de caracteres con identificacion de semestre
 	 */
 	public void llenarDatos(String idMicro){
 		
@@ -558,16 +668,16 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			
 			if(microcurriculo != null){
 				
+				microcurriculoGuardar = microcurriculo;
+				reiniciarListas();
+				llenarInfoGeneral(microcurriculo);
 				llenarDatosDependencias(microcurriculo);
 				llenarPrerrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
 				llenarCorrequisitos(microcurriculo.getTbAdmMateria().getVrIdmateria());
 				llenarDatosMateria(microcurriculo.getTbAdmMateria());
 				llenarDatosComplementarios(microcurriculo);
 				llenarUnidadesTemasBiblios(microcurriculo.getVrIdmicrocurriculo());
-				cmbSemestre.setValue(microcurriculo.getTbAdmSemestre().getVrIdsemestre());
-				cmbSemestre.setDisabled(true);
-				lblIdMicrocurriculo.setValue(microcurriculo.getVrIdmicrocurriculo());
-				cmbEstado.setValue("BORRADOR");
+				llenarEvaluaciones(microcurriculo.getVrIdmicrocurriculo());
 				
 			}else{
 				ReiniciarBusqueda();
@@ -576,7 +686,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Para la vista duplicar, reinicia la busqueda de nuevo microcurriculo y semestre a duplicar
+	 *  reinicia la busqueda de microcurriculos a modificar
 	 */
 	public void ReiniciarBusqueda(){
 		panelModificarMicro.setVisible(true);
@@ -593,6 +703,34 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
 			Executions.getCurrent().getSession().removeAttribute("idMicro");
 		}
+	}
+	
+	/**
+	 * Permite mostrar en la vista los datos asociados a la información general del microcurriculo
+	 * y es controlada para evitar errores del usuario
+	 * @param microcurriculo objeto con parametros definidos para microcurriculo
+	 */
+	public void llenarInfoGeneral(TbMicMicrocurriculo microcurriculo){
+		
+		cmbSemestre.setValue(microcurriculo.getTbAdmSemestre().getVrIdsemestre());
+		cmbSemestre.setDisabled(true);
+		lblIdMicrocurriculo.setValue(microcurriculo.getVrIdmicrocurriculo());
+		cmbEstado.setValue(microcurriculo.getTbMicEstado().getVrDescripcion());
+		
+		/**
+		 * Variable de conteo de items (contador)
+		 */
+		
+		int contador = 0;
+		if(listaDocentes != null){
+			for(TbAdmPersona docente: listaDocentes){
+				contador++;
+				if(docente.getVrIdpersona().equals(microcurriculo.getTbAdmPersona().getVrIdpersona())){
+					cmbDocente.setSelectedIndex(contador);
+				}
+			}
+		}
+		
 	}
 	
 	/**
@@ -730,6 +868,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		} catch (ExcepcionesLogica e) {
 			logger.error("problemas al invocar metodo obtenerObjetivosxMicroxMicro de la clase ObjetivoxMicroNGC "+e);
 		}
+		
 		if(objetivosxMicro != null){
 			for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
 				if(objetivoxMicro.getBlTipo()=='1'){
@@ -752,45 +891,13 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 					item.appendChild(celda);
 					listaObjetivosEspecificos.appendChild(item);
 					
+					listaObjetivosxMicroGuardar.add(objetivoxMicro);
+					
 				}
 			}
-		}
-	}
-	
-	/**
-	 * Permite mostrar en la vista los datos complementarios asociados al microcurriculo a duplicar
-	 * dejandolos listos para ser modificados
-	 * @param microcurriculo objeto con parametros definidos para materia
-	 */
-	public void llenarDatosComplementarios2(TbMicMicrocurriculo microcurriculo){
-		
-		lblResumenMicro.setValue(microcurriculo.getVrResumen());
-		lblJustificacionMicro.setValue(microcurriculo.getVrJustificacion());
-		lblPropositoMicro.setValue(microcurriculo.getVrProposito());
-		
-		List<TbMicObjetivoxmicro> objetivosxMicro = null;
-		try {
-			objetivosxMicro = objetivoxMicroNGC.obtenerObjetivosxMicroxMicro(microcurriculo.getVrIdmicrocurriculo());
-		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo obtenerObjetivosxMicroxMicro de la clase ObjetivoxMicroNGC "+e);
-		}
-		if(objetivosxMicro != null){
-			for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
-				if(objetivoxMicro.getBlTipo()=='1'){
-					lblObjetivoGeneral.setValue(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
-				}else{
-					
-					/**
-					 * implantacion del metodo de borrado de item, a través del doble click
-					 */
-					
-					final Listitem item = new Listitem();
-					
-					Listcell celda = new Listcell(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
-					item.appendChild(celda);
-					listaObjetivosEspecificos.appendChild(item);
-					
-				}
+			System.out.println("objetivos especificos");
+			for(TbMicObjetivoxmicro objetivoxMicro: listaObjetivosxMicroGuardar){
+				System.out.println(objetivoxMicro.getTbMicObjetivo().getNbIdobjetivo());
 			}
 		}
 	}
@@ -812,6 +919,9 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			Listcell celda = new Listcell(txtObjetivoEspecifico.getValue());
 			listaItem.appendChild(celda);			
 			listaObjetivosEspecificos.appendChild(listaItem);
+			TbMicObjetivo objetivoGuardar = new TbMicObjetivo(txtObjetivoEspecifico.getValue().toString(), "SYSTEM", new Date());
+			TbMicObjetivoxmicro objetivoxMicro = new TbMicObjetivoxmicro(objetivoGuardar, microcurriculoGuardar, '0', "SYSTEM", new Date());
+			listaObjetivosxMicroGuardar.add(objetivoxMicro);
 			txtObjetivoEspecifico.setText(null);
 			txtObjetivoEspecifico.setValue(null);
 		} else {
@@ -824,6 +934,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * @param idMicrocurriculo cadena de caracteres con identificacion de microcurriculo
 	 */
 	public void llenarUnidadesTemasBiblios(String idMicrocurriculo){
+		
 		List<TbMicUnidadxmicro> unidadesxMicro = null;
 		try {
 			unidadesxMicro = unidadxMicroNGC.listarUnidadesXMicroxMicro(idMicrocurriculo);
@@ -859,6 +970,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			Comboitem comboUnidad3 = new Comboitem(unidadxMicro.getTbMicUnidad().getVrNombre());
 			cmbListaUnidadBiblio.appendChild(comboUnidad3);
 			
+			listaUnidadesxMicroGuardar.add(unidadxMicro);
+			
 			/**
 			 * busca todos los temas x unidad asociados a las unidades y se ubican extraen los temas
 			 * para llenar los listbox
@@ -888,6 +1001,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 					itemTemas.appendChild(celdaTemas3);
 					listaTemas.appendChild(itemTemas);
 					
+					listaTemasxUnidadGuardar.add(temaxUnidad);
+					
 					/**
 					 * Busca los subtemas x unidad y los extrae para ser agregados al listbox listaSubtemas
 					 */
@@ -916,6 +1031,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 							itemSubtemas.appendChild(celdaSubtemas3);
 							listaSubtemas.appendChild(itemSubtemas);
 							
+							listaSubtemasxTemaGuardar.add(subtemaxTema);
+							
 						}
 					}
 				}
@@ -961,6 +1078,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 						}
 						listaBibliografia.appendChild(itemBiblio);
 						
+						listaBibliosxUnidadGuardar.add(biblioxUnidad);
+						
 					}else{
 						final Listitem itemBiblio = new Listitem();
 						itemBiblio.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
@@ -985,146 +1104,24 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 						}
 						listaCibergrafia.appendChild(itemBiblio);
 						
-					}
-				}
-			}
-		}
-		
-	}
-	
-	/**
-	 * El metodo procede a llenar los datos encontrados de unidades,temas, subtemas y bibliografias del microcurriculo
-	 * @param idMicrocurriculo cadena de caracteres con identificacion de microcurriculo
-	 */
-	public void llenarUnidadesTemasBiblios2(String idMicrocurriculo){
-		List<TbMicUnidadxmicro> unidadesxMicro = null;
-		try {
-			unidadesxMicro = unidadxMicroNGC.listarUnidadesXMicroxMicro(idMicrocurriculo);
-		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo listarUnidadesXMicroxMicro de la clase UnidadxMicroNGC "+e);
-		}
-		/**
-		 * Inicia buscando unidades relacionadas al microcurriculo y luego son agregadas
-		 * a los listbox y combobox
-		 */
-		
-		if(unidadesxMicro!=null)
-		for(TbMicUnidadxmicro unidadxMicro: unidadesxMicro){
-			final Listitem item = new Listitem();
-			
-			Listcell celda1 = new Listcell("");
-			item.appendChild(celda1);
-			Listcell celda2 = new Listcell(unidadxMicro.getTbMicUnidad().getVrNombre());
-			item.appendChild(celda2);
-			listaUnidades.appendChild(item);
-			
-			/**
-			 * busca todos los temas x unidad asociados a las unidades y se ubican extraen los temas
-			 * para llenar los listbox
-			 */
-			
-			List<TbMicTemaxunidad> temasxUnidad = null;
-			try {
-				temasxUnidad = temaxUnidadNGC.ListarTemasxUnidadxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
-			} catch (ExcepcionesLogica e) {
-				logger.error("problemas al invocar metodo ListarTemasxUnidadxUnidad de la clase TemaxUnidadNGC "+e);
-			}
-			if(temasxUnidad != null){
-				for(TbMicTemaxunidad temaxUnidad: temasxUnidad){
-					final Listitem itemTemas = new Listitem();
-					
-					Listcell celdaTemas1 = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
-					itemTemas.appendChild(celdaTemas1);
-					Listcell celdaTemas2 = new Listcell(temaxUnidad.getTbMicTema().getVrDescripcion());
-					itemTemas.appendChild(celdaTemas2);
-					Listcell celdaTemas3 = new Listcell(Integer.toString(temaxUnidad.getNbSemanasRequeridas()));
-					itemTemas.appendChild(celdaTemas3);
-					listaTemas.appendChild(itemTemas);
-					
-					/**
-					 * Busca los subtemas x unidad y los extrae para ser agregados al listbox listaSubtemas
-					 */
-					
-					List<TbMicSubtemaxtema> subtemasxTema = null;
-					try {
-						subtemasxTema = subtemaxTemaNGC.listarSubtemaxTema_Tema(temaxUnidad.getTbMicTema().getNbIdtema());
-					} catch (ExcepcionesLogica e) {
-						logger.error("problemas al invocar metodo listarSubtemaxTema_Tema de la clase SubtemaxTemaNGC "+e);
-					}
-					if(subtemasxTema != null){
-						for(TbMicSubtemaxtema subtemaxTema: subtemasxTema){
-							final Listitem itemSubtemas = new Listitem();
-							
-							Listcell celdaSubtemas1 = new Listcell(temaxUnidad.getTbMicUnidad().getVrNombre());
-							itemSubtemas.appendChild(celdaSubtemas1);
-							Listcell celdaSubtemas2 = new Listcell(subtemaxTema.getTbMicTema().getVrDescripcion());
-							itemSubtemas.appendChild(celdaSubtemas2);
-							Listcell celdaSubtemas3 = new Listcell(subtemaxTema.getTbMicSubtema().getVrDescripcion());
-							itemSubtemas.appendChild(celdaSubtemas3);
-							listaSubtemas.appendChild(itemSubtemas);
-							
-						}
-					}
-				}
-			}
-			
-			/**
-			 * Hace la busqueda de las bibliografias asociadas a las unidades del microcurriculo y las agrega
-			 * finalmente a los list box de las bibliografias
-			 */
-			
-			List<TbMicBiblioxunidad> bibliosxUnidad = null;
-			try {
-				bibliosxUnidad = biblioxUnidadNGC.listadoBiblioxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
-			} catch (ExcepcionesLogica e) {
-				logger.error("problemas al invocar metodo listadoBiblioxUnidad de la clase BiblioxUnidadNGC "+e);
-			}
-			
-			if(bibliosxUnidad!=null){
-				for(TbMicBiblioxunidad biblioxUnidad: bibliosxUnidad){
-					if(biblioxUnidad.getTbMicBibliografia().getVrSitioweb() == null){
-						final Listitem itemBiblio = new Listitem();
-						
-						Listcell celdaBiblio0 = new Listcell(biblioxUnidad.getTbMicUnidad().getVrNombre());
-						itemBiblio.appendChild(celdaBiblio0);
-						Listcell celdaBiblio1 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrNombre());
-						itemBiblio.appendChild(celdaBiblio1);
-						Listcell celdaBiblio2 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrAutor());
-						itemBiblio.appendChild(celdaBiblio2);
-						Listcell celdaBiblio3 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrIsbn());
-						itemBiblio.appendChild(celdaBiblio3);
-						if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='1'){
-							Listcell celdaBiblio4 = new Listcell("COMPLEMENTARIA");
-							itemBiblio.appendChild(celdaBiblio4);
-						}else if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='0'){
-							Listcell celdaBiblio4 = new Listcell("BÁSICA");
-							itemBiblio.appendChild(celdaBiblio4);
-						}
-						listaBibliografia.appendChild(itemBiblio);
-						
-					}else{
-						final Listitem itemBiblio = new Listitem();
-						
-						Listcell celdaBiblio0 = new Listcell(biblioxUnidad.getTbMicUnidad().getVrNombre());
-						itemBiblio.appendChild(celdaBiblio0);
-						Listcell celdaBiblio1 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrNombre());
-						itemBiblio.appendChild(celdaBiblio1);
-						Listcell celdaBiblio2 = new Listcell(biblioxUnidad.getTbMicBibliografia().getVrSitioweb());
-						itemBiblio.appendChild(celdaBiblio2);
-						if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='1'){
-							Listcell celdaBiblio3 = new Listcell("COMPLEMENTARIA");
-							itemBiblio.appendChild(celdaBiblio3);
-						}else if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='0'){
-							Listcell celdaBiblio3 = new Listcell("BÁSICA");
-							itemBiblio.appendChild(celdaBiblio3);
-						}
-						listaCibergrafia.appendChild(itemBiblio);
+						listaBibliosxUnidadGuardar.add(biblioxUnidad);
 						
 					}
 				}
 			}
 		}
-		
+		System.out.println("unidades");
+		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroGuardar){
+			System.out.println(unidad.getNbId());
+		}
+		System.out.println("temas");
+		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+			System.out.println(tema.getNbId());
+		}
+		System.out.println("subtemas");
+		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
+			System.out.println(subtema.getNbid());
+		}
 	}
 	
 	/**
@@ -1133,6 +1130,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * @param idMicrocurriculo cadena de caracteres con identificacion del microcurriculo
 	 */
 	public void llenarEvaluaciones(String idMicrocurriculo){
+		
 		List<TbMicEvaluacionxmicro> evaluacionesxMicro = null;
 		try {
 			evaluacionesxMicro = evaluacionxMicroNGC.ListarEvaluacionxMicroxMicro(idMicrocurriculo);
@@ -1141,7 +1139,13 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		}
 		if(evaluacionesxMicro != null){
 			for(TbMicEvaluacionxmicro evaluacionxmicro: evaluacionesxMicro){
-				Listitem item = new Listitem();
+				final Listitem item = new Listitem();
+				item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event arg0) throws Exception {
+						eliminaListItem(item, "");
+					}
+				});
 				
 				Listcell celda1 = new Listcell(evaluacionxmicro.getTbMicEvaluacion().getVrDescripcion());
 				item.appendChild(celda1);
@@ -1151,6 +1155,12 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				item.appendChild(celda3);
 				listaEvaluaciones.appendChild(item);
 				
+				listaEvaluacionesxMicroGuardar.add(evaluacionxmicro);
+				
+			}
+			System.out.println("evaluaciones");
+			for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroGuardar){
+				System.out.println(evaluacion.getNbId());
 			}
 		}
 	}
@@ -1163,25 +1173,504 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 */
 	private void eliminaListItem(Listitem item, String clave){
 		if(item.getParent().getId().toString().equals("listaUnidades")){
+			quitarUnidad(item);
 			eliminaCascadaUnidad(item, clave.toUpperCase());
 			item.detach();
 			recargarCombosUnidades(listaUnidades);
 		} else if (item.getParent().getId().toString().equals("listaTemas")){
+			quitarTema(item);
 			eliminaCascadaTema(item, clave.toUpperCase());
 			item.detach();
 			recargarCombosTemas(listaTemas);
 		} else if(item.getParent().getId().toString().equals("listaSubtemas")){
+			quitarSubtema(item);
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaEvaluaciones")){
+			quitarEvaluacion(item);
 			Listcell celdaPorcentaje = (Listcell)item.getChildren().get(1);
 			porcentajeEvaluacion = porcentajeEvaluacion - Integer.parseInt(celdaPorcentaje.getLabel());
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaBibliografia")){
+			quitarBibliografia(item);
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaCibergrafia")){
+			quitarCibergrafia(item);
 			item.detach();
 		} else if(item.getParent().getId().toString().equals("listaObjetivosEspecificos")){
+			quitarObjetivo(item);
 			item.detach();
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un item en bibliografia, se procede a identificar el item borrado
+	 * para registrarlo en una lista para ser borrado en base de datos
+	 * @param item elemento de lista bibliografias
+	 */
+	public void quitarBibliografia(Listitem item){
+		/**
+		 * Estracción de datos del item que llega por parametro
+		 */
+		
+		Listcell celda = (Listcell) item.getChildren().get(1);
+		String nombreBibliografia = celda.getLabel();
+		
+		/**
+		 * Busca en la lista de temas el item borrado
+		 */
+		
+		TbMicBiblioxunidad bibliografiaBorrar = null;
+		if(listaBibliosxUnidadGuardar != null){
+			for(TbMicBiblioxunidad bibliografia: listaBibliosxUnidadGuardar){
+				if(bibliografia.getTbMicBibliografia().getVrNombre().equals(nombreBibliografia)){
+					bibliografiaBorrar = bibliografia;
+				}
+			}
+		}
+		
+		if(bibliografiaBorrar != null){
+			
+			/**
+			 * actualiza en las listas el subtema a quitar
+			 */
+			
+			listaBibliosxUnidadGuardar.remove(bibliografiaBorrar);
+			listaBibliosxUnidadBorrar.add(bibliografiaBorrar);
+		}
+		System.out.println("temas despues de borrar");
+		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
+			System.out.println(cibergrafia.getNbId());
+		}
+		System.out.println("--temas a borrar--");
+		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadBorrar){
+			System.out.println(cibergrafia.getNbId());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un item en bibliografia, se procede a identificar el item borrado
+	 * para registrarlo en una lista para ser borrado en base de datos
+	 * @param item elemento de lista cibergrafias
+	 */
+	public void quitarCibergrafia(Listitem item){
+		/**
+		 * Estracción de datos del item que llega por parametro
+		 */
+		
+		Listcell celda = (Listcell) item.getChildren().get(1);
+		String nombreCibergrafia = celda.getLabel();
+		
+		/**
+		 * Busca en la lista de temas el item borrado
+		 */
+		
+		TbMicBiblioxunidad cibergrafiaBorrar = null;
+		if(listaBibliosxUnidadGuardar != null){
+			for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
+				if(cibergrafia.getTbMicBibliografia().getVrSitioweb().equals(nombreCibergrafia)){
+					cibergrafiaBorrar = cibergrafia;
+				}
+			}
+		}
+		
+		if(cibergrafiaBorrar != null){
+			
+			/**
+			 * actualiza en las listas el subtema a quitar
+			 */
+			
+			listaBibliosxUnidadGuardar.remove(cibergrafiaBorrar);
+			listaBibliosxUnidadBorrar.add(cibergrafiaBorrar);
+		}
+		System.out.println("temas despues de borrar");
+		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
+			System.out.println(cibergrafia.getNbId());
+		}
+		System.out.println("--temas a borrar--");
+		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadBorrar){
+			System.out.println(cibergrafia.getNbId());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un item en evaluacion, se procede a identificar el item borrado
+	 * para registrarlo en una lista para ser borrado en base de datos
+	 * @param item elemento de lista evaluaciones
+	 */
+	public void quitarEvaluacion(Listitem item){
+		/**
+		 * Estracción de datos del item que llega por parametro
+		 */
+		
+		Listcell celda = (Listcell) item.getChildren().get(0);
+		String nombreEvaluacion = celda.getLabel();
+		
+		/**
+		 * Busca en la lista de temas el item borrado
+		 */
+		
+		TbMicEvaluacionxmicro evaluacionBorrar = null;
+		if(listaEvaluacionesxMicroGuardar != null){
+			for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroGuardar){
+				if(evaluacion.getTbMicEvaluacion().getVrDescripcion().equals(nombreEvaluacion)){
+					evaluacionBorrar = evaluacion;
+				}
+			}
+		}
+		
+		if(evaluacionBorrar != null){
+			
+			/**
+			 * actualiza en las listas el subtema a quitar
+			 */
+			
+			listaEvaluacionesxMicroGuardar.remove(evaluacionBorrar);
+			listaEvaluacionesxMicroBorrar.add(evaluacionBorrar);
+		}
+		System.out.println("temas despues de borrar");
+		for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroGuardar){
+			System.out.println(evaluacion.getNbId());
+		}
+		System.out.println("--temas a borrar--");
+		for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroBorrar){
+			System.out.println(evaluacion.getNbId());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un item en subtemas, se procede a identificar el item borrado
+	 * para registrarlo en una lista para ser borrado en base de datos
+	 * @param item elemento de lista subtemas
+	 */
+	public void quitarSubtema(Listitem item){
+		/**
+		 * Estracción de datos del item que llega por parametro
+		 */
+		
+		Listcell celda = (Listcell) item.getChildren().get(2);
+		String nombreSubtema = celda.getLabel();
+		
+		/**
+		 * Busca en la lista de temas el item borrado
+		 */
+		
+		TbMicSubtemaxtema subtemaBorrar = null;
+		if(listaSubtemasxTemaGuardar != null){
+			for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
+				if(subtema.getTbMicSubtema().getVrDescripcion().equals(nombreSubtema)){
+					subtemaBorrar = subtema;
+				}
+			}
+		}
+		
+		if(subtemaBorrar != null){
+			
+			/**
+			 * actualiza en las listas el subtema a quitar
+			 */
+			
+			listaSubtemasxTemaGuardar.remove(subtemaBorrar);
+			listaSubtemasxTemaBorrar.add(subtemaBorrar);
+		}
+		System.out.println("temas despues de borrar");
+		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
+			System.out.println(subtema.getNbid());
+		}
+		System.out.println("--temas a borrar--");
+		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaBorrar){
+			System.out.println(subtema.getNbid());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un item en temas, se procede a identificar el item borrado
+	 * para registrarlo en una lista para ser borrado en base de datos
+	 * @param item elemento de lista temas
+	 */
+	public void quitarTema(Listitem item){
+		/**
+		 * Estracción de datos del item que llega por parametro
+		 */
+		
+		Listcell celda = (Listcell) item.getChildren().get(1);
+		String nombreTema = celda.getLabel();
+		
+		/**
+		 * Busca en la lista de temas el item borrado
+		 */
+		
+		TbMicTemaxunidad temaBorrar = null;
+		if(listaObjetivosxMicroGuardar != null){
+			for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+				if(tema.getTbMicTema().getVrDescripcion().equals(nombreTema)){
+					temaBorrar = tema;
+				}
+			}
+		}
+		
+		if(temaBorrar != null){
+			
+			/**
+			 * invoca el metodo que procede a borrar subtemas asociados al subtema a borrar
+			 */
+			quitarCascadaSubtemas(temaBorrar.getTbMicTema().getNbIdtema());
+			
+			/**
+			 * actualiza en las listas el tema a quitar
+			 */
+			
+			listaTemasxUnidadGuardar.remove(temaBorrar);
+			listaTemasxUnidadBorrar.add(temaBorrar);
+		}
+		System.out.println("temas despues de borrar");
+		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+			System.out.println(tema.getNbId());
+		}
+		System.out.println("--temas a borrar--");
+		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+			System.out.println(tema.getNbId());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un item en objetivos, se procede a identificar el item borrado
+	 * para registrarlo en una lista para ser borrado en base de datos
+	 * @param item elemento de lista objetivos especificos
+	 */
+	public void quitarObjetivo(Listitem item){
+		/**
+		 * Estracción de datos del item que llega por parametro
+		 */
+		
+		Listcell celda = (Listcell) item.getChildren().get(0);
+		String nombreObjetivo = celda.getLabel();
+		
+		/**
+		 * Busca en la lista de objetivos el item borrado
+		 */
+		
+		TbMicObjetivoxmicro objetivoBorrar = null;
+		if(listaObjetivosxMicroGuardar != null){
+			for(TbMicObjetivoxmicro objetivo: listaObjetivosxMicroGuardar){
+				if(objetivo.getTbMicObjetivo().getVrDescripcion().equals(nombreObjetivo)){
+					objetivoBorrar = objetivo;
+				}
+			}
+		}
+		
+		if(objetivoBorrar != null){
+			/**
+			 * actualiza en las listas el objetivo a quitar
+			 */
+			
+			listaObjetivosxMicroGuardar.remove(objetivoBorrar);
+			listaObjetivosxMicroBorrar.add(objetivoBorrar);
+		}
+		System.out.println("objetivos despues de borrar");
+		for(TbMicObjetivoxmicro objetivo: listaObjetivosxMicroGuardar){
+			System.out.println(objetivo.getNbId());
+		}
+		System.out.println("--objetivos a borrar--");
+		for(TbMicObjetivoxmicro objetivo: listaObjetivosxMicroBorrar){
+			System.out.println(objetivo.getNbId());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un item en unidades, se procede a identificar el item borrado
+	 * para registrarlo en una lista para ser borrado en base de datos
+	 * @param item elemento de lista unidades
+	 */
+	public void quitarUnidad(Listitem item){
+		/**
+		 * Estracción de datos del item que llega por parametro
+		 */
+		
+		Listcell celda = (Listcell) item.getChildren().get(1);
+		String nombreUnidad = celda.getLabel();
+		
+		/**
+		 * Busca en la lista de unidades el item borrado
+		 */
+		
+		TbMicUnidadxmicro unidadBorrar = null;
+		if(listaUnidadesxMicroGuardar != null){
+			for(TbMicUnidadxmicro unidadxMicro: listaUnidadesxMicroGuardar){
+				if(unidadxMicro.getTbMicUnidad().getVrNombre().equals(nombreUnidad)){
+					unidadBorrar = unidadxMicro;
+				}
+			}
+		}
+		
+		if(unidadBorrar != null){
+			/**
+			 * invoca el metodo de borrado en cascada asociado a la unidad
+			 */
+			quitarCascadaTemas(unidadBorrar.getTbMicUnidad().getNbIdunidad());
+			
+			quitarCascadaBibliografía(unidadBorrar.getTbMicUnidad().getNbIdunidad());
+			
+			/**
+			 * actualiza en las listas la unidad a quitar
+			 */
+			
+			listaUnidadesxMicroGuardar.remove(unidadBorrar);
+			listaUnidadesxMicroBorrar.add(unidadBorrar);
+		}
+		System.out.println("unidades despues de borrar");
+		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroGuardar){
+			System.out.println(unidad.getNbId());
+		}
+		System.out.println("--unidades a borrar--");
+		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroBorrar){
+			System.out.println(unidad.getNbId());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de unidades, el metodo borra en cascada los temas asociados a la unidad
+	 * borrada
+	 * @param idUnidad identidad de la unidad borrada
+	 */
+	public void quitarCascadaTemas(int idUnidad){
+		
+		/**
+		 * El dato booleno permite que se permanezca borrando temas hasta que no hayan más
+		 * asociados
+		 */
+		
+		boolean seguirBorrando = true;
+		while(seguirBorrando){
+			seguirBorrando = false;
+			TbMicTemaxunidad temaxUnidadBorrar = null;
+			
+			/**
+			 * Busca en la lista los temas asociados a borrar
+			 */
+			
+			if(listaTemasxUnidadGuardar != null){
+				for(TbMicTemaxunidad temaxUnidad: listaTemasxUnidadGuardar){
+					if(temaxUnidad.getTbMicUnidad().getNbIdunidad() == idUnidad){
+						temaxUnidadBorrar = temaxUnidad;
+						seguirBorrando = true;
+					}
+				}
+			}
+				
+			/**
+			 * procede a borrar en los listados el tema
+			 */
+			
+			if(temaxUnidadBorrar != null){
+				/**
+				 * invoca el metodo que procede a borrar subtemas asociados al subtema a borrar
+				 */
+				quitarCascadaSubtemas(temaxUnidadBorrar.getTbMicTema().getNbIdtema());
+				
+				listaTemasxUnidadGuardar.remove(temaxUnidadBorrar);
+				listaTemasxUnidadBorrar.add(temaxUnidadBorrar);
+			}
+		}
+		System.out.println("temas despues de borrar");
+		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+			System.out.println(tema.getNbId());
+		}
+		System.out.println("--temas a borrar--");
+		for(TbMicTemaxunidad tema: listaTemasxUnidadBorrar){
+			System.out.println(tema.getNbId());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de un tema, el metodo procede a borrar de los listados los
+	 * subtemas asociados
+	 * @param idTema identificación de tema borrado
+	 */
+	public void quitarCascadaSubtemas(int idTema){
+		
+		/**
+		 * Variable boolena que indica cuando parar de borrar subtemas,
+		 * cuando ya no hay subtemas asociados
+		 */
+		
+		boolean seguirBorrando = true;
+		while(seguirBorrando){
+			seguirBorrando = false;
+			
+			/**
+			 * Busca en todos los subtemas si alguno tiene asociación con el tema
+			 */
+			
+			TbMicSubtemaxtema subtemaxtemaBorrar = null;
+			if(listaSubtemasxTemaGuardar != null){
+				for(TbMicSubtemaxtema subtemaxTema: listaSubtemasxTemaGuardar){
+					if(subtemaxTema.getTbMicTema().getNbIdtema() == idTema){
+						subtemaxtemaBorrar = subtemaxTema;
+						seguirBorrando = true;
+					}
+				}
+			}
+			if(subtemaxtemaBorrar != null){
+				listaSubtemasxTemaGuardar.remove(subtemaxtemaBorrar);
+				listaSubtemasxTemaBorrar.add(subtemaxtemaBorrar);
+			}
+		}
+		System.out.println("subtemas despues de borrar");
+		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
+			System.out.println(subtema.getNbid());
+		}
+		System.out.println("--subtemas a borrar--");
+		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaBorrar){
+			System.out.println(subtema.getNbid());
+		}
+	}
+	
+	/**
+	 * Ante el borrado de unidades, el metodo borra en cascada las bibliografias asociadas a la unidad
+	 * borrada
+	 * @param idUnidad identidad de la unidad borrada
+	 */
+	public void quitarCascadaBibliografía(int idUnidad){
+		
+		/**
+		 * El dato booleno permite que se permanezca borrando temas hasta que no hayan más
+		 * asociados
+		 */
+		
+		boolean seguirBorrando = true;
+		while(seguirBorrando){
+			seguirBorrando = false;
+			TbMicBiblioxunidad BiblioxUnidadBorrar = null;
+			
+			/**
+			 * Busca en la lista los temas asociados a borrar
+			 */
+			
+			if(listaBibliosxUnidadGuardar != null){
+				for(TbMicBiblioxunidad biblioxUnidad: listaBibliosxUnidadGuardar){
+					if(biblioxUnidad.getTbMicUnidad().getNbIdunidad() == idUnidad){
+						BiblioxUnidadBorrar = biblioxUnidad;
+						seguirBorrando = true;
+					}
+				}
+			}
+				
+			/**
+			 * procede a borrar en los listados la bibliografia
+			 */
+			
+			if(BiblioxUnidadBorrar != null){
+				listaBibliosxUnidadGuardar.remove(BiblioxUnidadBorrar);
+				listaBibliosxUnidadBorrar.add(BiblioxUnidadBorrar);
+			}
+		}
+		System.out.println("bibliografias despues de borrar");
+		for(TbMicBiblioxunidad tema: listaBibliosxUnidadGuardar){
+			System.out.println(tema.getNbId());
+		}
+		System.out.println("--biblio a borrar--");
+		for(TbMicBiblioxunidad tema: listaBibliosxUnidadBorrar){
+			System.out.println(tema.getNbId());
 		}
 	}
 	
@@ -1304,7 +1793,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * Ante el evento click en el botón de reinicio de duplicado, procede a
 	 * llamar el metodo que reinicia el duplicado
 	 */
-	public void onClick$tool_duplica_otro(){
+	public void onClick$tool_modifica_otro(){
 		ReiniciarBusqueda();
 	}
 	
@@ -1374,10 +1863,30 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			Comboitem item = new Comboitem(txtNombreTema.getValue().toUpperCase());		
 			cmbListaTemas.appendChild(item);
 			
-			listaTemas.appendChild(listaItem);
-			cmbIdUnidad.setValue("");
-			txtNombreTema.setValue("");
-			txtNumeroSemanas.setValue(null);
+			/**
+			 * Encapsulado de tema en la lista de objetos a guardar en base de datos
+			 */
+			
+			TbMicTema temaGuardar = new TbMicTema(txtNombreTema.getValue().toUpperCase(), "SYSTEM", new Date());
+			int Semanas = Integer.parseInt(txtNumeroSemanas.getValue().toString());
+			TbMicUnidad unidadGuardar = null;
+			for(TbMicUnidadxmicro unidadxMicro: listaUnidadesxMicroGuardar ){
+				if(cmbIdUnidad.getValue().toString().equals(unidadxMicro.getTbMicUnidad().getVrNombre())){
+					unidadGuardar = unidadxMicro.getTbMicUnidad();
+				}
+			}
+			if(unidadGuardar != null){
+				TbMicTemaxunidad temaxUnidadGuardar = new TbMicTemaxunidad(unidadGuardar, temaGuardar, Semanas, "SYSTEM", new Date());
+				listaTemasxUnidadGuardar.add(temaxUnidadGuardar);
+				
+				listaTemas.appendChild(listaItem);
+				cmbIdUnidad.setValue("");
+				txtNombreTema.setValue("");
+				txtNumeroSemanas.setValue(null);
+			}else{
+				Messagebox.show("Error en guardar tema");
+			}
+			
 		} else{
 			Messagebox.show("El Tema a Ingresar ya Existe.");
 		}
@@ -1407,7 +1916,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * @param event
 	 */
 	public void onClick$btnAddUnidad(Event event){
-		llenarListaUnidades(txtNombreUnidad.getValue());
+		llenarListaUnidades(txtNombreUnidad.getValue().toUpperCase());
 	}
 	
 	/**
@@ -1432,6 +1941,13 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				Listcell celdaUnidad = new Listcell(nombreUnidad.toUpperCase());
 				listaItem.appendChild(celdaUnidad);
 				llenarCombosUnidades(nombreUnidad.toUpperCase());
+				/**
+				 * encapsulamiento para agregar a la lista de objetos unidades x micro
+				 */
+				TbMicUnidad unidadGuardar = new TbMicUnidad(nombreUnidad, "SYSTEM", new Date());
+				TbMicUnidadxmicro unidadxMicroGuardar = new TbMicUnidadxmicro(unidadGuardar, microcurriculoGuardar, "SYSTEM", new Date());
+				listaUnidadesxMicroGuardar.add(unidadxMicroGuardar);
+				
 				listaUnidades.appendChild(listaItem);
 				txtNombreUnidad.setValue("");
 				txtNombreUnidad.setFocus(true);
@@ -1509,12 +2025,30 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		Listcell celdaUnidad = new Listcell(cmbListaUnidades.getValue());
 		Listcell celdaTema = new Listcell(cmbListaTemas.getValue());
 		Listcell celdaSubtema = new Listcell(txtSubTemas.getValue());
-		listaItem.appendChild(celdaUnidad);
-		listaItem.appendChild(celdaTema);
-		listaItem.appendChild(celdaSubtema);
+		/**
+		 * Encapsulado de subtema en la lista de objetos a guardar en base de datos
+		 */
+		TbMicSubtema subtemaGuardar = new TbMicSubtema(txtSubTemas.getValue().toString(), "SYSTEM", new Date());
+		TbMicTema temaGuardar = null;
+		for(TbMicTemaxunidad temaxUnidad: listaTemasxUnidadGuardar ){
+			if(cmbListaTemas.getValue().toUpperCase().equals(temaxUnidad.getTbMicTema().getVrDescripcion())){
+				temaGuardar = temaxUnidad.getTbMicTema();
+			}
+		}
+		if(temaGuardar != null){
+			TbMicSubtemaxtema subtemaxTemaGuardar = new TbMicSubtemaxtema(temaGuardar, subtemaGuardar, "SYSTEM", new Date());
+			listaSubtemasxTemaGuardar.add(subtemaxTemaGuardar);
+			
+			listaItem.appendChild(celdaUnidad);
+			listaItem.appendChild(celdaTema);
+			listaItem.appendChild(celdaSubtema);
+			
+			listaSubtemas.appendChild(listaItem);
+			txtSubTemas.setValue("");
+		}else{
+			Messagebox.show("Error en guardar subtema");
+		}
 		
-		listaSubtemas.appendChild(listaItem);
-		txtSubTemas.setValue("");
 	}
 	
 	/**
@@ -1573,15 +2107,40 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		Listcell celdaAutor = new Listcell(txtAutorBiblio.getValue().toUpperCase());
 		Listcell celdaISBN = new Listcell(txtISBNBiblio.getValue().toUpperCase());
 		Listcell celdaTipo = new Listcell(cmbTipoBibliografia.getValue().toUpperCase());
-		listaItem.appendChild(celdaUnidad);
-		listaItem.appendChild(celdaReferencia);
-		listaItem.appendChild(celdaAutor);
-		listaItem.appendChild(celdaISBN);
-		listaItem.appendChild(celdaTipo);
-		listaBibliografia.appendChild(listaItem);		
 		
-		limpiarCamposBibliografia();
-		txtReferenciaBiblio.focus();
+		/**
+		 * Encapsulado de bibliografia en la lista de objetos a guardar en base de datos
+		 */
+		char tipo;
+		if(cmbTipoBibliografia.getSelectedIndex() == 0){
+			tipo = '0';
+		}else{
+			tipo = '1';
+		}
+		TbMicBibliografia biblioGuardar = new TbMicBibliografia(txtReferenciaBiblio.getValue().toString(), null, txtISBNBiblio.getValue().toUpperCase(), txtAutorBiblio.getValue().toUpperCase(), tipo, "SYSTEM", new Date());
+		TbMicUnidad unidadGuardar = null;
+		for(TbMicUnidadxmicro unidadxMicro: listaUnidadesxMicroGuardar ){
+			if(cmbListaUnidadBiblio.getValue().toString().equals(unidadxMicro.getTbMicUnidad().getVrNombre())){
+				unidadGuardar = unidadxMicro.getTbMicUnidad();
+			}
+		}
+		if(unidadGuardar != null){
+			TbMicBiblioxunidad biblioxUnidadGuardar = new TbMicBiblioxunidad(biblioGuardar, unidadGuardar, "SYSTEM", new Date());
+			listaBibliosxUnidadGuardar.add(biblioxUnidadGuardar);
+			
+			listaItem.appendChild(celdaUnidad);
+			listaItem.appendChild(celdaReferencia);
+			listaItem.appendChild(celdaAutor);
+			listaItem.appendChild(celdaISBN);
+			listaItem.appendChild(celdaTipo);
+			listaBibliografia.appendChild(listaItem);		
+			
+			limpiarCamposBibliografia();
+			txtReferenciaBiblio.focus();
+		}else{
+			Messagebox.show("Error en guardar bibliografia");
+		}
+		
 	}
 	
 	private void limpiarCamposBibliografia(){
@@ -1636,11 +2195,21 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaItem.appendChild(celdaActividad);
 			listaItem.appendChild(celdaPorcentaje);
 			listaItem.appendChild(celdaFecha);
+			/**
+			 * Encapsulado de subtema en la lista de objetos a guardar en base de datos
+			 */
+			TbMicEvaluacion evaluacionGuardar = new TbMicEvaluacion(txtActividadMicro.getValue().toString(), "SYSTEM", new Date());
+			
+			int porcentaje = Integer.parseInt(txtPorcentajeActividad.getValue().toString());
+			TbMicEvaluacionxmicro evaluacionxmicroGuardar = new TbMicEvaluacionxmicro(evaluacionGuardar, microcurriculoGuardar, porcentaje, dtFechaEvaluacion.getValue(), "SYSTEM", new Date());
+			listaEvaluacionesxMicroGuardar.add(evaluacionxmicroGuardar);
+			
 			listaEvaluaciones.appendChild(listaItem);
 			txtActividadMicro.setValue("");
 			txtPorcentajeActividad.setValue(null);
 			dtFechaEvaluacion.setValue(null);
 			txtActividadMicro.focus();
+			
 		}
 	}
 	
@@ -1694,10 +2263,34 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		listaItem.appendChild(celdaSitio);
 		listaItem.appendChild(celdaURL);
 		listaItem.appendChild(celdaTipo);
-		listaCibergrafia.appendChild(listaItem);
-		txtNombreSitioCiber.setValue("");
-		txtURLSitioCiber.setValue("");
-		txtNombreSitioCiber.focus();
+		/**
+		 * Encapsulado de cibergrafias en la lista de objetos a guardar en base de datos
+		 */
+		char tipo;
+		if(cmbTipoCibergrafia.getSelectedIndex() == 0){
+			tipo = '0';
+		}else{
+			tipo = '1';
+		}
+		TbMicBibliografia biblioGuardar = new TbMicBibliografia(txtNombreSitioCiber.getValue().toString(), txtURLSitioCiber.getValue().toString(), null, null, tipo, "SYSTEM", new Date());
+		TbMicUnidad unidadGuardar = null;
+		for(TbMicUnidadxmicro unidadxMicro: listaUnidadesxMicroGuardar ){
+			if(cmbListaUnidadBiblio.getValue().toString().equals(unidadxMicro.getTbMicUnidad().getVrNombre())){
+				unidadGuardar = unidadxMicro.getTbMicUnidad();
+			}
+		}
+		if(unidadGuardar != null){
+			TbMicBiblioxunidad biblioxUnidadGuardar = new TbMicBiblioxunidad(biblioGuardar, unidadGuardar, "SYSTEM", new Date());
+			listaBibliosxUnidadGuardar.add(biblioxUnidadGuardar);
+			
+			listaCibergrafia.appendChild(listaItem);
+			txtNombreSitioCiber.setValue("");
+			txtURLSitioCiber.setValue("");
+			txtNombreSitioCiber.focus();
+		}else{
+			Messagebox.show("Error en guardar bibliografia");
+		}
+		
 	}
 	
 	private String mostrarNombreDocente(String idDocente){
@@ -1857,6 +2450,10 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	public void onClick$tool_save(){
+		Messagebox.show("click en guardar");
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
@@ -1865,6 +2462,9 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			panelModificarMicro.setVisible(false);
 			fichaContenidos.setVisible(true);
 			String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+			reiniciarListas();
+			cargarDocentes();
+			cargarEstados();
 			llenarDatos(idMicro);
 		}else{
 			panelModificarMicro.setVisible(true);

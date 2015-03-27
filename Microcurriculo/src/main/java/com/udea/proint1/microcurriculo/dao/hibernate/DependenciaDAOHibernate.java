@@ -28,8 +28,13 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			session = getSession();
 			session.save(dependencias);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Dependencia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -45,8 +50,13 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			session = getSession();
 			dependencia = (TbAdmDependencia)session.get(TbAdmDependencia.class, id);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Dependencia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -63,8 +73,13 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			session = getSession();
 			this.getHibernateTemplate().update(dependencias);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Dependencia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -82,8 +97,13 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			Criteria criteria = session.createCriteria(TbAdmDependencia.class);
 			dependencia = criteria.list();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Dependencias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -100,9 +120,14 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
             Query query = session.createQuery("from TbAdmDependencia where tbAdmUnidadAcademica  like :unidad");
             query.setString("unidad", unidad);               
             dependencias = query.list();                
-        }catch(HibernateException e){
-            throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar Listar las Dependencias por Unidad. "+e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Dependencias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return dependencias;
@@ -119,8 +144,13 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			Query query = session.createQuery("from TbAdmDependencia where tbAdmUnidadAcademica = :unidad");
 			query.setEntity("unidad", unidad);
 			listaDependencias = query.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("Se presentaron problemas al intentar obtener listado de Dependencias por Unidad.");
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Dependencias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally {
 			session.close();
 		}
@@ -138,9 +168,14 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
         	Query query = session.createQuery("from TbAdmDependencia where vrIddependencia  like :dependencia");
         	query.setString("dependencia", buscar);               
             dependencias = query.list();
-        }catch(HibernateException e){
-            throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar buscar Dependencias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return dependencias;

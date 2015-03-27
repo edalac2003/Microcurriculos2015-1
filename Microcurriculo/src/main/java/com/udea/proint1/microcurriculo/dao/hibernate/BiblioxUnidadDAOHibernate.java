@@ -28,8 +28,13 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 			session = getSession();
 			session.save(biblioxUnidad);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Bibliografia x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -44,8 +49,13 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 			session = getSession();
 			this.getHibernateTemplate().update(biblioxUnidad);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Bibliografia x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -60,8 +70,13 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 			session = getSession();
 			BiblioxUnidad = (TbMicBiblioxunidad) session.get(TbMicBiblioxunidad.class, id);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Bibliografia x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -79,9 +94,13 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 			Criteria criteria = session.createCriteria(TbMicBiblioxunidad.class);
 			
 			BibliosxUnidad = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Bibliografias x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -103,9 +122,14 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
         	query.setEntity("unidad", unidad);
                
         	bibliosxUnidad = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Bibliografias x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return bibliosxUnidad;

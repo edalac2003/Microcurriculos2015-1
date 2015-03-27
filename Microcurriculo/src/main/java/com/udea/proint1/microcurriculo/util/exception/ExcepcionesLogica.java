@@ -8,6 +8,29 @@ public class ExcepcionesLogica extends Exception {
 	
 	private static Logger logger=Logger.getLogger(PersonaNGCImpl.class);
 
+	private String msjUsuario;
+	private String msjTecnico;
+	private Exception origen;
+	
+	public String getMsjUsuario() {
+		return msjUsuario;
+	}
+	public void setMsjUsuario(String msjUsuario) {
+		this.msjUsuario = msjUsuario;
+	}
+	public String getMsjTecnico() {
+		return msjTecnico;
+	}
+	public void setMsjTecnico(String msjTecnico) {
+		this.msjTecnico = msjTecnico;
+	}
+	public Exception getOrigen() {
+		return origen;
+	}
+	public void setOrigen(Exception origen) {
+		this.origen = origen;
+	}
+	
 	public ExcepcionesLogica() {
 		// TODO Auto-generated constructor stub
 	}

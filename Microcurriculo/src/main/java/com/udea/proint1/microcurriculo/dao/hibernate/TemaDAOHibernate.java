@@ -31,8 +31,13 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 			session = getSession();
 			session.save(tema);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Tema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -49,8 +54,13 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 			session.update(tema);
 			tx.commit();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Tema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -64,8 +74,13 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 		try{
 			session = getSession();
 			tema = (TbMicTema)session.get(TbMicTema.class, idTema);			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al obtener guardar Tema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}			
@@ -88,9 +103,14 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
         	query.setString("nombre", nombre);
                
         	temas = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al listar Temas");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return temas;
@@ -106,9 +126,13 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 			Criteria criteria = session.createCriteria(TbMicTema.class);
 			temas = criteria.list();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Temas");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

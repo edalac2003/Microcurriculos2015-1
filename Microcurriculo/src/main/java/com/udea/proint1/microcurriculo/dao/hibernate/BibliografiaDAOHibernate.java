@@ -31,8 +31,13 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 	        session.save(bibliografia);
 	        session.flush(); //address will not get saved without this
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Bibliografia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -48,8 +53,13 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			session = getSession();
 			bibliografia = (TbMicBibliografia) session.get(TbMicBibliografia.class, id);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Bibliografia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -65,8 +75,13 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			session = getSession();
 			this.getHibernateTemplate().update(bibliografia);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Bibliografia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -83,8 +98,13 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
 			
 			bibliografias = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Bibliografia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -107,8 +127,13 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 
 			bibliografias = query.list();
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Bibliografia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -146,9 +171,13 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			Criteria criteria = session.createCriteria(TbMicBibliografia.class);
 			
 			bibliografias = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Bibliografias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

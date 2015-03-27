@@ -27,8 +27,13 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 			session = getSession();
 			session.save(temaXunidad);
 			session.flush(); 
-		} catch (HibernateException e) {
-
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Tema x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -43,8 +48,13 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 			session = getSession();
 			this.getHibernateTemplate().update(temaXunidad);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Tema x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -58,8 +68,13 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 		try{
 			session = getSession();
 			temaxUnidad = (TbMicTemaxunidad)session.get(TbMicTemaxunidad.class, idTemaxUnidad);
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Tema x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}	
@@ -82,9 +97,14 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
         	query.setEntity("unidad", unidad);
                
         	temasxUnidad = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Temas x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return temasxUnidad;
@@ -100,8 +120,13 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 			Criteria criteria = session.createCriteria(TbAdmPersona.class);
 			
 			temasxUnidad = criteria.list();
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Temas x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

@@ -31,8 +31,13 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			session = getSession();
 			session.save(subtema);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Subtema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -49,8 +54,13 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			session.update(subtema);
 			tx.commit();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Subtema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -66,8 +76,13 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			session = getSession();
 			subtema = (TbMicSubtema)session.get(TbMicSubtema.class, idTema);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Subtema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -85,8 +100,13 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 			Criteria criteria = session.createCriteria(TbMicSubtema.class);
 			subtemas = criteria.list();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO();
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Subtemas");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -107,9 +127,14 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
         	query.setEntity("tema", tema);
                
         	subtemas = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Subtemas");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return subtemas;

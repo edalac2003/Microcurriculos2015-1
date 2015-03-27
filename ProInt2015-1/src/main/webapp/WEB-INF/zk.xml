@@ -11,7 +11,7 @@
 	</device-config>
 	<system-config>
 		<label-location>/WEB-INF/zk-label.properties</label-location>	
-		<label-location>/WEB-INF/zk-label_en.properties</label-location>
+<!-- 		<label-location>/WEB-INF/zk-label_en.properties</label-location> -->
 		<disable-event-thread>false</disable-event-thread>
 	</system-config>
 		

@@ -600,6 +600,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
         	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="estadoNGC" ref="estadoNGC" />
         </bean>
         
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">

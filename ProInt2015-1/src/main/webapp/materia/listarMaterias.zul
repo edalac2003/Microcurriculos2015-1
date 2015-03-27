@@ -32,26 +32,26 @@
 											<row>
 												<div>
 													<label value="Unidad Academica"/>
-													<combobox id="cmbUnidadAcademica" width="65%"/>
+													<combobox id="cmbUnidadAcademica" width="60%"/>
 												</div>
 												<div>
 													<label value="Dependencia"/>
-													<combobox id="cmbDependencia" width="75%"/>
+													<combobox id="cmbDependencia" width="65%"/>
 												</div>
 												<div>
 													<label value="Nucleo"/>
-													<combobox id="cmbNucleo" width="85%"/>
+													<combobox id="cmbNucleo" width="80%"/>
 												</div>
 											</row>
 											
 											<row>
 												<div>
 													<label value="Codigo Materia"/>
-													<combobox id="cmbMateria" width="222px"/>
+													<combobox id="cmbMateria" width="60%"/>
 												</div>
 												<div>
 													<label value="Nombre Materia"/>
-													<textbox id="txtMateria" width="70%"/>
+													<textbox id="txtMateria" width="60%"/>
 												</div>
 												<div align="center">
 													<button id="btnBuscar" label="Buscar"/>

@@ -28,8 +28,13 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			session = getSession();
 			session.save(estado);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -44,8 +49,13 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			session = getSession();
 			estado = (TbMicEstado)session.get(TbMicEstado.class, idEstado);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}	
@@ -64,8 +74,13 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			
 			listaEstados = query.list();
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Estados");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -82,8 +97,13 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicEstado.class);
 			estados = criteria.list();			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -99,8 +119,13 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 			session = getSession();
 			this.getHibernateTemplate().update(estado);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

@@ -29,31 +29,39 @@ public class UnidadxMicroNGCImpl  implements UnidadxMicroNGC {
 	}
 
 	@Override
-	public void guardarUnidadXmicro(TbMicUnidadxmicro unidadXmicro) throws ExcepcionesLogica {
+	public void guardarUnidadXmicro(TbMicUnidadxmicro unidadXmicro)  throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
-		 * Comprobamos que el objeto id no est� vacio
+		 * Comprobamos que el objeto id no est� vacio
 		 */
 		if(unidadXmicro == null){
-			throw new ExcepcionesLogica("El objeto unidadXmicro est� vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto unidad x microcurriculo esta vacio");
+			throw expLog;
 		}
-		try {
-			int id = unidadXmicro.getNbId();
-			TbMicUnidadxmicro unidadXmicroConsulta = unidadxMicroDao.obtenerUnidadXmicro(id);
-		
-			if(unidadXmicroConsulta != null){
-				throw new ExcepcionesLogica("La Unidad x Microcurriculo a insertar ya existe");
-			}
-		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerUnidadXmicro de la clase unidadxMicroDao: "+ e);
-		}
+//		try {
+//			int id = unidadXmicro.getNbId();
+//			TbMicUnidadxmicro unidadXmicroConsulta = unidadxMicroDao.obtenerUnidadXmicro(id);
+//		
+//			if(unidadXmicroConsulta != null){
+//				throw new ExcepcionesLogica("La Unidad x Microcurriculo a insertar ya existe");
+//			}
+//		
+//		} catch (ExcepcionesDAO e) {
+//			log.error("fall� al invocar el metodo obtenerUnidadXmicro de la clase unidadxMicroDao: "+ e);
+//		}
 		
 		try {
 			
 			unidadxMicroDao.guardarUnidadXmicro(unidadXmicro);;
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo guardarUnidadXmicro de la clase unidadxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo guardar Unidad x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
@@ -71,57 +79,82 @@ public class UnidadxMicroNGCImpl  implements UnidadxMicroNGC {
 
 	@Override
 	public void modificarUnidadXmicro(TbMicUnidadxmicro unidadXmicro)
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el objeto id no esté vacio
 		 */
 		if(unidadXmicro == null){
-			throw new ExcepcionesLogica("El objeto unidadXmicro está vacio");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo modificar, el objeto unidad x microcurriculo esta vacio");
+			throw expLog;
 		}
 		try {
 			int id = unidadXmicro.getNbId();
 			TbMicUnidadxmicro unidadXmicroConsulta = unidadxMicroDao.obtenerUnidadXmicro(id);
 		
 			if(unidadXmicroConsulta == null){
-				throw new ExcepcionesLogica("La unidad x micro actualizar no existe");
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("La unidad x microcurriculo actualizar no existe");
+				throw expLog;
 			}
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidadXmicro de la clase unidadxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		}catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Unidad x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		try {
 			
 			unidadxMicroDao.modificarUnidadXmicro(unidadXmicro);
 		
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo modificarUnidadXmicro de la clase unidadxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo modificar Unidad x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 	}
 
 	@Override
-	public TbMicUnidadxmicro obtenerUnidadXmicro(int id) throws ExcepcionesLogica {
+	public TbMicUnidadxmicro obtenerUnidadXmicro(int id) throws ExcepcionesLogica, ExcepcionesDAO {
 		/*
 		 * Comprobamos que el dato id no sea vacio
 		 */
 		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de unidadxmicro, está vacia");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo consultar Unidad x Microcurriculo, no se ha encontrado id de busqueda");
+			throw expLog;
 		}
 		TbMicUnidadxmicro unidadXmicro = null;
 		
 		try {
 			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
 			unidadXmicro = unidadxMicroDao.obtenerUnidadXmicro(id);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUnidadXmicro de la clase unidadxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Unidad x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(unidadXmicro == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró Unidad x Micro con el id "+ id);
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontró unidad x Microcurriculo con Id");
+			throw expLog;
 		}else{
 			//si no esta vacio retorna la ciudad
 			return unidadXmicro;
@@ -130,22 +163,34 @@ public class UnidadxMicroNGCImpl  implements UnidadxMicroNGC {
 
 	@Override
 	public List<TbMicUnidadxmicro> listarUnidadesXMicroxMicro(
-			String idMicrocurriculo) throws ExcepcionesLogica {
+			String idMicrocurriculo) throws ExcepcionesLogica, ExcepcionesDAO {
 		List<TbMicUnidadxmicro> listaUnidadesxMicro = null;
 		
 		TbMicMicrocurriculo microcurriculo= null;
 		
 		try {
 			microcurriculo = microcurriculoDao.obtenerMicrocurriculo(idMicrocurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Unidades x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		
 		try {
 			listaUnidadesxMicro = unidadxMicroDao.listarUnidadesXMicroxMicro(microcurriculo);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarUnidadesXMicroxMicro de la clase unidadxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Unidades x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
@@ -156,19 +201,27 @@ public class UnidadxMicroNGCImpl  implements UnidadxMicroNGC {
 
 	@Override
 	public List<TbMicUnidadxmicro> listarUnidadesXmicro()
-			throws ExcepcionesLogica {
+			throws ExcepcionesLogica, ExcepcionesDAO{
 		List<TbMicUnidadxmicro> listaUnidadesxMicro = null;
 		try {
 			listaUnidadesxMicro = unidadxMicroDao.listarUnidadesXmicro();
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarUnidadesXmicro de la clase unidadxMicroDao: "+ e);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Unidades x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}
 		
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		if(listaUnidadesxMicro == null){
-			throw new ExcepcionesLogica("No se encontraron UnidadesxMicro en la tabla TbMicUnidadesxmicro");
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se encontraron datos en listado de unidades x Microcurriculo");
+			throw expLog;
 		}else{
 			return listaUnidadesxMicro;
 		}

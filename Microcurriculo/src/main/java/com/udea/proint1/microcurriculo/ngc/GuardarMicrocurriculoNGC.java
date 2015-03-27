@@ -34,5 +34,5 @@ public interface GuardarMicrocurriculoNGC {
 			List<TbMicBibliografia> bibliografia,
 			List<TbMicBiblioxunidad> biblioxunidad,
 			List<TbMicEvaluacion> evaluaciones,
-			List<TbMicEvaluacionxmicro> evaluacionxMicro) throws ExcepcionesLogica;	
+			List<TbMicEvaluacionxmicro> evaluacionxMicro) throws ExcepcionesLogica, ExcepcionesDAO;	
 }

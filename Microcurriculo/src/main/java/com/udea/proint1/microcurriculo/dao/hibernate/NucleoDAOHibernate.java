@@ -29,8 +29,13 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			session = getSession();
 			session.save(nucleo);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Nucleo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -44,8 +49,13 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			session = getSession();
 			this.getHibernateTemplate().update(nucleo);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Nucleo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -60,8 +70,13 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			session = getSession();
 			nucleo = (TbAdmNucleo) session.get(TbAdmNucleo.class, id);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Nucleo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -77,8 +92,13 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbAdmNucleo.class);
 			nucleos = criteria.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Nucleos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -97,9 +117,14 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
             Query query = session.createQuery("from TbAdmNucleo where tbAdmDependencia = :dependencia");
             query.setString("dependencia", dependencia);
             nucleos = query.list();
-        }catch(HibernateException e){
-            throw new ExcepcionesDAO("DAO: Se presentaron errores al intentar listar los Nucleos por Dependencia.  "+e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Nucleos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return nucleos;
@@ -117,8 +142,13 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			Query query = session.createQuery("from TbAdmNucleo where tbAdmDependencia = :dependencia");
 			query.setEntity("dependencia", dependencia);
 			listaNucleos = query.list();
-		} catch (HibernateException e) {
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Nucleos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
 			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -139,9 +169,14 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
                 nucleos = query.list();  
             } else
             	listarNucleos();   
-        }catch(HibernateException e){
-            throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar buscar Nucleos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
         return nucleos;

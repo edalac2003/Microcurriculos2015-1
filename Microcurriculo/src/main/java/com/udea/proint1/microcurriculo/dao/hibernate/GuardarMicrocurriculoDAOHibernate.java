@@ -115,11 +115,18 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 					session.save(bxU);
 			}
 					
-			tx.commit();			
-		} catch (HibernateException e){
+			tx.commit();
+		} catch (Exception e) {
 			tx.rollback();
-			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
-//			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
+			
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+//			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
+//			throw new ExcepcionesDAO("No fue posible guardar la informaciï¿½n del Microcurriculo. \n Por favor verifique la informaciï¿½n ingresada. \n" + 
 //					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
 		} finally {
 			session.close();
@@ -211,10 +218,16 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			}
 					
 			tx.commit();			
-		} catch (HibernateException e){
+		} catch (Exception e) {
 			tx.rollback();
-			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
-//			throw new ExcepcionesDAO("No fue posible guardar la información del Microcurriculo. \n Por favor verifique la información ingresada. \n" + 
+			
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+//			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
+//			throw new ExcepcionesDAO("No fue posible guardar la informaciï¿½n del Microcurriculo. \n Por favor verifique la informaciï¿½n ingresada. \n" + 
 //					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
 		} finally {
 			session.close();

@@ -23,8 +23,13 @@ public class ActaxMicroDAOHibernate extends HibernateDaoSupport implements Actax
 			session = getSession();
 			session.save(actaxMicro);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al guardar ActaxMicro");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

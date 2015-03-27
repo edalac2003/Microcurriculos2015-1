@@ -27,8 +27,13 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 			session = getSession();
 			session.save(semestre);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Semestre");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -42,8 +47,13 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 			session = getSession();
 			this.getHibernateTemplate().update(semestre);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar modificar Semestre");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -58,8 +68,13 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 			session= getSession();
 			Criteria criteria = session.createCriteria(TbAdmSemestre.class);
 			listaSemestre = criteria.list();
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO();
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Semestres");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -75,8 +90,13 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 			session = getSession();
 			semestre = (TbAdmSemestre)session.get(TbAdmSemestre.class, id);
 			
-		}catch (HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Semestres");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

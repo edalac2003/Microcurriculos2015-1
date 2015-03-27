@@ -26,8 +26,13 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			session = getSession();
 			session.save(microxEstado);
 			session.flush(); 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Microcurriculo x estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -42,8 +47,13 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			session = getSession();
 			this.getHibernateTemplate().update(microxEstado);
 
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO("No se pudo ejecutar la operacion DAO, Actualizar");
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar actualizar Microcurriculo x estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -58,8 +68,13 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			session = getSession();
 			microxEstado = (TbMicMicroxestado)session.get(TbMicMicroxestado.class, id);
 			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Microcurriculo x estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -75,8 +90,13 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
 			session = getSession();
 			Criteria criteria = session.createCriteria(TbMicMicroxestado.class);
 			microsxestado = criteria.list();			
-		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculo x estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}
@@ -94,9 +114,14 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
             query.setEntity("estado", estado);
             microsxEstado = query.list();
             
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculo x estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
 			session.close();
 		}
 		return microsxEstado;
