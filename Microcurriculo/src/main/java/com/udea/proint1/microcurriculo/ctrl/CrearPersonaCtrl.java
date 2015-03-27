@@ -29,6 +29,7 @@ import com.udea.proint1.microcurriculo.ngc.PaisNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.TipoIdentificacionNGC;
 import com.udea.proint1.microcurriculo.ngc.TipoPersonaNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
@@ -107,8 +108,15 @@ public class CrearPersonaCtrl extends GenericForwardComposer{
 		
 		try {
 			existePersona = personaNGC.existePersona(persona.getVrIdpersona());
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron Errores al intentar consultar el registro de Persona. "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 				
@@ -117,9 +125,15 @@ public class CrearPersonaCtrl extends GenericForwardComposer{
 				personaNGC.guardarPersona(persona);
 				Messagebox.show("Registro Guardado Exitosamente.","Almacenado",Messagebox.OK,Messagebox.INFORMATION);
 				cargarListaPersona();
-			} catch (ExcepcionesLogica e) {
-				Messagebox.show(e.getMessage().toString(),"Error",Messagebox.OK,Messagebox.ERROR);
-				logger.error("Se presentaron errores al Guardar el registro de Persona. "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}else
 			Messagebox.show("El ID que desea guardar ya Existe en la Base de Datos.  Verifiquelo!!");
@@ -149,8 +163,15 @@ public class CrearPersonaCtrl extends GenericForwardComposer{
 	private void cargarListaPersona(){
 		try {
 			listadoPersona = personaNGC.listarPersonas();
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron errores al intentar obtener el listado de Personas." + e.getMessage());
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		listaPersona.getItems().clear();

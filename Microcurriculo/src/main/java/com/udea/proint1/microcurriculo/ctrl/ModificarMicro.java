@@ -147,7 +147,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	BiblioxunidadNGC biblioxUnidadNGC;
 	
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicMicrocurriculo
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicMicrocurriculo
 	 * @param microcurriculoNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
@@ -155,7 +155,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmSemestre
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbAdmSemestre
 	 * @param semestreNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setSemestreNGC(SemestreNGC semestreNGC) {
@@ -163,7 +163,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmPersona
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbAdmPersona
 	 * @param personaNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setPersonaNGC(PersonaNGC personaNGC) {
@@ -171,7 +171,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicObjetivoxMicro
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicObjetivoxMicro
 	 * @param objetivoxMicroNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setObjetivoxMicroNGC(ObjetivoxMicroNGC objetivoxMicroNGC) {
@@ -179,7 +179,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicCorrequisito
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicCorrequisito
 	 * @param correquisitoNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setCorrequisitoNGC(CorrequisitoNGC correquisitoNGC) {
@@ -187,7 +187,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicPrerrequisito
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicPrerrequisito
 	 * @param prerrequisitoNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setPrerrequisitoNGC(PrerrequisitoNGC prerrequisitoNGC) {
@@ -195,7 +195,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicUnidad
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicUnidad
 	 * @param unidadxMicroNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setUnidadxMicroNGC(UnidadxMicroNGC unidadxMicroNGC) {
@@ -203,7 +203,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicTemaxUnidad
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicTemaxUnidad
 	 * @param temaxUnidadNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setTemaxUnidadNGC(TemaxUnidadNGC temaxUnidadNGC) {
@@ -211,7 +211,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicSubtemaxTema
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicSubtemaxTema
 	 * @param subtemaxTemaNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setSubtemaxTemaNGC(SubtemaxTemaNGC subtemaxTemaNGC) {
@@ -219,7 +219,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicEvaluacionxMicro
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicEvaluacionxMicro
 	 * @param evaluacionxMicroNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setEvaluacionxMicroNGC(EvaluacionxMicroNGC evaluacionxMicroNGC) {
@@ -227,7 +227,7 @@ public class ModificarMicro extends GenericForwardComposer{
 	}
 
 	/**
-	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicBiblioxUnidad
+	 * Metodo set para la inyecciï¿½n de dependencia y gestionar datos en la tabla TbMicBiblioxUnidad
 	 * @param biblioxUnidadNGC variable de acceso a los metodos de la capa del negocio
 	 */
 	public void setBiblioxUnidadNGC(BiblioxunidadNGC biblioxUnidadNGC) {
@@ -259,23 +259,44 @@ public class ModificarMicro extends GenericForwardComposer{
 		TbMicMicrocurriculo microcurriculo = null;
 		try {
 			microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		String idMateria = microcurriculo.getTbAdmMateria().getVrIdmateria();
 		
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
 		try {
 			listaMicrocurriculos = microcurriculoNGC.listarMicrocurriculos();
-		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo obtenerMicrocurriculos de la clase MicrocurriculoNGC "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		List<TbAdmSemestre> semestres = null;
 		try {
 			semestres = semestreNGC.listarSemestres();
-		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo listarSemestres de la clase SemestreNGC "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		cmbSemestre2.getItems().clear();
@@ -327,8 +348,15 @@ public class ModificarMicro extends GenericForwardComposer{
 			} else
 				Messagebox.show("No Se Hallaron Registros de Docentes");
 			cmbDocente.setValue("[Seleccione]");
-		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo listaDocentes de la clase PersonaNGC "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -344,8 +372,15 @@ public class ModificarMicro extends GenericForwardComposer{
 		if(!idMicro.equals("") && (!idMicro.equals(null))){
 			try {
 				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
-			} catch (ExcepcionesLogica e) {
-				logger.error("problemas al invocar metodo obtenerMicrocurriculos de la clase MicrocurriculoNGC "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 			
 			/**
@@ -385,8 +420,15 @@ public class ModificarMicro extends GenericForwardComposer{
 		if(!idMicro.equals("") && (!idMicro.equals(null))){
 			try {
 				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
-			} catch (ExcepcionesLogica e) {
-				logger.error("problemas al invocar metodo obtenerMicrocurriculos de la clase MicrocurriculoNGC "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 			
 			/**
@@ -534,8 +576,15 @@ public class ModificarMicro extends GenericForwardComposer{
 		List<TbAdmCorrequisito> correquisitos = null;
 		try {
 			correquisitos = correquisitoNGC.listarCorrequisitosxMateria(idMateria);
-		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo listarCorrequisitosxMateria de la clase CorrequisitoNGC "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		/**
@@ -564,8 +613,15 @@ public class ModificarMicro extends GenericForwardComposer{
 		List<TbAdmPrerrequisito> prerrequisitos = null;
 		try {
 			prerrequisitos = prerrequisitoNGC.listarPrerrequisitosxMateria(idMateria);
-		} catch (ExcepcionesDAO e) {
-			logger.error("problemas al invocar metodo listarPrerrequisitosxMateria de la clase PrerrequisitoNGC "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		/**
@@ -597,8 +653,15 @@ public class ModificarMicro extends GenericForwardComposer{
 		List<TbMicObjetivoxmicro> objetivosxMicro = null;
 		try {
 			objetivosxMicro = objetivoxMicroNGC.obtenerObjetivosxMicroxMicro(microcurriculo.getVrIdmicrocurriculo());
-		} catch (ExcepcionesLogica e) {
-			logger.error("problemas al invocar metodo obtenerObjetivosxMicroxMicro de la clase ObjetivoxMicroNGC "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
@@ -610,7 +673,7 @@ public class ModificarMicro extends GenericForwardComposer{
 			}else{
 				
 				/**
-				 * implantacion del metodo de borrado de item, a través del doble click
+				 * implantacion del metodo de borrado de item, a travï¿½s del doble click
 				 */
 				
 				final Listitem item = new Listitem();
@@ -649,7 +712,7 @@ public class ModificarMicro extends GenericForwardComposer{
 			txtObjetivoEspecifico.setText(null);
 			txtObjetivoEspecifico.setValue(null);
 		} else {
-			Messagebox.show("Se Requiere información en el Campo <Objetivo Especifico>");
+			Messagebox.show("Se Requiere informaciï¿½n en el Campo <Objetivo Especifico>");
 		}
 	}
 	
@@ -661,8 +724,15 @@ public class ModificarMicro extends GenericForwardComposer{
 		List<TbMicUnidadxmicro> unidadesxMicro = null;
 		try {
 			unidadesxMicro = unidadxMicroNGC.listarUnidadesXMicroxMicro(idMicrocurriculo);
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		for(TbMicUnidadxmicro unidadxMicro: unidadesxMicro){
@@ -685,8 +755,15 @@ public class ModificarMicro extends GenericForwardComposer{
 			List<TbMicTemaxunidad> temasxUnidad = null;
 			try {
 				temasxUnidad = temaxUnidadNGC.ListarTemasxUnidadxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
-			} catch (ExcepcionesLogica e) {
-				logger.error(e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 			if(temasxUnidad != null){
 				for(TbMicTemaxunidad temaxUnidad: temasxUnidad){
@@ -706,8 +783,15 @@ public class ModificarMicro extends GenericForwardComposer{
 					List<TbMicSubtemaxtema> subtemasxTema = null;
 					try {
 						subtemasxTema = subtemaxTemaNGC.listarSubtemaxTema_Tema(temaxUnidad.getTbMicTema().getNbIdtema());
-					} catch (ExcepcionesLogica e) {
-						logger.error(e);
+					}catch(ExcepcionesDAO expDAO){
+						Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(expDAO.getMsjTecnico());
+					}catch(ExcepcionesLogica expNgs){
+						Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(expNgs.getMsjTecnico());
+					}catch(Exception exp){
+//						Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(exp);
 					}
 					if(subtemasxTema != null){
 						for(TbMicSubtemaxtema subtemaxTema: subtemasxTema){
@@ -731,8 +815,15 @@ public class ModificarMicro extends GenericForwardComposer{
 			List<TbMicBiblioxunidad> bibliosxUnidad = null;
 			try {
 				bibliosxUnidad = biblioxUnidadNGC.listadoBiblioxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
-			} catch (ExcepcionesLogica e) {
-				logger.error(e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 			
 			if(bibliosxUnidad!=null){
@@ -750,7 +841,7 @@ public class ModificarMicro extends GenericForwardComposer{
 							Listcell celdaBiblio4 = new Listcell("COMPLEMENTARIA");
 							itemBiblio.appendChild(celdaBiblio4);
 						}else if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='0'){
-							Listcell celdaBiblio4 = new Listcell("BÁSICA");
+							Listcell celdaBiblio4 = new Listcell("Bï¿½SICA");
 							itemBiblio.appendChild(celdaBiblio4);
 						}
 						listaBibliografia.appendChild(itemBiblio);
@@ -768,7 +859,7 @@ public class ModificarMicro extends GenericForwardComposer{
 							Listcell celdaBiblio3 = new Listcell("COMPLEMENTARIA");
 							itemBiblio.appendChild(celdaBiblio3);
 						}else if(biblioxUnidad.getTbMicBibliografia().getBlTipo()=='0'){
-							Listcell celdaBiblio3 = new Listcell("BÁSICA");
+							Listcell celdaBiblio3 = new Listcell("Bï¿½SICA");
 							itemBiblio.appendChild(celdaBiblio3);
 						}
 						listaCibergrafia.appendChild(itemBiblio);
@@ -790,8 +881,15 @@ public class ModificarMicro extends GenericForwardComposer{
 		List<TbMicEvaluacionxmicro> evaluacionesxMicro = null;
 		try {
 			evaluacionesxMicro = evaluacionxMicroNGC.ListarEvaluacionxMicroxMicro(idMicrocurriculo);
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		for(TbMicEvaluacionxmicro evaluacionxmicro: evaluacionesxMicro){
 			Listitem item = new Listitem();

@@ -215,8 +215,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				}
 				cmbUnidadAcademica.setValue("[Seleccione]");
 			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron problemas al Obtener los registros de la tabla <Tb_Adm_UnidadAcademica>.  "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -229,14 +236,28 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			try {
 				unidad = unidad + "%";
 				listaDependencias = dependenciaNGC.buscarDepedencias(unidad);
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al buscar registros de la tabla <Tb_Adm_Dependencia>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}else{
 			try {
 				listaDependencias = dependenciaNGC.listarDependencias();
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}
 		
@@ -260,14 +281,28 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			try {
 				dependencia = dependencia + "%";
 				listaNucleos = nucleoNGC.buscarNucleos(dependencia);
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al buscar registros de la tabla <Tb_Adm_Nucleo>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}else{
 			try {
 				listaNucleos = nucleoNGC.listarNucleos();
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}
 		
@@ -305,8 +340,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				
 			}
 			
-		}catch(ExcepcionesLogica e){
-			
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -513,8 +555,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron departamentos");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -534,8 +583,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron nucleos");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -719,9 +775,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				listPrerrequisito2.appendChild(listaItem);
 			}
 			
-		} catch (ExcepcionesDAO e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		try {
 			List<TbAdmCorrequisito> correquisitos = correquisitoNGC.listarCorrequisitosxMateria(materia.getVrIdmateria());
@@ -736,9 +798,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				listCorrequisito2.appendChild(listaItem);
 			}
 			
-		} catch (ExcepcionesLogica e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		tool_save.setVisible(false);
@@ -839,8 +907,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		try{
 			materiaNGC.guardarMateria(materiaGuardar);
 			Messagebox.show("Se guardó exitosamente la materia","Información",Messagebox.OK,Messagebox.INFORMATION);
-		}catch(ExcepcionesLogica e){
-			Messagebox.show("No se guardó la materia","ERROR",Messagebox.OK,Messagebox.ERROR);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		/**
@@ -852,8 +927,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				TbAdmPrerrequisito nuevoPrerrequisito = new TbAdmPrerrequisito(materiaGuardar, prerrequisito, "SYSTEM", new Date());
 				prerrequisitoNGC.guardarPrerrequisito(nuevoPrerrequisito);
 			}
-		}catch(ExcepcionesLogica e){
-			Messagebox.show("NO se guardó los prerrequisitos","ERROR",Messagebox.OK,Messagebox.ERROR);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		/**
@@ -865,8 +947,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 				TbAdmCorrequisito nuevoCorrequisito = new TbAdmCorrequisito(materiaGuardar, correquisito, "SYSTEM", new Date());
 				correquisitoNGC.guardarCorrequisito(nuevoCorrequisito);
 			}
-		}catch(ExcepcionesLogica e){
-			Messagebox.show("NO se guardó los correquisitos","ERROR",Messagebox.OK,Messagebox.ERROR);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		cargarMaterias();
 		limpiarCampos();
@@ -877,8 +966,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 			materiaNGC.actualizarMateria(materiaActualizar);
 			Messagebox.show("Se actualizó materia exitosamente");
 			cargarMaterias();
-		}catch(ExcepcionesLogica e){
-			Messagebox.show("No se pudo actualizar la Materia");
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	

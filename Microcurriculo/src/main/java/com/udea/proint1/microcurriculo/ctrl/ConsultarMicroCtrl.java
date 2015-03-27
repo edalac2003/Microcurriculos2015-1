@@ -357,7 +357,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Eventos que actualizan los combobox de acuerdo a la selección
+	 * Eventos que actualizan los combobox de acuerdo a la selecciï¿½n
 	 */
 	
 //	public void onSelect$cmbIdUnidadAcademica(){
@@ -471,8 +471,15 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron microcurriculos");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -491,8 +498,15 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron microcurriculos");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -511,8 +525,15 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron departamentos");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -531,8 +552,15 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron nucleos");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -551,8 +579,15 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron materias");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -570,8 +605,15 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 			}else{
 				Messagebox.show("No se hallaron microcurriculos");
 			}
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -664,8 +706,15 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 //				mostrarInfoBasica(microcurriculo);
 				mostrarInfoBasicaResumen(microcurriculo);
 			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("Problemas para consultar el Microcurriculo. "+e.getMessage());
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 //		try {
@@ -786,7 +835,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 //						
 //						String tipo;
 //						if(biblio.getTbMicBibliografia().getBlTipo()=='1'){
-//							tipo = "básica";
+//							tipo = "bï¿½sica";
 //						}else{
 //							tipo = "complementaria";
 //						}
@@ -812,7 +861,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 //						listaItem.appendChild(celda2);
 //						String tipo;
 //						if(biblio.getTbMicBibliografia().getBlTipo()=='1'){
-//							tipo = "básica";
+//							tipo = "bï¿½sica";
 //						}else{
 //							tipo = "complementaria";
 //						}
@@ -838,7 +887,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		
-//		System.out.println("Quien me llamó fue : "+ comp.getParent().getId().toString());
+//		System.out.println("Quien me llamï¿½ fue : "+ comp.getParent().getId().toString());
 //		if(comp.getParent().getId().equals("formaListarMicro")){
 //			inhabilitarComponentes();
 //		} else if (comp.getParent().getId().equals("inicioMicro")){

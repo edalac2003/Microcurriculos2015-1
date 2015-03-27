@@ -32,6 +32,7 @@ import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.ngc.impl.MateriaNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class ListarMateriasCtrl extends GenericForwardComposer{
@@ -118,8 +119,15 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 				}
 				cmbUnidadAcademica.setValue("[Seleccione]");
 			}
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se presentaron problemas al Obtener los registros de la tabla <Tb_Adm_UnidadAcademica>.  "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -132,14 +140,28 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 			try {
 				unidad = unidad + "%";
 				listaDependencias = dependenciaNGC.buscarDepedencias(unidad);
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al buscar registros de la tabla <Tb_Adm_Dependencia>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}else{
 			try {
 				listaDependencias = dependenciaNGC.listarDependencias();
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Dependencia>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}
 		
@@ -163,14 +185,28 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 			try {
 				dependencia = dependencia + "%";
 				listaNucleos = nucleoNGC.buscarNucleos(dependencia);
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al buscar registros de la tabla <Tb_Adm_Nucleo>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}else{
 			try {
 				listaNucleos = nucleoNGC.listarNucleos();
-			} catch (ExcepcionesLogica e) {
-				logger.error("Se presentaron Errores al listar los registros de la tabla <Tb_Adm_Nucleo>.  "+e);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}
 		
@@ -195,14 +231,28 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 			try {
 				nucleo = nucleo + "%";
 				listaMaterias2 = materiaNGC.buscarMaterias(nucleo);
-			} catch (ExcepcionesLogica e) {
-				logger.error(e.getMessage());
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		} else {
 			try {
 				listaMaterias2 = materiaNGC.listarMaterias();
-			} catch (ExcepcionesLogica e) {
-				logger.error(e.getMessage());
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
 			}
 		}
 				
@@ -278,8 +328,15 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 				Messagebox.show("No se hallaron departamentos");
 			}
 			cmbDependencia.setValue("[Seleccione]");
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -299,8 +356,15 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 				Messagebox.show("No se hallaron nucleos");
 			}
 			cmbNucleo.setValue("[Seleccione]");
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -320,8 +384,15 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 				Messagebox.show("No se hallaron nucleos");
 			}
 			cmbMateria.setValue("[Seleccione]");
-		} catch (ExcepcionesLogica e) {
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -389,8 +460,15 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 			materiasEncontradas = materiaNGC.buscarMaterias(MateriaBuscar);
 			listaMaterias.getItems().clear();
 			
-		}catch(ExcepcionesLogica e){
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -423,8 +501,15 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 				if(listaTodosCorrequisitos == null){
 					try {
 						listaTodosCorrequisitos = correquisitoNGC.listarCorrequisitos();
-					} catch (ExcepcionesLogica e) {
-						logger.error(e);
+					}catch(ExcepcionesDAO expDAO){
+						Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(expDAO.getMsjTecnico());
+					}catch(ExcepcionesLogica expNgs){
+						Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(expNgs.getMsjTecnico());
+					}catch(Exception exp){
+//						Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(exp);
 					}
 				}
 				
@@ -451,8 +536,15 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 				if(listaTodosPrerrequisitos == null){
 					try {
 						listaTodosPrerrequisitos = prerrequisitoNGC.listarPrerrequisitos();
-					} catch (ExcepcionesLogica e) {
-						logger.error(e);
+					}catch(ExcepcionesDAO expDAO){
+						Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(expDAO.getMsjTecnico());
+					}catch(ExcepcionesLogica expNgs){
+						Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(expNgs.getMsjTecnico());
+					}catch(Exception exp){
+//						Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+						logger.error(exp);
 					}	
 				}
 				

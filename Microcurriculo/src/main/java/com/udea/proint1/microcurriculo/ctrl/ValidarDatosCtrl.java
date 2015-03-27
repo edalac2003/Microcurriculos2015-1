@@ -60,6 +60,7 @@ import com.udea.proint1.microcurriculo.ngc.TemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 /**
@@ -163,7 +164,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
 
 	/*
-	 * Definición de Metodos Setter de Objetos de Negocio.
+	 * Definiciï¿½n de Metodos Setter de Objetos de Negocio.
 	 */
 
 	public void setMateriaNGC(MateriaNGC materiaNGC) {
@@ -279,9 +280,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 											listadoUnidades, listadoUnidadesxMicro, listadoObjetivos, listadoObjetivosxMicro, listadoBibliografia, listadoBibliografiaxUnidad, 
 											listadoEvaluaciones, listadoEvaluacionesxMicro);
 					
-				} catch (ExcepcionesLogica e) {
-					logger.error("Error al intentar guardar el objeto <Microcurriculo>. "+e);
-					logger.error(new StringBuilder(e.getClass().getName()).append(": ").append(e.getMessage()), e);
+				}catch(ExcepcionesDAO expDAO){
+					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expDAO.getMsjTecnico());
+				}catch(ExcepcionesLogica expNgs){
+					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expNgs.getMsjTecnico());
+				}catch(Exception exp){
+//					Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(exp);
 				}
 				if (verificarCampos() == 1){
 					cmbEstado.setDisabled(false);
@@ -290,13 +297,13 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 					Messagebox.show("El Microcurriculo se ha guardado correctamente. Su estado inicial es <Borrador>. \n Para cambiar el estado, el Microcurriculo "+
 							"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
 				} else{
-					Messagebox.show("Errores al guardar.  Revise la información.");
+					Messagebox.show("Errores al guardar.  Revise la informaciï¿½n.");
 				}				
 			} else {
-				Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la información ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
+				Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la informaciï¿½n ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
 			}
 		} else{
-			Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
+			Messagebox.show("El formulario no cumple con la informaciï¿½n minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
 		}
 	}
 	
@@ -306,9 +313,15 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 		try {
 			micro = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
-		} catch (ExcepcionesLogica e) {
-			logger.error("Se ha producido un Error al intentar obtener un Registro desde la tabla Microcurriculos.");
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		if (micro != null)
@@ -332,14 +345,28 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 		try {
 			estado = estadoNGC.obtenerEstados(1);
-		} catch (ExcepcionesLogica e) {
-			logger.error("Error al obtener el objeto Estado."+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		try {
 			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
-		} catch (ExcepcionesLogica e) {
-			logger.error("Error al obtener el objeto Persona."+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		if(estado != null){
@@ -529,7 +556,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo se encarga de tomar la información de la ListaObjetivosEspecificos y empaquetar ListaObjetivos y ListadoObjetivosxMicrocurriculo.
+	 * Este metodo se encarga de tomar la informaciï¿½n de la ListaObjetivosEspecificos y empaquetar ListaObjetivos y ListadoObjetivosxMicrocurriculo.
 	 * @param microcurriculo
 	 * @return Lista con objetos de Tipo Objetivos
 	 */
@@ -556,14 +583,14 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				listadoObjetivosxMicro.add(objetivosxMicro);
 			}
 		} else {
-			Messagebox.show("Sin Información en el Campo Objetivo General.");
+			Messagebox.show("Sin Informaciï¿½n en el Campo Objetivo General.");
 			txtObjetivoGeneral.setFocus(true);
 		}		
 	}
 	
 	
 	/*
-	 * Este método se encarga de empaquetar la información y devolver un Objeto de tipo Microcurriculo
+	 * Este mï¿½todo se encarga de empaquetar la informaciï¿½n y devolver un Objeto de tipo Microcurriculo
 	 *  
 	 * @return Objeto de Tipo Microcurriculo.
 	 */
@@ -577,30 +604,54 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 				
 		try {
 			materia = materiaNGC.obtenerMateria(cmbMateria.getValue());
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		try {
 			semestre = semestreNGC.obtenerSemestre(cmbSemestre.getValue());
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		try {
 			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 
 		try {
 			estado = estadoNGC.obtenerEstados(1);
-		} catch (WrongValueException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExcepcionesLogica e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		codigoMicrocurriculo = asignarIdMicrocurriculo(cmbSemestre.getValue().toString(), cmbMateria.getValue().toString());
@@ -624,7 +675,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	
 	/*
-	 * Obtiene la Descripcion de un estado que se asignará al Microcurriculo.
+	 * Obtiene la Descripcion de un estado que se asignarï¿½ al Microcurriculo.
 	 */
 //	private String obtenerEstado(){
 //		String estado = "";
@@ -645,14 +696,28 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 		
 		try {
 			semestre = semestreNGC.obtenerSemestre(idsemestre);			
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		try {
 			materia = materiaNGC.obtenerMateria(idmateria);
-		} catch (ExcepcionesLogica e) {
-			logger.error(e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		if (semestre != null){
@@ -667,7 +732,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este método se encarga de validar la información ingresada y clasifica el estado en el que se guardará el Microcurriculo.
+	 * Este mï¿½todo se encarga de validar la informaciï¿½n ingresada y clasifica el estado en el que se guardarï¿½ el Microcurriculo.
 	 * @return
 	 */
 	public int verificarCampos(){
@@ -689,7 +754,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	
 	/**
-	 * Este metodo verifica que los campos de la Pestaña Información General no esten vacios.
+	 * Este metodo verifica que los campos de la Pestaï¿½a Informaciï¿½n General no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -732,7 +797,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	
 	/**
-	 * Este metodo verifica que los Componentes de la Pestaña Información Complementaria no esten vacios.
+	 * Este metodo verifica que los Componentes de la Pestaï¿½a Informaciï¿½n Complementaria no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -770,7 +835,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 //					txtObjetivoGeneral.setFocus(true);
 //				}
 //			} else {
-//				Messagebox.show("Falta Informacion en el Campo <Justificación Microcurriculo>");
+//				Messagebox.show("Falta Informacion en el Campo <Justificaciï¿½n Microcurriculo>");
 //				txtJustificacionMicro.setFocus(true);
 //			}
 //		} else {
@@ -782,7 +847,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo verifica que los Componentes de la Pestaña Unidades Detalladas no esten vacios.
+	 * Este metodo verifica que los Componentes de la Pestaï¿½a Unidades Detalladas no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -820,7 +885,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo verifica que los componentes de la Pestaña Evaluaciones no esten vacios.
+	 * Este metodo verifica que los componentes de la Pestaï¿½a Evaluaciones no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */
@@ -834,7 +899,7 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Este metodo verifica que los componentes de la Pestaña Bibliográficas no esten vacios.
+	 * Este metodo verifica que los componentes de la Pestaï¿½a Bibliogrï¿½ficas no esten vacios.
 	 * 
 	 * @return estado.  Si es verdadero, todos los campos fueron verificados correctamente; en caso contrario es falso.
 	 */

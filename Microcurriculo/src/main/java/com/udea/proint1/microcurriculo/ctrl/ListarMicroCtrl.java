@@ -12,6 +12,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Toolbarbutton;
 
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
@@ -19,6 +20,7 @@ import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
@@ -160,8 +162,15 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 			microcurriculosEncontrados = microcurriculoNGC.listarMicrocurriculosPorMateria(materiaBuscar);
 			listaMicrocurriculo.getItems().clear();
 			
-		}catch(ExcepcionesLogica e){
-			logger.error("error al invocar metodo listarMicrocurriculosPorMateria de la clase MicrocurriculoNGC: "+e);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		return microcurriculosEncontrados;
 	}
