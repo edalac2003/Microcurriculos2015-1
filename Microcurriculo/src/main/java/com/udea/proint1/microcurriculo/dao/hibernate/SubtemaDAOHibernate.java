@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.SubtemaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
 import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -29,7 +30,7 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
 
 		try {
 			session = getSession();
-			session.save(subtema);
+			session.saveOrUpdate(subtema);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -140,6 +141,29 @@ public class SubtemaDAOHibernate extends HibernateDaoSupport implements SubtemaD
         return subtemas;
 	}
 
+	@Override
+	public void eliminarSubtema(TbMicSubtema subtema) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(subtema);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Subtema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+	}
+	
 //	@Override
 //	public int contarRegistros() throws ExcepcionesDAO {
 //		int registro = 0;

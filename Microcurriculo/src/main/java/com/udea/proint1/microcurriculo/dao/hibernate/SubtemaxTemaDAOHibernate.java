@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.SubtemaxTemaDAO;
@@ -22,7 +23,7 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
 		
 		try{
 			session = getSession();
-			session.save(subtemaxTema);
+			session.saveOrUpdate(subtemaxTema);
 			session.flush();
 			
 		} catch (Exception e) {
@@ -90,6 +91,29 @@ public class SubtemaxTemaDAOHibernate extends HibernateDaoSupport implements Sub
 			session.close();
 		}
         return subtemaxTema;
+	}
+	
+	@Override
+	public void eliminarSubtemaxTema(TbMicSubtemaxtema subtemaxTema) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(subtemaxTema);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Subtema x Tema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
 	}
 
 //	@Override

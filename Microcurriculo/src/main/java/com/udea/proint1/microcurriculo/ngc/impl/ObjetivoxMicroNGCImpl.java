@@ -8,6 +8,7 @@ import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dao.ObjetivoDAO;
 import com.udea.proint1.microcurriculo.dao.ObjetivoxMicroDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -251,6 +252,21 @@ public class ObjetivoxMicroNGCImpl implements ObjetivoxMicroNGC {
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		return listaObjetivosxMicro;
+	}
+	
+	@Override
+	public void eliminarObjetivoxMicro(TbMicObjetivoxmicro objetivoxMicro) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			objetivoxMicroDao.eliminarObjetivoxMicro(objetivoxMicro);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Objetivo x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
 	}
 
 //	@Override

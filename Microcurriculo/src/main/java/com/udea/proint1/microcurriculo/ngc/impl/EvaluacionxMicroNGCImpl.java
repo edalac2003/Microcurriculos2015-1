@@ -9,6 +9,7 @@ import com.udea.proint1.microcurriculo.dao.EvaluacionxMicroDAO;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -228,5 +229,19 @@ public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 		return listaEvaluacionesxMicro;
 	}
 	
+	@Override
+	public void eliminarEvaluacionxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			evaluacionxMicroDao.eliminarEvaluacionxmicro(evaluacionxMicro);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Evaluacion x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 
 }

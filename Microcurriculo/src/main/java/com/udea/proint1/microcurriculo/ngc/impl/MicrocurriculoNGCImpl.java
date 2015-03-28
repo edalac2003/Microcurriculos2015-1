@@ -109,28 +109,44 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		/*
 		 * Comprobamos que el objeto id no estÃ© vacio
 		 */
-//		if(microcurriculo == null){
-//			throw new ExcepcionesLogica("El objeto microcurriculo estÃ¡ vacio");
-//		}
-//		try {
-//			String id = microcurriculo.getVrIdmicrocurriculo();
-//			TbMicMicrocurriculos microcurriculoConsulta = microcurriculoDao.obtenerMicrocurriculo(id);
-//		
-//			if(microcurriculoConsulta == null){
-//				throw new ExcepcionesLogica("El microcurriculo a actualizar no existe");
-//			}
-//		
-//		} catch (ExcepcionesDAO e) {
-//			log.error("fallÃ³ al invocar el metodo obtenerMicrocurriculo de la clase microcurriculoDao: "+ e);
-//		}
-//		
-//		try {
-//			
-//			microcurriculoDao.modificarMicrocurriculo(microcurriculo);
-//		
-//		} catch (ExcepcionesDAO e) {
-//			log.error("fallÃ³ al invocar el metodo modificarMicrocurriculo de la clase microcurriculoDao: "+ e);
-//		}
+		if(microcurriculo == null){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No es posible actualizar. El objeto Microcurriculo no contiene información válida");
+			throw expLog;
+		}
+		try {
+			String id = microcurriculo.getVrIdmicrocurriculo();
+			TbMicMicrocurriculo microcurriculoConsulta = microcurriculoDao.obtenerMicrocurriculo(id);
+		
+			if(microcurriculoConsulta == null){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("No es posible actualizar. El Microcurriculo no existe");
+				throw expLog;
+			}
+		
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo consultar Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+		try {
+			
+			microcurriculoDao.modificarMicrocurriculo(microcurriculo);
+		
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo actualizar Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
 	}
 
 	@Override

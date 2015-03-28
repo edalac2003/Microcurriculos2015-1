@@ -7,11 +7,13 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.EvaluacionxMicroDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements EvaluacionxMicroDAO {
@@ -23,7 +25,7 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 		
 		try{			
 			session = getSession();
-			session.save(evaluacionxMicro);
+			session.saveOrUpdate(evaluacionxMicro);
 			session.flush();
 			
 		} catch (Exception e) {
@@ -154,5 +156,27 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
         return evaluacionesxMicro;
 	}
 	
+	@Override
+	public void eliminarEvaluacionxmicro(TbMicEvaluacionxmicro evaluacionxMicro) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(evaluacionxMicro);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Evaluacion x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+	}
 
 }

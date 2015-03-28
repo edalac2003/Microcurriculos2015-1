@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.BiblioxUnidadDAO;
 import com.udea.proint1.microcurriculo.dao.UnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -232,5 +233,20 @@ public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 //		
 //		return registro;
 //	}
+	
+	@Override
+	public void eliminarBiblioxUnidad(TbMicBiblioxunidad biblioxUnidad) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			biblioxUnidadDao.eliminarBiblioxunidad(biblioxUnidad);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Bibliografia x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 
 }

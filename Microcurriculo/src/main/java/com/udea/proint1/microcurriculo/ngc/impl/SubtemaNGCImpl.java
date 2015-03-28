@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.SubtemaDAO;
 import com.udea.proint1.microcurriculo.dao.TemaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
 import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -228,6 +229,21 @@ public class SubtemaNGCImpl implements SubtemaNGC {
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		return listaSubtemas;
+	}
+	
+	@Override
+	public void eliminarSubtema(TbMicSubtema subtema) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			subtemaDao.eliminarSubtema(subtema);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Subtema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
 	}
 
 }

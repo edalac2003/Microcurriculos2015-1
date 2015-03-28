@@ -28,7 +28,7 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 		try{
 			session = getSession();			
 			//save example - without transaction
-	        session.save(bibliografia);
+	        session.saveOrUpdate(bibliografia);
 	        session.flush(); //address will not get saved without this
 			
 		} catch (Exception e) {
@@ -182,6 +182,29 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 			session.close();
 		}
 		return bibliografias;
+	}
+	
+	@Override
+	public void eliminarBiblio(TbMicBibliografia bibliografia) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(bibliografia);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Bibliografia");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
 	}
 
 }

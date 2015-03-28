@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.UnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO {
@@ -23,7 +24,7 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 
 		try {
 			session = getSession();
-			session.save(unidad);
+			session.saveOrUpdate(unidad);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -123,6 +124,29 @@ public class UnidadDAOHibernate extends HibernateDaoSupport implements UnidadDAO
 		}
 		
 		return unidades;
+	}
+	
+	@Override
+	public void eliminarUnidad(TbMicUnidad unidad) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(unidad);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
 	}
 
 }

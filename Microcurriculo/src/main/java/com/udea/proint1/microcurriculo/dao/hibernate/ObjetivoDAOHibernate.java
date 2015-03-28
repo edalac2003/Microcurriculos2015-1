@@ -24,7 +24,7 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 
 		try {
 			session = getSession();
-			session.save(objetivo);
+			session.saveOrUpdate(objetivo);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -162,6 +162,29 @@ public class ObjetivoDAOHibernate extends HibernateDaoSupport implements Objetiv
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
 			expDAO.setMsjUsuario("Error al intentar modificar Objetivos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+	}
+	
+	@Override
+	public void eliminarObjetivo(TbMicObjetivo objetivo) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(objetivo);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Objetivo");
 			expDAO.setMsjTecnico(e.getMessage());
 			expDAO.setOrigen(e);
 			

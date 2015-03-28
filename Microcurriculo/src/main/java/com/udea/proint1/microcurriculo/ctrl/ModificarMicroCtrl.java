@@ -45,29 +45,38 @@ import com.udea.proint1.microcurriculo.dto.TbMicEstado;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicPensum;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
 import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
+import com.udea.proint1.microcurriculo.ngc.BibliografiaNGC;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
+import com.udea.proint1.microcurriculo.ngc.ObjetivoNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
+import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
 import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
+import com.udea.proint1.microcurriculo.ngc.TemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -217,10 +226,22 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	public static List<TbMicBiblioxunidad> listaBibliosxUnidadBorrar = new ArrayList<TbMicBiblioxunidad>();
 	
 	/**
+	 * Variable de actualización objetivo general
+	 */
+	public static TbMicObjetivo objetivoGeneralGuardar = null;
+	
+	/**
 	 * Variable de control de porcentaje, que no sobrepase el 100%
 	 */
 	int porcentajeEvaluacion = 0;
 	
+	UnidadNGC unidadNGC;
+	ObjetivoNGC objetivoNGC;
+	TemaNGC temaNGC;
+	SubtemaNGC subtemaNGC;
+	BibliografiaNGC bibliografiaNGC;
+	EvaluacionNGC evaluacionNGC;
+	MicroxEstadoNGC microxEstadoNGC;
 	MicrocurriculoNGC microcurriculoNGC;
 	SemestreNGC semestreNGC;
 	PersonaNGC personaNGC;
@@ -238,6 +259,62 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	MateriaNGC materiaNGC;
 	EstadoNGC estadoNGC;
 	
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicUnidad
+	 * @param unidadNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setUnidadNGC(UnidadNGC unidadNGC) {
+		this.unidadNGC = unidadNGC;
+	}
+
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicObjetivo
+	 * @param objetivoNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setObjetivoNGC(ObjetivoNGC objetivoNGC) {
+		this.objetivoNGC = objetivoNGC;
+	}
+
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicTema
+	 * @param temaNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setTemaNGC(TemaNGC temaNGC) {
+		this.temaNGC = temaNGC;
+	}
+
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicSubtema
+	 * @param subtemaNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setSubtemaNGC(SubtemaNGC subtemaNGC) {
+		this.subtemaNGC = subtemaNGC;
+	}
+
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicBibliografia
+	 * @param bibliografiaNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setBibliografiaNGC(BibliografiaNGC bibliografiaNGC) {
+		this.bibliografiaNGC = bibliografiaNGC;
+	}
+
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicEvaluacion
+	 * @param evaluacionNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setEvaluacionNGC(EvaluacionNGC evaluacionNGC) {
+		this.evaluacionNGC = evaluacionNGC;
+	}
+
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmMicroxEstado
+	 * @param microxEstadoNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setMicroxEstadoNGC(MicroxEstadoNGC microxEstadoNGC) {
+		this.microxEstadoNGC = microxEstadoNGC;
+	}
+
 	/**
 	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbAdmUnidadAcademica
 	 * @param unidadAcademicaNGC variable de acceso a los metodos de la capa del negocio
@@ -379,6 +456,15 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		listaEvaluacionesxMicroBorrar.clear();
 		listaBibliosxUnidadGuardar.clear();
 		listaBibliosxUnidadBorrar.clear();
+		
+		listaObjetivosEspecificos.getItems().clear();
+		listaBibliografia.getItems().clear();
+		listaCibergrafia.getItems().clear();
+		listaEvaluaciones.getItems().clear();
+		listaObjetivosEspecificos.getItems().clear();
+		listaSubtemas.getItems().clear();
+		listaTemas.getItems().clear();
+		listaUnidades.getItems().clear();
 	}
 	
 	/**
@@ -978,6 +1064,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
 				if(objetivoxMicro.getBlTipo()=='1'){
 					txtObjetivoGeneral.setValue(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
+					objetivoGeneralGuardar = objetivoxMicro.getTbMicObjetivo();
 				}else{
 					
 					/**
@@ -1000,10 +1087,10 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 					
 				}
 			}
-			System.out.println("objetivos especificos");
-			for(TbMicObjetivoxmicro objetivoxMicro: listaObjetivosxMicroGuardar){
-				System.out.println(objetivoxMicro.getTbMicObjetivo().getNbIdobjetivo());
-			}
+//			System.out.println("objetivos especificos");
+//			for(TbMicObjetivoxmicro objetivoxMicro: listaObjetivosxMicroGuardar){
+//				System.out.println(objetivoxMicro.getTbMicObjetivo().getNbIdobjetivo());
+//			}
 		}
 	}
 	
@@ -1243,18 +1330,18 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				}
 			}
 		}
-		System.out.println("unidades");
-		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroGuardar){
-			System.out.println(unidad.getNbId());
-		}
-		System.out.println("temas");
-		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
-			System.out.println(tema.getNbId());
-		}
-		System.out.println("subtemas");
-		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
-			System.out.println(subtema.getNbid());
-		}
+//		System.out.println("unidades");
+//		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroGuardar){
+//			System.out.println(unidad.getNbId());
+//		}
+//		System.out.println("temas");
+//		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+//			System.out.println(tema.getNbId());
+//		}
+//		System.out.println("subtemas");
+//		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
+//			System.out.println(subtema.getNbid());
+//		}
 	}
 	
 	/**
@@ -1298,10 +1385,10 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				listaEvaluacionesxMicroGuardar.add(evaluacionxmicro);
 				
 			}
-			System.out.println("evaluaciones");
-			for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroGuardar){
-				System.out.println(evaluacion.getNbId());
-			}
+//			System.out.println("evaluaciones");
+//			for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroGuardar){
+//				System.out.println(evaluacion.getNbId());
+//			}
 		}
 	}
 	
@@ -1377,14 +1464,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaBibliosxUnidadGuardar.remove(bibliografiaBorrar);
 			listaBibliosxUnidadBorrar.add(bibliografiaBorrar);
 		}
-		System.out.println("temas despues de borrar");
-		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
-			System.out.println(cibergrafia.getNbId());
-		}
-		System.out.println("--temas a borrar--");
-		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadBorrar){
-			System.out.println(cibergrafia.getNbId());
-		}
+//		System.out.println("temas despues de borrar");
+//		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
+//			System.out.println(cibergrafia.getNbId());
+//		}
+//		System.out.println("--temas a borrar--");
+//		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadBorrar){
+//			System.out.println(cibergrafia.getNbId());
+//		}
 	}
 	
 	/**
@@ -1397,7 +1484,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		 * Estracción de datos del item que llega por parametro
 		 */
 		
-		Listcell celda = (Listcell) item.getChildren().get(1);
+		Listcell celda = (Listcell) item.getChildren().get(2);
 		String nombreCibergrafia = celda.getLabel();
 		
 		/**
@@ -1407,8 +1494,10 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		TbMicBiblioxunidad cibergrafiaBorrar = null;
 		if(listaBibliosxUnidadGuardar != null){
 			for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
-				if(cibergrafia.getTbMicBibliografia().getVrSitioweb().equals(nombreCibergrafia)){
-					cibergrafiaBorrar = cibergrafia;
+				if(cibergrafia.getTbMicBibliografia().getVrSitioweb() != null){
+					if(cibergrafia.getTbMicBibliografia().getVrSitioweb().equals(nombreCibergrafia)){
+						cibergrafiaBorrar = cibergrafia;
+					}
 				}
 			}
 		}
@@ -1422,14 +1511,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaBibliosxUnidadGuardar.remove(cibergrafiaBorrar);
 			listaBibliosxUnidadBorrar.add(cibergrafiaBorrar);
 		}
-		System.out.println("temas despues de borrar");
-		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
-			System.out.println(cibergrafia.getNbId());
-		}
-		System.out.println("--temas a borrar--");
-		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadBorrar){
-			System.out.println(cibergrafia.getNbId());
-		}
+//		System.out.println("temas despues de borrar");
+//		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadGuardar){
+//			System.out.println(cibergrafia.getNbId());
+//		}
+//		System.out.println("--temas a borrar--");
+//		for(TbMicBiblioxunidad cibergrafia: listaBibliosxUnidadBorrar){
+//			System.out.println(cibergrafia.getNbId());
+//		}
 	}
 	
 	/**
@@ -1467,14 +1556,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaEvaluacionesxMicroGuardar.remove(evaluacionBorrar);
 			listaEvaluacionesxMicroBorrar.add(evaluacionBorrar);
 		}
-		System.out.println("temas despues de borrar");
-		for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroGuardar){
-			System.out.println(evaluacion.getNbId());
-		}
-		System.out.println("--temas a borrar--");
-		for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroBorrar){
-			System.out.println(evaluacion.getNbId());
-		}
+//		System.out.println("temas despues de borrar");
+//		for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroGuardar){
+//			System.out.println(evaluacion.getNbId());
+//		}
+//		System.out.println("--temas a borrar--");
+//		for(TbMicEvaluacionxmicro evaluacion: listaEvaluacionesxMicroBorrar){
+//			System.out.println(evaluacion.getNbId());
+//		}
 	}
 	
 	/**
@@ -1512,14 +1601,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaSubtemasxTemaGuardar.remove(subtemaBorrar);
 			listaSubtemasxTemaBorrar.add(subtemaBorrar);
 		}
-		System.out.println("temas despues de borrar");
-		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
-			System.out.println(subtema.getNbid());
-		}
-		System.out.println("--temas a borrar--");
-		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaBorrar){
-			System.out.println(subtema.getNbid());
-		}
+//		System.out.println("temas despues de borrar");
+//		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
+//			System.out.println(subtema.getNbid());
+//		}
+//		System.out.println("--temas a borrar--");
+//		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaBorrar){
+//			System.out.println(subtema.getNbid());
+//		}
 	}
 	
 	/**
@@ -1562,14 +1651,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaTemasxUnidadGuardar.remove(temaBorrar);
 			listaTemasxUnidadBorrar.add(temaBorrar);
 		}
-		System.out.println("temas despues de borrar");
-		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
-			System.out.println(tema.getNbId());
-		}
-		System.out.println("--temas a borrar--");
-		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
-			System.out.println(tema.getNbId());
-		}
+//		System.out.println("temas despues de borrar");
+//		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+//			System.out.println(tema.getNbId());
+//		}
+//		System.out.println("--temas a borrar--");
+//		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+//			System.out.println(tema.getNbId());
+//		}
 	}
 	
 	/**
@@ -1606,14 +1695,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaObjetivosxMicroGuardar.remove(objetivoBorrar);
 			listaObjetivosxMicroBorrar.add(objetivoBorrar);
 		}
-		System.out.println("objetivos despues de borrar");
-		for(TbMicObjetivoxmicro objetivo: listaObjetivosxMicroGuardar){
-			System.out.println(objetivo.getNbId());
-		}
-		System.out.println("--objetivos a borrar--");
-		for(TbMicObjetivoxmicro objetivo: listaObjetivosxMicroBorrar){
-			System.out.println(objetivo.getNbId());
-		}
+//		System.out.println("objetivos despues de borrar");
+//		for(TbMicObjetivoxmicro objetivo: listaObjetivosxMicroGuardar){
+//			System.out.println(objetivo.getNbId());
+//		}
+//		System.out.println("--objetivos a borrar--");
+//		for(TbMicObjetivoxmicro objetivo: listaObjetivosxMicroBorrar){
+//			System.out.println(objetivo.getNbId());
+//		}
 	}
 	
 	/**
@@ -1657,14 +1746,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			listaUnidadesxMicroGuardar.remove(unidadBorrar);
 			listaUnidadesxMicroBorrar.add(unidadBorrar);
 		}
-		System.out.println("unidades despues de borrar");
-		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroGuardar){
-			System.out.println(unidad.getNbId());
-		}
-		System.out.println("--unidades a borrar--");
-		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroBorrar){
-			System.out.println(unidad.getNbId());
-		}
+//		System.out.println("unidades despues de borrar");
+//		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroGuardar){
+//			System.out.println(unidad.getNbId());
+//		}
+//		System.out.println("--unidades a borrar--");
+//		for(TbMicUnidadxmicro unidad: listaUnidadesxMicroBorrar){
+//			System.out.println(unidad.getNbId());
+//		}
 	}
 	
 	/**
@@ -1711,14 +1800,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				listaTemasxUnidadBorrar.add(temaxUnidadBorrar);
 			}
 		}
-		System.out.println("temas despues de borrar");
-		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
-			System.out.println(tema.getNbId());
-		}
-		System.out.println("--temas a borrar--");
-		for(TbMicTemaxunidad tema: listaTemasxUnidadBorrar){
-			System.out.println(tema.getNbId());
-		}
+//		System.out.println("temas despues de borrar");
+//		for(TbMicTemaxunidad tema: listaTemasxUnidadGuardar){
+//			System.out.println(tema.getNbId());
+//		}
+//		System.out.println("--temas a borrar--");
+//		for(TbMicTemaxunidad tema: listaTemasxUnidadBorrar){
+//			System.out.println(tema.getNbId());
+//		}
 	}
 	
 	/**
@@ -1755,14 +1844,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				listaSubtemasxTemaBorrar.add(subtemaxtemaBorrar);
 			}
 		}
-		System.out.println("subtemas despues de borrar");
-		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
-			System.out.println(subtema.getNbid());
-		}
-		System.out.println("--subtemas a borrar--");
-		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaBorrar){
-			System.out.println(subtema.getNbid());
-		}
+//		System.out.println("subtemas despues de borrar");
+//		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaGuardar){
+//			System.out.println(subtema.getNbid());
+//		}
+//		System.out.println("--subtemas a borrar--");
+//		for(TbMicSubtemaxtema subtema: listaSubtemasxTemaBorrar){
+//			System.out.println(subtema.getNbid());
+//		}
 	}
 	
 	/**
@@ -1804,14 +1893,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				listaBibliosxUnidadBorrar.add(BiblioxUnidadBorrar);
 			}
 		}
-		System.out.println("bibliografias despues de borrar");
-		for(TbMicBiblioxunidad tema: listaBibliosxUnidadGuardar){
-			System.out.println(tema.getNbId());
-		}
-		System.out.println("--biblio a borrar--");
-		for(TbMicBiblioxunidad tema: listaBibliosxUnidadBorrar){
-			System.out.println(tema.getNbId());
-		}
+//		System.out.println("bibliografias despues de borrar");
+//		for(TbMicBiblioxunidad tema: listaBibliosxUnidadGuardar){
+//			System.out.println(tema.getNbId());
+//		}
+//		System.out.println("--biblio a borrar--");
+//		for(TbMicBiblioxunidad tema: listaBibliosxUnidadBorrar){
+//			System.out.println(tema.getNbId());
+//		}
 	}
 	
 	/**
@@ -1946,7 +2035,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * @param event
 	 */
 	public void onClick$btnAddTemas(Event event){		
-		validarCamposTemas(txtNombreTema.getValue().toString());
+		validarCamposTemas(txtNombreTema.getValue().toUpperCase());
 					
 	}
 	
@@ -2056,7 +2145,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * @param event
 	 */
 	public void onClick$btnAddUnidad(Event event){
-		llenarListaUnidades(txtNombreUnidad.getValue().toUpperCase());
+		llenarListaUnidades(txtNombreUnidad.getValue());
 	}
 	
 	/**
@@ -2065,6 +2154,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * @param nombreUnidad nombre de la unidad a agregar en la lista de unidades
 	 */
 	private void llenarListaUnidades(String nombreUnidad){
+		nombreUnidad = nombreUnidad.toUpperCase();
 		if(!("".equals(nombreUnidad)) && (nombreUnidad.trim().length() > 0)){			
 			final Listitem listaItem = new Listitem();
 			final String tmpUnidad = nombreUnidad;
@@ -2078,9 +2168,9 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			if (!existeUnidad(tmpUnidad)){
 				Listcell celdaVacia = new Listcell("");
 				listaItem.appendChild(celdaVacia);
-				Listcell celdaUnidad = new Listcell(nombreUnidad.toUpperCase());
+				Listcell celdaUnidad = new Listcell(nombreUnidad);
 				listaItem.appendChild(celdaUnidad);
-				llenarCombosUnidades(nombreUnidad.toUpperCase());
+				llenarCombosUnidades(nombreUnidad);
 				/**
 				 * encapsulamiento para agregar a la lista de objetos unidades x micro
 				 */
@@ -2546,15 +2636,15 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	
-	public void onSelect$cmbDocente(){
-		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
-	}
+//	public void onSelect$cmbDocente(){
+//		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
+//	}
 	
-	public void onOK$cmbDocente(){
-		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
-		if (!(lblNombreDocente.getValue().equals("") && (lblNombreDocente.getValue().trim().length() > 0)))
-			cmbSemestre.focus();				
-	}
+//	public void onOK$cmbDocente(){
+//		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
+//		if (!(lblNombreDocente.getValue().equals("") && (lblNombreDocente.getValue().trim().length() > 0)))
+//			cmbSemestre.focus();				
+//	}
 	
 	public void onOK$txtNombreUnidad(){
 		llenarListaUnidades(txtNombreUnidad.getValue());
@@ -2598,7 +2688,505 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	public void onClick$tool_save(){
-		Messagebox.show("click en guardar");
+		
+		actualizarMicro();
+		borrarObjetivos();
+		borrarSubtemas();
+		borrarTemas();
+		borrarEvaluaciones();
+		borrarBibliografias();
+		borrarUnidades();
+		guardarObjetivos();
+		guardarUnidades();
+		guardarBibliografias();
+		guardarEvaluaciones();
+		guardarTemas();
+		guardarSubtemas();
+		reiniciarEntorno();
+		Messagebox.show("Se actualizó correctamente el microcurriculo","INFORMACIÓN", Messagebox.OK,Messagebox.INFORMATION);
+		
+	}
+	
+	public void reiniciarEntorno(){
+		reiniciarListas();
+		cargarDocentes();
+		cargarEstados();
+		llenarDatos(microcurriculoGuardar.getVrIdmicrocurriculo());
+	}
+	
+	public void guardarBibliografias(){
+		for(TbMicBiblioxunidad biblioxUnidad: listaBibliosxUnidadGuardar){
+			TbMicBibliografia bibliografia = biblioxUnidad.getTbMicBibliografia();
+			
+			try {
+				bibliografiaNGC.guardarBibliografia(bibliografia);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				biblioxUnidadNGC.guardarBiblioxUnidad(biblioxUnidad);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+		}
+	}
+	
+	public void borrarBibliografias(){
+		for(TbMicBiblioxunidad biblioxUnidad: listaBibliosxUnidadBorrar){
+			TbMicBibliografia bibliografia = biblioxUnidad.getTbMicBibliografia();
+			
+			try {
+				biblioxUnidadNGC.eliminarBiblioxUnidad(biblioxUnidad);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				bibliografiaNGC.eliminarBibliografia(bibliografia);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+	}
+	
+	public void guardarEvaluaciones(){
+		for(TbMicEvaluacionxmicro evaluacionxMicro: listaEvaluacionesxMicroGuardar){
+			TbMicEvaluacion evaluacion = evaluacionxMicro.getTbMicEvaluacion();
+			
+			try {
+				evaluacionNGC.guardarEvaluacion(evaluacion);;
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				evaluacionxMicroNGC.guardarEvaluacionxmicro(evaluacionxMicro);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+		}
+	}
+	
+	public void borrarEvaluaciones(){
+		for(TbMicEvaluacionxmicro evaluacionxMicro: listaEvaluacionesxMicroBorrar){
+			TbMicEvaluacion evaluacion = evaluacionxMicro.getTbMicEvaluacion();
+			
+			try {
+				evaluacionxMicroNGC.eliminarEvaluacionxmicro(evaluacionxMicro);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				evaluacionNGC.eliminarEvaluacion(evaluacion);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+	}
+	
+	public void guardarSubtemas(){
+		for(TbMicSubtemaxtema subtemaxTema: listaSubtemasxTemaGuardar){
+			TbMicSubtema subtema = subtemaxTema.getTbMicSubtema();
+			
+			try {
+				subtemaNGC.guardarSubtemas(subtema);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				subtemaxTemaNGC.guardar(subtemaxTema);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+		}
+	}
+	
+	public void borrarSubtemas(){
+		for(TbMicSubtemaxtema subtemaxTema: listaSubtemasxTemaBorrar){
+			TbMicSubtema subtema = subtemaxTema.getTbMicSubtema();
+			
+			try {
+				subtemaxTemaNGC.eliminarSubtemaxtema(subtemaxTema);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				subtemaNGC.eliminarSubtema(subtema);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+	}
+	
+	public void guardarTemas(){
+		for(TbMicTemaxunidad temaxUnidad: listaTemasxUnidadGuardar){
+			TbMicTema tema = temaxUnidad.getTbMicTema();
+			
+			try {
+				temaNGC.guardarTemas(tema);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				temaxUnidadNGC.guardarTemasxUnidad(temaxUnidad);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+		}
+	}
+	
+	public void borrarTemas(){
+		for(TbMicTemaxunidad temaxUnidad: listaTemasxUnidadBorrar){
+			TbMicTema tema = temaxUnidad.getTbMicTema();
+			
+			try {
+				temaxUnidadNGC.eliminarTemaxUnidad(temaxUnidad);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				temaNGC.eliminarTema(tema);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+	}
+	
+	public void guardarUnidades(){
+		for(TbMicUnidadxmicro unidadxMicro: listaUnidadesxMicroGuardar){
+			TbMicUnidad unidad = unidadxMicro.getTbMicUnidad();
+			
+			try {
+				unidadNGC.guardarUnidades(unidad);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				unidadxMicroNGC.guardarUnidadXmicro(unidadxMicro);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+		}
+	}
+	
+	public void borrarUnidades(){
+		for(TbMicUnidadxmicro unidadxMicro: listaUnidadesxMicroBorrar){
+			TbMicUnidad unidad = unidadxMicro.getTbMicUnidad();
+			
+			try {
+				unidadxMicroNGC.eliminarUnidadxmicro(unidadxMicro);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				unidadNGC.eliminarUnidad(unidad);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+	}
+	
+	public void guardarObjetivos(){
+		for(TbMicObjetivoxmicro objetivoxMicro: listaObjetivosxMicroGuardar){
+			TbMicObjetivo objetivo = objetivoxMicro.getTbMicObjetivo();
+			
+			try {
+				objetivoNGC.guardarObjetivo(objetivo);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				objetivoxMicroNGC.guardarObjetivosxMicro(objetivoxMicro);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+		}
+	}
+	
+	public void borrarObjetivos(){
+		for(TbMicObjetivoxmicro objetivoxMicro: listaObjetivosxMicroBorrar){
+			TbMicObjetivo objetivo = objetivoxMicro.getTbMicObjetivo();
+			
+			try {
+				objetivoxMicroNGC.eliminarObjetivoxMicro(objetivoxMicro);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+			
+			try {
+				objetivoNGC.eliminarObjetivo(objetivo);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+	}
+	
+	public void actualizarMicro(){
+		
+		TbAdmPersona responsable = listaDocentes.get(cmbDocente.getSelectedIndex()-1);
+		TbMicEstado estadoGuardar = listaEstados.get(cmbEstado.getSelectedIndex()-1);
+		TbMicMicroxestado MicroxEstadoGuardar = null;
+		if(microcurriculoGuardar.getTbMicEstado().getNbIdestado() != estadoGuardar.getNbIdestado()){
+			MicroxEstadoGuardar = new TbMicMicroxestado(estadoGuardar, new Date(), microcurriculoGuardar, responsable, "SYSTEM", new Date());
+		}
+		microcurriculoGuardar.setTbMicEstado(estadoGuardar);
+		microcurriculoGuardar.setTbAdmPersona(responsable);
+		microcurriculoGuardar.setVrProposito(txtPropositoMicro.getValue().toString());
+		microcurriculoGuardar.setVrJustificacion(txtJustificacionMicro.getValue().toString());
+		microcurriculoGuardar.setVrResumen(txtResumenMicro.getValue().toString());
+		microcurriculoGuardar.setDtModfecha(new Date());
+		microcurriculoGuardar.setVrModusuario("SYSTEM");
+		
+		TbMicObjetivoxmicro objetivoxMicroGuardar = null;
+		if(objetivoGeneralGuardar != null){
+			objetivoGeneralGuardar.setVrDescripcion(txtObjetivoGeneral.getValue().toString());
+		}else{
+			objetivoGeneralGuardar = new TbMicObjetivo(txtObjetivoGeneral.getValue().toString(), "SYSTEM", new Date());
+			objetivoxMicroGuardar = new TbMicObjetivoxmicro(objetivoGeneralGuardar, microcurriculoGuardar, '1', "SYSTEM", new Date());
+		}
+		
+		try {
+			objetivoNGC.guardarObjetivo(objetivoGeneralGuardar);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		
+		if(objetivoxMicroGuardar != null){
+			try {
+				objetivoxMicroNGC.guardarObjetivosxMicro(objetivoxMicroGuardar);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+			
+		try {
+			microcurriculoNGC.actualizarMicrocurriculos(microcurriculoGuardar);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		
+		/**
+		 * Verificamos si se cambio el estado para actualizar el historial
+		 */
+		if(MicroxEstadoGuardar != null){
+			try {
+				microxEstadoNGC.guardarMicroxestado(MicroxEstadoGuardar);
+			}catch(ExcepcionesDAO expDAO){
+				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expDAO.getMsjTecnico());
+			}catch(ExcepcionesLogica expNgs){
+				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(expNgs.getMsjTecnico());
+			}catch(Exception exp){
+//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+				logger.error(exp);
+			}
+		}
+		
 	}
 	
 	@SuppressWarnings("unchecked")

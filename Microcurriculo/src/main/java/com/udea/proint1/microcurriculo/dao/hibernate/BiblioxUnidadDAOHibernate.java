@@ -7,12 +7,14 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.BiblioxUnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -26,7 +28,7 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 
 		try {
 			session = getSession();
-			session.save(biblioxUnidad);
+			session.saveOrUpdate(biblioxUnidad);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -154,5 +156,28 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 //		
 //		return registro;
 //	}
+	
+	@Override
+	public void eliminarBiblioxunidad(TbMicBiblioxunidad biblioxUnidad) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(biblioxUnidad);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Bibliografia x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+	}
 
 }

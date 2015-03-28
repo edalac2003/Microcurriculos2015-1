@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dao.UnidadXMicroDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -239,5 +240,20 @@ public class UnidadxMicroNGCImpl  implements UnidadxMicroNGC {
 //				
 //		return registro;
 //	}
+	
+	@Override
+	public void eliminarUnidadxmicro(TbMicUnidadxmicro unidadxmicro) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			unidadxMicroDao.eliminarUnidadxmicro(unidadxmicro);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Unidad x Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 	
 }

@@ -25,7 +25,7 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 
 		try {
 			session = getSession();
-			session.save(temaXunidad);
+			session.saveOrUpdate(temaXunidad);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -154,6 +154,27 @@ public class TemaxUnidadDAOHibernate extends HibernateDaoSupport implements Tema
 //		return registro;
 //	}
 	
-	
+	@Override
+	public void eliminarTemaxunidad(TbMicTemaxunidad temaXunidad) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(temaXunidad);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Tema x Unidad");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+	}
 
 }

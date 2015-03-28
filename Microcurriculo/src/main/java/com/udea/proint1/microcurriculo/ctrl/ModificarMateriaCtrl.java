@@ -75,6 +75,11 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	Hlayout hlaSectorModificar;
 	Hlayout hlaSectorBuscar;
 	
+	/**
+	 * Manejo lista de correquisitos y prerrequisitos
+	 */
+	public static List<TbAdmMateria> listaMaterias3;
+	
 	MateriaNGCImpl materiaNGC;
 	NucleoNGCImpl nucleoNGC;
 	SemestreNGCImpl semestreNGC;
@@ -181,18 +186,18 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	
 	public void cargarCoPrerrequisitos(){
 		try{
-			List<TbAdmMateria> listaMaterias = materiaNGC.listarMaterias();
+			listaMaterias3 = materiaNGC.listarMaterias();
 			cmbPrerrequisito.getItems().clear();
 			cmbCorrequisito.getItems().clear();
 			
-			if(listaMaterias != null){
-				for(TbAdmMateria materia: listaMaterias){
-					Comboitem item = new Comboitem(materia.getVrIdmateria());
-					item.setDescription(materia.getVrNombre());
+			if(listaMaterias3 != null){
+				cmbPrerrequisito.appendChild(new Comboitem("[Seleccione]"));
+				cmbCorrequisito.appendChild(new Comboitem("[Seleccione]"));
+				for(TbAdmMateria materia: listaMaterias3){
+					Comboitem item = new Comboitem(materia.getVrIdmateria()+" - "+materia.getVrNombre());
 					cmbPrerrequisito.appendChild(item);
 					
-					Comboitem item2 = new Comboitem(materia.getVrIdmateria());
-					item2.setDescription(materia.getVrNombre());
+					Comboitem item2 = new Comboitem(materia.getVrIdmateria()+" - "+materia.getVrNombre());
 					cmbCorrequisito.appendChild(item2);
 				}
 				cmbPrerrequisito.setValue("[Seleccione]");
@@ -230,36 +235,24 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	}
 	
 	public void onSelect$cmbPrerrequisito(){
-		TbAdmMateria materiaAgregar;
-		String idMateria = cmbPrerrequisito.getValue().toString();
+		if(cmbPrerrequisito.getSelectedIndex()>0)
+			verificarPrerrequisito();
+	}
+	
+	public void verificarPrerrequisito(){
+		TbAdmMateria materiaAgregar = listaMaterias3.get(cmbPrerrequisito.getSelectedIndex()-1);
 		boolean materiaNoExiste = true;
 		for(TbAdmMateria materia:listaPrerrequisitos){
-			if(materia.getVrIdmateria().equals(idMateria)){
+			if(materia.getVrIdmateria().equals(materiaAgregar.getVrIdmateria())){
 				Messagebox.show("Materia ya fue agregada como prerrequisito");
 				materiaNoExiste = false;
 			}
 		}
 		if(materiaNoExiste){
-			try{
-				materiaAgregar = materiaNGC.obtenerMateria(idMateria);
-				if(materiaAgregar != null){
-					listaPrerrequisitos.add(materiaAgregar);
-					agregarPrerrequisito(materiaAgregar);
-				}else{
-					Messagebox.show("Materia a agregar como prerrequisito no existe");
-				}
-			}catch(ExcepcionesDAO expDAO){
-				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expDAO.getMsjTecnico());
-			}catch(ExcepcionesLogica expNgs){
-				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expNgs.getMsjTecnico());
-			}catch(Exception exp){
-//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(exp);
-			}
+			listaPrerrequisitos.add(materiaAgregar);
+			agregarPrerrequisito(materiaAgregar);
 		}
-		cmbPrerrequisito.setValue("[Seleccione]");
+		cmbPrerrequisito.setSelectedIndex(0);
 	}
 	
 	public void agregarPrerrequisito(TbAdmMateria materiaAgregar){
@@ -277,39 +270,6 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 		Listcell celda2 = new Listcell(materiaAgregar.getVrNombre());
 		listaItem.appendChild(celda2);			
 		listPrerrequisito.appendChild(listaItem);
-	}
-	
-	public void onSelect$cmbCorrequisito(){
-		TbAdmMateria materiaAgregar;
-		String idMateria = cmbCorrequisito.getValue().toString();
-		boolean materiaNoExiste = true;
-		for(TbAdmMateria materia:listaCorrequisitos){
-			if(materia.getVrIdmateria().equals(idMateria)){
-				Messagebox.show("Materia ya fue agregada como correquisito");
-				materiaNoExiste = false;
-			}
-		}
-		if(materiaNoExiste){
-			try{
-				materiaAgregar = materiaNGC.obtenerMateria(idMateria);
-				if(materiaAgregar != null){
-					listaCorrequisitos.add(materiaAgregar);
-					agregarCorrequisito(materiaAgregar);
-				}else{
-					Messagebox.show("Materia a agregar como correquisito no existe");
-				}
-			}catch(ExcepcionesDAO expDAO){
-				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expDAO.getMsjTecnico());
-			}catch(ExcepcionesLogica expNgs){
-				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expNgs.getMsjTecnico());
-			}catch(Exception exp){
-//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(exp);
-			}
-		}
-		cmbCorrequisito.setValue("[Seleccione]");
 	}
 	
 	public void agregarCorrequisito(TbAdmMateria materiaAgregar){
@@ -364,6 +324,28 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 			}
 			
 		}
+	}
+	
+	public void onSelect$cmbCorrequisito(){
+		if(cmbCorrequisito.getSelectedIndex()>0)
+			verificarCorrequisito();
+	}
+	
+	public void verificarCorrequisito(){
+		TbAdmMateria materiaAgregar = listaMaterias3.get(cmbCorrequisito.getSelectedIndex()-1);
+		boolean materiaNoExiste = true;
+		for(TbAdmMateria materia:listaCorrequisitos){
+			if(materia.getVrIdmateria().equals(materiaAgregar.getVrIdmateria())){
+				Messagebox.show("Materia ya fue agregada como correquisito");
+				materiaNoExiste = false;
+			}
+		}
+		if(materiaNoExiste){
+			listaCorrequisitos.add(materiaAgregar);
+			agregarCorrequisito(materiaAgregar);
+		}
+		cmbCorrequisito.setSelectedIndex(0);
+		
 	}
 	
 	public void onClick$btnBuscar(){

@@ -14,6 +14,7 @@ import com.udea.proint1.microcurriculo.dao.UnidadXMicroDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -25,7 +26,7 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 
 		try {
 			session = getSession();
-			session.save(unidadXmicro);
+			session.saveOrUpdate(unidadXmicro);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -134,6 +135,29 @@ public class UnidadxMicroDAOHibernate extends HibernateDaoSupport implements Uni
 			session.close();
 		}
 		return unidadesXMicro;
+	}
+	
+	@Override
+	public void eliminarUnidadxmicro(TbMicUnidadxmicro unidadXmicro) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(unidadXmicro);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Unidad x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
 	}
 
 //	@Override

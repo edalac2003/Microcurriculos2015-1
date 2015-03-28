@@ -20,6 +20,8 @@ public interface ObjetivoxMicroNGC {
 	
 	public List<TbMicObjetivoxmicro>obtenerObjetivosxMicroxMicro(String idMicrocurriculo) throws ExcepcionesLogica, ExcepcionesDAO;
 	
+	public void eliminarObjetivoxMicro(TbMicObjetivoxmicro objetivoxMicro) throws ExcepcionesLogica, ExcepcionesDAO;
+	
 //	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO;
 
 }

@@ -231,5 +231,20 @@ public class TemaxUnidadNGCImpl implements TemaxUnidadNGC {
 		 */
 		return listaTemasxUnidad;
 	}
+	
+	@Override
+	public void eliminarTemaxUnidad(TbMicTemaxunidad temaxunidad) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			temaxUnidadDao.eliminarTemaxunidad(temaxunidad);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Tema x Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 
 }

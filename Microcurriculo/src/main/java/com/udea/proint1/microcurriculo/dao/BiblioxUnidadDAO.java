@@ -18,6 +18,8 @@ public interface BiblioxUnidadDAO {
 	
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(TbMicUnidad unidad) throws ExcepcionesDAO;
 	
+	public void eliminarBiblioxunidad(TbMicBiblioxunidad biblioxUnidad) throws ExcepcionesDAO;
+	
 //	public int contarRegistros() throws ExcepcionesDAO;
 
 }

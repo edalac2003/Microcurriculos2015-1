@@ -2,6 +2,7 @@ package com.udea.proint1.microcurriculo.ngc;
 
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -19,4 +20,6 @@ public interface UnidadxMicroNGC {
 	public List<TbMicUnidadxmicro> listarUnidadesXmicro() throws ExcepcionesLogica, ExcepcionesDAO;
 	
 //	public int contarRegistros() throws ExcepcionesLogica, ExcepcionesDAO;
+	
+	public void eliminarUnidadxmicro(TbMicUnidadxmicro unidadxmicro) throws ExcepcionesLogica, ExcepcionesDAO;
 }

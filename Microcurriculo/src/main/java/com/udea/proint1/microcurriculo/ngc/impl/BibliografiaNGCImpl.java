@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.ngc.BibliografiaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -212,5 +213,19 @@ public class BibliografiaNGCImpl implements BibliografiaNGC {
 //		return registro;
 //	}
 
+	@Override
+	public void eliminarBibliografia(TbMicBibliografia bibliografia) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			bibliografiaDao.eliminarBiblio(bibliografia);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Bibliografia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 	
 }

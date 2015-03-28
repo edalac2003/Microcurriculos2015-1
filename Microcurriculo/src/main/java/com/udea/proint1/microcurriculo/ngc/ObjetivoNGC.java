@@ -21,5 +21,7 @@ public interface ObjetivoNGC {
     public List<TbMicObjetivo> listarObjetivosPorMicrocurriculo(String idMicrocurriculo) throws ExcepcionesLogica, ExcepcionesDAO;
 	
 	public List<TbMicObjetivo> listarObjetivosPorTipo(char tipo) throws ExcepcionesLogica, ExcepcionesDAO;
+	
+	public void eliminarObjetivo(TbMicObjetivo objetivo) throws ExcepcionesLogica, ExcepcionesDAO;
     
 }

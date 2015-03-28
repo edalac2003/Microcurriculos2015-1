@@ -18,5 +18,7 @@ public interface BibliografiaDAO {
 	
 	public List<TbMicBibliografia> listarBibliografiaxTipo(char tipo) throws ExcepcionesDAO;
 	
+	public void eliminarBiblio(TbMicBibliografia bibliografia) throws ExcepcionesDAO;
+	
 //	public int contarRegistros() throws ExcepcionesDAO;
 }

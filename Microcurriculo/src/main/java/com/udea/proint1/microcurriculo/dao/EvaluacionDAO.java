@@ -15,5 +15,7 @@ public interface EvaluacionDAO {
 	
 	public void actualizarEvaluaciones(TbMicEvaluacion evaluacion) throws ExcepcionesDAO;
 	
+	public void eliminarEvaluacion(TbMicEvaluacion evaluacion) throws ExcepcionesDAO;
+	
 //	public int contarRegistros() throws ExcepcionesDAO;
 }

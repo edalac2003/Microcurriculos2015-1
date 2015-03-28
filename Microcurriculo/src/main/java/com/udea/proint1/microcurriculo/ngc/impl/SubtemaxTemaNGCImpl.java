@@ -130,5 +130,20 @@ public class SubtemaxTemaNGCImpl implements SubtemaxTemaNGC {
 //		
 //		return registro;
 //	}
+	
+	@Override
+	public void eliminarSubtemaxtema(TbMicSubtemaxtema subtemaxTema) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			subtemaxTemaDao.eliminarSubtemaxTema(subtemaxTema);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Subtema x Tema");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 
 }

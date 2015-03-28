@@ -601,6 +601,13 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="nucleoNGC" ref="nucleoNGC" />
         	<property name="materiaNGC" ref="materiaNGC" />
         	<property name="estadoNGC" ref="estadoNGC" />
+        	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
+        	<property name="objetivoNGC" ref="objetivoNGC" />
+        	<property name="temaNGC" ref="temaNGC" />
+        	<property name="subtemaNGC" ref="subtemaNGC" />
+        	<property name="bibliografiaNGC" ref="bibliografiaNGC" />
+        	<property name="evaluacionNGC" ref="evaluacionNGC" />
+        	<property name="unidadNGC" ref="unidadNGC" />
         </bean>
         
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">

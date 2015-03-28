@@ -17,6 +17,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements ObjetivoxMicroDAO {
 	
@@ -26,7 +27,7 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 
 		try {
 			session = getSession();
-			session.save(objetivoxMicro);
+			session.saveOrUpdate(objetivoxMicro);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -161,6 +162,29 @@ public class ObjetivoxMicroDAOHibernate extends HibernateDaoSupport implements O
 			session.close();
 		}
 		return objetivosxMicro;
+	}
+	
+	@Override
+	public void eliminarObjetivoxMicro(TbMicObjetivoxmicro objetivoxMicro) throws ExcepcionesDAO{
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(objetivoxMicro);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Objetivo x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
 	}
 	
 //	@Override

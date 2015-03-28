@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.UnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.UnidadNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -178,5 +179,20 @@ private static Logger log = Logger.getLogger(UnidadNGCImpl.class);
 //		
 //		return registro;
 //	}
+	
+	@Override
+	public void eliminarUnidad(TbMicUnidad unidad) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			unidadDao.eliminarUnidad(unidad);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Unidad");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 	
 }

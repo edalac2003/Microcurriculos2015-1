@@ -7,7 +7,7 @@
 <style src="estilos.css" />
 <window id="formaListarMicro" border="0" >
 	<borderlayout height="1050px" apply="${cargarDatosFormas2}">
-		<north border="0" height="100px">
+		<north border="0" height="100px" apply="${borrarVariablesSession}">
 			<include id="headerIdx" src="/_sections/header.zul" />
 		</north>
 		

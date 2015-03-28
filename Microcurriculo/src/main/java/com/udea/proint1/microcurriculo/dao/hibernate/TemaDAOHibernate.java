@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.TemaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicTema;
+import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /**
@@ -29,7 +30,7 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 
 		try {
 			session = getSession();
-			session.save(tema);
+			session.saveOrUpdate(tema);
 			session.flush(); 
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
@@ -138,6 +139,29 @@ public class TemaDAOHibernate extends HibernateDaoSupport implements TemaDAO {
 		}
 		
 		return temas;
+	}
+	
+	@Override
+	public void eliminarTema(TbMicTema tema) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			session.delete(tema);
+			tx.commit();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar borrar Tema");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
 	}
 
 //	@Override

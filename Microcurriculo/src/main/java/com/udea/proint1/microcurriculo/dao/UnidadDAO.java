@@ -15,6 +15,8 @@ public interface UnidadDAO {
 	
 	public List<TbMicUnidad> listarUnidades() throws ExcepcionesDAO;
 	
+	public void eliminarUnidad(TbMicUnidad unidad) throws ExcepcionesDAO;
+	
 //	public int contarRegistros() throws ExcepcionesDAO;
 
 }

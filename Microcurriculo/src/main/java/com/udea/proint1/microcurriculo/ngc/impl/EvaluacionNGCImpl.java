@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.EvaluacionDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -177,6 +178,19 @@ public class EvaluacionNGCImpl implements EvaluacionNGC {
 //		return registros;
 //	}
 	
-	
+	@Override
+	public void eliminarEvaluacion(TbMicEvaluacion evaluacion) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			evaluacionDao.eliminarEvaluacion(evaluacion);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Evaluacion");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
 
 }

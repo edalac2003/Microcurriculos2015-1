@@ -84,7 +84,7 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 				expLog.setOrigen(exp);
 				throw expLog;
 			}
-			if (objetivosTMP == null){
+//			if (objetivosTMP == null){
 				try {
 					objetivoDao.guardarObjetivo(objetivo);
 				} catch(ExcepcionesDAO expDAO){
@@ -96,11 +96,11 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 					expLog.setOrigen(exp);
 					throw expLog;
 				}
-			}else {
-				ExcepcionesLogica expLog = new ExcepcionesLogica();
-				expLog.setMsjUsuario("No se pudo guardar, El objeto Objetivo ya existe");
-				throw expLog;
-			}
+//			}else {
+//				ExcepcionesLogica expLog = new ExcepcionesLogica();
+//				expLog.setMsjUsuario("No se pudo guardar, El objeto Objetivo ya existe");
+//				throw expLog;
+//			}
 		} else {
 			ExcepcionesLogica expLog = new ExcepcionesLogica();
 			expLog.setMsjUsuario("No se pudo guardar, El objeto Objetivo esta vacio");
@@ -261,6 +261,21 @@ public class ObjetivoNGCImpl implements ObjetivoNGC {
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
 		return listaObjetivos;
+	}
+	
+	@Override
+	public void eliminarObjetivo(TbMicObjetivo objetivo) throws ExcepcionesLogica, ExcepcionesDAO{
+		try {
+			objetivoDao.eliminarObjetivo(objetivo);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo eliminar Objetivo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
 	}
 	
 }

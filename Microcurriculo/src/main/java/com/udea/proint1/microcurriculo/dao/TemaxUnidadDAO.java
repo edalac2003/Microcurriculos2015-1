@@ -18,6 +18,8 @@ public interface TemaxUnidadDAO {
 	
 	public List<TbMicTemaxunidad> ListarTemasXunidad() throws ExcepcionesDAO;
 	
+	public void eliminarTemaxunidad(TbMicTemaxunidad temaXunidad) throws ExcepcionesDAO;
+	
 //	public int contarRegistros() throws ExcepcionesDAO;
 	
 }
