@@ -1,0 +1,222 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+<window border="none">
+	<borderlayout height="800px">
+		<north border="none" height="100px">
+			<include id="headerIdx" src="/_sections/header.zul" />
+		</north>
+		<east width="180px" border="none">
+			<label />
+		</east>
+		<west width="180px" border="none">
+			<label />
+		</west>
+		<center border="none">
+			<div align="center">
+				<borderlayout height="650px" apply="${crearNucleosCtrl}">
+					<north border="none">
+						<label />
+<!-- 						<include id="listMenu" src="/_sections/toolbar-docente.zul"/> -->
+					</north>
+					<center border="none">
+						<div>
+						<separator />
+							<tabbox id="tabOpciones" width="960px" height="590px">
+								<tabs>
+									<tab label="${labels.microcurriculo.unidadAcademica}" />
+									<tab label="${labels.microcurriculo.dependenciaAcademica}" />
+									<tab label="${labels.microcurriculo.nucleoAcademico}" />
+								</tabs>
+								<tabpanels>
+<!-- 									Panel de Unidades Academicas -->
+									<tabpanel>
+										<hlayout>
+											<hbox>
+												<groupbox mold="3d" width="330px" closable="false">
+													<caption image="/_img/icons/32x32/book02.png" label="${labels.microcurriculo.u_academica}" />
+													<hbox align="center" height="40px">
+														<label value="${labels.microcurriculo.buscar}" />
+														<textbox id="txtBuscarUnidad" />														
+													</hbox>										
+													<listbox id="listaUnidadAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="440px" autopaging="true" />
+												</groupbox>
+											</hbox>
+											<hbox width="5px" />
+											<hbox>
+												<vbox>
+													<groupbox mold="3d" width="600px" height="90px" closable="false">
+														<caption image="/_img/icons/32x32/pencil_32.png" label="${labels.microcurriculo.editUnidadAcademica}" />
+														<hbox height="35px" align="center">
+															<label value="${labels.microcurriculo.u_academica}" />
+															<textbox id="txtNuevoNombreUnidadAcademica" width="300px"/>
+															<button id="btnCambiarNombreUnidad" label="${labels.microcurriculo.modificar}" />
+														</hbox>
+														
+													</groupbox>
+													<div height="15px" />
+													<groupbox mold="3d" width="600px" height="400px" closable="false">
+														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addUnidadAcademica}" />
+														<hbox height="40px" align="center" width="100%">
+															<label value="${labels.microcurriculo.id}"/>
+															<textbox id="txtIdUnidadAcademica" width="100px"/>
+															<label value="${labels.microcurriculo.u_academica}" />
+															<textbox id="txtNombreUnidadAcademica" width="250px"/>
+															<button id="btnAdicionarNombreUnidad" label="${labels.microcurriculo.add}" />
+														</hbox>
+														
+														<div>
+															<listbox id="listaNuevasUnidades" height="310px" />
+														</div>
+													</groupbox>	
+												</vbox>
+											</hbox>
+										</hlayout>
+									</tabpanel>
+									
+<!-- 									Panel de Dependencias Academicas -->
+									<tabpanel>
+										<hlayout>
+											<hbox>
+												<groupbox mold="3d" width="330px" closable="false">
+													<caption image="/_img/icons/32x32/book02.png" label="${labels.microcurriculo.dependenciaAcademica}" />
+													<div height="35px">
+														<label value="${labels.microcurriculo.u_academica}" />
+														<combobox id="cmbUnidadAcademica" />
+													</div>
+													<div height="35px">
+														<label value="${labels.microcurriculo.buscar}" />
+														<textbox id="txtBuscarDependencia" />
+														<button id="btnBuscarDependencia" label="${labels.microcurriculo.buscar}"/>	
+													</div>
+																					
+													<listbox id="listaDependenciaAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="410px" autopaging="true" />
+												</groupbox>
+											</hbox>
+											<hbox width="5px" />
+											<hbox>
+												<vbox>
+													<groupbox mold="3d" width="600px" height="90px" closable="false">
+														<caption image="/_img/icons/32x32/pencil_32.png" label="${labels.microcurriculo.editDependenciaAcademica}" />
+														<hbox height="35px" align="center">															
+															<textbox id="txtUnidadAcademica" width="150px" disabled="true"/>
+															<label value="${labels.microcurriculo.dependencia}" />
+															<textbox id="txtNuevoNombreDependenciaAcademica" width="210px"/>
+															<button id="btnCambiarNombreDependencia" label="${labels.microcurriculo.modificar}" />
+														</hbox>
+														
+													</groupbox>
+													<div height="15px" />
+													<groupbox mold="3d" width="600px" height="430px" closable="false">
+														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addDependenciaAcademica}" />
+															
+														<hbox height="30px" align="center" width="100%">															
+															<div>
+																<label value="${labels.microcurriculo.u_academica}" />
+																<combobox id="cmbUnidadAcademica2" width="250px"/>
+															</div>
+														</hbox>
+														<hbox height="40px" align="center" width="100%">
+															<label value="${labels.microcurriculo.id}"/>
+															<textbox id="txtPreIdDependencia" width="40px" disabled="true"/>
+															<textbox id="txtIdDependencia" width="100px" />
+															<label value="${labels.microcurriculo.dependencia}" />
+															<textbox id="txtNombreDependenciaAcademica" width="210px"/>
+															<button id="btnAdicionarNombreDependencia" label="${labels.microcurriculo.add}" />
+														</hbox>
+															
+														<div>
+															<listbox id="listaNuevasDependencias" height="300px" />
+														</div>
+													</groupbox>	
+												</vbox>
+											</hbox>
+										</hlayout>
+									</tabpanel>
+									
+<!-- 									Panel de Nucleos -->
+									<tabpanel>
+										<hlayout>
+											<hbox>
+												<groupbox mold="3d" width="330px" closable="false">
+													<caption image="/_img/icons/32x32/book02.png" label="${labels.microcurriculo.nucleoAcademico}" />
+													<div height="35px">
+														<label value="${labels.microcurriculo.u_academica}" />
+														<combobox id="cmbUnidadAcademica3" width="220px" />
+													</div>
+													<div height="35px">
+														<label value="${labels.microcurriculo.dependencia}" />
+														<combobox id="cmbDependencia" width="220px" />
+													</div>
+													<div height="35px">
+														<label value="${labels.microcurriculo.buscar}" />
+														<textbox id="txtBuscarNucleo" />
+														<button id="btnBuscarNucleo" label="${labels.microcurriculo.buscar}"/>	
+													</div>
+																			
+													<listbox id="listaNucleoAcademico" emptyMessage="${labels.microcurriculo.sinRegistro}" height="380px" autopaging="true" />
+												</groupbox>
+											</hbox>
+											<hbox width="5px" />
+											<hbox>
+												<vbox>
+													<groupbox mold="3d" width="600px" height="90px" closable="false">
+														<caption image="/_img/icons/32x32/pencil_32.png" label="${labels.microcurriculo.editNucleoAcademico}" />
+														<hbox height="35px" align="center">
+															
+															<textbox id="txtDependencia" width="150px" disabled="true"/>
+<!-- 															<label value="${labels.microcurriculo.Dependencia}" /> -->
+															<label value="${labels.microcurriculo.nucleo}" />
+															<textbox id="txtNuevoNucleoAcademico" width="210px"/>
+															<button id="btnCambiarNombreNucleo" label="${labels.microcurriculo.modificar}" />
+														</hbox>
+														
+													</groupbox>
+													<div height="15px" />
+													<groupbox mold="3d" width="600px" height="430px" closable="false">
+														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addNucleoAcademico}" />
+															
+														<hbox height="30px" align="center" width="100%">															
+															<div>
+																<label value="${labels.microcurriculo.u_academica}" />
+																<combobox id="cmbUnidadAcademica4" width="200px"/>
+																<label value="${labels.microcurriculo.dependencia}" />
+																<combobox id="cmbDependencia2" width="200px"/>
+															</div>
+														</hbox>
+														
+														<hbox height="40px" align="center" width="100%">
+															
+															<label value="${labels.microcurriculo.id}"/>
+															<textbox id="txtPreIdNucleo" width="45px" disabled="true"/>
+															<textbox id="txtIdNucleo" width="100px" />
+															<label value="${labels.microcurriculo.nucleo}" />
+															<textbox id="txtNombreNucleo" width="250px"/>
+															<button id="btnAdicionarNombreNucleo" label="${labels.microcurriculo.add}" />
+														</hbox>
+															
+														<div>
+															<listbox id="listaNuevosNucleos" height="300px" />
+														</div>
+													</groupbox>	
+												</vbox>
+											</hbox>
+										</hlayout>
+									</tabpanel>
+								</tabpanels>
+							</tabbox>
+						
+						</div>
+						
+					</center>
+				</borderlayout>
+			</div>
+		</center>
+		<south height="90px" border="none">
+			<include id="footerIdx" src="/_sections/footer.zul" />
+		</south>
+	</borderlayout>
+</window>
+</zk>

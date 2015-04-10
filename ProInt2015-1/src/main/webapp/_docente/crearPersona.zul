@@ -3,7 +3,7 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-<window title="" border="normal">
+<window title="" border="normal" >
 	<borderlayout height="700px">
 		<north border="none" height="100px">
 			<include id="headerIdx" src="/_sections/header.zul" />
@@ -24,8 +24,7 @@
 					<center border="none">
 						<div>
 							<separator />
-							<hlayout>
-								
+							<hlayout>								
 								<hbox >
 									<groupbox mold="3d" width="300px" >
 										<caption image="/_img/icons/32x32/users.png" height="43px">

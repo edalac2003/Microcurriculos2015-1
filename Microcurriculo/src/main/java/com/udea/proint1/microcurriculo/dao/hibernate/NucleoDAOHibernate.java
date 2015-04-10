@@ -114,7 +114,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
         
         try{
             session = getSession();
-            Query query = session.createQuery("from TbAdmNucleo where tbAdmDependencia = :dependencia");
+            Query query = session.createQuery("from TbAdmNucleo where vrIdNucleo like :dependencia");
             query.setString("dependencia", dependencia);
             nucleos = query.list();
         } catch (Exception e) {

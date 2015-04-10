@@ -187,8 +187,7 @@ public class CrearPersonaCtrl extends GenericForwardComposer{
 				}
 			}
 			
-		} else
-			System.out.println("La lista esta vacia.");
+		} 
 	}
 	
 	private void cargarTipoID(){

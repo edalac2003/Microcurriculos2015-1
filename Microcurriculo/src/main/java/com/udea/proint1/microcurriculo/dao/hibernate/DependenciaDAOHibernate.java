@@ -117,7 +117,7 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
         List<TbAdmDependencia> dependencias = new ArrayList<TbAdmDependencia>();        
         try{               
             session = getSession();	
-            Query query = session.createQuery("from TbAdmDependencia where tbAdmUnidadAcademica  like :unidad");
+            Query query = session.createQuery("from TbAdmDependencia where tbAdmUnidadAcademica  = :unidad");
             query.setString("unidad", unidad);               
             dependencias = query.list();                
         } catch (Exception e) {

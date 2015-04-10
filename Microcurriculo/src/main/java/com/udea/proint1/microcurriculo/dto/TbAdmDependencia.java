@@ -22,11 +22,19 @@ public class TbAdmDependencia implements java.io.Serializable {
 		super();
 	}
 
-	public TbAdmDependencia(String vrIddependencia,
-			TbAdmUnidadAcademica tbAdmUnidadAcademica) {
+	
+
+	public TbAdmDependencia(String vrIddependencia, String vrNombre, String vrModusuario, Date dtModfecha,
+							TbAdmUnidadAcademica tbAdmUnidadAcademica) {
+		super();
 		this.vrIddependencia = vrIddependencia;
 		this.tbAdmUnidadAcademica = tbAdmUnidadAcademica;
+		this.vrNombre = vrNombre;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
 	}
+
+
 
 	public TbAdmDependencia(String vrIddependencia,
 			TbAdmUnidadAcademica tbAdmUnidadAcademica, String vrNombre,

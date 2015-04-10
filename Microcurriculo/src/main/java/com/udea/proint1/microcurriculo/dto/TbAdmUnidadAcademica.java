@@ -26,13 +26,11 @@ public class TbAdmUnidadAcademica implements java.io.Serializable {
 		this.vrIdunidad = vrIdunidad;
 	}
 
-	public TbAdmUnidadAcademica(String vrIdunidad, String vrNombre,
-			String vrModusuario, Date dtModfecha, Set tbAdmDependencias) {
+	public TbAdmUnidadAcademica(String vrIdunidad, String vrNombre,	String vrModusuario, Date dtModfecha) {
 		this.vrIdunidad = vrIdunidad;
 		this.vrNombre = vrNombre;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbAdmDependencias = tbAdmDependencias;
 	}
 
 	public String getVrIdunidad() {
