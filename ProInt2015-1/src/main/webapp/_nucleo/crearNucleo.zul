@@ -19,7 +19,7 @@
 				<borderlayout height="650px" apply="${crearNucleosCtrl}">
 					<north border="none">
 						<label />
-<!-- 						<include id="listMenu" src="/_sections/toolbar-docente.zul"/> -->
+						<include id="listMenu" src="/_sections/toolbar-nucleo.zul"/>
 					</north>
 					<center border="none">
 						<div>

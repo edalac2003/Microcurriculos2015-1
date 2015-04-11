@@ -28,9 +28,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport implements GuardarMicrocurriculoDAO {
 
-	private static Logger logger = Logger.getLogger(ValidarDatosCtrl.class);
 	
-
 	@Override
 	public void guardarMicroxlotes(TbMicMicrocurriculo microcurriculo,
 			TbMicMicroxestado microxEstado, List<TbMicTema> temas, 
@@ -125,9 +123,7 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			expDAO.setOrigen(e);
 			
 			throw expDAO;
-//			throw new ExcepcionesDAO("Error al guardar"+" --- "+e.getMessage()+" --- "+e.getCause());
-//			throw new ExcepcionesDAO("No fue posible guardar la informaci�n del Microcurriculo. \n Por favor verifique la informaci�n ingresada. \n" + 
-//					"Los Cambios realizados en la Base de Datos fueron Revertidos Satisfactoriamente.   "+e.getMessage());
+
 		} finally {
 			session.close();
 		}

@@ -217,6 +217,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
+        <bean id="guardarNucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.GuardarNucleoDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
         <bean id="subtemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
@@ -391,6 +395,10 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         <bean id="guardarMicrocurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.GuardarMicrocurriculoNGCImpl">
         	<property name="guardarMicrocurriculoDao" ref="guardarMicrocurriculoDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
+        </bean>
+        
+        <bean id="guardarNucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.GuardarNucleoNGCImpl">
+        	<property name="guardarNucleoDao" ref="guardarNucleoDao" />
         </bean>
    
    		<bean id="temaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaNGCImpl">
@@ -623,5 +631,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="guardarNucleoNGC" ref="guardarNucleoNGC" />
         </bean>
 </beans>

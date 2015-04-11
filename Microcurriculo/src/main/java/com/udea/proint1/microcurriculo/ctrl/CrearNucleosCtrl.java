@@ -23,12 +23,14 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Toolbarbutton;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
+import com.udea.proint1.microcurriculo.ngc.GuardarNucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -36,7 +38,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 @SuppressWarnings("rawtypes")
 public class CrearNucleosCtrl extends GenericForwardComposer {
-	
 	/**
 	 * 
 	 */
@@ -91,6 +92,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	Combobox cmbDependencia;
 	Combobox cmbDependencia2;
 	
+	Toolbarbutton tool_save;
 	
 		
 	List<TbAdmUnidadAcademica> listadoUnidadAcademica;
@@ -99,6 +101,9 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	List<TbAdmUnidadAcademica> listadoNuevoUnidadAcademica = new ArrayList<TbAdmUnidadAcademica>();;
 	List<TbAdmDependencia> listadoNuevoDependencia = new ArrayList<TbAdmDependencia>();
 	List<TbAdmNucleo> listadoNuevoNucleo = new ArrayList<TbAdmNucleo>();
+	List<TbAdmUnidadAcademica> listaTotalUnidades;
+	List<TbAdmDependencia> listaTotalDependencias;
+	List<TbAdmNucleo> listaTotalNucleos;
 
 	TbAdmUnidadAcademica unidadAcademica;
 	TbAdmDependencia dependenciaAcademica;
@@ -107,6 +112,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	UnidadAcademicaNGC unidadAcademicaNGC;
 	DependenciaNGC dependenciaNGC;
 	NucleoNGC nucleoNGC;
+	GuardarNucleoNGC guardarNucleoNGC;
 	
 	
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
@@ -117,6 +123,57 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	}
 	public void setNucleoNGC(NucleoNGC nucleoNGC) {
 		this.nucleoNGC = nucleoNGC;
+	}
+	
+	public void setGuardarNucleoNGC(GuardarNucleoNGC guardarNucleoNGC) {
+		this.guardarNucleoNGC = guardarNucleoNGC;
+	}
+	
+	
+	private void unificarListados(){
+		listaTotalUnidades = new ArrayList<TbAdmUnidadAcademica>();
+		listaTotalDependencias = new ArrayList<TbAdmDependencia>();
+		listaTotalNucleos = new ArrayList<TbAdmNucleo>();
+		
+		//Unificando los listados de las Unidades
+		
+		if (listadoUnidadAcademica.size() > 0){
+			for(TbAdmUnidadAcademica unidad : listadoUnidadAcademica){
+				listaTotalUnidades.add(unidad);
+			}
+		}
+		
+		if (listadoNuevoUnidadAcademica.size() > 0){
+			for(TbAdmUnidadAcademica unidad : listadoNuevoUnidadAcademica){
+				listaTotalUnidades.add(unidad);
+			}
+		}
+		
+		//Unificando los Listados de Dependencias
+		if(listadoDependencia.size() > 0){
+			for (TbAdmDependencia dependencia : listadoDependencia){
+				listaTotalDependencias.add(dependencia);
+			}
+		}
+		
+		if(listadoNuevoDependencia.size() > 0){
+			for (TbAdmDependencia dependencia : listadoNuevoDependencia){
+				listaTotalDependencias.add(dependencia);
+			}
+		}
+		
+		//Unificando los Listados de los Nucleos
+		if(listadoNucleo.size() > 0){
+			for (TbAdmNucleo nucleo : listadoNucleo){
+				listaTotalNucleos.add(nucleo);
+			}
+		}
+		
+		if(listadoNuevoNucleo.size() > 0){
+			for (TbAdmNucleo nucleo : listadoNuevoNucleo){
+				listaTotalNucleos.add(nucleo);
+			}
+		}
 	}
 	
 	
@@ -282,6 +339,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	
 	private void recargarListaNucleo(){
 		if(listadoNucleo.size() > 0){
+			listaNucleoAcademico.getItems().clear();
 			for(TbAdmNucleo item : listadoNucleo){
 				listaNucleoAcademico.appendItem(item.getVrIdnucleo()+" - "+item.getVrNombre(), item.getVrIdnucleo());
 			}
@@ -294,8 +352,12 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	
 	private void copiarDependenciaAcademica(TbAdmDependencia dependencia){
 		txtUnidadAcademica.setText(dependencia.getTbAdmUnidadAcademica().getVrNombre());
-		txtNuevoNombreDependenciaAcademica.setText(dependencia.getVrNombre());
-		
+		txtNuevoNombreDependenciaAcademica.setText(dependencia.getVrNombre());		
+	}
+	
+	private void copiarNucleoAcademico(TbAdmNucleo nucleo){
+		txtDependencia.setText(nucleo.getTbAdmDependencia().getVrNombre());
+		txtNuevoNucleoAcademico.setText(nucleo.getVrNombre());
 	}
 	
 	private void eliminaListItem(Listitem item, String cadena){
@@ -337,18 +399,21 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		final Listitem item = new Listitem();
 		String codigo = txtPreIdDependencia.getText().trim().toUpperCase() +txtIdDependencia.getText().trim().toUpperCase();
 		
-		item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {						
-				eliminaListItem(item, "");
-			}
-		});
+		
 		
 		if ((!codigo.isEmpty()) && (!existeIdDependencia(codigo))){
 			if ((!dependencia.isEmpty()) && (!existeDependencia(dependencia))){
+				item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event arg0) throws Exception {						
+						eliminaListItem(item, "");
+					}
+				});
 				dependenciaAcademica = new TbAdmDependencia(codigo,dependencia,modUsuario,modFecha,unidad);
 				listadoNuevoDependencia.add(dependenciaAcademica);
-				listaNuevasDependencias.appendItem(codigo +" - "+dependencia, dependencia);
+				Listcell celda = new Listcell(codigo +" - "+dependencia);
+				item.appendChild(celda);
+				listaNuevasDependencias.appendChild(item);
 				txtIdDependencia.setText("");
 				txtNombreDependenciaAcademica.setText("");
 				txtIdDependencia.focus();
@@ -363,18 +428,21 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	private void adicionarNucleo(String nucleo, TbAdmDependencia dependencia){
 		final Listitem item = new Listitem();
 		String codigo = txtPreIdNucleo.getText().trim().toUpperCase()+txtIdNucleo.getText().trim().toUpperCase();
-		item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(Event arg0) throws Exception {						
-				eliminaListItem(item, "");
-			}
-		});
+		
 		
 		if((!codigo.isEmpty()) && (!existeIdNucleo(codigo))){
 			if((!nucleo.isEmpty()) && (!existeNucleo(nucleo))){
+				item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event arg0) throws Exception {						
+						eliminaListItem(item, "");
+					}
+				});
 				nucleoAcademico = new TbAdmNucleo(codigo, dependencia, nucleo, modUsuario, modFecha);
-				listadoNuevoNucleo.add(nucleoAcademico);
-				listaNuevosNucleos.appendItem(codigo, codigo);
+				listadoNuevoNucleo.add(nucleoAcademico);			
+				Listcell celda = new Listcell(codigo +" - "+nucleo);
+				item.appendChild(celda);				
+				listaNuevosNucleos.appendChild(item);
 				txtIdNucleo.setText("");
 				txtNombreNucleo.setText("");
 				txtIdNucleo.focus();
@@ -410,7 +478,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	private void cambiarNombreDependencia(String dependencia){
 		if(listaDependenciaAcademica.getSelectedIndex() >= 0){
 			if ((!existeDependencia(dependencia)) && (!dependencia.isEmpty())){
-				dependenciaAcademica.setVrNombre(txtNuevoNombreDependenciaAcademica.getText().toUpperCase());
+//				dependenciaAcademica.setVrNombre(txtNuevoNombreDependenciaAcademica.getText().toUpperCase());
+				dependenciaAcademica.setVrNombre(dependencia.trim().toUpperCase());
 				listadoDependencia.set(listaDependenciaAcademica.getSelectedIndex(), dependenciaAcademica);
 				recargarListaDependencia();
 				txtNuevoNombreDependenciaAcademica.setText("");
@@ -425,7 +494,23 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		}
 	}
 	
-	//DEBO HACER EL METODO CAMBIAR NOMBRE.... RECUERDALO.
+	public void cambiarNombreNucleo(String nucleo){
+		if (listaNucleoAcademico.getSelectedIndex() >= 0){
+			if ((!existeNucleo(nucleo)) && (!nucleo.isEmpty())){
+				nucleoAcademico.setVrNombre(nucleo.trim().toUpperCase());
+				listadoNucleo.set(listaNucleoAcademico.getSelectedIndex(), nucleoAcademico);
+				recargarListaNucleo();
+				txtNuevoNucleoAcademico.setText("");
+				txtDependencia.setText("");
+				txtBuscarNucleo.focus();
+			} else {
+				Messagebox.show("El Nombre del Nucleo Académico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+			}
+		} else {
+			Messagebox.show("Para cambiar el nombre de un Nucleo Académico, primero debe seleccionar un elemento de la Lista.\n Operación Anulada.","Sin Elemento",Messagebox.OK,Messagebox.ON_ABORT);
+		}
+		
+	}
 	
 	
 	private boolean existeUnidad(String unidad){
@@ -593,12 +678,21 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		copiarDependenciaAcademica(dependenciaAcademica);
 	}
 	
+	public void onSelect$listaNucleoAcademico(){
+		nucleoAcademico = listadoNucleo.get(listaNucleoAcademico.getSelectedIndex());
+		copiarNucleoAcademico(nucleoAcademico);
+	}
+	
 	public void onOK$txtNuevoNombreUnidadAcademica(){
 		cambiarNombreUnidad(txtNuevoNombreUnidadAcademica.getText().toUpperCase().trim());
 	}
 	
 	public void onOK$txtNuevoNombreDependenciaAcademica(){
 		cambiarNombreDependencia(txtNuevoNombreDependenciaAcademica.getText().trim().toUpperCase());
+	}
+	
+	public void onOK$txtNuevoNucleoAcademico(){
+		cambiarNombreNucleo(txtNuevoNucleoAcademico.getText().trim().toUpperCase());
 	}
 	
 	public void onClick$btnCambiarNombreUnidad(){
@@ -611,7 +705,6 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	
 	public void onSelect$cmbDependencia(){
 		dependenciaAcademica = listadoDependencia.get(cmbDependencia.getSelectedIndex());
-//		String id = dependenciaAcademica.getVrIddependencia();
 		cargarNucleoPorDependencia(dependenciaAcademica);
 	}
 	
@@ -720,6 +813,17 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		
 	}
 	
+	public void onClick$tool_save(){
+		unificarListados();		
+		try {
+			guardarNucleoNGC.guardarNucleos(listaTotalUnidades, listaTotalDependencias, listaTotalNucleos);
+		} catch (ExcepcionesLogica e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	
 	
 	public void onSelect$tabOpciones(){
