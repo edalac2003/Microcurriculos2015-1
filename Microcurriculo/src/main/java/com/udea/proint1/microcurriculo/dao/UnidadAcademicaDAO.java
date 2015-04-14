@@ -9,6 +9,8 @@ public interface UnidadAcademicaDAO {
 	
 	public void guardarUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO;
 	
+	public void guardarListadoUnidad(List<TbAdmUnidadAcademica> lista) throws ExcepcionesDAO;
+	
 	public TbAdmUnidadAcademica obtenerUnidad(String idUnidad) throws ExcepcionesDAO;
 	
 	public void modificarUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO;

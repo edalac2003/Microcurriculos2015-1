@@ -12,6 +12,8 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 
+	
+
 	private static Logger log=Logger.getLogger(UnidadAcademicaNGCImpl.class);
 	
 	UnidadAcademicaDAO unidadAcademicaDao;
@@ -34,22 +36,9 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			expLog.setMsjUsuario("No se pudo guardar, El objeto unidad Academica esta vacio");
 			throw expLog;
 		}
-//		try {
-//			String id = unidadAcademica.getVrIdunidad();
-//			TbAdmUnidadAcademica unidadAcademicaConsulta = unidadAcademicaDao.obtenerUnidad(id);
-//		
-//			if(unidadAcademicaConsulta != null){
-//				throw new ExcepcionesLogica("La unidadAcademica a insertar ya existe");
-//			}
-//		
-//		} catch (ExcepcionesDAO e) {
-//			log.error("fall� al invocar el metodo obtenerUnidad de la clase unidadAcademicaDao: "+ e);
-//		}
-		
-		try {
-			
-			unidadAcademicaDao.guardarUnidad(unidadAcademica);
-		
+
+		try {			
+			unidadAcademicaDao.guardarUnidad(unidadAcademica);		
 		} catch(ExcepcionesDAO expDAO){
 			throw expDAO;
 		} catch(Exception exp){
@@ -57,6 +46,28 @@ public class UnidadAcademicaNGCImpl implements UnidadAcademicaNGC {
 			expLog.setMsjUsuario("Error al invocar el metodo guardar Unidad Academica");
 			expLog.setMsjTecnico(exp.getMessage());
 			expLog.setOrigen(exp);
+			throw expLog;
+		}
+	}
+	
+	@Override
+	public void guardarListadoUnidad(List<TbAdmUnidadAcademica> lista) throws ExcepcionesLogica, ExcepcionesDAO {
+		
+		if(lista != null){
+			try {			
+				unidadAcademicaDao.guardarListadoUnidad(lista);
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo guardar Unidad Academica");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
+			}
+		} else {
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El listado de Unidad Academica esta vacio.");
 			throw expLog;
 		}
 	}

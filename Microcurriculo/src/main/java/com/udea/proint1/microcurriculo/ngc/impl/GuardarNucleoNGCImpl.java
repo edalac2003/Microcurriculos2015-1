@@ -12,6 +12,8 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class GuardarNucleoNGCImpl implements GuardarNucleoNGC {
 
+	
+
 	GuardarNucleoDAO guardarNucleoDao;
 	
 	public void setGuardarNucleoDao(GuardarNucleoDAO guardarNucleoDao) {
@@ -21,16 +23,28 @@ public class GuardarNucleoNGCImpl implements GuardarNucleoNGC {
 	@Override
 	public void guardarNucleos(List<TbAdmUnidadAcademica> listaUnidades,
 			List<TbAdmDependencia> listaDependencias,
-			List<TbAdmNucleo> listaNucleos) throws ExcepcionesLogica {
+			List<TbAdmNucleo> listaNucleos) throws ExcepcionesLogica,
+			ExcepcionesDAO {
 		
-		try {
-			guardarNucleoDao.guardarNucleos(listaUnidades, listaDependencias, listaNucleos);
-		} catch (ExcepcionesDAO e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if ((listaUnidades == null) && (listaDependencias == null) && (listaNucleos == null)){
+			
+		}else if ((listaUnidades != null) || (listaDependencias != null) || (listaNucleos != null)){
+			try{
+				guardarNucleoDao.guardarNucleos(listaUnidades, listaDependencias, listaNucleos);
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al intentar obtener información de Nucleos");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
+			}
 		}
 		
-
+		
+		
 	}
+	
 
 }

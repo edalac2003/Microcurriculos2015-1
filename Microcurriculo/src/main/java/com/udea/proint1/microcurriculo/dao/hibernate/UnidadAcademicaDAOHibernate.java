@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UnidadAcademicaDAO;
@@ -37,6 +38,32 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 		} finally{
 			session.close();
 		}
+	}
+	
+	@Override
+	public void guardarListadoUnidad(List<TbAdmUnidadAcademica> lista) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			for (TbAdmUnidadAcademica unidad : lista)
+				session.saveOrUpdate(unidad);
+			
+			tx.commit();
+		} catch (HibernateException e){
+			tx.rollback();			
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar el listado de Unidades Academicas. \n Todos los posibles cambios fueron revertidos.");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally {
+			session.close();
+		}
+		
 	}
 
 	@Override

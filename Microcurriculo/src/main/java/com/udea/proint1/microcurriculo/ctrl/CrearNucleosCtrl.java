@@ -43,11 +43,10 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
+	private static Logger logger = Logger.getLogger(CrearNucleosCtrl.class);
 	private static String modUsuario = "SYSTEM";
 	private static Date modFecha = new Date();
-	private static Date fechaEstimada = null;
-	private static DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+	
 	
 	Tabbox tabOpciones;
 	
@@ -129,52 +128,107 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		this.guardarNucleoNGC = guardarNucleoNGC;
 	}
 	
-	
-	private void unificarListados(){
-		listaTotalUnidades = new ArrayList<TbAdmUnidadAcademica>();
-		listaTotalDependencias = new ArrayList<TbAdmDependencia>();
-		listaTotalNucleos = new ArrayList<TbAdmNucleo>();
-		
-		//Unificando los listados de las Unidades
-		
-		if (listadoUnidadAcademica.size() > 0){
-			for(TbAdmUnidadAcademica unidad : listadoUnidadAcademica){
-				listaTotalUnidades.add(unidad);
+	private List<TbAdmUnidadAcademica> empaquetarUnidades(List<TbAdmUnidadAcademica> lista1, List<TbAdmUnidadAcademica> lista2){
+		List<TbAdmUnidadAcademica> lista = null;
+		if((lista1 != null) || (lista2 != null)){
+			lista = new ArrayList<TbAdmUnidadAcademica>();
+			if (lista1 != null){
+				for (TbAdmUnidadAcademica unidad : lista1)
+					lista.add(unidad);
+			}
+			
+			lista = new ArrayList<TbAdmUnidadAcademica>();
+			if (lista2 != null){
+				for (TbAdmUnidadAcademica unidad : lista2)
+					lista.add(unidad);
 			}
 		}
 		
-		if (listadoNuevoUnidadAcademica.size() > 0){
-			for(TbAdmUnidadAcademica unidad : listadoNuevoUnidadAcademica){
-				listaTotalUnidades.add(unidad);
-			}
-		}
-		
-		//Unificando los Listados de Dependencias
-		if(listadoDependencia.size() > 0){
-			for (TbAdmDependencia dependencia : listadoDependencia){
-				listaTotalDependencias.add(dependencia);
-			}
-		}
-		
-		if(listadoNuevoDependencia.size() > 0){
-			for (TbAdmDependencia dependencia : listadoNuevoDependencia){
-				listaTotalDependencias.add(dependencia);
-			}
-		}
-		
-		//Unificando los Listados de los Nucleos
-		if(listadoNucleo.size() > 0){
-			for (TbAdmNucleo nucleo : listadoNucleo){
-				listaTotalNucleos.add(nucleo);
-			}
-		}
-		
-		if(listadoNuevoNucleo.size() > 0){
-			for (TbAdmNucleo nucleo : listadoNuevoNucleo){
-				listaTotalNucleos.add(nucleo);
-			}
-		}
+		return lista;
 	}
+	
+	private List<TbAdmDependencia> empaquetarDependencias(List<TbAdmDependencia> lista1, List<TbAdmDependencia> lista2){
+		List<TbAdmDependencia> lista = null;
+		
+		if((lista1 != null) || (lista2 != null)){
+			lista = new ArrayList<TbAdmDependencia>();
+			if (lista1 != null){
+				for(TbAdmDependencia dependencia : lista1)
+					lista.add(dependencia);
+			}
+			if (lista2 != null){
+				for(TbAdmDependencia dependencia : lista2)
+					lista.add(dependencia);
+			}
+		}
+		
+		return lista;
+	}
+	
+	private List<TbAdmNucleo> empaquetarNucleos(List<TbAdmNucleo> lista1, List<TbAdmNucleo> lista2){
+		List<TbAdmNucleo> lista = null;
+		
+		if((lista1 != null) || (lista2 != null)){
+			lista = new ArrayList<TbAdmNucleo>();
+			if (lista1 != null){
+				for (TbAdmNucleo nucleo : lista1)
+					lista.add(nucleo);
+			}
+			
+			if (lista2 != null){
+				for (TbAdmNucleo nucleo : lista2)
+					lista.add(nucleo);
+			}
+		}
+		
+		return lista;
+	}
+	
+//	private void unificarListados(){
+//		listaTotalUnidades = new ArrayList<TbAdmUnidadAcademica>();
+//		listaTotalDependencias = new ArrayList<TbAdmDependencia>();
+//		listaTotalNucleos = new ArrayList<TbAdmNucleo>();
+//		
+//		//Unificando los listados de las Unidades
+//		
+//		if ((listadoUnidadAcademica.size() > 0) && (listadoUnidadAcademica != null)){
+//			for(TbAdmUnidadAcademica unidad : listadoUnidadAcademica){
+//				listaTotalUnidades.add(unidad);
+//			}
+//		}
+//		
+//		if ((listadoUnidadAcademica != null)){
+//			for(TbAdmUnidadAcademica unidad : listadoNuevoUnidadAcademica){
+//				listaTotalUnidades.add(unidad);
+//			}
+//		}
+//		
+//		//Unificando los Listados de Dependencias
+//		if((listadoDependencia != null)){
+//			for (TbAdmDependencia dependencia : listadoDependencia){
+//				listaTotalDependencias.add(dependencia);
+//			}
+//		}
+//		
+//		if((listadoDependencia != null)){
+//			for (TbAdmDependencia dependencia : listadoNuevoDependencia){
+//				listaTotalDependencias.add(dependencia);
+//			}
+//		}
+//		
+//		//Unificando los Listados de los Nucleos
+//		if((listadoNucleo != null)){
+//			for (TbAdmNucleo nucleo : listadoNucleo){
+//				listaTotalNucleos.add(nucleo);
+//			}
+//		}
+//		
+//		if((listadoNucleo != null)){
+//			for (TbAdmNucleo nucleo : listadoNuevoNucleo){
+//				listaTotalNucleos.add(nucleo);
+//			}
+//		}
+//	}
 	
 	
 	private void cargarListaUnidades(){
@@ -814,14 +868,40 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	}
 	
 	public void onClick$tool_save(){
-		unificarListados();		
-		try {
-			guardarNucleoNGC.guardarNucleos(listaTotalUnidades, listaTotalDependencias, listaTotalNucleos);
-		} catch (ExcepcionesLogica e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO: handle exception
+//		unificarListados();		
+		listaTotalUnidades = empaquetarUnidades(listadoUnidadAcademica, listadoNuevoUnidadAcademica);
+		listaTotalDependencias = empaquetarDependencias(listadoDependencia, listadoNuevoDependencia);
+		listaTotalNucleos = empaquetarNucleos(listadoNucleo, listadoNuevoNucleo);
+		
+		if((listaTotalUnidades != null) || (listaTotalDependencias != null) || (listaTotalNucleos != null)){
+			if(listaTotalUnidades != null){
+//				try {
+//					unidadAcademicaNGC.guardarListadoUnidad(listaTotalUnidades);
+//				} catch(ExcepcionesDAO expDAO){
+//					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//					logger.error(expDAO.getMsjTecnico());
+//				}catch(ExcepcionesLogica expNgs){
+//					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//					logger.error(expNgs.getMsjTecnico());
+//				}catch(Exception exp){
+//					Messagebox.show("",exp.getMessage(), Messagebox.OK,Messagebox.ERROR);
+//					logger.error(exp);
+//				}
+//				Messagebox.show("Registros Guardados satisfactoriamente."); 
+//			}
+			
+				try {
+					guardarNucleoNGC.guardarNucleos(listaTotalUnidades, listaTotalDependencias, listaTotalNucleos);
+				} catch (ExcepcionesLogica expNgs) {
+					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expNgs.getMsjTecnico());
+				} catch (ExcepcionesDAO expDAO) {
+					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expDAO.getMsjTecnico());
+				}
+			} else {
+				Messagebox.show("No hay nada para Guardar.");
+			}
 		}
 	}
 	
@@ -829,9 +909,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	public void onSelect$tabOpciones(){
 		Tabpanel tabpanels = (Tabpanel)tabOpciones.getSelectedPanel();
 		int indice = tabpanels.getIndex();
-		TbAdmDependencia tmpDependencia;
-		String id = "";
-		
+				
 		switch (indice) {
 		case 0:
 			cargarListaUnidades();
@@ -871,6 +949,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		
-		cargarListaUnidades();
+		if("formaCrearNucleo".equals(comp.getParent().getId().toString()))
+			cargarListaUnidades();
 	}
 }

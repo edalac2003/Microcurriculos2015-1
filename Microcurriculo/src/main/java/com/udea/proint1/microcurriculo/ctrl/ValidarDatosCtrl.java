@@ -253,259 +253,259 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 */
 	
 	
-	public void onClick$tool_save2(){
-		//Aqui se va a empaquetar todo.
-
-		
-		TbMicMicrocurriculo microcurriculo = empaquetarMicrocurriculo();
-		if (microcurriculo != null){
-			TbMicMicroxestado microxEstado = empaquetarMicroxEstado(microcurriculo);
-			empaquetarObjetivos(microcurriculo);
-			if (listaUnidades.getItems().size() > 0)
-				empaquetarUnidades(microcurriculo);
-			if (listaTemas.getItems().size() > 0)
-				empaquetarTemas(listadoUnidades);
-			if (listaEvaluaciones.getItems().size() > 0)
-				empaquetarEvaluaciones(microcurriculo);
-			if (listaSubtemas.getItems().size() >0 )
-				empaquetarSubtemas(listadoTemas);
-			if(listaBibliografia.getItems().size() > 0)
-				empaquetarBibliografias(listadoUnidades);			
-//					listadoAutores = new ArrayList<TbMicAutor>();
-//					listadoAutorxBiblio = new ArrayList<TbMicAutorxbiblio>();
-		
-			if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
-				try {
-					guardarMicrocurriculoNGC.guardarMicroxlotes(microcurriculo, microxEstado, listadoTemas, listadoSubtemas, listadoSubtemaxTema, listadoTemasxUnidad, 
-											listadoUnidades, listadoUnidadesxMicro, listadoObjetivos, listadoObjetivosxMicro, listadoBibliografia, listadoBibliografiaxUnidad, 
-											listadoEvaluaciones, listadoEvaluacionesxMicro);
-					
-				}catch(ExcepcionesDAO expDAO){
-					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-					logger.error(expDAO.getMsjTecnico());
-				}catch(ExcepcionesLogica expNgs){
-					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-					logger.error(expNgs.getMsjTecnico());
-				}catch(Exception exp){
-//					Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-					logger.error(exp);
-				}
-				if (verificarCampos() == 1){
-					cmbEstado.setDisabled(false);
-					Messagebox.show("El Microcurriculo se ha guardado correctamente. Puede Cambiar el estado del Microcurriculo cuando lo desee.");
-				} else if (verificarCampos() == 0){
-					Messagebox.show("El Microcurriculo se ha guardado correctamente. Su estado inicial es <Borrador>. \n Para cambiar el estado, el Microcurriculo "+
-							"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
-				} else{
-					Messagebox.show("Errores al guardar.  Revise la informaci�n.");
-				}				
-			} else {
-				Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la informaci�n ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
-			}
-		} else{
-			Messagebox.show("El formulario no cumple con la informaci�n minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
-		}
-	}
-	
-	private boolean existeMicrocurriculo(String idMicrocurriculo){
-		TbMicMicrocurriculo micro = null;
-		boolean estado = false;
-		
-		try {
-			micro = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		if (micro != null)
-			estado = true;
-		
-		return estado;
-		
-	}
-	
-	private TbMicMicroxestado empaquetarMicroxEstado(TbMicMicrocurriculo microcurriculo){
-		TbMicMicroxestado microxEstado = null;
-		int registro = 0;
-		TbMicEstado estado = null;
-		TbAdmPersona responsable = null;
-		
-//		try {
-//			registro = microxEstadoNGC.contarRegistros();			
-//		} catch (ExcepcionesLogica e) {
-//			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Microcurriculo x Estado."+e);
+//	public void onClick$tool_save2(){
+//		//Aqui se va a empaquetar todo.
+//
+//		
+//		TbMicMicrocurriculo microcurriculo = empaquetarMicrocurriculo();
+//		if (microcurriculo != null){
+//			TbMicMicroxestado microxEstado = empaquetarMicroxEstado(microcurriculo);
+//			empaquetarObjetivos(microcurriculo);
+//			if (listaUnidades.getItems().size() > 0)
+//				empaquetarUnidades(microcurriculo);
+//			if (listaTemas.getItems().size() > 0)
+//				empaquetarTemas(listadoUnidades);
+//			if (listaEvaluaciones.getItems().size() > 0)
+//				empaquetarEvaluaciones(microcurriculo);
+//			if (listaSubtemas.getItems().size() >0 )
+//				empaquetarSubtemas(listadoTemas);
+//			if(listaBibliografia.getItems().size() > 0)
+//				empaquetarBibliografias(listadoUnidades);			
+////					listadoAutores = new ArrayList<TbMicAutor>();
+////					listadoAutorxBiblio = new ArrayList<TbMicAutorxbiblio>();
+//		
+//			if( !(existeMicrocurriculo(microcurriculo.getVrIdmicrocurriculo()))){
+//				try {
+//					guardarMicrocurriculoNGC.guardarMicroxlotes(microcurriculo, microxEstado, listadoTemas, listadoSubtemas, listadoSubtemaxTema, listadoTemasxUnidad, 
+//											listadoUnidades, listadoUnidadesxMicro, listadoObjetivos, listadoObjetivosxMicro, listadoBibliografia, listadoBibliografiaxUnidad, 
+//											listadoEvaluaciones, listadoEvaluacionesxMicro);
+//					
+//				}catch(ExcepcionesDAO expDAO){
+//					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//					logger.error(expDAO.getMsjTecnico());
+//				}catch(ExcepcionesLogica expNgs){
+//					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//					logger.error(expNgs.getMsjTecnico());
+//				}catch(Exception exp){
+////					Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//					logger.error(exp);
+//				}
+//				if (verificarCampos() == 1){
+//					cmbEstado.setDisabled(false);
+//					Messagebox.show("El Microcurriculo se ha guardado correctamente. Puede Cambiar el estado del Microcurriculo cuando lo desee.");
+//				} else if (verificarCampos() == 0){
+//					Messagebox.show("El Microcurriculo se ha guardado correctamente. Su estado inicial es <Borrador>. \n Para cambiar el estado, el Microcurriculo "+
+//							"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
+//				} else{
+//					Messagebox.show("Errores al guardar.  Revise la informaci�n.");
+//				}				
+//			} else {
+//				Messagebox.show("El Microcurriculo que desea crear coincide con un Registro en la Base de Datos. \n Por favor verifique la informaci�n ingresada.","Advertencia",Messagebox.OK,Messagebox.INFORMATION);
+//			}
+//		} else{
+//			Messagebox.show("El formulario no cumple con la informaci�n minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
 //		}
-		
-		try {
-			estado = estadoNGC.obtenerEstados(1);
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		try {
-			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		if(estado != null){
-			microxEstado = new TbMicMicroxestado(estado, modFecha, microcurriculo, responsable, modUsuario, modFecha);
-		}		
-		return microxEstado;
-	}
+//	}
 	
-			
-	private void empaquetarEvaluaciones(TbMicMicrocurriculo microcurriculo){
-		TbMicEvaluacion evaluacion = null;
-		TbMicEvaluacionxmicro evaluacionxMicro = null;
-		
-		listadoEvaluaciones = new ArrayList<TbMicEvaluacion>();
-		listadoEvaluacionesxMicro = new ArrayList<TbMicEvaluacionxmicro>();
-				
-		for(int i=1;i<=listaEvaluaciones.getItemCount();i++){
-			Listitem listaitem = (Listitem)listaEvaluaciones.getChildren().get(i);
-			Listcell celdaEvaluacion = (Listcell)listaitem.getChildren().get(0);
-			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
-			Listcell celdaFecha = (Listcell)listaitem.getChildren().get(2);
-			String tmpFecha = celdaFecha.getLabel().toString();			
-			try {
-				fechaEstimada = df.parse(tmpFecha);
-			} catch (ParseException e) {
-				logger.error("Error en le Formato de Fecha.");
-			}
-
-			evaluacion = new TbMicEvaluacion(celdaEvaluacion.getLabel(), modUsuario, modFecha);
-			listadoEvaluaciones.add(evaluacion);
-			evaluacionxMicro = new TbMicEvaluacionxmicro(evaluacion, microcurriculo, Integer.parseInt(celdaPorcentaje.getLabel()), fechaEstimada, modUsuario, modFecha);
-			listadoEvaluacionesxMicro.add(evaluacionxMicro);
-		}
-	}
+//	private boolean existeMicrocurriculo(String idMicrocurriculo){
+//		TbMicMicrocurriculo micro = null;
+//		boolean estado = false;
+//		
+//		try {
+//			micro = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		if (micro != null)
+//			estado = true;
+//		
+//		return estado;
+//		
+//	}
 	
-	
-	private void empaquetarTemas(List<TbMicUnidad> listadoUnidades){
-		TbMicTema tema = null;
-		TbMicTemaxunidad temaxUnidad = null;
-		TbMicUnidad unidad = null;
-		listadoTemas = new ArrayList<TbMicTema>();
-		listadoTemasxUnidad = new ArrayList<TbMicTemaxunidad>();
-				
-		for (int i=1;i<=listaTemas.getItems().size(); i++){
-			Listitem listaitem = (Listitem)listaTemas.getChildren().get(i);
-			Listcell celdaUnidad = (Listcell)listaitem.getChildren().get(0);
-			Listcell celdaNombreTema = (Listcell)listaitem.getChildren().get(1);
-			Listcell celdaSemanas = (Listcell)listaitem.getChildren().get(2);
-			
-			unidad = obtenerUnidad(listadoUnidades, celdaUnidad.getLabel());
-			String descripcion = celdaNombreTema.getLabel();
-			tema = new TbMicTema(descripcion, modUsuario, modFecha);
-			listadoTemas.add(tema);
-			temaxUnidad = new TbMicTemaxunidad(unidad, tema, Integer.parseInt(celdaSemanas.getLabel()), modUsuario, modFecha);
-			listadoTemasxUnidad.add(temaxUnidad);
-		}		
-	}
-	
-	
-	
-	private void empaquetarSubtemas(List<TbMicTema> lista){
-		TbMicTema tema = null;
-		TbMicSubtema subtema = null;
-		TbMicSubtemaxtema subtemaxTema = null;	
-		listadoSubtemas = new ArrayList<TbMicSubtema>();
-		listadoSubtemaxTema = new ArrayList<TbMicSubtemaxtema>();
-		
-		for(int i=1; i<=listaSubtemas.getItems().size(); i++){
-			Listitem listaitem = (Listitem)listaSubtemas.getChildren().get(i);
-			Listcell celdaTemas = (Listcell)listaitem.getChildren().get(1);
-			Listcell celdaSubtema = (Listcell)listaitem.getChildren().get(2);
-			String nombreTema = celdaTemas.getLabel().toString();
-			
-			tema = obtenerTema(lista, nombreTema);
-						
-			if (tema != null){
-				subtema = new TbMicSubtema(celdaSubtema.getLabel().toString(), modUsuario, modFecha);
-				listadoSubtemas.add(subtema);
-				subtemaxTema = new TbMicSubtemaxtema(tema, subtema, modUsuario, modFecha);
-				listadoSubtemaxTema.add(subtemaxTema);
-			} 
-		}		
-	}
-	
-	
-	
-	private void empaquetarBibliografias(List<TbMicUnidad> lista){
-		TbMicBibliografia bibliografia = null;
-		TbMicBiblioxunidad biblioxUnidad = null;
-		char tipoBibliografia;
-		listadoBibliografia = new ArrayList<TbMicBibliografia>();
-		listadoBibliografiaxUnidad = new ArrayList<TbMicBiblioxunidad>();
-		
-		for(int i=1; i<=listaBibliografia.getItems().size(); i++){
-			Listitem listaitem = (Listitem)listaBibliografia.getChildren().get(i);
-			Listcell celdaUnidad = (Listcell)listaitem.getChildren().get(0);
-			Listcell celdaReferencia = (Listcell)listaitem.getChildren().get(1);
-			Listcell celdaAutor = (Listcell)listaitem.getChildren().get(2);
-			Listcell celdaISBN = (Listcell)listaitem.getChildren().get(3);
-			Listcell celdaTipo = (Listcell)listaitem.getChildren().get(4);
-			String strReferencia = celdaReferencia.getLabel().toString();
-			String strAutor = celdaAutor.getLabel().toString();
-			String strISBN = celdaISBN.getLabel().toString();
-			
-			if ("BASICA".equals(celdaTipo.getLabel().toUpperCase()))
-				tipoBibliografia = '1';
-			else 
-				tipoBibliografia = '0';
-						
-			bibliografia = new TbMicBibliografia(strReferencia, null, strISBN, strAutor, tipoBibliografia, modUsuario, modFecha);
-			listadoBibliografia.add(bibliografia);			
-			TbMicUnidad unidad = obtenerUnidad(lista, celdaUnidad.getLabel().toString().toUpperCase());
-			biblioxUnidad = new TbMicBiblioxunidad(bibliografia, unidad, modUsuario, modFecha);
-			listadoBibliografiaxUnidad.add(biblioxUnidad);
-		}
-		
-		for(int i=0; i<listaCibergrafia.getItemCount();i++){
-			Listitem listaItem = (Listitem)listaCibergrafia.getChildren().get(i+1);
-			Listcell celdaUnidad = (Listcell)listaItem.getChildren().get(0);
-			Listcell celdaReferencia = (Listcell)listaItem.getChildren().get(1);
-			Listcell celdaSitio = (Listcell)listaItem.getChildren().get(2);
-			Listcell celdaTipo = (Listcell)listaItem.getChildren().get(3);
-			String strReferencia = celdaReferencia.getLabel().toString();
-			String strSitio = celdaSitio.getLabel().toString();
-			
-			if ("BASICA".equals(celdaTipo.getLabel().toUpperCase()))
-				tipoBibliografia = '1';
-			else 
-				tipoBibliografia = '0';
-			
-			TbMicUnidad unidad = obtenerUnidad(lista, celdaUnidad.getLabel().toString().toUpperCase());
-			
-			bibliografia = new TbMicBibliografia(strReferencia, strSitio, null, null, tipoBibliografia, modUsuario, modFecha);
-			
-			biblioxUnidad = new TbMicBiblioxunidad(bibliografia, unidad, modUsuario, modFecha);
-			listadoBibliografia.add(bibliografia);
-			listadoBibliografiaxUnidad.add(biblioxUnidad);			
-		}	
-	}
+//	private TbMicMicroxestado empaquetarMicroxEstado(TbMicMicrocurriculo microcurriculo){
+//		TbMicMicroxestado microxEstado = null;
+//		int registro = 0;
+//		TbMicEstado estado = null;
+//		TbAdmPersona responsable = null;
+//		
+////		try {
+////			registro = microxEstadoNGC.contarRegistros();			
+////		} catch (ExcepcionesLogica e) {
+////			logger.error("Error al intentar recuperar el numero de Registros de la Tabla Microcurriculo x Estado."+e);
+////		}
+//		
+//		try {
+//			estado = estadoNGC.obtenerEstados(1);
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		try {
+//			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		if(estado != null){
+//			microxEstado = new TbMicMicroxestado(estado, modFecha, microcurriculo, responsable, modUsuario, modFecha);
+//		}		
+//		return microxEstado;
+//	}
+//	
+//			
+//	private void empaquetarEvaluaciones(TbMicMicrocurriculo microcurriculo){
+//		TbMicEvaluacion evaluacion = null;
+//		TbMicEvaluacionxmicro evaluacionxMicro = null;
+//		
+//		listadoEvaluaciones = new ArrayList<TbMicEvaluacion>();
+//		listadoEvaluacionesxMicro = new ArrayList<TbMicEvaluacionxmicro>();
+//				
+//		for(int i=1;i<=listaEvaluaciones.getItemCount();i++){
+//			Listitem listaitem = (Listitem)listaEvaluaciones.getChildren().get(i);
+//			Listcell celdaEvaluacion = (Listcell)listaitem.getChildren().get(0);
+//			Listcell celdaPorcentaje = (Listcell)listaitem.getChildren().get(1);
+//			Listcell celdaFecha = (Listcell)listaitem.getChildren().get(2);
+//			String tmpFecha = celdaFecha.getLabel().toString();			
+//			try {
+//				fechaEstimada = df.parse(tmpFecha);
+//			} catch (ParseException e) {
+//				logger.error("Error en le Formato de Fecha.");
+//			}
+//
+//			evaluacion = new TbMicEvaluacion(celdaEvaluacion.getLabel(), modUsuario, modFecha);
+//			listadoEvaluaciones.add(evaluacion);
+//			evaluacionxMicro = new TbMicEvaluacionxmicro(evaluacion, microcurriculo, Integer.parseInt(celdaPorcentaje.getLabel()), fechaEstimada, modUsuario, modFecha);
+//			listadoEvaluacionesxMicro.add(evaluacionxMicro);
+//		}
+//	}
+//	
+//	
+//	private void empaquetarTemas(List<TbMicUnidad> listadoUnidades){
+//		TbMicTema tema = null;
+//		TbMicTemaxunidad temaxUnidad = null;
+//		TbMicUnidad unidad = null;
+//		listadoTemas = new ArrayList<TbMicTema>();
+//		listadoTemasxUnidad = new ArrayList<TbMicTemaxunidad>();
+//				
+//		for (int i=1;i<=listaTemas.getItems().size(); i++){
+//			Listitem listaitem = (Listitem)listaTemas.getChildren().get(i);
+//			Listcell celdaUnidad = (Listcell)listaitem.getChildren().get(0);
+//			Listcell celdaNombreTema = (Listcell)listaitem.getChildren().get(1);
+//			Listcell celdaSemanas = (Listcell)listaitem.getChildren().get(2);
+//			
+//			unidad = obtenerUnidad(listadoUnidades, celdaUnidad.getLabel());
+//			String descripcion = celdaNombreTema.getLabel();
+//			tema = new TbMicTema(descripcion, modUsuario, modFecha);
+//			listadoTemas.add(tema);
+//			temaxUnidad = new TbMicTemaxunidad(unidad, tema, Integer.parseInt(celdaSemanas.getLabel()), modUsuario, modFecha);
+//			listadoTemasxUnidad.add(temaxUnidad);
+//		}		
+//	}
+//	
+//	
+//	
+//	private void empaquetarSubtemas(List<TbMicTema> lista){
+//		TbMicTema tema = null;
+//		TbMicSubtema subtema = null;
+//		TbMicSubtemaxtema subtemaxTema = null;	
+//		listadoSubtemas = new ArrayList<TbMicSubtema>();
+//		listadoSubtemaxTema = new ArrayList<TbMicSubtemaxtema>();
+//		
+//		for(int i=1; i<=listaSubtemas.getItems().size(); i++){
+//			Listitem listaitem = (Listitem)listaSubtemas.getChildren().get(i);
+//			Listcell celdaTemas = (Listcell)listaitem.getChildren().get(1);
+//			Listcell celdaSubtema = (Listcell)listaitem.getChildren().get(2);
+//			String nombreTema = celdaTemas.getLabel().toString();
+//			
+//			tema = obtenerTema(lista, nombreTema);
+//						
+//			if (tema != null){
+//				subtema = new TbMicSubtema(celdaSubtema.getLabel().toString(), modUsuario, modFecha);
+//				listadoSubtemas.add(subtema);
+//				subtemaxTema = new TbMicSubtemaxtema(tema, subtema, modUsuario, modFecha);
+//				listadoSubtemaxTema.add(subtemaxTema);
+//			} 
+//		}		
+//	}
+//	
+//	
+//	
+//	private void empaquetarBibliografias(List<TbMicUnidad> lista){
+//		TbMicBibliografia bibliografia = null;
+//		TbMicBiblioxunidad biblioxUnidad = null;
+//		char tipoBibliografia;
+//		listadoBibliografia = new ArrayList<TbMicBibliografia>();
+//		listadoBibliografiaxUnidad = new ArrayList<TbMicBiblioxunidad>();
+//		
+//		for(int i=1; i<=listaBibliografia.getItems().size(); i++){
+//			Listitem listaitem = (Listitem)listaBibliografia.getChildren().get(i);
+//			Listcell celdaUnidad = (Listcell)listaitem.getChildren().get(0);
+//			Listcell celdaReferencia = (Listcell)listaitem.getChildren().get(1);
+//			Listcell celdaAutor = (Listcell)listaitem.getChildren().get(2);
+//			Listcell celdaISBN = (Listcell)listaitem.getChildren().get(3);
+//			Listcell celdaTipo = (Listcell)listaitem.getChildren().get(4);
+//			String strReferencia = celdaReferencia.getLabel().toString();
+//			String strAutor = celdaAutor.getLabel().toString();
+//			String strISBN = celdaISBN.getLabel().toString();
+//			
+//			if ("BASICA".equals(celdaTipo.getLabel().toUpperCase()))
+//				tipoBibliografia = '1';
+//			else 
+//				tipoBibliografia = '0';
+//						
+//			bibliografia = new TbMicBibliografia(strReferencia, null, strISBN, strAutor, tipoBibliografia, modUsuario, modFecha);
+//			listadoBibliografia.add(bibliografia);			
+//			TbMicUnidad unidad = obtenerUnidad(lista, celdaUnidad.getLabel().toString().toUpperCase());
+//			biblioxUnidad = new TbMicBiblioxunidad(bibliografia, unidad, modUsuario, modFecha);
+//			listadoBibliografiaxUnidad.add(biblioxUnidad);
+//		}
+//		
+//		for(int i=0; i<listaCibergrafia.getItemCount();i++){
+//			Listitem listaItem = (Listitem)listaCibergrafia.getChildren().get(i+1);
+//			Listcell celdaUnidad = (Listcell)listaItem.getChildren().get(0);
+//			Listcell celdaReferencia = (Listcell)listaItem.getChildren().get(1);
+//			Listcell celdaSitio = (Listcell)listaItem.getChildren().get(2);
+//			Listcell celdaTipo = (Listcell)listaItem.getChildren().get(3);
+//			String strReferencia = celdaReferencia.getLabel().toString();
+//			String strSitio = celdaSitio.getLabel().toString();
+//			
+//			if ("BASICA".equals(celdaTipo.getLabel().toUpperCase()))
+//				tipoBibliografia = '1';
+//			else 
+//				tipoBibliografia = '0';
+//			
+//			TbMicUnidad unidad = obtenerUnidad(lista, celdaUnidad.getLabel().toString().toUpperCase());
+//			
+//			bibliografia = new TbMicBibliografia(strReferencia, strSitio, null, null, tipoBibliografia, modUsuario, modFecha);
+//			
+//			biblioxUnidad = new TbMicBiblioxunidad(bibliografia, unidad, modUsuario, modFecha);
+//			listadoBibliografia.add(bibliografia);
+//			listadoBibliografiaxUnidad.add(biblioxUnidad);			
+//		}	
+//	}
 	
 	/**
 	 * 
@@ -513,164 +513,164 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	 * @param nombre
 	 * @return
 	 */
-	private TbMicUnidad obtenerUnidad(List<TbMicUnidad> lista, String nombre){
-		TbMicUnidad unidad = null;
-		for (TbMicUnidad un : lista){
-			if(nombre.equals(un.getVrNombre().trim())){
-				unidad = un;
-				break;
-			}				
-		}
-		return unidad;
-	}
-	
-	
-	private TbMicTema obtenerTema(List<TbMicTema> lista, String nombre){
-		TbMicTema tema = null;
-		for(TbMicTema tm : lista){
-			if (nombre.equals(tm.getVrDescripcion().trim())){
-				tema = tm;
-				break;
-			}
-		}
-		return tema;
-	}
-	
-	
-	private void empaquetarUnidades(TbMicMicrocurriculo microcurriculo){
-		TbMicUnidad unidad = null;
-		TbMicUnidadxmicro unidadxMicro = null;		
-		String nombreUnidad = "";
-		listadoUnidades = new ArrayList<TbMicUnidad>();
-		listadoUnidadesxMicro = new ArrayList<TbMicUnidadxmicro>();
-		
-		for (int i=1; i <= listaUnidades.getItems().size(); i++){
-			Listitem item = (Listitem)listaUnidades.getChildren().get(i);
-			Listcell celdaUnidad = (Listcell)item.getChildren().get(1);
-			nombreUnidad = celdaUnidad.getLabel();
-			unidad = new TbMicUnidad(nombreUnidad, modUsuario, modFecha);
-			listadoUnidades.add(unidad);
-			unidadxMicro = new TbMicUnidadxmicro(unidad, microcurriculo, modUsuario, modFecha);
-			listadoUnidadesxMicro.add(unidadxMicro);
-		}
-	}
-	
-	/**
-	 * Este metodo se encarga de tomar la informaci�n de la ListaObjetivosEspecificos y empaquetar ListaObjetivos y ListadoObjetivosxMicrocurriculo.
-	 * @param microcurriculo
-	 * @return Lista con objetos de Tipo Objetivos
-	 */
-	private void empaquetarObjetivos(TbMicMicrocurriculo microcurriculo){
-		TbMicObjetivo objetivo = null;
-		TbMicObjetivoxmicro objetivosxMicro = null;		
-		
-		
-		listadoObjetivos = new ArrayList<TbMicObjetivo>();
-		listadoObjetivosxMicro = new ArrayList<TbMicObjetivoxmicro>();
-		
-		if((txtObjetivoGeneral.getValue().trim().length() > 0) && !(txtObjetivoGeneral.equals(""))){
-			objetivo = new TbMicObjetivo(txtObjetivoGeneral.getValue(), modUsuario, modFecha);
-			listadoObjetivos.add(objetivo);
-			objetivosxMicro = new TbMicObjetivoxmicro(objetivo,microcurriculo,'1',modUsuario,modFecha);
-			listadoObjetivosxMicro.add(objetivosxMicro);
-			
-			for (int i=0; i<listaObjetivosEspecificos.getItems().size(); i++){
-				Listitem item = (Listitem)listaObjetivosEspecificos.getChildren().get(i);
-				Listcell celdaObjetivo = (Listcell)item.getChildren().get(0);
-				objetivo = new TbMicObjetivo(celdaObjetivo.getLabel(), modUsuario, modFecha);
-				listadoObjetivos.add(objetivo);
-				objetivosxMicro = new TbMicObjetivoxmicro(objetivo,microcurriculo,'0',modUsuario,modFecha);
-				listadoObjetivosxMicro.add(objetivosxMicro);
-			}
-		} else {
-			Messagebox.show("Sin Informaci�n en el Campo Objetivo General.");
-			txtObjetivoGeneral.setFocus(true);
-		}		
-	}
-	
-	
-	/*
-	 * Este m�todo se encarga de empaquetar la informaci�n y devolver un Objeto de tipo Microcurriculo
-	 *  
-	 * @return Objeto de Tipo Microcurriculo.
-	 */
-	private TbMicMicrocurriculo empaquetarMicrocurriculo(){
-		TbMicMicrocurriculo microcurriculo = null;;
-		String codigoMicrocurriculo = "";
-		TbAdmMateria materia = null;
-		TbAdmSemestre semestre = null;
-		TbAdmPersona responsable = null;
-		TbMicEstado estado = null;
-				
-		try {
-			materia = materiaNGC.obtenerMateria(cmbMateria.getValue());
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		try {
-			semestre = semestreNGC.obtenerSemestre(cmbSemestre.getValue());
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		try {
-			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-
-		try {
-			estado = estadoNGC.obtenerEstados(1);
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		codigoMicrocurriculo = asignarIdMicrocurriculo(cmbSemestre.getValue().toString(), cmbMateria.getValue().toString());
-		
-		if ((codigoMicrocurriculo.length() > 0) && (!codigoMicrocurriculo.equals(""))){
-			if (materia != null){
-				if (semestre != null){
-					if (responsable != null){
-						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, semestre, txtPropositoMicro.getValue().toString(), 
-								txtJustificacionMicro.getValue().toString(), txtResumenMicro.getValue().toString(), responsable, estado, modUsuario, modFecha);
-						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
-//						cmbEstado.setValue(obtenerEstado());
-					}
-				}
-			}
-		} else
-			Messagebox.show("No se pudo crear el objeto Microcurriculo");
-		return microcurriculo;
-	}
+//	private TbMicUnidad obtenerUnidad(List<TbMicUnidad> lista, String nombre){
+//		TbMicUnidad unidad = null;
+//		for (TbMicUnidad un : lista){
+//			if(nombre.equals(un.getVrNombre().trim())){
+//				unidad = un;
+//				break;
+//			}				
+//		}
+//		return unidad;
+//	}
+//	
+//	
+//	private TbMicTema obtenerTema(List<TbMicTema> lista, String nombre){
+//		TbMicTema tema = null;
+//		for(TbMicTema tm : lista){
+//			if (nombre.equals(tm.getVrDescripcion().trim())){
+//				tema = tm;
+//				break;
+//			}
+//		}
+//		return tema;
+//	}
+//	
+//	
+//	private void empaquetarUnidades(TbMicMicrocurriculo microcurriculo){
+//		TbMicUnidad unidad = null;
+//		TbMicUnidadxmicro unidadxMicro = null;		
+//		String nombreUnidad = "";
+//		listadoUnidades = new ArrayList<TbMicUnidad>();
+//		listadoUnidadesxMicro = new ArrayList<TbMicUnidadxmicro>();
+//		
+//		for (int i=1; i <= listaUnidades.getItems().size(); i++){
+//			Listitem item = (Listitem)listaUnidades.getChildren().get(i);
+//			Listcell celdaUnidad = (Listcell)item.getChildren().get(1);
+//			nombreUnidad = celdaUnidad.getLabel();
+//			unidad = new TbMicUnidad(nombreUnidad, modUsuario, modFecha);
+//			listadoUnidades.add(unidad);
+//			unidadxMicro = new TbMicUnidadxmicro(unidad, microcurriculo, modUsuario, modFecha);
+//			listadoUnidadesxMicro.add(unidadxMicro);
+//		}
+//	}
+//	
+//	/**
+//	 * Este metodo se encarga de tomar la informaci�n de la ListaObjetivosEspecificos y empaquetar ListaObjetivos y ListadoObjetivosxMicrocurriculo.
+//	 * @param microcurriculo
+//	 * @return Lista con objetos de Tipo Objetivos
+//	 */
+//	private void empaquetarObjetivos(TbMicMicrocurriculo microcurriculo){
+//		TbMicObjetivo objetivo = null;
+//		TbMicObjetivoxmicro objetivosxMicro = null;		
+//		
+//		
+//		listadoObjetivos = new ArrayList<TbMicObjetivo>();
+//		listadoObjetivosxMicro = new ArrayList<TbMicObjetivoxmicro>();
+//		
+//		if((txtObjetivoGeneral.getValue().trim().length() > 0) && !(txtObjetivoGeneral.equals(""))){
+//			objetivo = new TbMicObjetivo(txtObjetivoGeneral.getValue(), modUsuario, modFecha);
+//			listadoObjetivos.add(objetivo);
+//			objetivosxMicro = new TbMicObjetivoxmicro(objetivo,microcurriculo,'1',modUsuario,modFecha);
+//			listadoObjetivosxMicro.add(objetivosxMicro);
+//			
+//			for (int i=0; i<listaObjetivosEspecificos.getItems().size(); i++){
+//				Listitem item = (Listitem)listaObjetivosEspecificos.getChildren().get(i);
+//				Listcell celdaObjetivo = (Listcell)item.getChildren().get(0);
+//				objetivo = new TbMicObjetivo(celdaObjetivo.getLabel(), modUsuario, modFecha);
+//				listadoObjetivos.add(objetivo);
+//				objetivosxMicro = new TbMicObjetivoxmicro(objetivo,microcurriculo,'0',modUsuario,modFecha);
+//				listadoObjetivosxMicro.add(objetivosxMicro);
+//			}
+//		} else {
+//			Messagebox.show("Sin Informaci�n en el Campo Objetivo General.");
+//			txtObjetivoGeneral.setFocus(true);
+//		}		
+//	}
+//	
+//	
+//	/*
+//	 * Este m�todo se encarga de empaquetar la informaci�n y devolver un Objeto de tipo Microcurriculo
+//	 *  
+//	 * @return Objeto de Tipo Microcurriculo.
+//	 */
+//	private TbMicMicrocurriculo empaquetarMicrocurriculo(){
+//		TbMicMicrocurriculo microcurriculo = null;;
+//		String codigoMicrocurriculo = "";
+//		TbAdmMateria materia = null;
+//		TbAdmSemestre semestre = null;
+//		TbAdmPersona responsable = null;
+//		TbMicEstado estado = null;
+//				
+//		try {
+//			materia = materiaNGC.obtenerMateria(cmbMateria.getValue());
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		try {
+//			semestre = semestreNGC.obtenerSemestre(cmbSemestre.getValue());
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		try {
+//			responsable = personaNGC.obtenerPersona(cmbDocente.getValue());
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//
+//		try {
+//			estado = estadoNGC.obtenerEstados(1);
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		codigoMicrocurriculo = asignarIdMicrocurriculo(cmbSemestre.getValue().toString(), cmbMateria.getValue().toString());
+//		
+//		if ((codigoMicrocurriculo.length() > 0) && (!codigoMicrocurriculo.equals(""))){
+//			if (materia != null){
+//				if (semestre != null){
+//					if (responsable != null){
+//						microcurriculo = new TbMicMicrocurriculo(codigoMicrocurriculo, materia, semestre, txtPropositoMicro.getValue().toString(), 
+//								txtJustificacionMicro.getValue().toString(), txtResumenMicro.getValue().toString(), responsable, estado, modUsuario, modFecha);
+//						lblidMicrocurriculo.setValue(codigoMicrocurriculo.toString());
+////						cmbEstado.setValue(obtenerEstado());
+//					}
+//				}
+//			}
+//		} else
+//			Messagebox.show("No se pudo crear el objeto Microcurriculo");
+//		return microcurriculo;
+//	}
 	
 	
 	
@@ -689,47 +689,47 @@ public class ValidarDatosCtrl extends GenericForwardComposer{
 	
 	
 	
-	private String asignarIdMicrocurriculo(String idsemestre, String idmateria){
-		String codigo = "";
-		TbAdmSemestre semestre = null;
-		TbAdmMateria materia = null;
-		
-		try {
-			semestre = semestreNGC.obtenerSemestre(idsemestre);			
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		try {
-			materia = materiaNGC.obtenerMateria(idmateria);
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		if (semestre != null){
-			if (materia != null){
-				codigo = materia.getVrIdmateria().toUpperCase() + "-" + semestre.getVrIdsemestre().toUpperCase();	
-			}else
-				Messagebox.show("No es posible generar el codigo del Microcurriculo porque el valor de la Materia es Incorrecto.");					
-		}else
-			Messagebox.show("No es posible generar el codigo del Microcurriculo porque el valor del semestre es Incorrecto.");
-		
-		return codigo;
-	}
+//	private String asignarIdMicrocurriculo(String idsemestre, String idmateria){
+//		String codigo = "";
+//		TbAdmSemestre semestre = null;
+//		TbAdmMateria materia = null;
+//		
+//		try {
+//			semestre = semestreNGC.obtenerSemestre(idsemestre);			
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		try {
+//			materia = materiaNGC.obtenerMateria(idmateria);
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		if (semestre != null){
+//			if (materia != null){
+//				codigo = materia.getVrIdmateria().toUpperCase() + "-" + semestre.getVrIdsemestre().toUpperCase();	
+//			}else
+//				Messagebox.show("No es posible generar el codigo del Microcurriculo porque el valor de la Materia es Incorrecto.");					
+//		}else
+//			Messagebox.show("No es posible generar el codigo del Microcurriculo porque el valor del semestre es Incorrecto.");
+//		
+//		return codigo;
+//	}
 	
 	/**
 	 * Este m�todo se encarga de validar la informaci�n ingresada y clasifica el estado en el que se guardar� el Microcurriculo.

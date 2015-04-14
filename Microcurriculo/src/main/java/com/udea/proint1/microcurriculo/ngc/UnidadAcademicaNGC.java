@@ -10,6 +10,8 @@ public interface UnidadAcademicaNGC {
 
 	public void guardarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica, ExcepcionesDAO;
 	
+	public void guardarListadoUnidad(List<TbAdmUnidadAcademica> lista) throws ExcepcionesLogica, ExcepcionesDAO;
+	
 	public void actualizarUnidadAcademica(TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesLogica, ExcepcionesDAO;
 
 	public TbAdmUnidadAcademica obtenerUnidadAcademica(String id) throws ExcepcionesLogica, ExcepcionesDAO;

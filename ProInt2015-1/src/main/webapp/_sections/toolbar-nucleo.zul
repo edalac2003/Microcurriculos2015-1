@@ -2,7 +2,7 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-	<toolbar id="toolbar_micro" sclass="vista" height="40px" width="960px" apply="${cargarDatosFormas}">
+	<toolbar id="toolbar_nucleo" sclass="vista" height="40px" width="960px" apply="${crearNucleosCtrl}">
 		<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
 <!-- 		<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" /> -->
 		<toolbarbutton id="tool_save" label="${labels.microcurriculo.toolbar.save}" image="/_img/icons/32x32/save.png" />

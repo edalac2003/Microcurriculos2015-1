@@ -15,11 +15,12 @@
 			<label />
 		</west>
 		<center border="none">
-			<div align="center">
+			<div id="formaCrearNucleo" align="center" >
 				<borderlayout height="650px" apply="${crearNucleosCtrl}">
 					<north border="none">
-						<label />
-						<include id="listMenu" src="/_sections/toolbar-nucleo.zul"/>
+						<div>
+							<include id="listMenu" src="/_sections/toolbar-nucleo.zul"/>
+						</div>						
 					</north>
 					<center border="none">
 						<div>
