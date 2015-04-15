@@ -62,8 +62,7 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 			throw expDAO;
 		} finally {
 			session.close();
-		}
-		
+		}		
 	}
 
 	@Override

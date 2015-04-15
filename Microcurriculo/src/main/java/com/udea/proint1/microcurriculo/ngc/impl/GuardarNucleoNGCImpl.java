@@ -29,6 +29,10 @@ public class GuardarNucleoNGCImpl implements GuardarNucleoNGC {
 		if ((listaUnidades == null) && (listaDependencias == null) && (listaNucleos == null)){
 			
 		}else if ((listaUnidades != null) || (listaDependencias != null) || (listaNucleos != null)){
+			System.out.println("El tamaño de Unidades : "+listaUnidades.size());
+			System.out.println("El tamaño de Dependencias : "+listaDependencias.size());
+			System.out.println("El tamaño de Nucleos : "+listaNucleos.size());
+			
 			try{
 				guardarNucleoDao.guardarNucleos(listaUnidades, listaDependencias, listaNucleos);
 			} catch(ExcepcionesDAO expDAO){
