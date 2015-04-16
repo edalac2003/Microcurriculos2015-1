@@ -637,4 +637,14 @@
         	<property name="nucleoNGC" ref="nucleoNGC" />
 <!--         	<property name="guardarNucleoNGC" ref="guardarNucleoNGC" /> -->
         </bean>
+        
+        <bean id="borrarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.BorrarMicroCtrl" scope="prototype">
+        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
+        	<property name="dependenciaNGC" ref="dependenciaNGC" />
+        	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="semestreNGC" ref="semestreNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        </bean>
 </beans>

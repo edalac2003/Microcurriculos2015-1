@@ -765,7 +765,7 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	}
 	
 	/**
-	 * Solicita de la capa del negocio todos los microcurriculos existentes y los ubica en el combobox cmbMicrocurriculo
+	 * Solicita de la capa del negocio todos los microcurriculos existentes y los ubica en el combobox cmbMicrocurriculo2
 	 */
 	private void cargarMicrocurriculos2(){
 		List<TbMicMicrocurriculo> listaMicrocurriculos = null;

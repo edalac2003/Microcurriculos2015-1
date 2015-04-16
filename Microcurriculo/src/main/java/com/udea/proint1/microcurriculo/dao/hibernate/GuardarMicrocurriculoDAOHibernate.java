@@ -230,5 +230,130 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		}
 	}
 	
+	@Override
+	public void modificarMicroxlotes(TbMicMicrocurriculo microcurriculo,
+			TbMicMicroxestado microxEstado,
+			List<TbMicObjetivoxmicro> objetivosxMicroBorrar,
+			List<TbMicSubtemaxtema> subtemasxTemaBorrar,
+			List<TbMicTemaxunidad> temasxUnidadBorrar,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicroBorrar,
+			List<TbMicBiblioxunidad> bibliosxUnidadBorrar,
+			List<TbMicUnidadxmicro> unidadesxMicroBorrar, 
+			List<TbMicObjetivoxmicro> objetivosxMicroGuardar,
+			List<TbMicUnidadxmicro> unidadesxMicroGuardar,
+			List<TbMicBiblioxunidad> bibliosxUnidadGuardar,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicroGuardar,
+			List<TbMicTemaxunidad> temasxUnidadGuardar,
+			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesDAO {
+		
+		Session session = null;
+		Transaction tx = null;
+		
+		try {
+			session = getSession();
+			tx = session.beginTransaction();
+			
+			session.update(microcurriculo);
+			if(microxEstado != null){
+				session.save(microxEstado);
+			}
+			
+			if (objetivosxMicroBorrar != null){
+				for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicroBorrar){
+					session.delete(objetivoxMicro);
+					session.delete(objetivoxMicro.getTbMicObjetivo());
+				}
+			}
+			
+			if (subtemasxTemaBorrar != null){
+				for(TbMicSubtemaxtema subtemaxTema: subtemasxTemaBorrar){
+					session.delete(subtemaxTema);
+					session.delete(subtemaxTema.getTbMicSubtema());
+				}
+			}
+			
+			if (temasxUnidadBorrar != null){
+				for(TbMicTemaxunidad temaxUnidad: temasxUnidadBorrar){
+					session.delete(temaxUnidad);
+					session.delete(temaxUnidad.getTbMicTema());
+				}
+			}
+			
+			if (evaluacionesxMicroBorrar != null){
+				for(TbMicEvaluacionxmicro evaluacionxMicro: evaluacionesxMicroBorrar){
+					session.delete(evaluacionxMicro);
+					session.delete(evaluacionxMicro.getTbMicEvaluacion());
+				}
+			}
+			
+			if (bibliosxUnidadBorrar != null){
+				for(TbMicBiblioxunidad biblioxUnidad: bibliosxUnidadBorrar){
+					session.delete(biblioxUnidad);
+					session.delete(biblioxUnidad.getTbMicBibliografia());
+				}
+			}
+			
+			if (unidadesxMicroBorrar != null){
+				for(TbMicUnidadxmicro unidadxMicro: unidadesxMicroBorrar){
+					session.delete(unidadxMicro);
+					session.delete(unidadxMicro.getTbMicUnidad());
+				}
+			}
+			
+			if (objetivosxMicroGuardar != null){
+				for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicroGuardar){
+					session.saveOrUpdate(objetivoxMicro.getTbMicObjetivo());
+					session.saveOrUpdate(objetivoxMicro);
+				}
+			}
+			
+			if (unidadesxMicroGuardar != null){
+				for(TbMicUnidadxmicro unidadxMicro: unidadesxMicroGuardar){
+					session.saveOrUpdate(unidadxMicro.getTbMicUnidad());
+					session.saveOrUpdate(unidadxMicro);
+				}
+			}
+			
+			if (bibliosxUnidadGuardar != null){
+				for(TbMicBiblioxunidad biblioxUnidad: bibliosxUnidadGuardar){
+					session.saveOrUpdate(biblioxUnidad.getTbMicBibliografia());
+					session.saveOrUpdate(biblioxUnidad);
+				}
+			}
+			
+			if (evaluacionesxMicroGuardar != null){
+				for(TbMicEvaluacionxmicro evaluacionxMicro: evaluacionesxMicroGuardar){
+					session.saveOrUpdate(evaluacionxMicro.getTbMicEvaluacion());
+					session.saveOrUpdate(evaluacionxMicro);
+				}
+			}
+			
+			if (temasxUnidadGuardar != null){
+				for(TbMicTemaxunidad temaxUnidad: temasxUnidadGuardar){
+					session.saveOrUpdate(temaxUnidad.getTbMicTema());
+					session.saveOrUpdate(temaxUnidad);
+				}
+			}
+			
+			if (subtemasxTemaGuardar != null){
+				for(TbMicSubtemaxtema subtemaxTema: subtemasxTemaGuardar){
+					session.saveOrUpdate(subtemaxTema.getTbMicSubtema());
+					session.saveOrUpdate(subtemaxTema);
+				}
+			}
+					
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			throw expDAO;
+		} finally {
+			session.close();
+		}
+	}
 	
 }

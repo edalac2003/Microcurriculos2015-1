@@ -62,6 +62,7 @@ import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
+import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
@@ -196,6 +197,11 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	TbMicMicrocurriculo microcurriculoGuardar;
 	
 	/**
+	 * microcurriculo x estado a guardar
+	 */
+	TbMicMicroxestado microxEstadoGuardar = null;
+	
+	/**
 	 * listas de guardado de datos
 	 */
 	
@@ -235,6 +241,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 */
 	int porcentajeEvaluacion = 0;
 	
+	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
 	UnidadNGC unidadNGC;
 	ObjetivoNGC objetivoNGC;
 	TemaNGC temaNGC;
@@ -259,6 +266,15 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	MateriaNGC materiaNGC;
 	EstadoNGC estadoNGC;
 	
+	/**
+	 * Metodo set para la inyección de dependencia y gestionar datos en la gestion de microcurriculo por lotes
+	 * @param guardarMicrocurriculoNGC variable de acceso a los metodos de la capa del negocio
+	 */
+	public void setGuardarMicrocurriculoNGC(
+			GuardarMicrocurriculoNGC guardarMicrocurriculoNGC) {
+		this.guardarMicrocurriculoNGC = guardarMicrocurriculoNGC;
+	}
+
 	/**
 	 * Metodo set para la inyección de dependencia y gestionar datos en la tabla TbMicUnidad
 	 * @param unidadNGC variable de acceso a los metodos de la capa del negocio
@@ -1064,7 +1080,6 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
 				if(objetivoxMicro.getBlTipo()=='1'){
 					txtObjetivoGeneral.setValue(objetivoxMicro.getTbMicObjetivo().getVrDescripcion());
-					objetivoGeneralGuardar = objetivoxMicro.getTbMicObjetivo();
 				}else{
 					
 					/**
@@ -2690,20 +2705,19 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	public void onClick$tool_save(){
 		
 		actualizarMicro();
-		borrarObjetivos();
-		borrarSubtemas();
-		borrarTemas();
-		borrarEvaluaciones();
-		borrarBibliografias();
-		borrarUnidades();
-		guardarObjetivos();
-		guardarUnidades();
-		guardarBibliografias();
-		guardarEvaluaciones();
-		guardarTemas();
-		guardarSubtemas();
-		reiniciarEntorno();
-		Messagebox.show("Se actualizó correctamente el microcurriculo","INFORMACIÓN", Messagebox.OK,Messagebox.INFORMATION);
+		actualizarLote();
+//		borrarObjetivos();
+//		borrarSubtemas();
+//		borrarTemas();
+//		borrarEvaluaciones();
+//		borrarBibliografias();
+//		borrarUnidades();
+//		guardarObjetivos();
+//		guardarUnidades();
+//		guardarBibliografias();
+//		guardarEvaluaciones();
+//		guardarTemas();
+//		guardarSubtemas();
 		
 	}
 	
@@ -2712,6 +2726,27 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		cargarDocentes();
 		cargarEstados();
 		llenarDatos(microcurriculoGuardar.getVrIdmicrocurriculo());
+	}
+	
+	public void actualizarLote(){
+		try{
+			guardarMicrocurriculoNGC.modificarMicroxlotes(microcurriculoGuardar, microxEstadoGuardar,
+					listaObjetivosxMicroBorrar, listaSubtemasxTemaBorrar, listaTemasxUnidadBorrar,
+					listaEvaluacionesxMicroBorrar, listaBibliosxUnidadBorrar, listaUnidadesxMicroBorrar,
+					listaObjetivosxMicroGuardar, listaUnidadesxMicroGuardar, listaBibliosxUnidadGuardar,
+					listaEvaluacionesxMicroGuardar, listaTemasxUnidadGuardar, listaSubtemasxTemaGuardar);
+			reiniciarEntorno();
+			Messagebox.show("Se actualizó correctamente el microcurriculo","INFORMACIÓN", Messagebox.OK,Messagebox.INFORMATION);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("Ocurrió un error, no se pudo actualizar el microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
 	}
 	
 	public void guardarBibliografias(){
@@ -3108,9 +3143,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		
 		TbAdmPersona responsable = listaDocentes.get(cmbDocente.getSelectedIndex()-1);
 		TbMicEstado estadoGuardar = listaEstados.get(cmbEstado.getSelectedIndex()-1);
-		TbMicMicroxestado MicroxEstadoGuardar = null;
 		if(microcurriculoGuardar.getTbMicEstado().getNbIdestado() != estadoGuardar.getNbIdestado()){
-			MicroxEstadoGuardar = new TbMicMicroxestado(estadoGuardar, new Date(), microcurriculoGuardar, responsable, "SYSTEM", new Date());
+			microxEstadoGuardar = new TbMicMicroxestado(estadoGuardar, new Date(), microcurriculoGuardar, responsable, "SYSTEM", new Date());
 		}
 		microcurriculoGuardar.setTbMicEstado(estadoGuardar);
 		microcurriculoGuardar.setTbAdmPersona(responsable);
@@ -3120,72 +3154,87 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		microcurriculoGuardar.setDtModfecha(new Date());
 		microcurriculoGuardar.setVrModusuario("SYSTEM");
 		
-		TbMicObjetivoxmicro objetivoxMicroGuardar = null;
-		if(objetivoGeneralGuardar != null){
-			objetivoGeneralGuardar.setVrDescripcion(txtObjetivoGeneral.getValue().toString());
-		}else{
-			objetivoGeneralGuardar = new TbMicObjetivo(txtObjetivoGeneral.getValue().toString(), "SYSTEM", new Date());
-			objetivoxMicroGuardar = new TbMicObjetivoxmicro(objetivoGeneralGuardar, microcurriculoGuardar, '1', "SYSTEM", new Date());
-		}
-		
-		try {
-			objetivoNGC.guardarObjetivo(objetivoGeneralGuardar);
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		if(objetivoxMicroGuardar != null){
-			try {
-				objetivoxMicroNGC.guardarObjetivosxMicro(objetivoxMicroGuardar);
-			}catch(ExcepcionesDAO expDAO){
-				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expDAO.getMsjTecnico());
-			}catch(ExcepcionesLogica expNgs){
-				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expNgs.getMsjTecnico());
-			}catch(Exception exp){
-//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(exp);
+		boolean sinObjetivoGeneral = true;
+		for(TbMicObjetivoxmicro objetivoxMicroGeneral: listaObjetivosxMicroGuardar){
+			if(objetivoxMicroGeneral.getBlTipo() == '1'){
+				objetivoxMicroGeneral.getTbMicObjetivo().setVrDescripcion(txtObjetivoGeneral.getValue().toString());
+				sinObjetivoGeneral = false;
 			}
 		}
-			
-		try {
-			microcurriculoNGC.actualizarMicrocurriculos(microcurriculoGuardar);
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
+		
+		if(sinObjetivoGeneral){
+			TbMicObjetivo objetivoGeneralGuardar = new TbMicObjetivo(txtObjetivoGeneral.getValue().toString(), "SYSTEM", new Date());
+			TbMicObjetivoxmicro objetivoxMicroAdicionar = new TbMicObjetivoxmicro(objetivoGeneralGuardar, microcurriculoGuardar, '1', "SYSTEM", new Date());
+			listaObjetivosxMicroGuardar.add(objetivoxMicroAdicionar);
 		}
+		
+//		TbMicObjetivoxmicro objetivoxMicroGuardar = null;
+//		if(objetivoGeneralGuardar != null){
+//			objetivoGeneralGuardar.setVrDescripcion(txtObjetivoGeneral.getValue().toString());
+//		}else{
+//			objetivoGeneralGuardar = new TbMicObjetivo(txtObjetivoGeneral.getValue().toString(), "SYSTEM", new Date());
+//			objetivoxMicroGuardar = new TbMicObjetivoxmicro(objetivoGeneralGuardar, microcurriculoGuardar, '1', "SYSTEM", new Date());
+//		}
+//		
+//		try {
+//			objetivoNGC.guardarObjetivo(objetivoGeneralGuardar);
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		if(objetivoxMicroGuardar != null){
+//			try {
+//				objetivoxMicroNGC.guardarObjetivosxMicro(objetivoxMicroGuardar);
+//			}catch(ExcepcionesDAO expDAO){
+//				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expDAO.getMsjTecnico());
+//			}catch(ExcepcionesLogica expNgs){
+//				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expNgs.getMsjTecnico());
+//			}catch(Exception exp){
+////				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(exp);
+//			}
+//		}
+//			
+//		try {
+//			microcurriculoNGC.actualizarMicrocurriculos(microcurriculoGuardar);
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
 		
 		/**
 		 * Verificamos si se cambio el estado para actualizar el historial
 		 */
-		if(MicroxEstadoGuardar != null){
-			try {
-				microxEstadoNGC.guardarMicroxestado(MicroxEstadoGuardar);
-			}catch(ExcepcionesDAO expDAO){
-				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expDAO.getMsjTecnico());
-			}catch(ExcepcionesLogica expNgs){
-				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expNgs.getMsjTecnico());
-			}catch(Exception exp){
-//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(exp);
-			}
-		}
+//		if(MicroxEstadoGuardar != null){
+			
+//			try {
+//				microxEstadoNGC.guardarMicroxestado(MicroxEstadoGuardar);
+//			}catch(ExcepcionesDAO expDAO){
+//				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expDAO.getMsjTecnico());
+//			}catch(ExcepcionesLogica expNgs){
+//				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expNgs.getMsjTecnico());
+//			}catch(Exception exp){
+////				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(exp);
+//			}
+//		}
 		
 	}
 	

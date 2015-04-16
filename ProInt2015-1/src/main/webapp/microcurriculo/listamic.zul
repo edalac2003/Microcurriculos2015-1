@@ -27,6 +27,7 @@
 						<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" />
 						<toolbarbutton id="tool_refresh" label="Actualizar" image="/_img/icons/32x32/reload.png" href="/microcurriculo/modificarMic.zul" />
 						<toolbarbutton id="tool_duplica" label="Duplicar" image="/_img/icons/32x32/clone.png" href="/microcurriculo/duplicarMic.zul" />
+						<toolbarbutton id="tool_borrar" label="Borrar" image="/_img/icons/32x32/clone.png" href="/microcurriculo/borrarMic.zul" />
 						<toolbarbutton id="tool_print" label="Imprimir" image="/_img/icons/32x32/printer.png" href="" />
 						<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul" />
 					</toolbar>

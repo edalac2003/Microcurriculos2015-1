@@ -1,0 +1,116 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Universidad de Antioquia" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+	<window id="formaBorrarMicro" border="0" >
+		<include id="panelDuplicarMicro" src="/_sections/panel_duplicar.zul" visible="false"/>
+		<borderlayout id="blyDuplicarMicro" height="600px" apply="${borrarMicroCtrl}">
+			
+			<north height="100px" border="0">
+				<include id="headerIdx" src="/_sections/header.zul" />			
+			</north>
+			
+			<center border="0" apply="">
+				<div align="center">
+					<borderlayout height="455px">
+						<north border="0"> 
+							<toolbar id="tb" sclass="vista" height="45px" width="960px">
+								<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
+								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
+							</toolbar>
+						</north>
+						<west width="180px" border="0">
+							<label />
+						</west>
+						<east width="180px" border="0">
+							<label />
+						</east>
+						
+						<center autoscroll="true" border="0">
+							<div>
+							
+								<div height="10px"/>
+								<panel title="Seleccione Microcurriculo a borrar" border="normal" width="960px" height="270px">
+									<panelchildren>
+										<div height="10px"/>
+										<div align="center" width="940px">
+											<toolbar>
+												<label value="Filtrar Busqueda" style="font-size:13px; margin:0 0 0 413px;"/>
+											</toolbar>
+											<grid>
+												<columns>
+													<column width="11%"/>
+													<column width="20%"/>
+													<column width="8%"/>
+													<column width="20%"/>
+													<column width="8%"/>
+													<column width="20%"/>
+												</columns>
+												<rows>
+												
+													<row>
+						                				<label value="Unidad Académica" width="30%"/>
+								                        <combobox id="cmbUnidadAcademica" width="100%"/>
+								                        <label value="Dependencia" width="30%"/>
+								                        <combobox id="cmbDependencia" width="100%"/>
+								                        <label value="Nucleo" width="30%"/>
+								                        <combobox id="cmbNucleo" width="100%"/>
+							                		</row>
+							                		
+							                		<row>
+								                        <label value="Materia" />
+									                    <combobox id="cmbMateria" width="100%"/>
+									                    <label value="${labels.microcurriculo.semestre}" />
+														<combobox id="cmbSemestre" width="100%"/>
+														<label value="${labels.microcurriculo.docente}" />
+														<combobox id="cmbDocente" width="100%"/>
+							                		</row>
+							                		
+							                	</rows>
+							                </grid>
+							                <div height="30px"/>
+							                
+							                <grid width="320px">
+							                	<columns>
+							                		<column width="40%"/>
+							                		<column width="60%"/>
+							                	</columns>
+							                	<rows>
+							                	
+							                		<row>
+														<label value="Microcurriculo" />
+									                    <combobox id="cmbMicrocurriculo" width="100%"/>
+							                		</row>
+							                		
+												</rows>
+											</grid>
+										</div>
+									</panelchildren>
+									<toolbar>
+										<button id="btnBorrar" label="Borrar" style="margin:0 0 0 442px;" href="/microcurriculo/duplicarMic.zul"/>
+									</toolbar>
+								</panel>
+													
+							</div>			
+						</center>
+						
+						<south border="0" height="130px">
+							<div>
+								<div height="20px" />
+								<div>
+									<include id="footerIdx" src="/_sections/footer.zul" />
+								</div> 							
+							</div>
+						</south>
+					</borderlayout>
+				</div>		
+			</center>
+			
+			<south border="0">		
+				<div>  </div>					
+			</south>
+		</borderlayout>
+	</window>
+</zk>

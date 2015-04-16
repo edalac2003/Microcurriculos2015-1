@@ -106,4 +106,36 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			
 		}
 	}
+	
+	@Override
+	public void modificarMicroxlotes(TbMicMicrocurriculo microcurriculo,
+			TbMicMicroxestado microxEstado,
+			List<TbMicObjetivoxmicro> objetivosxMicroBorrar,
+			List<TbMicSubtemaxtema> subtemasxTemaBorrar,
+			List<TbMicTemaxunidad> temasxUnidadBorrar,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicroBorrar,
+			List<TbMicBiblioxunidad> bibliosxUnidadBorrar,
+			List<TbMicUnidadxmicro> unidadesxMicroBorrar, 
+			List<TbMicObjetivoxmicro> objetivosxMicroGuardar,
+			List<TbMicUnidadxmicro> unidadesxMicroGuardar,
+			List<TbMicBiblioxunidad> bibliosxUnidadGuardar,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicroGuardar,
+			List<TbMicTemaxunidad> temasxUnidadGuardar,
+			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesLogica, ExcepcionesDAO{
+		try{
+			guardarMicrocurriculoDao.modificarMicroxlotes(microcurriculo, microxEstado, objetivosxMicroBorrar, 
+					subtemasxTemaBorrar, temasxUnidadBorrar, evaluacionesxMicroBorrar, bibliosxUnidadBorrar, 
+					unidadesxMicroBorrar, objetivosxMicroGuardar, unidadesxMicroGuardar, bibliosxUnidadGuardar, 
+					evaluacionesxMicroGuardar, temasxUnidadGuardar, subtemasxTemaGuardar);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error invocar metodo, actualizar Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+	}
 }

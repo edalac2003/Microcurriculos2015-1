@@ -50,4 +50,19 @@ public interface GuardarMicrocurriculoDAO {
 			List<TbMicEvaluacion> evaluaciones,
 			List<TbMicEvaluacionxmicro> evaluacionxMicro) throws ExcepcionesDAO;
 	
+	public void modificarMicroxlotes(TbMicMicrocurriculo microcurriculo,
+			TbMicMicroxestado microxEstado,
+			List<TbMicObjetivoxmicro> objetivosxMicroBorrar,
+			List<TbMicSubtemaxtema> subtemasxTemaBorrar,
+			List<TbMicTemaxunidad> temasxUnidadBorrar,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicroBorrar,
+			List<TbMicBiblioxunidad> bibliosxUnidadBorrar,
+			List<TbMicUnidadxmicro> unidadesxMicroBorrar, 
+			List<TbMicObjetivoxmicro> objetivosxMicroGuardar,
+			List<TbMicUnidadxmicro> unidadesxMicroGuardar,
+			List<TbMicBiblioxunidad> bibliosxUnidadGuardar,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicroGuardar,
+			List<TbMicTemaxunidad> temasxUnidadGuardar,
+			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesDAO;
+	
 }
