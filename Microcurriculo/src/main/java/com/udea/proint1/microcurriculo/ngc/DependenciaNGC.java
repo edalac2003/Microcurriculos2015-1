@@ -11,6 +11,8 @@ public interface DependenciaNGC {
 	
 	public void guardarDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica, ExcepcionesDAO;
 	
+	public void guardarListadoDependencia(List<TbAdmDependencia> lista) throws ExcepcionesLogica, ExcepcionesDAO;
+	
 	public void actualizarDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica, ExcepcionesDAO;
 
 	public TbAdmDependencia obtenerDependencia(String id) throws ExcepcionesLogica, ExcepcionesDAO;

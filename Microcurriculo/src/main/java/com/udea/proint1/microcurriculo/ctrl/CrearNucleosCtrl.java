@@ -137,7 +137,6 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 					lista.add(unidad);
 			}
 			
-			lista = new ArrayList<TbAdmUnidadAcademica>();
 			if ((lista2 != null) && (lista2.size() >0)){
 				for (TbAdmUnidadAcademica unidad : lista2)
 					lista.add(unidad);
@@ -147,23 +146,25 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		return lista;
 	}
 	
+	
 	private List<TbAdmDependencia> empaquetarDependencias(List<TbAdmDependencia> lista1, List<TbAdmDependencia> lista2){
 		List<TbAdmDependencia> lista = null;
-		
-		if((lista1 != null) || (lista2 != null)){
+		if ((lista1 != null && (lista1.size() > 0)) || (lista2 != null && (lista2.size() > 0))){
 			lista = new ArrayList<TbAdmDependencia>();
 			if (lista1 != null){
 				for(TbAdmDependencia dependencia : lista1)
 					lista.add(dependencia);
 			}
-			if (lista2 != null){
+			
+			if ((lista2 != null) && (lista2.size() > 0)){
 				for(TbAdmDependencia dependencia : lista2)
 					lista.add(dependencia);
 			}
-		}
-		
+		}		
 		return lista;
 	}
+	
+	
 	
 	private List<TbAdmNucleo> empaquetarNucleos(List<TbAdmNucleo> lista1, List<TbAdmNucleo> lista2){
 		List<TbAdmNucleo> lista = null;
@@ -210,12 +211,23 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		}		
 	}
 	
-	private void recargarListaUnidadAcademica(){		
+	private void recargarListaUnidadAcademica(int llamado){		
 		listaUnidadAcademica.getItems().clear();
 		cmbUnidadAcademica.getItems().clear();
 		cmbUnidadAcademica2.getItems().clear();
 		cmbUnidadAcademica3.getItems().clear();
 		cmbUnidadAcademica4.getItems().clear();
+		
+		if (llamado == 0){
+			try {
+				listadoUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();
+			} catch (ExcepcionesLogica e) {
+				e.printStackTrace();
+			} catch (ExcepcionesDAO e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		if(listadoUnidadAcademica != null){
 			for(TbAdmUnidadAcademica unidad : listadoUnidadAcademica){
@@ -228,8 +240,22 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		}
 	}
 	
-	private void recargarListaDependencia(){
+	private void recargarListaDependencia(int llamado){
 		listaDependenciaAcademica.getItems().clear();
+		
+		if (llamado == 0){
+			try {
+				listadoDependencia = dependenciaNGC.listarDependencias();
+			} catch (ExcepcionesLogica e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExcepcionesDAO e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 		if(listadoDependencia != null){
 			for (TbAdmDependencia item : listadoDependencia){
 				listaDependenciaAcademica.appendItem(item.getVrIddependencia()+" - "+item.getVrNombre(), item.getVrIddependencia());
@@ -237,16 +263,19 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		}
 	}
 	
-	private void cargarDependencias(){
-		try {
-			listadoDependencia = dependenciaNGC.listarDependencias();
-		} catch (ExcepcionesLogica e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExcepcionesDAO e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	private void cargarDependencias(int llamado){
+		if (llamado == 0){
+			try {
+				listadoDependencia = dependenciaNGC.listarDependencias();
+			} catch (ExcepcionesLogica e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExcepcionesDAO e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 		
 		listaDependenciaAcademica.getItems().clear();
 		cmbDependencia.getItems().clear();
@@ -276,6 +305,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		if(listadoDependencia != null){			
 			listaDependenciaAcademica.getItems().clear();
 			cmbDependencia.getItems().clear();
+			cmbDependencia.setText("");
 			cmbDependencia2.getItems().clear();
 			
 			for(TbAdmDependencia dependencia : listadoDependencia){
@@ -338,8 +368,41 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		}		
 	}
 	
-	private void recargarListaNucleo(){
-		if(listadoNucleo.size() > 0){
+	private void cargarNucleoPorDependencia(String id){
+		try {
+			listadoNucleo = nucleoNGC.listarNucleosPorDependencia(id);
+		} catch (ExcepcionesLogica e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExcepcionesDAO e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		listaNucleoAcademico.getItems().clear();
+		
+		if (listadoNucleo != null){
+			for(TbAdmNucleo item : listadoNucleo){
+				listaNucleoAcademico.appendItem(item.getVrIdnucleo() + " - " + item.getVrNombre(), item.getVrIdnucleo());
+			}
+		}		
+	}
+	
+	private void recargarListaNucleo(int llamado){		
+		if (llamado == 0){
+			try {
+				listadoNucleo = nucleoNGC.listarNucleos();
+			} catch (ExcepcionesLogica e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExcepcionesDAO e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		if( (listadoNucleo != null) && (listadoNucleo.size() > 0)){
 			listaNucleoAcademico.getItems().clear();
 			for(TbAdmNucleo item : listadoNucleo){
 				listaNucleoAcademico.appendItem(item.getVrIdnucleo()+" - "+item.getVrNombre(), item.getVrIdnucleo());
@@ -373,8 +436,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 			listadoNuevoUnidadAcademica = new ArrayList<TbAdmUnidadAcademica>();
 			
 		}
-		if (!id.isEmpty() && (!existeIDUnidad(id))){
-			
+		if (!id.isEmpty() && (!existeIDUnidad(id))){			
 			if ((!unidad.isEmpty()) && (!existeUnidad(unidad))){				
 				item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 					@Override
@@ -383,9 +445,9 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 					}
 				});
 				
-				unidadAcademica = new TbAdmUnidadAcademica(id,unidad,modUsuario,modFecha);
-				
+				unidadAcademica = new TbAdmUnidadAcademica(id,unidad,modUsuario,modFecha);				
 				listadoNuevoUnidadAcademica.add(unidadAcademica);
+				
 				Listcell celda = new Listcell(id+" - "+unidad);
 				item.appendChild(celda);
 				listaNuevasUnidades.appendChild(item);
@@ -402,20 +464,23 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	}
 	
 	private void adicionarDependencia(String dependencia, TbAdmUnidadAcademica unidad){
-		final Listitem item = new Listitem();
 		String codigo = txtPreIdDependencia.getText().trim().toUpperCase() +txtIdDependencia.getText().trim().toUpperCase();
-		
-		
-		
+				
 		if ((!codigo.isEmpty()) && (!existeIdDependencia(codigo))){
 			if ((!dependencia.isEmpty()) && (!existeDependencia(dependencia))){
+				final Listitem item = new Listitem();
 				item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 					@Override
 					public void onEvent(Event arg0) throws Exception {						
 						eliminaListItem(item, "");
 					}
 				});
-				dependenciaAcademica = new TbAdmDependencia(codigo,dependencia,modUsuario,modFecha,unidad);
+				
+				if(listadoNuevoDependencia == null){
+					listadoNuevoDependencia = new ArrayList<TbAdmDependencia>();
+				}
+					
+				dependenciaAcademica = new TbAdmDependencia(codigo,unidad,dependencia,modUsuario,modFecha);
 				listadoNuevoDependencia.add(dependenciaAcademica);
 				Listcell celda = new Listcell(codigo +" - "+dependencia);
 				item.appendChild(celda);
@@ -432,20 +497,25 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	}
 	
 	private void adicionarNucleo(String nucleo, TbAdmDependencia dependencia){
-		final Listitem item = new Listitem();
 		String codigo = txtPreIdNucleo.getText().trim().toUpperCase()+txtIdNucleo.getText().trim().toUpperCase();
-		
-		
+			
 		if((!codigo.isEmpty()) && (!existeIdNucleo(codigo))){
 			if((!nucleo.isEmpty()) && (!existeNucleo(nucleo))){
+				final Listitem item = new Listitem();
 				item.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 					@Override
 					public void onEvent(Event arg0) throws Exception {						
 						eliminaListItem(item, "");
 					}
 				});
+				
+				if (listadoNuevoNucleo == null){
+					listadoNuevoNucleo = new ArrayList<TbAdmNucleo>();
+				}
+				
 				nucleoAcademico = new TbAdmNucleo(codigo, dependencia, nucleo, modUsuario, modFecha);
-				listadoNuevoNucleo.add(nucleoAcademico);			
+				listadoNuevoNucleo.add(nucleoAcademico);
+				
 				Listcell celda = new Listcell(codigo +" - "+nucleo);
 				item.appendChild(celda);				
 				listaNuevosNucleos.appendChild(item);
@@ -457,10 +527,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 			}
 		} else {
 			Messagebox.show("El Codigo del Nucleo Academico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
-		}
-		
-		
-		
+		}		
 	}
 	
 	
@@ -469,7 +536,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 			if((!existeUnidad(unidad) && (unidad.length()>0))){
 				unidadAcademica.setVrNombre(txtNuevoNombreUnidadAcademica.getText().toUpperCase());
 				listadoUnidadAcademica.set(listaUnidadAcademica.getSelectedIndex(), unidadAcademica);
-				recargarListaUnidadAcademica();
+				recargarListaUnidadAcademica(1);
 				txtNuevoNombreUnidadAcademica.setText("");
 				txtBuscarUnidad.focus();
 			}else{
@@ -487,7 +554,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 //				dependenciaAcademica.setVrNombre(txtNuevoNombreDependenciaAcademica.getText().toUpperCase());
 				dependenciaAcademica.setVrNombre(dependencia.trim().toUpperCase());
 				listadoDependencia.set(listaDependenciaAcademica.getSelectedIndex(), dependenciaAcademica);
-				recargarListaDependencia();
+				recargarListaDependencia(1);
 				txtNuevoNombreDependenciaAcademica.setText("");
 				txtUnidadAcademica.setText("");
 				txtBuscarDependencia.focus();
@@ -505,7 +572,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 			if ((!existeNucleo(nucleo)) && (!nucleo.isEmpty())){
 				nucleoAcademico.setVrNombre(nucleo.trim().toUpperCase());
 				listadoNucleo.set(listaNucleoAcademico.getSelectedIndex(), nucleoAcademico);
-				recargarListaNucleo();
+				recargarListaNucleo(1);
 				txtNuevoNucleoAcademico.setText("");
 				txtDependencia.setText("");
 				txtBuscarNucleo.focus();
@@ -644,23 +711,28 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	
 	private boolean buscarIdDependencia(List<TbAdmDependencia> lista, String id){
 		boolean estado = false;
-		for (TbAdmDependencia item : lista){
-			if(id.equals(item.getVrIddependencia())){
-				estado=true;
-				break;
+		if((lista != null) && (lista.size() > 0)){
+			for (TbAdmDependencia item : lista){
+				if(id.equals(item.getVrIddependencia())){
+					estado=true;
+					break;
+				}
 			}
-		}
+		}		
 		return estado;
 	}
 	
 	private boolean buscarIdNucleo(List<TbAdmNucleo> lista, String id){
 		boolean estado = false;
-		for (TbAdmNucleo item : lista){
-			if(id.equals(item.getVrIdnucleo())){
-				estado=true;
-				break;
+		if ((lista != null) && (lista.size() > 0)){
+			for (TbAdmNucleo item : lista){
+				if(id.equals(item.getVrIdnucleo())){
+					estado=true;
+					break;
+				}
 			}
 		}
+		
 		return estado;
 	}
 	
@@ -725,7 +797,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	
 	public void onSelect$cmbUnidadAcademica3(){
 		unidadAcademica = listadoUnidadAcademica.get(cmbUnidadAcademica3.getSelectedIndex());
-		cargarListaDependenciasPorUnidad(unidadAcademica, 2);		
+		cargarListaDependenciasPorUnidad(unidadAcademica, 2);
+		cargarNucleoPorDependencia(unidadAcademica.getVrIdunidad());
 	}
 	
 	public void onSelect$cmbUnidadAcademica4(){
@@ -819,8 +892,14 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		if(cmbUnidadAcademica.getSelectedIndex() >= 0){
 			unidadAcademica = listadoUnidadAcademica.get(cmbUnidadAcademica.getSelectedIndex());
 			cargarListaDependenciasPorUnidad(unidadAcademica, 1);
+		}		
+	}
+	
+	public void onSelect$cmbUnidadAcademica(){
+		if(cmbUnidadAcademica.getSelectedIndex() >= 0){
+			unidadAcademica = listadoUnidadAcademica.get(cmbUnidadAcademica.getSelectedIndex());
+			cargarListaDependenciasPorUnidad(unidadAcademica, 1);
 		}
-		
 	}
 	
 	public void onClick$tool_save(){
@@ -828,7 +907,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		listaTotalDependencias = empaquetarDependencias(listadoDependencia, listadoNuevoDependencia);
 		listaTotalNucleos = empaquetarNucleos(listadoNucleo, listadoNuevoNucleo);
 		
-//		if(((listaTotalUnidades != null) &&(listaTotalUnidades.size()>0)) || (listaTotalDependencias != null) || (listaTotalNucleos != null)){
+		if(((listaTotalUnidades != null) &&(listaTotalUnidades.size()>0)) || ((listaTotalDependencias != null) && (listaTotalDependencias.size() > 0)) 
+				|| ((listaTotalNucleos != null) && (listaTotalNucleos.size() > 0))){
 			if((listaTotalUnidades != null) && (listaTotalUnidades.size() > 0)){
 				try {
 					unidadAcademicaNGC.guardarListadoUnidad(listaTotalUnidades);
@@ -842,26 +922,52 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 					Messagebox.show("",exp.getMessage(), Messagebox.OK,Messagebox.ERROR);
 					logger.error(exp);
 				}
-				Messagebox.show("Registros Guardados satisfactoriamente."); 
 				listaNuevasUnidades.getItems().clear();
 				listadoNuevoUnidadAcademica = null;
 				listadoUnidadAcademica = null;
-				recargarListaUnidadAcademica();
-
+				recargarListaUnidadAcademica(0);
+			} 
 			
-//				try {
-//					guardarNucleoNGC.guardarNucleos(listaTotalUnidades, listaTotalDependencias, listaTotalNucleos);
-//				} catch (ExcepcionesLogica expNgs) {
-//					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//					logger.error(expNgs.getMsjTecnico());
-//				} catch (ExcepcionesDAO expDAO) {
-//					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//					logger.error(expDAO.getMsjTecnico());
-//				}
-			} else {
-				Messagebox.show("No hay nada para Guardar.");
+			if ((listaTotalDependencias != null) && (listaTotalDependencias.size() > 0)){
+				try {
+					dependenciaNGC.guardarListadoDependencia(listaTotalDependencias);
+				} catch(ExcepcionesDAO expDAO){
+					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expDAO.getMsjTecnico());
+				}catch(ExcepcionesLogica expNgs){
+					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expNgs.getMsjTecnico());
+				}catch(Exception exp){
+					Messagebox.show("",exp.getMessage(), Messagebox.OK,Messagebox.ERROR);
+					logger.error(exp);
+				}
+				listaNuevasDependencias.getItems().clear();
+				listadoNuevoDependencia = null;
+				listadoDependencia = null;
+				recargarListaDependencia(0);				
 			}
-//		}
+			
+			if ((listaTotalNucleos != null) && (listaTotalNucleos.size() > 0)){
+				try {
+					nucleoNGC.guardarListadoNucleo(listaTotalNucleos);
+				} catch(ExcepcionesDAO expDAO){
+					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expDAO.getMsjTecnico());
+				}catch(ExcepcionesLogica expNgs){
+					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expNgs.getMsjTecnico());
+				}catch(Exception exp){
+					Messagebox.show("",exp.getMessage(), Messagebox.OK,Messagebox.ERROR);
+					logger.error(exp);
+				}
+				listaNuevosNucleos.getItems().clear();
+				listadoNuevoNucleo = null;
+				listadoNucleo = null;
+				recargarListaNucleo(0);				
+			}
+			Messagebox.show("Registros Guardados Satisfactoriamente.");
+		}
+			
 	}
 	
 	
@@ -878,7 +984,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 			if(cmbUnidadAcademica.getSelectedIndex() >= 0){
 				
 			} else {
-				cargarDependencias();
+				cargarDependencias(0);
 			}
 			cmbUnidadAcademica.focus();
 			break;

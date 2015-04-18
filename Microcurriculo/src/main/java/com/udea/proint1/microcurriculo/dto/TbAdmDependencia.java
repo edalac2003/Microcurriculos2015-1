@@ -23,9 +23,8 @@ public class TbAdmDependencia implements java.io.Serializable {
 	}
 
 	
-
-	public TbAdmDependencia(String vrIddependencia, String vrNombre, String vrModusuario, Date dtModfecha,
-							TbAdmUnidadAcademica tbAdmUnidadAcademica) {
+	public TbAdmDependencia(String vrIddependencia,	TbAdmUnidadAcademica tbAdmUnidadAcademica, String vrNombre,
+			String vrModusuario, Date dtModfecha) {
 		super();
 		this.vrIddependencia = vrIddependencia;
 		this.tbAdmUnidadAcademica = tbAdmUnidadAcademica;
@@ -34,17 +33,11 @@ public class TbAdmDependencia implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
-
-
-	public TbAdmDependencia(String vrIddependencia,
-			TbAdmUnidadAcademica tbAdmUnidadAcademica, String vrNombre,
-			String vrModusuario, Date dtModfecha, Set tbAdmNucleo) {
+	public TbAdmDependencia(String vrIddependencia, String vrNombre, String vrModusuario, Date dtModfecha) {
 		this.vrIddependencia = vrIddependencia;
-		this.tbAdmUnidadAcademica = tbAdmUnidadAcademica;
 		this.vrNombre = vrNombre;
 		this.vrModusuario = vrModusuario;
-		this.dtModfecha = dtModfecha;
-		this.tbAdmNucleo = tbAdmNucleo;
+		this.dtModfecha = dtModfecha;		
 	}
 
 	public String getVrIddependencia() {

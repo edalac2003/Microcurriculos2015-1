@@ -16,15 +16,11 @@ public class NucleoNGCImpl implements NucleoNGC {
 	private static Logger log=Logger.getLogger(NucleoNGCImpl.class);
 	
 	NucleoDAO nucleoDao;
-	//DependenciasDAO dependenciasDAO;
 
 	public void setNucleoDao(NucleoDAO nucleoDao) {
 		this.nucleoDao = nucleoDao;
 	}
 
-	/*public void setDependenciasDAO(DependenciasDAO dependenciasDAO) {
-		this.dependenciasDAO = dependenciasDAO;
-	}*/
 
 	public NucleoNGCImpl() {
 		// TODO Auto-generated constructor stub
@@ -74,6 +70,33 @@ public class NucleoNGCImpl implements NucleoNGC {
 			throw expLog;
 		}
 	}
+	
+	
+	@Override
+	public void guardarListadoNucleo(List<TbAdmNucleo> lista) throws ExcepcionesLogica, ExcepcionesDAO {
+		
+		if (lista != null){
+			try {
+				nucleoDao.guardarListadoNucleo(lista);
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo guardar Lista Nucleo");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
+			}
+		} else {
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El Listado de Nucleo esta vacio");
+			throw expLog;
+		}
+		
+	}
+
+	
+	
 
 	@Override
 	public void actualizarNucleo(TbAdmNucleo nucleo) throws ExcepcionesLogica, ExcepcionesDAO {
@@ -193,7 +216,7 @@ public class NucleoNGCImpl implements NucleoNGC {
 		}
 		List<TbAdmNucleo> listaNucleos = null;
 		try {
-			listaNucleos = nucleoDao.listarNucleoPorDependencia(dependencia);
+			listaNucleos = nucleoDao.listarNucleoPorDependencia(dependencia+"%");
 		} catch(ExcepcionesDAO expDAO){
 			throw expDAO;
 		} catch(Exception exp){

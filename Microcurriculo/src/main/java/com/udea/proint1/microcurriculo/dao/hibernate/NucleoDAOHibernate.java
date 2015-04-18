@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
@@ -40,6 +41,36 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 			session.close();
 		}
 	}
+	
+	
+	@Override
+	public void guardarListadoNucleo(List<TbAdmNucleo> lista) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx = session.beginTransaction();
+			
+			for(TbAdmNucleo nucleo : lista){
+				session.saveOrUpdate(nucleo);
+			}
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Nucleo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+		
+		
+	}
+	
 
 	@Override
 	public void actualizarNucleo(TbAdmNucleo nucleo) throws ExcepcionesDAO {
@@ -114,7 +145,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
         
         try{
             session = getSession();
-            Query query = session.createQuery("from TbAdmNucleo where vrIdNucleo like :dependencia");
+            Query query = session.createQuery("from TbAdmNucleo where vrIdnucleo like :dependencia");
             query.setString("dependencia", dependencia);
             nucleos = query.list();
         } catch (Exception e) {

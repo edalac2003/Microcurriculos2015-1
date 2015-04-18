@@ -19,6 +19,8 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class DependenciaDAOHibernate extends HibernateDaoSupport implements DependenciaDAO {
 
+	
+
 	@Override
 	public void guardarDependencia(TbAdmDependencia dependencias)
 			throws ExcepcionesDAO {
@@ -39,10 +41,39 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 			session.close();
 		}
 	}
+	
+	@Override
+	public void guadarListadoDependencia(List<TbAdmDependencia> lista) throws ExcepcionesDAO {
+		Session session = null;
+		Transaction tx = null;
+		
+		try{
+			session = getSession();
+			tx=session.beginTransaction();
+			
+			for (TbAdmDependencia dependencia : lista)
+				session.saveOrUpdate(dependencia);
+			
+			tx.commit();
+		} catch (Exception e){
+			tx.rollback();
+			
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Listado deDependencias.");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+		
+	}
+
+
 
 	@Override
-	public TbAdmDependencia obtenerDependencias(String id)
-			throws ExcepcionesDAO {
+	public TbAdmDependencia obtenerDependencias(String id) throws ExcepcionesDAO {
 		Session session = null;
 		TbAdmDependencia dependencia = null;
 		

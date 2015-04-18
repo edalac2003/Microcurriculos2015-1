@@ -10,6 +10,8 @@ public interface DependenciaDAO {
 
 	public void guardarDependencia(TbAdmDependencia dependencias) throws ExcepcionesDAO;
 	
+	public void guadarListadoDependencia(List<TbAdmDependencia> lista) throws ExcepcionesDAO;
+	
 	public TbAdmDependencia obtenerDependencias(String id) throws ExcepcionesDAO;
 	
 	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesDAO;

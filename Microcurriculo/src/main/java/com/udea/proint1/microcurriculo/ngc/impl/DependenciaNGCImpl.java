@@ -2,6 +2,7 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
+import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
 import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
@@ -68,6 +69,32 @@ public class DependenciaNGCImpl implements DependenciaNGC {
 			throw expLog;
 		}
 	}
+	
+	
+	@Override
+	public void guardarListadoDependencia(List<TbAdmDependencia> lista)	throws ExcepcionesLogica, ExcepcionesDAO {
+		
+		if((lista != null) && (lista.size() > 0)){			
+			try {				
+				dependenciaDao.guadarListadoDependencia(lista);			
+			} catch(ExcepcionesDAO expDAO){
+				throw expDAO;
+			} catch(Exception exp){
+				ExcepcionesLogica expLog = new ExcepcionesLogica();
+				expLog.setMsjUsuario("Error al invocar el metodo guardar Listados de Dependencia");
+				expLog.setMsjTecnico(exp.getMessage());
+				expLog.setOrigen(exp);
+				throw expLog;
+			}
+		} else {
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No se pudo guardar, El objeto Dependencia esta vacio");
+			throw expLog;
+		}		
+	}
+
+	
+	
 
 	@Override
 	public void actualizarDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica, ExcepcionesDAO {
