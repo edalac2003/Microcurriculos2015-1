@@ -15,18 +15,15 @@
 		</west>
 		<center border="none" >
 						
-			<div align="center" height="400px" width="100%">
-				<div height="30px" />
-				<vbox height="50px" align="center">
-					<label value="${labels.microcurriculo.timeout}" sclass="tituloFondo"/>
-				</vbox>
-				<vbox height="310px" align="center">
-					<image src="/_img/timeout.jpg" />
-				</vbox>
-<!-- 				<hbox height="40px" /> -->
-<!-- 				<hbox  align="center"> -->
-<!-- 					<a href="/index.zul" label="Pagina de Inicio" sclass="tituloFondo"/>					 -->
-<!-- 				</hbox> -->
+			<div align="center" height="500px" width="100%">
+				<hbox height="50px" />
+				<hbox align="center">
+					<image src="/_img/construc.png"/>
+				</hbox>
+				<hbox height="40px" />
+				<hbox  align="center">
+					<a href="/index.zul" label="Pagina de Inicio" sclass="tituloFondo"/>					
+				</hbox>
 			</div>
 			
 		</center>
