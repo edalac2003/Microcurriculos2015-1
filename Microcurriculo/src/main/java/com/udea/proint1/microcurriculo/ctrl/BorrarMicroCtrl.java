@@ -687,22 +687,51 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 		}
 	}
 	
+	public void confirmarMicro(String idMicrocurriculo){
+		TbMicMicrocurriculo microcurriculo = null;
+		try{
+			microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("Error al intentar obtener microcurriculo a borrar","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		if(microcurriculo != null){
+			if(microcurriculo.getTbMicEstado().getNbIdestado() != 1){
+				Messagebox.show("No se puede eliminar un microcurriculo con estado \""+microcurriculo.getTbMicEstado().getVrDescripcion().toString()+"\", solo se puede en \"BORRADOR\".","ERROR", Messagebox.OK,Messagebox.ERROR);
+			}else{
+				confirmarEliminacion(idMicrocurriculo);
+			}
+		}else{
+			Messagebox.show("Hubo un error, o el Microcurriculo a eliminar no existe","ERROR", Messagebox.OK,Messagebox.ERROR);
+		}
+	}
+	
+	public void llenarCombox(){
+		cargarUnidades();
+		cargarDependencias("");
+		cargarNucleos("");
+		cargarMaterias("");
+		cargarMicrocurriculos("");
+		cargarDocentes();
+		cargarSemestres();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
 			String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-			confirmarEliminacion(idMicrocurriculo);
-		}else{
-			cargarUnidades();
-			cargarDependencias("");
-			cargarNucleos("");
-			cargarMaterias("");
-			cargarMicrocurriculos("");
-			cargarDocentes();
-			cargarSemestres();
+			confirmarMicro(idMicrocurriculo);
+			
 		}
+		llenarCombox();
 	}
 	
 }
