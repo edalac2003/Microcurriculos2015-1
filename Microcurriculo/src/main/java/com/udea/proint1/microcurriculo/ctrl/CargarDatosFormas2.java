@@ -923,6 +923,28 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 		cmbDocente.setValue(cadenaInicial);		
 	}
 	
+	public void listadoInicial(){
+		System.out.println("ingresó");
+		List<TbMicMicrocurriculo> microcurriculos = null;
+		
+		try{
+			microcurriculos = microcurriculoNGC.listarMicrocurriculos();
+			listaMicrocurriculo.getItems().clear();
+			
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		listarMicrocurriculos(microcurriculos);
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
@@ -937,6 +959,7 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 			cargarSemestres();
 			cargarDocentes();
 			cargarEstados2();
+			listadoInicial();
 		} else if(comp.getParent().getId().equals("panelDuplicarMicro")){
 			cargarMaterias("");
 			cargarUnidades();

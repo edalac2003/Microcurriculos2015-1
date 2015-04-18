@@ -51,4 +51,13 @@ public interface GuardarMicrocurriculoNGC {
 			List<TbMicTemaxunidad> temasxUnidadGuardar,
 			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesLogica, ExcepcionesDAO;
 	
+	public void eliminarMicrocurridulo(TbMicMicrocurriculo microcurriculo,
+			List<TbMicMicroxestado> microxEstado,
+			List<TbMicSubtemaxtema> subtemasxTema,
+			List<TbMicTemaxunidad> temasxUnidad,
+			List<TbMicUnidadxmicro> unidadesxmicro,
+			List<TbMicObjetivoxmicro> objetivosxMicro,
+			List<TbMicBiblioxunidad> bibliosxUnidad,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro) throws ExcepcionesLogica, ExcepcionesDAO;
+	
 }

@@ -356,4 +356,84 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		}
 	}
 	
+	@Override
+	public void eliminarMicrocurridulo(TbMicMicrocurriculo microcurriculo,
+			List<TbMicMicroxestado> microsxEstado,
+			List<TbMicSubtemaxtema> subtemasxTema,
+			List<TbMicTemaxunidad> temasxUnidad,
+			List<TbMicUnidadxmicro> unidadesxMicro,
+			List<TbMicObjetivoxmicro> objetivosxMicro,
+			List<TbMicBiblioxunidad> bibliosxUnidad,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro) throws ExcepcionesDAO{
+		
+		Session session = null;
+		Transaction tx = null;
+		
+		try {
+			session = getSession();
+			tx = session.beginTransaction();
+			
+			if(microsxEstado != null){
+				for(TbMicMicroxestado microxEstado: microsxEstado){
+					session.delete(microxEstado);
+				}
+			}
+			
+			if (objetivosxMicro != null){
+				for(TbMicObjetivoxmicro objetivoxMicro: objetivosxMicro){
+					session.delete(objetivoxMicro);
+					session.delete(objetivoxMicro.getTbMicObjetivo());
+				}
+			}
+			
+			if (subtemasxTema != null){
+				for(TbMicSubtemaxtema subtemaxTema: subtemasxTema){
+					session.delete(subtemaxTema);
+					session.delete(subtemaxTema.getTbMicSubtema());
+				}
+			}
+			
+			if (temasxUnidad != null){
+				for(TbMicTemaxunidad temaxUnidad: temasxUnidad){
+					session.delete(temaxUnidad);
+					session.delete(temaxUnidad.getTbMicTema());
+				}
+			}
+			
+			if (evaluacionesxMicro != null){
+				for(TbMicEvaluacionxmicro evaluacionxMicro: evaluacionesxMicro){
+					session.delete(evaluacionxMicro);
+					session.delete(evaluacionxMicro.getTbMicEvaluacion());
+				}
+			}
+			
+			if (bibliosxUnidad != null){
+				for(TbMicBiblioxunidad biblioxUnidad: bibliosxUnidad){
+					session.delete(biblioxUnidad);
+					session.delete(biblioxUnidad.getTbMicBibliografia());
+				}
+			}
+			
+			if (unidadesxMicro != null){
+				for(TbMicUnidadxmicro unidadxMicro: unidadesxMicro){
+					session.delete(unidadxMicro);
+					session.delete(unidadxMicro.getTbMicUnidad());
+				}
+			}
+			session.delete(microcurriculo);
+			
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar guardar Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			throw expDAO;
+		} finally {
+			session.close();
+		}
+	}
+	
 }

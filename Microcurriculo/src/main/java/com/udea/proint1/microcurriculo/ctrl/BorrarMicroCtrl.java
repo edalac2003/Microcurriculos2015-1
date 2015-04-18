@@ -1,10 +1,12 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
@@ -17,15 +19,30 @@ import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
+import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
+import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
+import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
+import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
+import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
+import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
+import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
+import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
@@ -56,6 +73,14 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 	public static List<TbMicEstado> listaEstados;
 	public static List<TbMicMicrocurriculo> listaMicrocurriculos;
 	
+	public static List<TbMicBiblioxunidad> bibliosxUnidad;
+	public static List<TbMicEvaluacionxmicro> evaluacionesxMicro;
+	public static List<TbMicMicroxestado> microsxEstado;
+	public static List<TbMicObjetivoxmicro> objetivosxMicro;
+	public static List<TbMicUnidadxmicro> unidadesxMicro;
+	public static List<TbMicSubtemaxtema> subtemasxTema = new ArrayList<TbMicSubtemaxtema>();
+	public static List<TbMicTemaxunidad> temasxUnidad = new ArrayList<TbMicTemaxunidad>();
+	
 	/**
 	 * Variables de capa NGC y settters para inyección de dependencias
 	 */
@@ -67,7 +92,51 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 	SemestreNGC semestreNGC;
 	PersonaNGC personaNGC;
 	MicrocurriculoNGC microcurriculoNGC;
+	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
+	ObjetivoxMicroNGC objetivoxMicroNGC;
+	UnidadxMicroNGC unidadxMicroNGC;
+	TemaxUnidadNGC temaxUnidadNGC;
+	SubtemaxTemaNGC subtemaxTemaNGC;
+	EvaluacionxMicroNGC evaluacionxMicroNGC;
+	BiblioxunidadNGC biblioxUnidadNGC;
+	MicroxEstadoNGC microxEstadoNGC;
 	
+	public void setMicroxEstadoNGC(MicroxEstadoNGC microxEstadoNGC) {
+		this.microxEstadoNGC = microxEstadoNGC;
+	}
+
+	public static void setUnidadesxMicro(List<TbMicUnidadxmicro> unidadesxMicro) {
+		BorrarMicroCtrl.unidadesxMicro = unidadesxMicro;
+	}
+
+	public static void setTemasxUnidad(List<TbMicTemaxunidad> temasxUnidad) {
+		BorrarMicroCtrl.temasxUnidad = temasxUnidad;
+	}
+
+	public void setObjetivoxMicroNGC(ObjetivoxMicroNGC objetivoxMicroNGC) {
+		this.objetivoxMicroNGC = objetivoxMicroNGC;
+	}
+
+	public void setUnidadxMicroNGC(UnidadxMicroNGC unidadxMicroNGC) {
+		this.unidadxMicroNGC = unidadxMicroNGC;
+	}
+
+	public void setTemaxUnidadNGC(TemaxUnidadNGC temaxUnidadNGC) {
+		this.temaxUnidadNGC = temaxUnidadNGC;
+	}
+
+	public void setSubtemaxTemaNGC(SubtemaxTemaNGC subtemaxTemaNGC) {
+		this.subtemaxTemaNGC = subtemaxTemaNGC;
+	}
+
+	public void setEvaluacionxMicroNGC(EvaluacionxMicroNGC evaluacionxMicroNGC) {
+		this.evaluacionxMicroNGC = evaluacionxMicroNGC;
+	}
+
+	public void setBiblioxUnidadNGC(BiblioxunidadNGC biblioxUnidadNGC) {
+		this.biblioxUnidadNGC = biblioxUnidadNGC;
+	}
+
 	/**
 	 * Metodo set para inyeccion de dependencia spring para unidades academicas en la capa del negocio
 	 * @param unidadAcademicaNGC objeto instaciado de capa de negocio
@@ -122,6 +191,15 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 	 */
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
 		this.microcurriculoNGC = microcurriculoNGC;
+	}
+	
+	/**
+	 * Metodo set para inyeccion de dependencia spring para microcurriculos en la capa del negocio
+	 * @param guardarMicrocurriculoNGC objeto instaciado de capa de negocio
+	 */
+	public void setGuardarMicrocurriculoNGC(
+			GuardarMicrocurriculoNGC guardarMicrocurriculoNGC) {
+		this.guardarMicrocurriculoNGC = guardarMicrocurriculoNGC;
 	}
 	
 	/***************************************************************************
@@ -403,7 +481,7 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 			if(listaMaterias != null){
 				cmbMicrocurriculo.appendChild(new Comboitem("[Seleccione]"));
 				for(TbMicMicrocurriculo microcurriculo: listaMicrocurriculos){
-					if(microcurriculo.getTbMicEstado().getNbIdestado()==6){
+					if(microcurriculo.getTbMicEstado().getNbIdestado()==1){
 						Comboitem item = new Comboitem(microcurriculo.getVrIdmicrocurriculo());
 						cmbMicrocurriculo.appendChild(item);
 					}
@@ -414,18 +492,215 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public void confirmarEliminacion(final String idMicrocurriculo){
+		Messagebox.show("Está seguro de eliminar el microcurriculo con Id "+idMicrocurriculo+"?", "ADVERTENCIA", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+			public void onEvent(Event evt) throws InterruptedException {
+				if (evt.getName().equals("onOK")) {
+					eliminarMicrocurriculo(idMicrocurriculo);
+				} else if (evt.getName().equals("onCancel")) {
+					Executions.getCurrent().getSession().removeAttribute("idPersona");
+					Messagebox.show("Persona no fue eliminada","INFORMACION", Messagebox.OK,Messagebox.INFORMATION);
+					cargarUnidades();
+					cargarDependencias("");
+					cargarNucleos("");
+					cargarMaterias("");
+					cargarMicrocurriculos("");
+					cargarDocentes();
+					cargarSemestres();
+				}
+			}
+		});
+	}
+	
+	private void eliminarMicrocurriculo(String idMicrocurriculo){
+		
+		TbMicMicrocurriculo microcurriculo = null;
+		try{
+			microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		
+		cargarListasObjetivos(microcurriculo.getVrIdmicrocurriculo());
+		cargarListasUnidadesTemasSubtemas(microcurriculo.getVrIdmicrocurriculo());
+		cargarListasEstados(microcurriculo.getVrIdmicrocurriculo());
+		cargarListasEvaluaciones(microcurriculo.getVrIdmicrocurriculo());
+		
+		boolean ocurrioError = false;
+		try{
+			guardarMicrocurriculoNGC.eliminarMicrocurridulo(microcurriculo, microsxEstado, subtemasxTema, temasxUnidad, unidadesxMicro, objetivosxMicro, bibliosxUnidad, evaluacionesxMicro);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+			ocurrioError = true;
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+			ocurrioError = true;
+		}catch(Exception exp){
+			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+			ocurrioError = true;
+		}
+		if(!ocurrioError){
+			Messagebox.show("Se eliminó microcurriculo con exito","INFORMACION", Messagebox.OK,Messagebox.INFORMATION);
+		}
+		
+		Executions.getCurrent().getSession().removeAttribute("idMicro");
+		cargarUnidades();
+		cargarDependencias("");
+		cargarNucleos("");
+		cargarMaterias("");
+		cargarMicrocurriculos("");
+		cargarDocentes();
+		cargarSemestres();
+	}
+	
+	private void cargarListasObjetivos(String idMicrocurriculo){
+		try{
+			objetivosxMicro = objetivoxMicroNGC.obtenerObjetivosxMicroxMicro(idMicrocurriculo);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+	}
+	
+	private void cargarListasUnidadesTemasSubtemas(String idMicrocurriculo){
+		try{
+			unidadesxMicro = unidadxMicroNGC.listarUnidadesXMicroxMicro(idMicrocurriculo);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		if(unidadesxMicro != null){
+			for(TbMicUnidadxmicro unidadxMicro: unidadesxMicro){
+				
+				List<TbMicBiblioxunidad> bibliosxUnidadConsultar = null;
+				try{
+					bibliosxUnidadConsultar = biblioxUnidadNGC.listadoBiblioxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
+				}catch(ExcepcionesDAO expDAO){
+					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expDAO.getMsjTecnico());
+				}catch(ExcepcionesLogica expNgs){
+					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expNgs.getMsjTecnico());
+				}catch(Exception exp){
+					Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(exp);
+				}
+				for(TbMicBiblioxunidad biblioxUnidad: bibliosxUnidadConsultar){
+					bibliosxUnidad.add(biblioxUnidad);
+				}
+				
+				List<TbMicTemaxunidad> temasxUnidadConsultar = null;
+				try{
+					temasxUnidadConsultar = temaxUnidadNGC.ListarTemasxUnidadxUnidad(unidadxMicro.getTbMicUnidad().getNbIdunidad());
+				}catch(ExcepcionesDAO expDAO){
+					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expDAO.getMsjTecnico());
+				}catch(ExcepcionesLogica expNgs){
+					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expNgs.getMsjTecnico());
+				}catch(Exception exp){
+					Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(exp);
+				}
+				if(temasxUnidadConsultar != null){
+					for(TbMicTemaxunidad temaxUnidad: temasxUnidadConsultar){
+						temasxUnidad.add(temaxUnidad);
+						
+						List<TbMicSubtemaxtema> subtemasxtemaConsultar = null;
+						try{
+							subtemasxtemaConsultar = subtemaxTemaNGC.listarSubtemaxTema_Tema(temaxUnidad.getTbMicTema().getNbIdtema());
+						}catch(ExcepcionesDAO expDAO){
+							Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+							logger.error(expDAO.getMsjTecnico());
+						}catch(ExcepcionesLogica expNgs){
+							Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+							logger.error(expNgs.getMsjTecnico());
+						}catch(Exception exp){
+							Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+							logger.error(exp);
+						}
+						for(TbMicSubtemaxtema subtemaxTema: subtemasxtemaConsultar){
+							subtemasxTema.add(subtemaxTema);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void cargarListasEstados(String idMicrocurriculo){
+		try{
+			microsxEstado = microxEstadoNGC.listarMicrosxestadoxMicrocurriculo(idMicrocurriculo);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+	}
+	
+	private void cargarListasEvaluaciones(String idMicrocurriculo){
+		try{
+			evaluacionesxMicro = evaluacionxMicroNGC.ListarEvaluacionxMicroxMicro(idMicrocurriculo);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+	}
+	
+	public void onSelect$cmbMicrocurriculo(){
+		if(cmbMicrocurriculo.getSelectedIndex() > 0 ){
+			String idMicro = cmbMicrocurriculo.getValue().toString();
+			Executions.getCurrent().getSession().setAttribute("idMicro", idMicro);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public void doAfterCompose(Component comp) throws Exception {				
+	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
 			String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+			confirmarEliminacion(idMicrocurriculo);
 		}else{
 			cargarUnidades();
 			cargarDependencias("");
 			cargarNucleos("");
 			cargarMaterias("");
 			cargarMicrocurriculos("");
-			cargarNucleos("");
+			cargarDocentes();
 			cargarSemestres();
 		}
 	}

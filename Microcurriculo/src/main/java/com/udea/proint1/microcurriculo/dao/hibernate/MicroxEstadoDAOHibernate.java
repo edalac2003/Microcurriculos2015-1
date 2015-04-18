@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.MicroxEstadoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -112,6 +113,28 @@ public class MicroxEstadoDAOHibernate extends HibernateDaoSupport implements Mic
         	session = getSession();
             Query query = session.createQuery("from TbMicMicroxestado where tbMicEstados = :estado");
             query.setEntity("estado", estado);
+            microsxEstado = query.list();
+            
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculo x estado");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+		return microsxEstado;
+	}
+	
+	public List<TbMicMicroxestado> listarMicrosxestadoxMicrocurriculo(TbMicMicrocurriculo microcurriculo) throws ExcepcionesDAO{
+		Session session = null;
+		List<TbMicMicroxestado> microsxEstado = new ArrayList<TbMicMicroxestado>();
+        try{               
+        	session = getSession();
+            Query query = session.createQuery("from TbMicMicroxestado where tbMicMicrocurriculo = :microcurriculo");
+            query.setEntity("microcurriculo", microcurriculo);
             microsxEstado = query.list();
             
         } catch (Exception e) {

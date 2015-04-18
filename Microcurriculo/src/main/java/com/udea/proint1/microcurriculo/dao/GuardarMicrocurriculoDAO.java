@@ -65,4 +65,13 @@ public interface GuardarMicrocurriculoDAO {
 			List<TbMicTemaxunidad> temasxUnidadGuardar,
 			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesDAO;
 	
+	public void eliminarMicrocurridulo(TbMicMicrocurriculo microcurriculo,
+			List<TbMicMicroxestado> microsxEstado,
+			List<TbMicSubtemaxtema> subtemasxTema,
+			List<TbMicTemaxunidad> temasxUnidad,
+			List<TbMicUnidadxmicro> unidadesxmicro,
+			List<TbMicObjetivoxmicro> objetivosxMicro,
+			List<TbMicBiblioxunidad> bibliosxUnidad,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro) throws ExcepcionesDAO;
+	
 }

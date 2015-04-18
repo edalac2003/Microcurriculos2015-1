@@ -46,7 +46,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 	@Override
 	public TbMicMicrocurriculo obtenerMicrocurriculo(String idMicrocurriculo) throws ExcepcionesDAO {
 		Session session = null;
-		TbMicMicrocurriculo microcurriculo = null;;
+		TbMicMicrocurriculo microcurriculo = null;
 		try{
 			session = getSession();
 			microcurriculo = (TbMicMicrocurriculo)session.get(TbMicMicrocurriculo.class, idMicrocurriculo);

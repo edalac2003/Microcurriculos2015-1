@@ -300,6 +300,28 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	public void listadoInicial(){
+		System.out.println("ingresó");
+		List<TbMicMicrocurriculo> microcurriculos = null;
+		
+		try{
+			microcurriculos = microcurriculoNGC.listarMicrocurriculos();
+			listaMicrocurriculo.getItems().clear();
+			
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		listarMicrocurriculos(microcurriculos);
+		
+	}
+	
 	/**
 	 * Metodo de inicio al cargar página
 	 */
@@ -308,5 +330,7 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {		
 		
 		super.doAfterCompose(comp);
+		listadoInicial();
+		
 	}
 }

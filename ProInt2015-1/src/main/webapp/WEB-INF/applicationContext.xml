@@ -375,6 +375,7 @@
         <bean id="microxEstadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxEstadoNGCImpl">
         	<property name="microxEstadoDao" ref="microxEstadoDao" />
         	<property name="estadoDao" ref="estadoDao" />
+        	<property name="microcurriculoDao" ref="microcurriculoDao" />
         </bean>
         
         <bean id="objetivoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoNGCImpl">
@@ -620,6 +621,7 @@
         	<property name="bibliografiaNGC" ref="bibliografiaNGC" />
         	<property name="evaluacionNGC" ref="evaluacionNGC" />
         	<property name="unidadNGC" ref="unidadNGC" />
+        	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
         </bean>
         
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">
@@ -646,5 +648,13 @@
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
         	<property name="personaNGC" ref="personaNGC" />
+        	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
+        	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" />
+        	<property name="unidadxMicroNGC" ref="unidadxMicroNGC" />
+        	<property name="temaxUnidadNGC" ref="temaxUnidadNGC" />
+        	<property name="subtemaxTemaNGC" ref="subtemaxTemaNGC" />
+        	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
+        	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
+        	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
         </bean>
 </beans>

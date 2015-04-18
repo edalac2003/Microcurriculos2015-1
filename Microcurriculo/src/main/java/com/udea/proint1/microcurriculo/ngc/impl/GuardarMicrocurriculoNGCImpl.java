@@ -138,4 +138,29 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 		}
 		
 	}
+	
+	public void eliminarMicrocurridulo(TbMicMicrocurriculo microcurriculo,
+			List<TbMicMicroxestado> microxEstado,
+			List<TbMicSubtemaxtema> subtemasxTema,
+			List<TbMicTemaxunidad> temasxUnidad,
+			List<TbMicUnidadxmicro> unidadesxmicro,
+			List<TbMicObjetivoxmicro> objetivosxMicro,
+			List<TbMicBiblioxunidad> bibliosxUnidad,
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro) throws ExcepcionesLogica, ExcepcionesDAO{
+		
+		try{
+			guardarMicrocurriculoDao.eliminarMicrocurridulo(microcurriculo, microxEstado, 
+					subtemasxTema, temasxUnidad, unidadesxmicro, objetivosxMicro, bibliosxUnidad, 
+					evaluacionesxMicro);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error invocar metodo, actualizar Microcurriculo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+	}
 }

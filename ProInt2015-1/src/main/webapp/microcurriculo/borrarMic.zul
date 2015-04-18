@@ -89,7 +89,7 @@
 										</div>
 									</panelchildren>
 									<toolbar>
-										<button id="btnBorrar" label="Borrar" style="margin:0 0 0 442px;" href="/microcurriculo/duplicarMic.zul"/>
+										<button id="btnBorrar" label="Borrar" style="margin:0 0 0 442px;" href="/microcurriculo/borrarMic.zul"/>
 									</toolbar>
 								</panel>
 													

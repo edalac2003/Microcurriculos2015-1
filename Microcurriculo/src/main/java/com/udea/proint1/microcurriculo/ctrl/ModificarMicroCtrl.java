@@ -2706,6 +2706,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		
 		actualizarMicro();
 		actualizarLote();
+		
 //		borrarObjetivos();
 //		borrarSubtemas();
 //		borrarTemas();
@@ -2730,11 +2731,13 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	
 	public void actualizarLote(){
 		try{
+			System.out.println("objetoNulo");
 			guardarMicrocurriculoNGC.modificarMicroxlotes(microcurriculoGuardar, microxEstadoGuardar,
 					listaObjetivosxMicroBorrar, listaSubtemasxTemaBorrar, listaTemasxUnidadBorrar,
 					listaEvaluacionesxMicroBorrar, listaBibliosxUnidadBorrar, listaUnidadesxMicroBorrar,
 					listaObjetivosxMicroGuardar, listaUnidadesxMicroGuardar, listaBibliosxUnidadGuardar,
 					listaEvaluacionesxMicroGuardar, listaTemasxUnidadGuardar, listaSubtemasxTemaGuardar);
+			System.out.println("despues del objeto");
 			reiniciarEntorno();
 			Messagebox.show("Se actualizó correctamente el microcurriculo","INFORMACIÓN", Messagebox.OK,Messagebox.INFORMATION);
 		}catch(ExcepcionesDAO expDAO){
