@@ -17,8 +17,8 @@
 							<north border="0">
 								<toolbar id="tb" sclass="vista" height="45px" width="960px">
 									<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
-									<toolbarbutton id="tool_new" label="Nueva Busqueda" image="/_img/icons/32x32/new.png" />
-									<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/materia/inicio_mat.zul"/>
+									<toolbarbutton id="tool_new" label="Nueva Busqueda" image="/_img/icons/32x32/search.png" />
+									<toolbarbutton id="tool_close" label="Regresar" image="/_img/icons/32x32/atras.png" href="/materia/inicio_mat.zul"/>
 								</toolbar>
 							</north>
 						<center border="none" autoscroll="true">

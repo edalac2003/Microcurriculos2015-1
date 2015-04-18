@@ -44,7 +44,7 @@
 							<hbox align="center" height="95px">
 								<a href="/index.zul" image="/_img/icons/128x128/shutdown.png" />
 								<vbox width="350px">
-									<a href="/index.zul" label="Cerrar Microcurriculos" sclass="nombreSeccion" />
+									<a href="/index.zul" label="Cerrar Materias" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
 										<label value="Regrese al Menú Principal." />
 									</div>	
@@ -55,7 +55,7 @@
 				</div>
 			</center>
 			
-			<south border="0">		
+			<south border="0" height="100px">		
 				<div> <include id="footerIdx" src="/_sections/footer.zul" /> </div>					
 			</south>
 		</borderlayout>
