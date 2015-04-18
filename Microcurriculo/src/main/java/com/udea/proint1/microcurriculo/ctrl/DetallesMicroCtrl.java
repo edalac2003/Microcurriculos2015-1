@@ -2188,7 +2188,7 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	
 	
 	public void onSelect$cmbDocente(){
-		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
+//		lblNombreDocente.setValue(mostrarNombreDocente(cmbDocente.getValue()));
 	}
 	
 	public void onOK$cmbDocente(){
