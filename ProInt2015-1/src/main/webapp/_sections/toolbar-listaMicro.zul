@@ -1,0 +1,14 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+	<toolbar id="tb" sclass="vista" height="45px" apply="${validarDatosCtrl}">
+		<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+		<toolbarbutton id="tool_new" label="Crear Nuevo" image="/_img/icons/32x32/new_32.png" href="/microcurriculo/crearMic.zul" />
+		<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" />
+		<toolbarbutton id="tool_refresh" label="Modificar" image="/_img/icons/32x32/pencil_32.png" href="/microcurriculo/modificarMic.zul" />
+		<toolbarbutton id="tool_duplica" label="Duplicar" image="/_img/icons/32x32/clone.png" href="/microcurriculo/duplicarMic.zul" />
+		<toolbarbutton id="tool_borrar" label="Eliminar" image="/_img/icons/32x32/erase_32.png" href="/microcurriculo/borrarMic.zul" />
+		<toolbarbutton id="tool_close" label="Regresar" image="/_img/icons/32x32/atras.png" href="/microcurriculo/inicio_mic.zul" />
+	</toolbar>
+</zk>

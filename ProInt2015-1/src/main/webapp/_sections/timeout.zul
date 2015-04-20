@@ -21,12 +21,10 @@
 					<label value="${labels.microcurriculo.timeout}" sclass="tituloFondo"/>
 				</vbox>
 				<vbox height="310px" align="center">
-					<image src="/_img/timeout.jpg" />
+					<a href="/index.zul">
+						<image src="/_img/timeout.jpg" />
+					</a>					
 				</vbox>
-<!-- 				<hbox height="40px" /> -->
-<!-- 				<hbox  align="center"> -->
-<!-- 					<a href="/index.zul" label="Pagina de Inicio" sclass="tituloFondo"/>					 -->
-<!-- 				</hbox> -->
 			</div>
 			
 		</center>

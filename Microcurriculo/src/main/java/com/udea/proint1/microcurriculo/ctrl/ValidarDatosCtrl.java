@@ -1,46 +1,14 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listcell;
-import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
-import com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo;
-import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
-import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
-import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
-import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicEstado;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
-import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
-import com.udea.proint1.microcurriculo.dto.TbMicTema;
-import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.BibliografiaNGC;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
@@ -60,8 +28,6 @@ import com.udea.proint1.microcurriculo.ngc.TemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
-import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
-import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 /**
  * Este Controlador se encarga de Realizar las validaciones de los datos antes de guardarlos
@@ -71,29 +37,29 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  */
 public class ValidarDatosCtrl extends GenericForwardComposer{
 	
-	private static Logger logger = Logger.getLogger(ValidarDatosCtrl.class);
-	private static String modUsuario = "SYSTEM";
-	private static Date modFecha = new Date();
-	private static Date fechaEstimada = null;
-	private static DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+//	private static Logger logger = Logger.getLogger(ValidarDatosCtrl.class);
+//	private static String modUsuario = "SYSTEM";
+//	private static Date modFecha = new Date();
+//	private static Date fechaEstimada = null;
+//	private static DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 	
 	//Declaracion de Variables globales requeridas.  Las listas se llenan de forma secundaria mediante un metodo primario.
 	//Por Ejemplo: listadoUnidadesxMicro se llenar cuando se estan empaquetando las Unidades, a este metodo solo se le pasa un objeto de tipo
 	//Microcurriculo.
 	
-	private static List<TbMicUnidadxmicro> listadoUnidadesxMicro;
-	private static List<TbMicTemaxunidad> listadoTemasxUnidad;
-	private static List<TbMicEvaluacionxmicro> listadoEvaluacionesxMicro;
-	private static List<TbMicObjetivoxmicro> listadoObjetivosxMicro;
-	private static List<TbMicBiblioxunidad> listadoBibliografiaxUnidad;
-	private static List<TbMicSubtemaxtema> listadoSubtemaxTema;
+//	private static List<TbMicUnidadxmicro> listadoUnidadesxMicro;
+//	private static List<TbMicTemaxunidad> listadoTemasxUnidad;
+//	private static List<TbMicEvaluacionxmicro> listadoEvaluacionesxMicro;
+//	private static List<TbMicObjetivoxmicro> listadoObjetivosxMicro;
+//	private static List<TbMicBiblioxunidad> listadoBibliografiaxUnidad;
+//	private static List<TbMicSubtemaxtema> listadoSubtemaxTema;
 	
-	private static List<TbMicUnidad> listadoUnidades;
-	private static List<TbMicObjetivo> listadoObjetivos;
-	private static List<TbMicEvaluacion> listadoEvaluaciones;
-	private static List<TbMicTema> listadoTemas;
-	private static List<TbMicSubtema> listadoSubtemas;
-	private static List<TbMicBibliografia> listadoBibliografia;
+//	private static List<TbMicUnidad> listadoUnidades;
+//	private static List<TbMicObjetivo> listadoObjetivos;
+//	private static List<TbMicEvaluacion> listadoEvaluaciones;
+//	private static List<TbMicTema> listadoTemas;
+//	private static List<TbMicSubtema> listadoSubtemas;
+//	private static List<TbMicBibliografia> listadoBibliografia;
 		
 	
 	Toolbarbutton tool_home;

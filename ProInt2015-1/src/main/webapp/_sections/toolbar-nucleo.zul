@@ -7,6 +7,6 @@
 <!-- 		<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" /> -->
 		<toolbarbutton id="tool_save" label="${labels.microcurriculo.toolbar.save}" image="/_img/icons/32x32/save.png" />
 <!-- 		<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" /> -->
-		<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/index.zul"/>
+		<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.back}" image="/_img/icons/32x32/atras.png" href="/index.zul"/>
 	</toolbar>	
 </zk>
