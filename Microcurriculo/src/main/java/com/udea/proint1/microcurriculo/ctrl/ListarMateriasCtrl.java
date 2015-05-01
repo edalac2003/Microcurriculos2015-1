@@ -257,7 +257,7 @@ public class ListarMateriasCtrl extends GenericForwardComposer{
 		}
 				
 		cmbMateria.getItems().clear();
-		if(listaMaterias != null){
+		if(listaMaterias2 != null){
 			cmbMateria.appendChild(new Comboitem("[Seleccione]"));
 			for(TbAdmMateria materia : listaMaterias2){
 				Comboitem item = new Comboitem(materia.getVrIdmateria()+" - "+materia.getVrNombre());

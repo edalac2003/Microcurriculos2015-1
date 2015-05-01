@@ -5,17 +5,23 @@
 
 <zk>
 	<window id="formaCrearMateria" border="0" apply="${modificarMateriaCtrl}">
-		<borderlayout height="660px" apply="" >
-
-			<north border="0" height="100px">
+		<borderlayout height="850px" apply="" >
+			<north height="100px" border="0" sclass="fondoEncabezado">
 				<include id="headerIdx" src="/_sections/header.zul" />
 			</north>
+			
+			<west border="none" width="14%">
+				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+			</west>
+			<east width="14%" border="none">
+				<label />
+			</east>
 
 			<center border="0" >
 				<div align="center">
-					<borderlayout height="470px">
+					<borderlayout height="680px">
 						<north border="0">
-							<toolbar id="tb" sclass="vista" height="45px" width="960px">
+							<toolbar id="tb" sclass="vista" height="45px" width="100%">
 								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
 								<toolbarbutton id="tool_new" label="Nueva Materia" image="/_img/icons/32x32/new.png" href="/materia/CrearMateria.zul"/>
 								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" visible="false"/>
@@ -24,74 +30,69 @@
 							</toolbar>
 						</north>
 						<center border="none">
-
 							<div align="center">
 								<separator />
-								<hlayout id="hlaSectorBuscar" width="100%">
-									<hbox spacing="15px">
-										<groupbox mold="3d" width="960px">
-											<caption image="/_img/materias.png" height="43px">
-													<label value="Seleccione Materia a Actualizar" />
-											</caption>
+								<hlayout id="hlaSectorBuscar" width="100%" >
+									<groupbox mold="3d" width="950px" closable="false">
+										<caption image="/_img/icons/32x32/materias32.png" height="43px">
+												<label value="Seleccione Materia a Actualizar" />
+										</caption>
 
-											<hbox align="center">
-												<label value="Buscar por Codigo"></label>
-												<textbox instant="true" id="txtFiltrarCodigo" tabindex="1" />
-												<label value="Buscar por Nombre"></label>
-												<textbox instant="true" id="txtFiltrarNombre" tabindex="1" />
-												<button id="btnBuscar" label="Buscar"/>
-											</hbox>
-											<borderlayout height="300px">
-												<north height="40px" border="0">
-													<listbox style="margin-top:10px">
-														<listhead>
-															<listheader label="Codigo" width="15%"/>
-															<listheader label="Materias"/>
-														</listhead>
-														
-														<template name="model">
-															<listitem>
-																<listcell label="${each.vrNombre}"></listcell>
-															</listitem>
-														</template>
-													</listbox>
-												</north>
-												<center border="normal" autoscroll="true">
-													<listbox id="listBoxMaterias" emptyMessage="Sin registros">
-														<listhead>
-															<listheader width="15%"/>
-															<listheader/>
-														</listhead>
-													</listbox>
-												</center>
-											</borderlayout>
-										</groupbox>
-									</hbox>
+										<hbox align="center" height="30px">
+											<label value="Buscar por Codigo" />
+											<textbox instant="true" id="txtFiltrarCodigo" />
+											<label value="Buscar por Nombre" />
+											<textbox instant="true" id="txtFiltrarNombre" />
+											<button id="btnBuscar" label="Buscar"/>
+										</hbox>
+										<borderlayout height="430px">
+											<north height="40px" border="0">
+												<listbox style="margin-top:10px">
+													<listhead>
+														<listheader label="Codigo" width="15%"/>
+														<listheader label="Materias"/>
+													</listhead>
+													
+													<template name="model">
+														<listitem>
+															<listcell label="${each.vrNombre}"></listcell>
+														</listitem>
+													</template>
+												</listbox>
+											</north>
+											<center border="normal" autoscroll="true">
+												<listbox id="listBoxMaterias" emptyMessage="Sin registros">
+													<listhead>
+														<listheader width="15%"/>
+														<listheader/>
+													</listhead>
+												</listbox>
+											</center>
+										</borderlayout>
+									</groupbox>
 								</hlayout>
 								
 								<hlayout id="hlaSectorModificar" visible="false">
 									<hbox spacing="15px">
-										<groupbox mold="3d" width="960px">
-											<caption image="/_img/crearMateria.png" >
-												<label value="Modificar Materia" ></label>
+										<groupbox mold="3d" width="950px">
+											<caption image="/_img/icons/32x32/crearMateria.png" >
+												<label value="Modificar Materia" />
 											</caption>
-											<borderlayout height="345px">
+											<borderlayout height="490px">
 												<center autoscroll="true" border="0">
 													<grid>
 														<columns>
-															<column width="20%" />
-															<column width="80%" />
+															<column width="25%" />
+															<column width="74%" />
 														</columns>
 														
-														<rows>
-															
+														<rows>															
 															<row>
 																<label value="Código Materia"></label>
 																<div>
 																	<label id="lblCodigo"></label>
 																</div>
-															</row>
-															
+															</row>															
 															<row>
 																<label value="Nombre Materia" sclass="campoobligatorio"></label>
 																<textbox id="txtNombreMateria" tabindex="5" width="50%" constraint="no empty" />
@@ -181,8 +182,10 @@
 				</div>
 			</center>
 
-			<south border="none">
-				<include id="footerIdx" src="/_sections/footer.zul" />
+			<south border="none" height="100px" >
+				<div width="100%" align="center" sclass="fondoEncabezado">
+					<include id="footerIdx" src="/_sections/footer.zul" />
+				</div>				
 			</south>
 		</borderlayout>
 	</window>

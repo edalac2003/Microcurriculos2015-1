@@ -4,29 +4,30 @@
 
 <zk>
 <window border="none">
-	<borderlayout height="800px" width="100%">
+	<borderlayout height="820px" width="1350px">
 		<north border="none" height="100px">
-			<div width="100%" align="center">
+			<div width="100%" align="center" sclass="fondoEncabezado">
 				<include id="headerIdx" src="/_sections/header.zul" />
 			</div>			
 		</north>
+		<west border="none" width="14%">
+			<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+		</west>
+		<east width="14%" border="none">
+			<label />
+		</east>
 		
-		<center border="none">
-			<div id="formaCrearNucleo" align="center" width="100%" >
+		<center border="normal" >
+			<div id="formaCrearNucleo" align="center" width="100%">
 				<borderlayout height="650px" apply="${crearNucleosCtrl}" width="100%">
 					<north border="none">
 						<include id="listMenu" src="/_sections/toolbar-nucleo.zul"/>						
 					</north>
-					<east width="180px" border="none">
-						<label></label>
-					</east>
-					<west width="180px" border="none">
-						<label></label>						
-					</west>
+					
 					<center border="none">
 						<div width="100%" align="center">
-						<separator />
-							<tabbox id="tabOpciones" width="960px" height="545px">
+						<div height="10px"></div>
+							<tabbox id="tabOpciones" width="99%" height="545px">
 								<tabs>
 									<tab label="${labels.microcurriculo.unidadAcademica}" />
 									<tab label="${labels.microcurriculo.dependenciaAcademica}" />
@@ -38,11 +39,11 @@
 										<hlayout>
 											<hbox>
 												<groupbox mold="3d" width="310px" closable="false">
-													<caption image="/_img/icons/32x32/book02.png" label="${labels.microcurriculo.u_academica}" />
-													<hbox align="center" height="40px">
-														<label value="${labels.microcurriculo.buscar}" />
-														<textbox id="txtBuscarUnidad" />														
-													</hbox>										
+													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.u_academica}" />
+<!-- 													<hbox align="center" height="40px"> -->
+<!-- 														<label value="${labels.microcurriculo.buscar}" /> -->
+<!-- 														<textbox id="txtBuscarUnidad" />														 -->
+<!-- 													</hbox>										 -->
 													<listbox id="listaUnidadAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="400px" autopaging="true" />
 												</groupbox>
 											</hbox>
@@ -60,7 +61,7 @@
 													</groupbox>
 													<div height="15px" />
 <!-- 													height="365px"  -->
-													<groupbox mold="3d" width="600px" hflex="1" closable="false">
+													<groupbox mold="3d" width="500px" hflex="1" closable="false">
 														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addUnidadAcademica}" />
 														<hbox height="40px" align="center" width="100%">
 															<label value="${labels.microcurriculo.id}"/>
@@ -84,16 +85,16 @@
 										<hlayout>
 											<hbox>
 												<groupbox mold="3d" width="330px" closable="false">
-													<caption image="/_img/icons/32x32/book02.png" label="${labels.microcurriculo.dependenciaAcademica}" />
+													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.dependenciaAcademica}" />
 													<div height="35px">
 														<label value="${labels.microcurriculo.u_academica}" />
 														<combobox id="cmbUnidadAcademica" />
 													</div>
-													<div height="35px">
-														<label value="${labels.microcurriculo.buscar}" />
-														<textbox id="txtBuscarDependencia" />
-														<button id="btnBuscarDependencia" label="${labels.microcurriculo.buscar}"/>	
-													</div>
+<!-- 													<div height="35px"> -->
+<!-- 														<label value="${labels.microcurriculo.buscar}" /> -->
+<!-- 														<textbox id="txtBuscarDependencia" /> -->
+<!-- 														<button id="btnBuscarDependencia" label="${labels.microcurriculo.buscar}"/>	 -->
+<!-- 													</div> -->
 																					
 													<listbox id="listaDependenciaAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="370px" autopaging="true" />
 												</groupbox>
@@ -144,7 +145,7 @@
 										<hlayout>
 											<hbox>
 												<groupbox mold="3d" width="330px" closable="false">
-													<caption image="/_img/icons/32x32/book02.png" label="${labels.microcurriculo.nucleoAcademico}" />
+													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.nucleoAcademico}" />
 													<div height="35px">
 														<label value="${labels.microcurriculo.u_academica}" />
 														<combobox id="cmbUnidadAcademica3" width="220px" />
@@ -153,11 +154,11 @@
 														<label value="${labels.microcurriculo.dependencia}" />
 														<combobox id="cmbDependencia" width="220px" />
 													</div>
-													<div height="35px">
-														<label value="${labels.microcurriculo.buscar}" />
-														<textbox id="txtBuscarNucleo" />
-														<button id="btnBuscarNucleo" label="${labels.microcurriculo.buscar}"/>	
-													</div>
+<!-- 													<div height="35px"> -->
+<!-- 														<label value="${labels.microcurriculo.buscar}" /> -->
+<!-- 														<textbox id="txtBuscarNucleo" /> -->
+<!-- 														<button id="btnBuscarNucleo" label="${labels.microcurriculo.buscar}"/>	 -->
+<!-- 													</div> -->
 																			
 													<listbox id="listaNucleoAcademico" emptyMessage="${labels.microcurriculo.sinRegistro}" height="330px" autopaging="true" />
 												</groupbox>
@@ -217,7 +218,7 @@
 				</borderlayout>
 			</div>
 		</center>
-		<south height="90px" border="none">
+		<south height="90px" border="none" sclass="fondoEncabezado">
 			<div width="100%" align="center">
 				<include id="footerIdx" src="/_sections/footer.zul" />
 			</div>			

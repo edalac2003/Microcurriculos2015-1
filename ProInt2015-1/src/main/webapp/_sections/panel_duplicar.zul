@@ -1,17 +1,26 @@
+
 <zk>
-		<borderlayout id="formaPanelDuplicaMicro" height="558px" apply="${cargarDatosFormas2}">
+		<borderlayout id="formaPanelDuplicaMicro" height="610px" apply="${cargarDatosFormas2}">
 		
 			<north height="100px" border="0">
-				<include id="headerIdx2" src="/_sections/header.zul" />
+				<div width="100%" align="center" sclass="fondoEncabezado">
+					<include id="headerIdx" src="/_sections/header.zul" />	
+				</div>				
 			</north>
+			
+			<west border="none" width="14%">
+				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+			</west>
+			<east width="14%" border="none">
+				<label />
+			</east>
 			
 			<center border="0">
 				<div align="center">
-					<borderlayout height="358px">
-					
+					<borderlayout height="358px">					
 						<north border="0">
 							<div align="center">
-								<toolbar id="tb" sclass="vista" height="45px" width="960px" >
+								<toolbar id="tb" sclass="vista" height="45px" width="100%" >
 									<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
 									<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
 									<toolbarbutton id="tool_close" label="Cerrar" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
@@ -22,10 +31,10 @@
 						<center border="0" apply="${eventosPanelDuplicarMicro}">
 							<div align="center">
 								<div height="10px"/>
-								<panel title="Seleccione Microcurriculo a duplicar" border="normal" width="960px" height="300px">
+								<panel title="Seleccione Microcurriculo a duplicar" border="normal" width="98%" height="300px">
 									<panelchildren>
 										<div height="10px"/>
-										<div align="center" width="940px">
+										<div align="center" width="98%">
 											<toolbar>
 												<label value="Filtrar Busqueda" style="font-size:13px; margin:0 0 0 413px;"/>
 											</toolbar>
@@ -98,13 +107,8 @@
 				</div>
 			</center>
 			
-			<south height="100px" border="0">
-				<div>
-					<div height="10px" />
-					<div>
-						<include id="footerIdx2" src="/_sections/footer.zul" />
-					</div> 							
-				</div>
+			<south border="0" height="80px" sclass="fondoEncabezado">
+				<include id="footerIdx" src="/_sections/footer.zul" />
 			</south>
 		</borderlayout>
 </zk>

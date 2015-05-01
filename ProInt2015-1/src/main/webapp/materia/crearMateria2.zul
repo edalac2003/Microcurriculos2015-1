@@ -4,26 +4,19 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-	<window id="formaCrearMateria" border="0" apply="${crearMateriaCtrl}">
-		<borderlayout height="960px" width="1350px" apply="" >
-			<north height="100px" border="0">
-				<div width="100%" align="center" sclass="fondoEncabezado">
-					<include id="headerIdx" src="/_sections/header.zul" />	
-				</div>				
+	<!-- apply="${crearMateriaCtrl}" -->
+	<window id="formaCrearMateria" border="0" >
+		<borderlayout height="860px" apply="" >
+
+			<north border="0" height="100px">
+				<include id="headerIdx" src="/_sections/header.zul" />
 			</north>
-			
-			<west border="none" width="14%">
-				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
-			</west>
-			<east width="14%" border="none">
-				<label />
-			</east>
-			
-			<center border="none" >
+
+			<center border="0" >
 				<div align="center">
-					<borderlayout height="690px">
+					<borderlayout height="680px">
 						<north border="0">
-							<toolbar id="tb" sclass="vista" height="45px" width="100%">
+							<toolbar id="tb" sclass="vista" height="45px" width="960px">
 								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
 								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new_32.png" />
 								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" />
@@ -33,11 +26,11 @@
 						</north>
 						<center border="none" autoscroll="true" >
 							<div align="center">
-								<separator />
-								<hlayout width="100%">
-									<hbox>
-										<groupbox mold="3d" width="340px" height="600px" closable="false">
-											<caption image="/_img/icons/32x32/materiaBusca.png">
+								<hbox height="10px" />
+								<hlayout width="960px">
+									<hbox spacing="15px">
+										<groupbox mold="3d" width="350px" height="490px" closable="false">
+											<caption image="/_img/icons/32x32/materias.png" height="43px">
 													<label value="Buscar Materia" />
 											</caption>
 
@@ -59,21 +52,22 @@
 											</listbox>
 										</groupbox>
 									</hbox>
-									<hbox width="5px"></hbox>
-									
-									<hbox>
-										<groupbox mold="3d" width="590px" closable="false">
-											<caption image="/_img/icons/32x32/materiaNuevo.png" >
+									<hbox width="5px" />
+								
+									<hbox spacing="15px">
+										<groupbox mold="3d" width="580px" closable="false">
+											<caption image="/_img/icons/32x32/crearMateria.png" >
 												<label id="lblEncabezadoMateria" value="Crear Materia" ></label>
 											</caption>
 
 											<grid>
 												<columns>
 													<column width="25%" />
-													<column width="74%" />
+													<column width="75%" />
 												</columns>
 												
-												<rows>												
+												<rows>
+												
 													<row>
 														<label value="Unidad Academica" sclass="campoobligatorio"></label>
 														<div>
@@ -194,10 +188,10 @@
 													<row id="rowPrerrequisitos">
 														<label></label>
 														<listbox id="listPrerrequisito">
-															<listhead>
-																<listheader width="20%"></listheader>
-																<listheader></listheader>
-															</listhead>
+<!-- 															<listhead> -->
+<!-- 																<listheader width="20%"></listheader> -->
+<!-- 																<listheader></listheader> -->
+<!-- 															</listhead> -->
 														</listbox>
 													</row>
 													
@@ -206,10 +200,10 @@
 														<div>
 															<combobox id="cmbCorrequisito" width="50%"/>
 															<listbox id="listCorrequisito2" visible="false">
-																<listhead>
-																	<listheader width="20%"></listheader>
-																	<listheader></listheader>
-																</listhead>
+<!-- 																<listhead> -->
+<!-- 																	<listheader width="20%"></listheader> -->
+<!-- 																	<listheader></listheader> -->
+<!-- 																</listhead> -->
 															</listbox>
 														</div>
 													</row>
@@ -237,10 +231,8 @@
 				</div>
 			</center>
 
-			<south border="none" height="100px" >
-				<div width="100%" align="center" sclass="fondoEncabezado">
-					<include id="footerIdx" src="/_sections/footer.zul" />
-				</div>				
+			<south border="none">
+				<include id="footerIdx" src="/_sections/footer.zul" />
 			</south>
 		</borderlayout>
 	</window>

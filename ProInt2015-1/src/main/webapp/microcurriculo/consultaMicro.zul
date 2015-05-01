@@ -4,10 +4,18 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 <zk>
 <window id="formaConsultarMicro" border="normal" >	
-	<borderlayout height="950px" >
-		<north border="0" height="100px">
-			<include id="headerIdx" src="/_sections/header.zul" />
+	<borderlayout height="950px" width="1350px">
+		<north border="none" height="100px">
+			<div width="100%" align="center" sclass="fondoEncabezado">
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</div>			
 		</north>
+		<west border="none" width="14%">
+			<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+		</west>
+		<east width="14%" border="none">
+			<label />
+		</east>
 		
 		<center border="0" apply="${consultarMicroCtrl}">
 			<div align="center" >
@@ -15,12 +23,6 @@
 					<north border="0">
 						<include id="listMenu" src="/_sections/toolbar_micro_consulta.zul"/>
 					</north>
-					<west width="180px" border="0">
-						<label></label>
-					</west>
-					<east width="180px" border="0">
-						<label></label>
-					</east>
 				
 					<center autoscroll="true" border="0" >
 						<div id="consultarMicro" align="center">
@@ -28,7 +30,7 @@
 							<separator /> 
 							<separator />
 							<div apply="${cargarDatosFormas}">
-								<tabbox >
+								<tabbox id="tabOpciones" width="99%" height="545px">
 									<tabs style="" >
 										<tab label="Información General" id="infoGeneral"/>
 										<tab label="Información Complementaria" id="infoComplemento"/>
@@ -288,21 +290,14 @@
 								</tabbox>
 							</div>
 						</div>			
-					</center>	
-					<south border="0" height="130px">
-							<div>
-								<div height="20px" />
-								<div>
-									<include id="footerIdx" src="/_sections/footer.zul" />
-								</div> 							
-							</div>
-						</south>
+					</center>						
 				</borderlayout>
 			</div>		
-		</center>
-		
-		<south border="none">
-			
+		</center>		
+		<south height="90px" border="none" sclass="fondoEncabezado">
+			<div width="100%" align="center">
+				<include id="footerIdx" src="/_sections/footer.zul" />
+			</div>			
 		</south>
 	</borderlayout>
 </window>

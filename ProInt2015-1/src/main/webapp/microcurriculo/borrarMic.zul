@@ -6,12 +6,20 @@
 <zk>
 	<window id="formaBorrarMicro" border="0" >
 		<include id="panelDuplicarMicro" src="/_sections/panel_duplicar.zul" visible="false"/>
-		<borderlayout id="blyDuplicarMicro" height="600px" apply="${borrarMicroCtrl}">
+		<borderlayout id="blyDuplicarMicro" height="620px" apply="${borrarMicroCtrl}">
 			
-			<north height="100px" border="0">
-				<include id="headerIdx" src="/_sections/header.zul" />			
+			<north border="none" height="100px">
+				<div width="100%" align="center" sclass="fondoEncabezado">
+					<include id="headerIdx" src="/_sections/header.zul" />
+				</div>			
 			</north>
-			
+			<west border="none" width="14%">
+				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+			</west>
+			<east width="14%" border="none">
+				<label />
+			</east>
+				
 			<center border="0" apply="">
 				<div align="center">
 					<borderlayout height="455px">
@@ -21,12 +29,6 @@
 								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
 							</toolbar>
 						</north>
-						<west width="180px" border="0">
-							<label />
-						</west>
-						<east width="180px" border="0">
-							<label />
-						</east>
 						
 						<center autoscroll="true" border="0">
 							<div>
@@ -95,21 +97,12 @@
 													
 							</div>			
 						</center>
-						
-						<south border="0" height="130px">
-							<div>
-								<div height="20px" />
-								<div>
-									<include id="footerIdx" src="/_sections/footer.zul" />
-								</div> 							
-							</div>
-						</south>
 					</borderlayout>
 				</div>		
 			</center>
 			
-			<south border="0">		
-				<div>  </div>					
+			<south height="90px" border="none" sclass="fondoEncabezado">				
+				<include id="footerIdx" src="/_sections/footer.zul" />				
 			</south>
 		</borderlayout>
 	</window>

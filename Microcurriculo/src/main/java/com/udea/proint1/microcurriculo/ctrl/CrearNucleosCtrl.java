@@ -181,6 +181,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	}
 	
 	private void cargarListaUnidades(){
+//		final Listitem item = new Listitem();
 		try {
 			listadoUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();
 		} catch (ExcepcionesLogica e) {
@@ -985,7 +986,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		switch (indice) {
 		case 0:
 			cargarListaUnidades();
-			txtBuscarUnidad.focus();
+//			txtBuscarUnidad.focus();
 			break;
 		case 1:
 			if(cmbUnidadAcademica.getSelectedIndex() >= 0){

@@ -73,7 +73,7 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 	public static List<TbMicEstado> listaEstados;
 	public static List<TbMicMicrocurriculo> listaMicrocurriculos;
 	
-	public static List<TbMicBiblioxunidad> bibliosxUnidad;
+	public static List<TbMicBiblioxunidad> bibliosxUnidad = new ArrayList<TbMicBiblioxunidad>();
 	public static List<TbMicEvaluacionxmicro> evaluacionesxMicro;
 	public static List<TbMicMicroxestado> microsxEstado;
 	public static List<TbMicObjetivoxmicro> objetivosxMicro;

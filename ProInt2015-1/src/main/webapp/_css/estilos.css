@@ -2,7 +2,7 @@
 
 .estiloceldas{
 	font-size: 9px;
-	padding:0 5px;
+	padding: 0 5px;
 }
 
 .titulos{
@@ -62,7 +62,10 @@
 	background-color: AliceBlue;
 	font-style: normal;
 	padding: 3px;
-	margin: 3
+	margin: 3;
+	border-color: Black;
+	border-style: solid;
+	border-width: thin
 }
 
 .p-vista .z-panel-children {
@@ -103,6 +106,12 @@
 	font-family: Calibri, Tahoma, Arial
 }
 
+.fondoEncabezado{
+	background-color: #004000;
+	border-color: #004000;
+	border-width: medium
+}
+
 /**.z-div, .z-div-label{
 	margin: px;
 	padding: px;
@@ -111,8 +120,3 @@
 	font-family: Arial, Tahoma, Verdana;
 	font-weight: bold
 }**/
-
-/**.z-tabbox {
-	color: Green;
-	font-family: Arial, Tahoma, Verdana
-} **/

@@ -7,9 +7,18 @@
 	<window border="0" width="100%" apply="${listarMateriasCtrl}">
 		<borderlayout height="650px" apply="">
 		
-			<north border="0" height="100px">
-				<include id="headerIdx" src="/_sections/header.zul" />
+			<north height="100px" border="0">
+				<div width="100%" align="center" sclass="fondoEncabezado">
+					<include id="headerIdx" src="/_sections/header.zul" />	
+				</div>				
 			</north>
+			
+			<west border="none" width="14%">
+				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+			</west>
+			<east width="14%" border="none">
+				<label />
+			</east>
 			
 			<center border="0">
 				<div align="center">
@@ -107,11 +116,10 @@
 				</div>
 			</center>
 			
-			<south border="none">
-				<div>
-					<separator />
+			<south border="none" height="100px" >
+				<div width="100%" align="center" sclass="fondoEncabezado">
 					<include id="footerIdx" src="/_sections/footer.zul" />
-				</div>		
+				</div>				
 			</south>	
 		</borderlayout>
 	</window>

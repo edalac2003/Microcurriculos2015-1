@@ -5,7 +5,7 @@
 <zk>	
 	<window id="index" border="0">	
 		<borderlayout height="630px">			
-			<north height="100px" border="0">
+			<north height="100px" border="0" sclass="fondoEncabezado">
 				<include id="headerIdx" src="/_sections/header.zul" />							
 			</north>
 			<east width="180px" border="0">
@@ -18,7 +18,7 @@
 			<center border="0">
 				<div align="center">
 					<hbox align="center" height="90px">
-						<label value="GESTION DE MICROCURRICULOS" sclass="tituloFondo"/>
+						<label value="${labels.materia.titulo}" sclass="tituloFondo"/>
 					</hbox>
 					<div align="center">
 						<vbox>
@@ -27,7 +27,7 @@
 								<vbox width="350px">
 									<a href="/materia/crearMateria.zul" label="Crear Materia" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="Diligencie el formulario para crear Materias." />
+										<label value="${labels.materia.mensajeCrear}" />
 									</div>	
 								</vbox>								
 							</hbox>
@@ -36,8 +36,7 @@
 								<vbox width="350px">
 									<a href="/materia/listarMaterias.zul" label="Listar Materias" sclass="nombreSeccion" />	
 									<div sclass="contenidoSeccion">
-										<label value="Liste las Materias basándose en diferentes criterios de busqueda; 
-										desde este módulo puede tener información detallada de éstas." />
+										<label value="${labels.materia.mensajeListar}" />
 									</div>	
 								</vbox>	
 							</hbox>							
@@ -46,7 +45,7 @@
 								<vbox width="350px">
 									<a href="/index.zul" label="Cerrar Materias" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
-										<label value="Regrese al Menú Principal." />
+										<label value="${labels.microcurriculo.mensajeCerrar}" />
 									</div>	
 								</vbox>		
 							</hbox>
@@ -55,7 +54,7 @@
 				</div>
 			</center>
 			
-			<south border="0" height="100px">		
+			<south border="0" height="100px" sclass="fondoEncabezado">		
 				<div> <include id="footerIdx" src="/_sections/footer.zul" /> </div>					
 			</south>
 		</borderlayout>
