@@ -1,31 +1,26 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Cell;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
@@ -454,11 +449,13 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				txtNombreUnidadAcademica.setText("");
 				txtNombreUnidadAcademica.focus();				
 			}else{
-				Messagebox.show("El Nombre de la Unidad Academica ya Existe en uno de los Listados o el Contenido está Vacio.  \nPor favor verifique el nombre.");
+				Messagebox.show("El Nombre de la Unidad Academica ya Existe en uno de los Listados o el Contenido está Vacio.  \nPor favor verifique el nombre.",
+						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 				txtNombreDependenciaAcademica.focus();
 			}							
 		}	else {
-			Messagebox.show("El Código de la Unidad Academica ya Existe en uno de los Listados o el Contenido está Vacio.  \nPor favor verifique el Código.");
+				Messagebox.show("El Código de la Unidad Academica ya Existe en uno de los Listados o el Contenido está Vacio.  \nPor favor verifique el Código.",
+						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 			txtIdDependencia.focus();
 		}			
 	}
@@ -489,10 +486,12 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				txtNombreDependenciaAcademica.setText("");
 				txtIdDependencia.focus();
 			} else {
-				Messagebox.show("El Nombre de la Dependencia Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+				Messagebox.show("El Nombre de la Dependencia Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre.",
+						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 			}
-		} else {
-			Messagebox.show("El Codigo de la Dependencia Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+		} else {			
+			Messagebox.show("El Codigo de la Dependencia Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre..",
+					"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 		}
 	}
 	
@@ -523,10 +522,12 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				txtNombreNucleo.setText("");
 				txtIdNucleo.focus();
 			} else {
-				Messagebox.show("El Nombre del Nucleo Academico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+				Messagebox.show("El Nombre del Nucleo Academico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.",
+						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 			}
 		} else {
-			Messagebox.show("El Codigo del Nucleo Academico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+			Messagebox.show("El Codigo del Nucleo Academico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.",
+					"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 		}		
 	}
 	
@@ -540,10 +541,12 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				txtNuevoNombreUnidadAcademica.setText("");
 				txtBuscarUnidad.focus();
 			}else{
-				Messagebox.show("El Nombre de la Unidad Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+				Messagebox.show("El Nombre de la Unidad Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre.",
+						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 			}	
 		} else{
-			Messagebox.show("Para cambiar el nombre de una Unidad Académica, primero debe seleccionar un elemento de la Lista.\n Operación Anulada.","Sin Elemento",Messagebox.OK,Messagebox.ON_ABORT);
+			Messagebox.show("Para cambiar el nombre de una Unidad Académica, primero debe seleccionar un elemento de la Lista.\n Operación Anulada.",
+					"SIN SELECCION",Messagebox.OK,Messagebox.ON_ABORT);
 		}							
 	}
 	
@@ -559,11 +562,13 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				txtUnidadAcademica.setText("");
 				txtBuscarDependencia.focus();
 			} else{
-				Messagebox.show("El Nombre de la Dependencia Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+				Messagebox.show("El Nombre de la Dependencia Academica ya Existe en uno de los Listados.  \nPor favor verifique el nombre.",
+						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 			}
 	
 		}else {
-			Messagebox.show("Para cambiar el nombre de una Dependencia Académica, primero debe seleccionar un elemento de la Lista.\n Operación Anulada.","Sin Elemento",Messagebox.OK,Messagebox.ON_ABORT);
+			Messagebox.show("Para cambiar el nombre de una Dependencia Académica, primero debe seleccionar un elemento de la Lista.\n Operación Anulada.",
+					"SIN SELECCION",Messagebox.OK,Messagebox.ON_ABORT);
 		}
 	}
 	
@@ -577,10 +582,12 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				txtDependencia.setText("");
 				txtBuscarNucleo.focus();
 			} else {
-				Messagebox.show("El Nombre del Nucleo Académico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.");
+				Messagebox.show("El Nombre del Nucleo Académico ya Existe en uno de los Listados.  \nPor favor verifique el nombre.",
+						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
 			}
 		} else {
-			Messagebox.show("Para cambiar el nombre de un Nucleo Académico, primero debe seleccionar un elemento de la Lista.\n Operación Anulada.","Sin Elemento",Messagebox.OK,Messagebox.ON_ABORT);
+			Messagebox.show("Para cambiar el nombre de un Nucleo Académico, primero debe seleccionar un elemento de la Lista.\n Operación Anulada.",
+					"SIN SELECCION",Messagebox.OK,Messagebox.EXCLAMATION);
 		}
 		
 	}
@@ -964,8 +971,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				listadoNuevoNucleo = null;
 				listadoNucleo = null;
 				recargarListaNucleo(0);				
-			}
-			Messagebox.show("Registros Guardados Satisfactoriamente.");
+			}			
+			Messagebox.show("Registros Guardados Satisfactoriamente.", "ALMACENADO",Messagebox.OK,Messagebox.EXCLAMATION);
 		}
 			
 	}

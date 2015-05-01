@@ -42,7 +42,7 @@
 								</vbox>	
 							</hbox>							
 							<hbox align="center" height="95px">
-								<a href="/index.zul" image="/_img/icons/128x128/shutdown.png" />
+								<a href="/index.zul" image="/_img/icons/128x128/logout_70.png" />
 								<vbox width="350px">
 									<a href="/index.zul" label="Cerrar Materias" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">

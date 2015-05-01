@@ -50,7 +50,7 @@
 <!-- 								</vbox>		 -->
 <!-- 							</hbox> -->
 							<hbox align="center" height="95px">
-								<a href="/index.zul" image="/_img/icons/128x128/shutdown.png" width="75px"/>
+								<a href="/index.zul" image="/_img/icons/128x128/logout_70.png" width="75px"/>
 								<vbox width="350px">
 									<a href="/index.zul" label="${labels.microcurriculo.tituloCerrar}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">

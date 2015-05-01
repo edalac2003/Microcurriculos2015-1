@@ -4,26 +4,27 @@
 
 <zk>
 <window border="none">
-	<borderlayout height="800px">
+	<borderlayout height="800px" width="100%">
 		<north border="none" height="100px">
-			<include id="headerIdx" src="/_sections/header.zul" />
+			<div width="100%" align="center">
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</div>			
 		</north>
-		<east width="180px" border="none">
-			<label />
-		</east>
-		<west width="180px" border="none">
-			<label />
-		</west>
+		
 		<center border="none">
-			<div id="formaCrearNucleo" align="center" >
-				<borderlayout height="650px" apply="${crearNucleosCtrl}">
+			<div id="formaCrearNucleo" align="center" width="100%" >
+				<borderlayout height="650px" apply="${crearNucleosCtrl}" width="100%">
 					<north border="none">
-						<div>
-							<include id="listMenu" src="/_sections/toolbar-nucleo.zul"/>
-						</div>						
+						<include id="listMenu" src="/_sections/toolbar-nucleo.zul"/>						
 					</north>
+					<east width="180px" border="none">
+						<label></label>
+					</east>
+					<west width="180px" border="none">
+						<label></label>						
+					</west>
 					<center border="none">
-						<div>
+						<div width="100%" align="center">
 						<separator />
 							<tabbox id="tabOpciones" width="960px" height="545px">
 								<tabs>
@@ -58,7 +59,8 @@
 														
 													</groupbox>
 													<div height="15px" />
-													<groupbox mold="3d" width="600px" height="365px" closable="false">
+<!-- 													height="365px"  -->
+													<groupbox mold="3d" width="600px" hflex="1" closable="false">
 														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addUnidadAcademica}" />
 														<hbox height="40px" align="center" width="100%">
 															<label value="${labels.microcurriculo.id}"/>
@@ -216,7 +218,9 @@
 			</div>
 		</center>
 		<south height="90px" border="none">
-			<include id="footerIdx" src="/_sections/footer.zul" />
+			<div width="100%" align="center">
+				<include id="footerIdx" src="/_sections/footer.zul" />
+			</div>			
 		</south>
 	</borderlayout>
 </window>

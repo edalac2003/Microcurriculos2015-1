@@ -924,7 +924,6 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	}
 	
 	public void listadoInicial(){
-		System.out.println("ingresó");
 		List<TbMicMicrocurriculo> microcurriculos = null;
 		
 		try{
@@ -949,7 +948,6 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
-//		System.out.println(comp.getParent().getId().toString());
 		if (comp.getParent().getId().equals("formaListarMicro")){
 			inicializarFormaListado();
 			cargarMaterias("");
