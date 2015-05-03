@@ -11,8 +11,11 @@ import java.util.Set;
  */
 public class TbAdmUnidadAcademica implements java.io.Serializable {
 
+	
 	private String vrIdunidad;
 	private String vrNombre;
+	private TbAdmPersona vrResponsable;
+	private String vrAlias;
 	private String vrModusuario;
 	private Date dtModfecha;
 	private Set tbAdmDependencias = new HashSet(0);
@@ -32,6 +35,18 @@ public class TbAdmUnidadAcademica implements java.io.Serializable {
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
+	
+	public TbAdmUnidadAcademica(String vrIdunidad, String vrNombre,
+			TbAdmPersona vrResponsable, String vrAlias, String vrModusuario,
+			Date dtModfecha) {
+		super();
+		this.vrIdunidad = vrIdunidad;
+		this.vrNombre = vrNombre;
+		this.vrResponsable = vrResponsable;
+		this.vrAlias = vrAlias;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
+	}
 
 	public String getVrIdunidad() {
 		return this.vrIdunidad;
@@ -47,6 +62,22 @@ public class TbAdmUnidadAcademica implements java.io.Serializable {
 
 	public void setVrNombre(String vrNombre) {
 		this.vrNombre = vrNombre;
+	}
+
+	public TbAdmPersona getVrResponsable() {
+		return vrResponsable;
+	}
+
+	public void setVrResponsable(TbAdmPersona vrResponsable) {
+		this.vrResponsable = vrResponsable;
+	}
+
+	public String getVrAlias() {
+		return vrAlias;
+	}
+
+	public void setVrAlias(String vrAlias) {
+		this.vrAlias = vrAlias;
 	}
 
 	public String getVrModusuario() {

@@ -14,6 +14,12 @@
         <property name="vrNombre" type="string">
             <column name="VR_NOMBRE" length="128" />
         </property>
+        <many-to-one name="vrResponsable" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
+            <column name="VR_RESPONSABLE" length="15" not-null="true" />
+        </many-to-one>
+        <property name="vrAlias" type="String">
+        	<column name="VR_ALIAS" length="32" />
+        </property>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>

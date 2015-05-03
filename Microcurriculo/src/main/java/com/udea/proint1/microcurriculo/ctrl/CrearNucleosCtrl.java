@@ -51,6 +51,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	Listbox listaNuevasDependencias;
 	Listbox listaNucleoAcademico;
 	Listbox listaNuevosNucleos;
+	Listbox listaAreaAcademica;
+	Listbox listaNuevasAreas;
 	
 	Textbox txtNombreUnidadAcademica;
 	Textbox txtNuevoNombreUnidadAcademica;
@@ -61,6 +63,9 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	Textbox txtDependencia;
 	Textbox txtNombreNucleo;
 	Textbox txtNuevoNucleoAcademico;
+	Textbox txtNucleo;
+	Textbox txtNombreArea;
+	Textbox txtNuevoAreaAcademica;
 		
 	Textbox txtNombreDependenciaAcademica;
 	Textbox txtNuevoNombreDependenciaAcademica;
@@ -69,6 +74,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	Textbox txtPreIdDependencia;
 	Textbox txtPreIdNucleo;
 	Textbox txtIdNucleo;
+	Textbox txtPreIdArea;
+	Textbox txtIdArea;
 	
 	Button btnCambiarNombreUnidad;
 	Button btnAdicionarNombreUnidad;
@@ -77,14 +84,22 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	Button btnBuscarDependencia;
 	Button btnCambiarNombreNucleo;
 	Button btnAdicionarNombreNucleo;
+	Button btnCambiarNombreArea;
+	Button btnAdicionarNombreArea;
 	
 	
 	Combobox cmbUnidadAcademica;
 	Combobox cmbUnidadAcademica2;
 	Combobox cmbUnidadAcademica3;
 	Combobox cmbUnidadAcademica4;
+	Combobox cmbUnidadAcademica5;
+	Combobox cmbUnidadAcademica6;
 	Combobox cmbDependencia;
 	Combobox cmbDependencia2;
+	Combobox cmbDependencia3;
+	Combobox cmbDependencia4;
+	Combobox cmbNucleo;
+	Combobox cmbNucleo2;
 	
 	Toolbarbutton tool_save;
 	
@@ -195,6 +210,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		cmbUnidadAcademica2.getItems().clear();
 		cmbUnidadAcademica3.getItems().clear();
 		cmbUnidadAcademica4.getItems().clear();
+		cmbUnidadAcademica5.getItems().clear();
+		cmbUnidadAcademica6.getItems().clear();
 		
 		if(listadoUnidadAcademica != null){
 			for(TbAdmUnidadAcademica unidad : listadoUnidadAcademica){
@@ -203,6 +220,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				cmbUnidadAcademica2.appendItem(unidad.getVrNombre());
 				cmbUnidadAcademica3.appendItem(unidad.getVrNombre());
 				cmbUnidadAcademica4.appendItem(unidad.getVrNombre());
+				cmbUnidadAcademica5.appendItem(unidad.getVrNombre());
+				cmbUnidadAcademica6.appendItem(unidad.getVrNombre());
 			}
 		}		
 	}
@@ -213,6 +232,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		cmbUnidadAcademica2.getItems().clear();
 		cmbUnidadAcademica3.getItems().clear();
 		cmbUnidadAcademica4.getItems().clear();
+		cmbUnidadAcademica5.getItems().clear();
+		cmbUnidadAcademica6.getItems().clear();
 		
 		if (llamado == 0){
 			try {
@@ -232,6 +253,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				cmbUnidadAcademica2.appendItem(unidad.getVrNombre());
 				cmbUnidadAcademica3.appendItem(unidad.getVrNombre());
 				cmbUnidadAcademica4.appendItem(unidad.getVrNombre());
+				cmbUnidadAcademica5.appendItem(unidad.getVrNombre());
+				cmbUnidadAcademica6.appendItem(unidad.getVrNombre());
 			}
 		}
 	}
@@ -270,18 +293,20 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+		}		
 		
 		listaDependenciaAcademica.getItems().clear();
 		cmbDependencia.getItems().clear();
 		cmbDependencia2.getItems().clear();
-		
+		cmbDependencia3.getItems().clear();
+		cmbDependencia4.getItems().clear();
 		if (listadoDependencia != null){
 			for(TbAdmDependencia item : listadoDependencia){
 				listaDependenciaAcademica.appendItem(item.getVrIddependencia()+" - "+item.getVrNombre(), item.getVrIddependencia());
 				cmbDependencia.appendItem(item.getVrNombre());
 				cmbDependencia2.appendItem(item.getVrNombre());
+				cmbDependencia3.appendItem(item.getVrNombre());
+				cmbDependencia4.appendItem(item.getVrNombre());
 			}
 		}
 	}
@@ -339,6 +364,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		if (listadoNucleo != null){
 			for (TbAdmNucleo item : listadoNucleo){
 				listaNucleoAcademico.appendItem(item.getVrIdnucleo()+" - "+item.getVrNombre(), item.getVrIdnucleo());
+				cmbNucleo.appendItem(item.getVrNombre());
+				cmbNucleo2.appendItem(item.getVrNombre());
 			}
 		}		
 	}
@@ -1010,6 +1037,9 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				cargarNucleos();
 			}
 			cmbUnidadAcademica4.focus();
+			break;
+		case 3:
+			
 			break;
 		default:
 			break;

@@ -32,6 +32,7 @@
 									<tab label="${labels.microcurriculo.unidadAcademica}" />
 									<tab label="${labels.microcurriculo.dependenciaAcademica}" />
 									<tab label="${labels.microcurriculo.nucleoAcademico}" />
+									<tab label="${labels.microcurriculo.areaAcademica}" />
 								</tabs>
 								<tabpanels>
 <!-- 									Panel de Unidades Academicas -->
@@ -160,7 +161,7 @@
 <!-- 														<button id="btnBuscarNucleo" label="${labels.microcurriculo.buscar}"/>	 -->
 <!-- 													</div> -->
 																			
-													<listbox id="listaNucleoAcademico" emptyMessage="${labels.microcurriculo.sinRegistro}" height="330px" autopaging="true" />
+													<listbox id="listaNucleoAcademico" emptyMessage="${labels.microcurriculo.sinRegistro}" height="360px" autopaging="true" />
 												</groupbox>
 											</hbox>
 											<hbox width="5px" />
@@ -203,6 +204,84 @@
 															
 														<div>
 															<listbox id="listaNuevosNucleos" height="260px" />
+														</div>
+													</groupbox>	
+												</vbox>
+											</hbox>
+										</hlayout>										
+									</tabpanel>
+									
+									<!-- PANEL DE AREAS ACADEMICAS -->
+									<tabpanel>
+										<hlayout>
+											<hbox>
+												<groupbox mold="3d" width="330px" closable="false">
+													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.areaAcademica}" />
+													<div height="35px">
+														<label value="${labels.microcurriculo.u_academica}" />
+														<combobox id="cmbUnidadAcademica5" width="220px" />
+													</div>
+													<div height="35px">
+														<label value="${labels.microcurriculo.dependencia}" />
+														<combobox id="cmbDependencia3" width="220px" />
+													</div>
+													<div height="35px">
+														<label value="${labels.microcurriculo.nucleo}" />
+														<combobox id="cmbNucleo"></combobox>
+													</div>
+<!-- 													<div height="35px"> -->
+<!-- 														<label value="${labels.microcurriculo.buscar}" /> -->
+<!-- 														<textbox id="txtBuscarNucleo" /> -->
+<!-- 														<button id="btnBuscarNucleo" label="${labels.microcurriculo.buscar}"/>	 -->
+<!-- 													</div> -->																			
+													<listbox id="listaAreaAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="330px" autopaging="true" />
+												</groupbox>
+											</hbox>
+											<hbox width="5px" />
+											<hbox>
+												<vbox>
+													<groupbox mold="3d" width="600px" height="90px" closable="false">
+														<caption image="/_img/icons/32x32/pencil_32.png" label="${labels.microcurriculo.editAreaAcademica}" />
+														<hbox height="35px" align="center">
+															
+															<textbox id="txtNucleo" width="150px" disabled="true"/>
+<!-- 															<label value="${labels.microcurriculo.Dependencia}" /> -->
+															<label value="${labels.microcurriculo.area}" />
+															<textbox id="txtNuevaAreaAcademica" width="210px"/>
+															<button id="btnCambiarNombreArea" label="${labels.microcurriculo.modificar}" />
+														</hbox>
+														
+													</groupbox>
+													<div height="5px" />
+													<groupbox mold="3d" width="600px" height="390px" closable="false">
+														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addAreaAcademica}" />
+															
+														<hbox height="30px" align="center" width="100%">															
+															<div>
+																<label value="${labels.microcurriculo.u_academica}" />
+																<combobox id="cmbUnidadAcademica6" width="200px"/>
+																<label value="${labels.microcurriculo.dependencia}" />
+																<combobox id="cmbDependencia4" width="200px"/>																
+															</div>															
+														</hbox>
+														<hbox height="30px" align="center" width="100%">
+															<div>
+																<label value="${labels.microcurriculo.nucleo}" />
+																<combobox id="cmbNucleo2" width="200px"/>
+															</div>
+														</hbox>
+														<hbox height="30px" align="center" width="100%">
+															
+															<label value="${labels.microcurriculo.id}"/>
+															<textbox id="txtPreIdArea" width="45px" disabled="true"/>
+															<textbox id="txtIdArea" width="100px" />
+															<label value="${labels.microcurriculo.area}" />
+															<textbox id="txtNombreArea" width="250px"/>
+															<button id="btnAdicionarNombreArea" label="${labels.microcurriculo.add}" />
+														</hbox>
+														<separator />
+														<div>
+															<listbox id="listaNuevasAreas" height="230px" />
 														</div>
 													</groupbox>	
 												</vbox>

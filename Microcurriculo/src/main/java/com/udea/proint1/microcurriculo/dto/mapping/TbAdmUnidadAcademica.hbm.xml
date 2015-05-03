@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica" table="TB_ADM_UNIDAD_ACADEMICA">
         <id name="vrIdunidad" type="string">
-            <column name="VR_IDUNIDAD" length="2" />
+            <column name="VR_IDUNIDAD" length="2" not-null="true"/>
             <generator class="assigned" />
         </id>
         <property name="vrNombre" type="string">
@@ -13,6 +13,12 @@
         </property>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
+        </property>
+        <many-to-one name="vrResponsable" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
+            <column name="VR_RESPONSABLE" length="15" not-null="true" />
+        </many-to-one>
+        <property name="vrAlias" type="string">
+            <column name="VR_ALIAS" length="32" />
         </property>
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
