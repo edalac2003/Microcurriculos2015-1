@@ -13,6 +13,7 @@ public class TbAdmMateria implements java.io.Serializable {
 
 	private String vrIdmateria;
 	private TbAdmNucleo tbAdmNucleo;
+	private TbAdmArea tbAdmArea;
 	private String vrNombre;
 	private int nbSemestre;
 	private int nbCreditos;
@@ -22,6 +23,7 @@ public class TbAdmMateria implements java.io.Serializable {
 	private int nbHt;
 	private int nbHp;
 	private int nbHtp;
+	private String vrAlias;
 	private String vrModusuario;
 	private Date dtModfecha;
 	private int blEstado;
@@ -40,6 +42,31 @@ public class TbAdmMateria implements java.io.Serializable {
 		this.vrIdmateria = vrIdmateria;
 		this.tbAdmNucleo = tbAdmNucleo;
 		this.nbSemestre = nbSemestre;
+	}
+
+
+	public TbAdmMateria(String vrIdmateria, TbAdmNucleo tbAdmNucleo,
+			TbAdmArea tbAdmArea, String vrNombre, int nbSemestre,
+			int nbCreditos, int blHabilitable, int blValidable,
+			int blClasificable, int nbHt, int nbHp, int nbHtp, String vrAlias,
+			String vrModusuario, Date dtModfecha, int blEstado) {
+		super();
+		this.vrIdmateria = vrIdmateria;
+		this.tbAdmNucleo = tbAdmNucleo;
+		this.tbAdmArea = tbAdmArea;
+		this.vrNombre = vrNombre;
+		this.nbSemestre = nbSemestre;
+		this.nbCreditos = nbCreditos;
+		this.blHabilitable = blHabilitable;
+		this.blValidable = blValidable;
+		this.blClasificable = blClasificable;
+		this.nbHt = nbHt;
+		this.nbHp = nbHp;
+		this.nbHtp = nbHtp;
+		this.vrAlias = vrAlias;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
+		this.blEstado = blEstado;
 	}
 
 	public TbAdmMateria(String vrIdmateria, TbAdmNucleo tbAdmNucleo,
@@ -161,6 +188,8 @@ public class TbAdmMateria implements java.io.Serializable {
 	public void setNbHtp(int nbHtp) {
 		this.nbHtp = nbHtp;
 	}
+	
+	
 
 	public String getVrModusuario() {
 		return this.vrModusuario;
@@ -184,6 +213,22 @@ public class TbAdmMateria implements java.io.Serializable {
 
 	public void setBlEstado(int blEstado) {
 		this.blEstado = blEstado;
+	}
+	
+	public TbAdmArea getTbAdmArea() {
+		return tbAdmArea;
+	}
+
+	public void setTbAdmArea(TbAdmArea tbAdmArea) {
+		this.tbAdmArea = tbAdmArea;
+	}
+	
+	public String getVrAlias() {
+		return vrAlias;
+	}
+
+	public void setVrAlias(String vrAlias) {
+		this.vrAlias = vrAlias;
 	}
 
 	public Set getTbMicMicrocurriculo() {

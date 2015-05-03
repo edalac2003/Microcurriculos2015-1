@@ -11,7 +11,6 @@ import java.util.Set;
  */
 public class TbAdmUnidadAcademica implements java.io.Serializable {
 
-	
 	private String vrIdunidad;
 	private String vrNombre;
 	private TbAdmPersona vrResponsable;
@@ -35,6 +34,7 @@ public class TbAdmUnidadAcademica implements java.io.Serializable {
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 	}
+	
 	
 	public TbAdmUnidadAcademica(String vrIdunidad, String vrNombre,
 			TbAdmPersona vrResponsable, String vrAlias, String vrModusuario,

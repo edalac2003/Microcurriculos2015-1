@@ -110,7 +110,7 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 	@Override
 	public List<TbAdmUnidadAcademica> listarUnidades() throws ExcepcionesDAO{
 		Session session = null;
-        List<TbAdmUnidadAcademica> unidadesAcademicas = new ArrayList<TbAdmUnidadAcademica>();
+        List<TbAdmUnidadAcademica> unidadesAcademicas = null;
         
 		try {
 			session = getSession();
@@ -120,8 +120,7 @@ public class UnidadAcademicaDAOHibernate extends HibernateDaoSupport implements 
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
 			expDAO.setMsjUsuario("Error al intentar listar Unidades Academica");
 			expDAO.setMsjTecnico(e.getMessage());
-			expDAO.setOrigen(e);
-			
+			expDAO.setOrigen(e);			
 			throw expDAO;
 		} finally{
 			session.close();

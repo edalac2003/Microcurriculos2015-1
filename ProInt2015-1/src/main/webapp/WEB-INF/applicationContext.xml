@@ -38,6 +38,7 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="mappingResources">
 			<list>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmArea.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudad.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisito.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamento.hbm.xml</value>
@@ -72,8 +73,6 @@
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActaxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActividadxmicro.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmAuditoria.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTabla.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
 			</list>
 		</property>
@@ -95,9 +94,7 @@
 		
 		
 		<!-- SE CREAN LOS BEANS CORRESPONDIENTES A LOS DAO's -->
-		
-		
-		<bean id="auditoriaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.AuditoriaDAOHibernate">
+		<bean id="areaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.AreaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
@@ -142,10 +139,6 @@
         </bean>
         
         <bean id="semestreDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        
-        <bean id="tablaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TablaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
@@ -255,12 +248,12 @@
 
 
 		<!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LA LOGICA -->
-		
-		<bean id="auditoriaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.AuditoriaNGCImpl">
-        	<property name="auditoriaDao" ref="auditoriaDao" />
+		 
+        <bean id="areaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.AreaNGCImpl">
+        	<property name="areaDao" ref="areaDao" />
         </bean>
         
-         <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl">
+        <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl">
         	<property name="paisDao" ref="paisDao" />
         </bean>
         
@@ -312,10 +305,6 @@
         
         <bean id="semestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
         	<property name="semestreDao" ref="semestreDao" />
-        </bean>
-        
-        <bean id="tablaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TablaNGCImpl">
-        	<property name="tablaDao" ref="tablaDao" />
         </bean>
         
         <bean id="tipoIdentificacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TipoIdentificacionNGCImpl">

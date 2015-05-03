@@ -17,6 +17,7 @@ public class TbAdmArea {
 	private Set tbAdmMateriases = new HashSet(0);
 	
 	public TbAdmArea() {
+		super();
 	}
 
 	public TbAdmArea(String vrIdArea, String vrNombre, TbAdmNucleo tbAdmNucleo,

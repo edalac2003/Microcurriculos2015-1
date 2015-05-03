@@ -9,7 +9,7 @@
             <generator class="assigned" />
         </id>
         <many-to-one name="tbAdmNucleo" class="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" fetch="join" lazy="false">
-            <column name="VR_DEPENDENCIA" length="7" not-null="true" />
+            <column name="VR_NUCLEO" length="7" not-null="false" />
         </many-to-one>
         <property name="vrNombre" type="string">
             <column name="VR_NOMBRE" length="128" />

@@ -4,7 +4,7 @@
 
 <zk>
 <window border="none">
-	<borderlayout height="820px" width="1350px">
+	<borderlayout height="850px" width="1350px">
 		<north border="none" height="100px">
 			<div width="100%" align="center" sclass="fondoEncabezado">
 				<include id="headerIdx" src="/_sections/header.zul" />
@@ -17,7 +17,7 @@
 			<label />
 		</east>
 		
-		<center border="normal" >
+		<center border="none" >
 			<div id="formaCrearNucleo" align="center" width="100%">
 				<borderlayout height="650px" apply="${crearNucleosCtrl}" width="100%">
 					<north border="none">
@@ -27,7 +27,7 @@
 					<center border="none">
 						<div width="100%" align="center">
 						<div height="10px"></div>
-							<tabbox id="tabOpciones" width="99%" height="545px">
+							<tabbox id="tabOpciones" width="99%" height="590px">
 								<tabs>
 									<tab label="${labels.microcurriculo.unidadAcademica}" />
 									<tab label="${labels.microcurriculo.dependenciaAcademica}" />
@@ -35,17 +35,21 @@
 									<tab label="${labels.microcurriculo.areaAcademica}" />
 								</tabs>
 								<tabpanels>
-<!-- 									Panel de Unidades Academicas -->
+<!-- 								Panel de Unidades Academicas -->
 									<tabpanel>
-										<hlayout>
+										<div height="10px" />
+										<hlayout height="550px">
 											<hbox>
-												<groupbox mold="3d" width="310px" closable="false">
+												<groupbox mold="3d" width="310px" height="520px" closable="false">
 													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.u_academica}" />
 <!-- 													<hbox align="center" height="40px"> -->
 <!-- 														<label value="${labels.microcurriculo.buscar}" /> -->
 <!-- 														<textbox id="txtBuscarUnidad" />														 -->
 <!-- 													</hbox>										 -->
-													<listbox id="listaUnidadAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="400px" autopaging="true" />
+													<div align="center">
+													<listbox id="listaUnidadAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="450px" autopaging="true" width="98%"/>
+													</div>
+													
 												</groupbox>
 											</hbox>
 											<hbox width="5px" />
@@ -57,23 +61,27 @@
 															<label value="${labels.microcurriculo.u_academica}" />
 															<textbox id="txtNuevoNombreUnidadAcademica" width="300px"/>
 															<button id="btnCambiarNombreUnidad" label="${labels.microcurriculo.modificar}" />
-														</hbox>
-														
+														</hbox>														
 													</groupbox>
-													<div height="15px" />
-<!-- 													height="365px"  -->
-													<groupbox mold="3d" width="500px" hflex="1" closable="false">
+													<div height="25px" />
+													
+													<groupbox mold="3d" height="395px" width="500px" hflex="1" closable="false">
 														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addUnidadAcademica}" />
-														<hbox height="40px" align="center" width="100%">
+														<hbox height="35px" align="center" width="100%">
 															<label value="${labels.microcurriculo.id}"/>
 															<textbox id="txtIdUnidadAcademica" width="100px"/>
 															<label value="${labels.microcurriculo.u_academica}" />
 															<textbox id="txtNombreUnidadAcademica" width="250px"/>
+															
+														</hbox>
+														<hbox align="center" height="35px" width="100%">
+															<label value="${labels.microcurriculo.jefeUnidad}" />
+															<combobox id="cmbResponsableUnidad" width="300px"/>
 															<button id="btnAdicionarNombreUnidad" label="${labels.microcurriculo.add}" />
 														</hbox>
-														
-														<div>
-															<listbox id="listaNuevasUnidades" height="280px" />
+														<separator />
+														<div align="center">
+															<listbox id="listaNuevasUnidades" height="270px" width="98%"/>
 														</div>
 													</groupbox>	
 												</vbox>
@@ -83,9 +91,10 @@
 									
 <!-- 									Panel de Dependencias Academicas -->
 									<tabpanel>
-										<hlayout>
+										<div height="10px" />
+										<hlayout height="550px">
 											<hbox>
-												<groupbox mold="3d" width="330px" closable="false">
+											<groupbox mold="3d" width="330px" height="530px" closable="false">
 													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.dependenciaAcademica}" />
 													<div height="35px">
 														<label value="${labels.microcurriculo.u_academica}" />
@@ -96,8 +105,9 @@
 <!-- 														<textbox id="txtBuscarDependencia" /> -->
 <!-- 														<button id="btnBuscarDependencia" label="${labels.microcurriculo.buscar}"/>	 -->
 <!-- 													</div> -->
-																					
-													<listbox id="listaDependenciaAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="370px" autopaging="true" />
+													<div align="center">
+														<listbox id="listaDependenciaAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="430px" autopaging="true" width="98%"/>
+													</div>
 												</groupbox>
 											</hbox>
 											<hbox width="5px" />
@@ -114,26 +124,26 @@
 														
 													</groupbox>
 													<div height="5px" />
-													<groupbox mold="3d" width="600px" height="390px" closable="false">
+													<groupbox mold="3d" width="600px" height="425px" closable="false">
 														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addDependenciaAcademica}" />
 															
-														<hbox height="30px" align="center" width="100%">															
-															<div>
-																<label value="${labels.microcurriculo.u_academica}" />
-																<combobox id="cmbUnidadAcademica2" width="250px"/>
-															</div>
-														</hbox>
-														<hbox height="40px" align="center" width="100%">
+														<hbox height="30px" align="center" width="100%">
+															<label value="${labels.microcurriculo.u_academica}" />
+															<combobox id="cmbUnidadAcademica2" width="200px"/>
 															<label value="${labels.microcurriculo.id}"/>
 															<textbox id="txtPreIdDependencia" width="40px" disabled="true"/>
 															<textbox id="txtIdDependencia" width="100px" />
-															<label value="${labels.microcurriculo.dependencia}" />
-															<textbox id="txtNombreDependenciaAcademica" width="210px"/>
 															<button id="btnAdicionarNombreDependencia" label="${labels.microcurriculo.add}" />
 														</hbox>
+														<hbox height="40px" align="center" width="100%">															
+															<label value="${labels.microcurriculo.dependencia}" />
+															<textbox id="txtNombreDependenciaAcademica" width="150px"/>
+															<label value="${labels.microcurriculo.jefeDependencia}" />
+															<combobox id="cmbResponsableDependencia" />
 															
-														<div>
-															<listbox id="listaNuevasDependencias" height="260px" />
+														</hbox>															
+														<div align="center">
+															<listbox id="listaNuevasDependencias" height="290px" width="98%" />
 														</div>
 													</groupbox>	
 												</vbox>
@@ -141,11 +151,12 @@
 										</hlayout>
 									</tabpanel>
 									
-<!-- 									Panel de Nucleos -->
+<!-- 								Panel de Nucleos -->
 									<tabpanel>
-										<hlayout>
+										<div height="10px" />
+										<hlayout height="550px">
 											<hbox>
-												<groupbox mold="3d" width="330px" closable="false">
+												<groupbox mold="3d" width="330px" height="530px" closable="false">
 													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.nucleoAcademico}" />
 													<div height="35px">
 														<label value="${labels.microcurriculo.u_academica}" />
@@ -160,8 +171,10 @@
 <!-- 														<textbox id="txtBuscarNucleo" /> -->
 <!-- 														<button id="btnBuscarNucleo" label="${labels.microcurriculo.buscar}"/>	 -->
 <!-- 													</div> -->
-																			
-													<listbox id="listaNucleoAcademico" emptyMessage="${labels.microcurriculo.sinRegistro}" height="360px" autopaging="true" />
+													<div align="center">
+														<listbox id="listaNucleoAcademico" emptyMessage="${labels.microcurriculo.sinRegistro}" height="395px" width="98%" autopaging="true" />
+													</div>						
+													
 												</groupbox>
 											</hbox>
 											<hbox width="5px" />
@@ -180,9 +193,8 @@
 														
 													</groupbox>
 													<div height="5px" />
-													<groupbox mold="3d" width="600px" height="390px" closable="false">
-														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addNucleoAcademico}" />
-															
+													<groupbox mold="3d" width="600px" height="425px" closable="false">
+														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addNucleoAcademico}" />															
 														<hbox height="30px" align="center" width="100%">															
 															<div>
 																<label value="${labels.microcurriculo.u_academica}" />
@@ -192,18 +204,20 @@
 															</div>
 														</hbox>
 														
-														<hbox height="40px" align="center" width="100%">
-															
+														<hbox height="35px" align="center" width="98%">															
 															<label value="${labels.microcurriculo.id}"/>
 															<textbox id="txtPreIdNucleo" width="45px" disabled="true"/>
 															<textbox id="txtIdNucleo" width="100px" />
 															<label value="${labels.microcurriculo.nucleo}" />
-															<textbox id="txtNombreNucleo" width="250px"/>
-															<button id="btnAdicionarNombreNucleo" label="${labels.microcurriculo.add}" />
+															<textbox id="txtNombreNucleo" width="250px"/>															
 														</hbox>
-															
-														<div>
-															<listbox id="listaNuevosNucleos" height="260px" />
+														<hbox height="35px" align="center" width="100%">
+															<label value="${labels.microcurriculo.jefeNucleo}" />
+															<combobox id="responsableNucleo" width="300px"/>
+															<button id="btnAdicionarNombreNucleo" label="${labels.microcurriculo.add}" />
+														</hbox>															
+														<div align="center">
+															<listbox id="listaNuevosNucleos" height="260px" width="98%" />
 														</div>
 													</groupbox>	
 												</vbox>
@@ -213,9 +227,10 @@
 									
 									<!-- PANEL DE AREAS ACADEMICAS -->
 									<tabpanel>
+										<div height="10px" />
 										<hlayout>
 											<hbox>
-												<groupbox mold="3d" width="330px" closable="false">
+												<groupbox mold="3d" width="330px" height="530px" closable="false">
 													<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.areaAcademica}" />
 													<div height="35px">
 														<label value="${labels.microcurriculo.u_academica}" />
@@ -253,7 +268,7 @@
 														
 													</groupbox>
 													<div height="5px" />
-													<groupbox mold="3d" width="600px" height="390px" closable="false">
+													<groupbox mold="3d" width="600px" height="425px" closable="false">
 														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addAreaAcademica}" />
 															
 														<hbox height="30px" align="center" width="100%">															
