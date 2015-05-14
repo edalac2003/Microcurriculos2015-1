@@ -112,7 +112,20 @@
 	border-width: medium
 }
 
-/**.z-div, .z-div-label{
+.backgroundVerde{
+	background: #14470e; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #14470e 0%, #2c961c 51%, #14470e 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#14470e), color-stop(51%,#2c961c), color-stop(100%,#14470e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-45deg,  #14470e 0%,#2c961c 51%,#14470e 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg,  #14470e 0%,#2c961c 51%,#14470e 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg,  #14470e 0%,#2c961c 51%,#14470e 100%); /* IE10+ */
+	background: linear-gradient(135deg, #14470e 0%,#2c961c 51%,#14470e 100%); /* W3C */
+	filter: ='#14470e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.imageBack {
+	background-image: url("./../_img/background/backgroundVerde.png")
+}/**.z-div, .z-div-label{
 	margin: px;
 	padding: px;
 	color: Red;

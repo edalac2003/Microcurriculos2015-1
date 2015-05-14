@@ -1,0 +1,27 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?page title="Bienvenidos a Microcurriculos" contentType="text/html; charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+<window title="" border="normal">
+	<borderlayout height="700px">
+		<north height="100px" border="0" sclass="fondoEncabezado">
+			<include id="headerIdx" src="/_sections/header.zul" />							
+		</north>
+		<east width="180px" border="0">
+			<label value="" />
+		</east>			
+		<west width="180px" border="none">
+			<label value="" />
+		</west>
+		<center>
+		
+		</center>
+		<south border="none" height="100px" sclass="fondoEncabezado">		
+			<div> 
+				<include id="footerIdx" src="/_sections/footer.zul" /> 
+			</div>					
+		</south>
+	</borderlayout>
+</window>
+</zk>

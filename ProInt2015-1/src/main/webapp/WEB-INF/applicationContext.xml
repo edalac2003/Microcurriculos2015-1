@@ -572,6 +572,13 @@
         	<property name="estadoNGC" ref="estadoNGC" />
         </bean>
         
+        <bean id="listadoMicroxDocente" class="com.udea.proint1.microcurriculo.ctrl.ListadoMicroxDocenteCtrl" scope="prototype">
+        	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
+        	<property name="materiaNGC" ref="materiaNGC" />
+<!--         	<property name="microxEstadoNGC" ref="microxEstadoNGC" /> -->
+<!--         	<property name="estadoNGC" ref="estadoNGC" /> -->
+        </bean>
+        
         <bean id="detallesMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.DetallesMicroCtrl" scope="prototype">
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />

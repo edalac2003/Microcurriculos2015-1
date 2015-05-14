@@ -1,0 +1,76 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Pantalla Inicial Microcurriculos" contentType="text/html; charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?> 
+
+<zk>	
+	<window id="index" border="0">	
+		<borderlayout height="700px">			
+			<north height="100px" border="0" sclass="fondoEncabezado">
+				<include id="headerIdx" src="/_sections/header.zul" />							
+			</north>
+			<east width="180px" border="0">
+				<label value="" />
+			</east>			
+			<west width="180px" border="0">
+				<label value="" />
+			</west>
+			
+			<center border="0">
+				<div>
+					<div align="center">
+						<hbox align="center" height="70px">
+							<label value="${labels.microcurriculo.tituloIndex}" sclass="tituloFondo"/>
+						</hbox>
+					</div>
+					
+					<div align="center">
+<!-- 						<vbox> -->
+							<hbox align="center" height="100px">
+								<a href="/microcurriculo/inicio_mic.zul" image="/_img/icons/128x128/microcurriculos.png" width="80px"/>
+								<vbox width="400px">
+									<a href="/microcurriculo/inicio_mic.zul" label="${labels.microcurriculo.tituloMicro}" sclass="nombreSeccion" />
+									<div sclass="contenidoSeccion">
+										<label value="${labels.microcurriculo.mensajeMicro}" />
+									</div>	
+								</vbox>								
+							</hbox>
+							<hbox align="center" height="100px">
+								<a href="/_sections/construc.zul" image="/_img/icons/128x128/docentes.png" width="80px"/>
+								<vbox width="400px">
+									<a href="/_sections/construc.zul" label="${labels.microcurriculo.tituloDocente}" sclass="nombreSeccion" />	
+									<div sclass="contenidoSeccion">
+										<label value="${labels.microcurriculo.mensajeDocente}" />
+									</div>	
+								</vbox>	
+							</hbox>
+							<hbox align="center" height="100px">
+								<a href="/materia/inicio_mat.zul" image="/_img/icons/128x128/materias.png" width="80px"/>
+								<vbox width="400px">
+									<a href="/materia/inicio_mat.zul" label="${labels.microcurriculo.tituloMateria}" sclass="nombreSeccion" />
+									<div sclass="contenidoSeccion">
+										<label value="${labels.microcurriculo.mensajeMateria}" />
+									</div>	
+								</vbox>		
+							</hbox>
+							<hbox align="center" height="100px">
+								<a href="/materia/inicio_mat.zul" image="/_img/icons/128x128/nucleo2.png" width="80px"/>
+								<vbox width="400px">
+									<a href="/_nucleo/crearNucleo.zul" label="${labels.microcurriculo.tituloNucleo}" sclass="nombreSeccion" />
+									<div sclass="contenidoSeccion">
+										<label value="${labels.microcurriculo.mensajeMateria}" />
+									</div>	
+								</vbox>		
+							</hbox>
+<!-- 						</vbox> -->
+					</div>
+				</div>
+			</center>
+			
+			<south border="0" height="100px" sclass="fondoEncabezado">		
+				<div> 
+					<include id="footerIdx" src="/_sections/footer.zul" /> 
+				</div>					
+			</south>
+		</borderlayout>
+	</window>
+</zk>

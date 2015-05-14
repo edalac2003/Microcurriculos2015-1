@@ -1,0 +1,71 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="Bienvenidos a Microcurriculos" contentType="text/html; charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+<window title="" border="none">
+	<borderlayout height="800px">
+		<north height="100px" border="0" sclass="fondoEncabezado">
+			<include id="headerIdx" src="/_sections/header.zul" />							
+		</north>
+		<east width="180px" border="0">
+			<label value="" />
+		</east>			
+		<west width="180px" border="none">
+			<label value="" />
+		</west>
+		<center border="none">
+			<borderlayout height="600px">
+				<north height="110px" border="none">
+					<div>						
+						<div align="right" height="25px">
+							<label value="Fecha : "></label>
+							<label id="lblFechaActual" value="FechaActual"></label>
+						</div>
+						<div align="center">
+							<groupbox width="600px" height="80px">
+								<hbox height="30px" align="center">
+									<div align="left">
+										<label value="Docente : " />
+										<label id="lblNombreDocente" value="lblNombreDocente" />
+										<label value="  |  "></label>
+										<label value="Usuario : "></label>
+										<label id="lblUsuarioLogin" value="UsuarioLogin"></label>
+									</div>
+								</hbox>
+								<hbox align="center" height="30px">
+									<div align="center">
+										<label value="Unidad Academica" />
+										<combobox id="cmbUnidadAcademica" />
+										<label value="Dependencia" />
+										<combobox id="cmbDependenciaAcademica" />
+									</div>																	
+								</hbox>								
+							</groupbox>							
+						</div>
+						<hbox>
+							<label value=""></label>
+						</hbox>
+					</div>
+				</north>
+				<center border="none" apply="${listadoMicroxDocente}">
+					<listbox id="listaMicrocurriculo">
+						<listhead>
+							<listheader label="${labels.microcurriculo.headerCodigo}"  align="center" width="12%"/>
+							<listheader label="${labels.microcurriculo.nucleo}" align="center"/>
+							<listheader label="${labels.microcurriculo.idmateria}" align="center"/>
+							<listheader label="${labels.microcurriculo.estados}" align="center" width="15%"/>
+						</listhead>
+					</listbox>
+				</center>
+			</borderlayout>
+		</center>
+		<south border="none" height="100px" sclass="fondoEncabezado">		
+			<div> 
+				<include id="footerIdx" src="/_sections/footer.zul" /> 
+			</div>					
+		</south>
+	</borderlayout>
+</window>
+</zk>

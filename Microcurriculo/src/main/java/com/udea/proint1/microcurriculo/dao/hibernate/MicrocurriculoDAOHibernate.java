@@ -212,17 +212,12 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(
 			TbAdmPersona responsable) throws ExcepcionesDAO {
 		Session session = null;
-		List<TbMicMicrocurriculo> microcurriculos = new ArrayList<TbMicMicrocurriculo>();
+		List<TbMicMicrocurriculo> microcurriculos = null;
 
 		try {
-
 			session = getSession();
-
-			Query query = session
-					.createQuery("from TbMicMicrocurriculo where tbAdmPersona= :buscarResponsable");
-
+			Query query = session.createQuery("from TbMicMicrocurriculo where tbAdmPersona= :buscarResponsable");
 			query.setEntity("buscarResponsable", responsable);
-
 			microcurriculos = query.list();
 		} catch (Exception e) {
 			ExcepcionesDAO expDAO = new ExcepcionesDAO();
