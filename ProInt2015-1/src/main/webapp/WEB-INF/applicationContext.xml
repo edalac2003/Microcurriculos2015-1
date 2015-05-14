@@ -74,6 +74,9 @@
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActaxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActividadxmicro.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmHistorico.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateriaxsemestre.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRol.hbm.xml</value>
 			</list>
 		</property>
             

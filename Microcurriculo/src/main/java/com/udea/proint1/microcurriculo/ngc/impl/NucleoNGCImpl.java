@@ -2,8 +2,6 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
@@ -12,8 +10,6 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class NucleoNGCImpl implements NucleoNGC {
-	
-	private static Logger log=Logger.getLogger(NucleoNGCImpl.class);
 	
 	NucleoDAO nucleoDao;
 
