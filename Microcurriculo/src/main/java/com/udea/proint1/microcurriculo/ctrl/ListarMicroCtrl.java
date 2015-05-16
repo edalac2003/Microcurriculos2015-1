@@ -49,8 +49,8 @@ public class ListarMicroCtrl extends GenericForwardComposer{
 	
 	Listbox listaMicrocurriculo;
 	
-	Toolbarbutton tool_details;
-	Toolbarbutton tool_duplica;
+//	Toolbarbutton tool_details;
+//	Toolbarbutton tool_duplica;
 	
 	MicrocurriculoNGC microcurriculoNGC;
 	MicroxEstadoNGC microxEstadoNGC;

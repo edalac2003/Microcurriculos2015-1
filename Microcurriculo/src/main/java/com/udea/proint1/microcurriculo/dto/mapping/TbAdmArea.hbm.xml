@@ -23,10 +23,10 @@
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>
-        <property name="vrModfecha" type="date">
-            <column name="VR_MODFECHA" length="7" />
+        <property name="dtModfecha" type="date">
+            <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmMateriases" table="TB_ADM_MATERIAS" inverse="true" lazy="true" fetch="select">
+        <set name="tbAdmMateriases" table="TB_ADM_MATERIA" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="VR_AREA" length="8" not-null="true" />
             </key>

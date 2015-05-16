@@ -4,7 +4,7 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-<window title="" border="none">
+<window id="formaInicioDocente" border="none">
 	<borderlayout height="800px">
 		<north height="100px" border="0" sclass="fondoEncabezado">
 			<include id="headerIdx" src="/_sections/header.zul" />							

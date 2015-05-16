@@ -2242,8 +2242,7 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
-		if("formaDuplicarMicro".equals(comp.getParent().getId().toString())){
-			
+		if("formaDuplicarMicro".equals(comp.getParent().getId().toString())){			
 			if(Executions.getCurrent().getSession().hasAttribute("idMicro")&&(Executions.getCurrent().getSession().hasAttribute("semestre"))){
 				panelDuplicarMicro.setVisible(false);
 				blyDuplicarMicro.setVisible(true);
@@ -2291,6 +2290,8 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 				cargarNucleos("");
 				cargarMicrocurriculos("");
 			}
+		} else if("formaInicioDocente".equals(comp.getParent().getId().toString())){
+			
 		}
 		
 	}

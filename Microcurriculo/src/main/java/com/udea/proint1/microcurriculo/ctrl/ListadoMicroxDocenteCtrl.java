@@ -1,12 +1,20 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
@@ -21,12 +29,24 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	/*
+	 * Objetos de la Vista
+	 */
 	Listbox listaMicrocurriculo;
+	Label lblFechaActual;
+	Label lblNombreDocente;
+	Label lblUsuarioLogin;
 	
-	List<TbMicMicrocurriculo> listadoMicrocurriculo;
+	/*
+	 * Variables locales
+	 */
+	List<TbMicMicrocurriculo> listadoMicrocurriculo = null;
+	private static Date fechaActual = new Date();
 	
-	
+	/*
+	 * Clases Relacionadas
+	 */
 	MicrocurriculoNGC microcurriculoNGC;
 	MateriaNGC materiaNGC;
 	
@@ -38,15 +58,9 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public void setMateriaNGC(MateriaNGC materiaNGC) {
 		this.materiaNGC = materiaNGC;
 	}
-
-
 	
 	
-	public void listarMicrocurriculos(){
-		TbAdmPersona persona = new TbAdmPersona();
-		persona.setVrIdpersona("92532121");
-		persona.setVrApellidos("ACOSTA BRAVO");
-		persona.setVrNombres("EDWIN ALFREDO");
+	public void listarMicrocurriculos(){		
 		try {
 			listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable("92532121");
 		} catch (ExcepcionesLogica e) {
@@ -61,20 +75,43 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 			listaMicrocurriculo.getItems().clear();
 			
 			for(TbMicMicrocurriculo micro : listadoMicrocurriculo){
-//				final Listitem listaItem = new Listitem();				
-//				Listcell celdaID = new Listcell(micro.getVrIdmicrocurriculo());
-//				Listcell celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrAlias());
-//				Listcell celdaMateria = new Listcell(micro.getTbAdmMateria().getVrAlias());
-//				Listcell celdaEstado = new Listcell(micro.getTbMicEstado().getVrDescripcion());
-//				
-//				listaItem.appendChild(celdaID);
-//				listaItem.appendChild(celdaNucleo);
-//				listaItem.appendChild(celdaID);
-//				listaItem.appendChild(celdaEstado);
-//				
-//				listaMicrocurriculo.appendChild(listaItem);
+				final Listitem listaItem = new Listitem();
+				listaItem.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event arg0) throws Exception {						
+						mostrarMicrocurriculo(listadoMicrocurriculo.get(listaMicrocurriculo.getSelectedIndex()));
+					}
+				});
+				Listcell celdaNucleo = null;
+				Listcell celdaMateria = null;
+				Listcell celdaID = new Listcell(micro.getVrIdmicrocurriculo());
+				System.out.println("Alias : "+micro.getTbAdmMateria().getTbAdmNucleo().getVrAlias());
+				if (micro.getTbAdmMateria().getTbAdmNucleo().getVrAlias() != null)
+					celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrAlias());
+				else
+					celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrNombre());
+				
+				if(micro.getTbAdmMateria().getVrAlias() != null)
+					celdaMateria = new Listcell(micro.getTbAdmMateria().getVrAlias());
+				else
+					celdaMateria = new Listcell(micro.getTbAdmMateria().getVrNombre());
+				
+				Listcell celdaEstado = new Listcell(micro.getTbMicEstado().getVrDescripcion());
+				
+				listaItem.appendChild(celdaID);
+				listaItem.appendChild(celdaNucleo);
+				listaItem.appendChild(celdaMateria);
+				listaItem.appendChild(celdaEstado);
+				
+				listaMicrocurriculo.appendChild(listaItem);
 			}
 		}
+	}
+	
+	
+	private static void mostrarMicrocurriculo(TbMicMicrocurriculo microcurriculo){
+		Executions.getCurrent().setAttribute("micro", microcurriculo);
+		Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
 	}
 	
 	
@@ -84,7 +121,9 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		// TODO Auto-generated method stub
 		
 		super.doAfterCompose(comp);
-		
+		lblFechaActual.setValue(fechaActual.toString());
 		listarMicrocurriculos();
+		
+//		Executions.getCurrent().getSession()
 	}
 }

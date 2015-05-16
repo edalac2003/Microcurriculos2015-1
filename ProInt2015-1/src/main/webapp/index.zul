@@ -29,7 +29,7 @@
 					 		<groupbox height="220px" width="450px" mold="3d" closable="false">
 					 			<caption>
 					 				<image src="./_img/icons/128x128/lock.png"></image>
-					 				<label value="Inicio de Sesion" sclass="resaltadonormal"></label>
+					 				<label value="Inicio de Sesion" sclass="resaltado"></label>
 					 			</caption>
 					 			<div height="10px"></div>
 					 			<div align="center" height="50px">

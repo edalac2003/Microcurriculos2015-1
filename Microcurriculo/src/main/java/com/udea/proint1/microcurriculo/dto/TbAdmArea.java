@@ -7,13 +7,21 @@ import java.util.Set;
 public class TbAdmArea {
 
 	
+	public Date getDtModfecha() {
+		return dtModfecha;
+	}
+
+	public void setDtModfecha(Date dtModfecha) {
+		this.dtModfecha = dtModfecha;
+	}
+
 	private String vrIdArea;
 	private String vrNombre;
 	private TbAdmNucleo tbAdmNucleo;
 	private String vrAlias;
 	private TbAdmPersona vrResponsable;
 	private String vrModusuario;
-	private Date vrModfecha;	
+	private Date dtModfecha;	
 	private Set tbAdmMateriases = new HashSet(0);
 	
 	public TbAdmArea() {
@@ -30,7 +38,7 @@ public class TbAdmArea {
 		this.vrAlias = vrAlias;
 		this.vrResponsable = vrResponsable;
 		this.vrModusuario = vrModusuario;
-		this.vrModfecha = vrModfecha;
+		this.dtModfecha = vrModfecha;
 	}
 
 	public TbAdmArea(String vrIdArea, String vrNombre, TbAdmNucleo tbAdmNucleo,
@@ -40,7 +48,7 @@ public class TbAdmArea {
 		this.vrNombre = vrNombre;
 		this.tbAdmNucleo = tbAdmNucleo;
 		this.vrModusuario = vrModusuario;
-		this.vrModfecha = vrModfecha;
+		this.dtModfecha = vrModfecha;
 	}
 
 	public String getVrIdArea() {
@@ -91,13 +99,7 @@ public class TbAdmArea {
 		this.vrModusuario = vrModusuario;
 	}
 
-	public Date getVrModfecha() {
-		return vrModfecha;
-	}
-
-	public void setVrModfecha(Date vrModfecha) {
-		this.vrModfecha = vrModfecha;
-	}
+	
 
 	public Set getTbAdmMateriases() {
 		return tbAdmMateriases;
