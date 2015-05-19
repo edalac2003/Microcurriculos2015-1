@@ -9,7 +9,11 @@ public interface UsuarioNGC {
 
 	public void guardarUsuarios(TbAdmUsuario usuario) throws ExcepcionesLogica;
 	
-	public TbAdmUsuario obtenerUsuarios(int id) throws ExcepcionesLogica;
+	public TbAdmUsuario obtenerUsuarios(String login) throws ExcepcionesLogica;
+	
+	public Boolean validarPassword(String usuario, String paswword) throws ExcepcionesLogica;
+	
+	public Boolean existeUsuario(String login) throws ExcepcionesLogica;
 	
 	public List<TbAdmUsuario> listarUsuarios() throws ExcepcionesLogica;
 	

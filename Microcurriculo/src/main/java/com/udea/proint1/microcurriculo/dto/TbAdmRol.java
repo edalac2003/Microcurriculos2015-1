@@ -8,6 +8,11 @@ public class TbAdmRol {
 	private String vrNivel;
 	private String vrDescripcion;
 	
+	
+	public TbAdmRol() {
+		super();
+	}
+
 	public TbAdmRol(int nbId, String vrNivel, String vrDescripcion) {
 		super();
 		this.nbId = nbId;

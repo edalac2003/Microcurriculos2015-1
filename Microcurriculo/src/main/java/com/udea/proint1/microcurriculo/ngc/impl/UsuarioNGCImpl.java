@@ -12,6 +12,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class UsuarioNGCImpl implements UsuarioNGC {
 
+
 	private static Logger log=Logger.getLogger(UsuarioNGCImpl.class);
 	
 	UsuarioDAO usuarioDao;
@@ -23,21 +24,21 @@ public class UsuarioNGCImpl implements UsuarioNGC {
 	@Override
 	public void guardarUsuarios(TbAdmUsuario usuario) throws ExcepcionesLogica {
 		/*
-		 * Comprobamos que el objeto id no est� vacio
+		 * Comprobamos que el objeto id no est� vacio
 		 */
 		if(usuario == null){
-			throw new ExcepcionesLogica("El objeto usuario est� vacio");
+			throw new ExcepcionesLogica("El objeto usuario est� vacio");
 		}
 		try {
-			int id = usuario.getNbId();
-			TbAdmUsuario usuarioConsulta = usuarioDao.obtenerUsuarios(id);
+			String login = usuario.getVrLogin();
+			TbAdmUsuario usuarioConsulta = usuarioDao.obtenerUsuarios(login);
 		
 			if(usuarioConsulta != null){
 				throw new ExcepcionesLogica("El usuario a insertar ya existe");
 			}
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo obtenerUsuarios de la clase usuarioDao: "+ e);
+			log.error("fall� al invocar el metodo obtenerUsuarios de la clase usuarioDao: "+ e);
 		}
 		
 		try {
@@ -45,38 +46,53 @@ public class UsuarioNGCImpl implements UsuarioNGC {
 			usuarioDao.guardarUsuarios(usuario);
 		
 		} catch (ExcepcionesDAO e) {
-			log.error("fall� al invocar el metodo guardarUsuarios de la clase usuarioDao: "+ e);
+			log.error("fall� al invocar el metodo guardarUsuarios de la clase usuarioDao: "+ e);
 		}
 	}
 
 	@Override
-	public TbAdmUsuario obtenerUsuarios(int id) throws ExcepcionesLogica {
-		/*
-		 * Comprobamos que el dato id no sea vacio
-		 */
-		if(id == 0){
-			throw new ExcepcionesLogica("No se ha ingresado una identificación de usuario, está vacia");
-		}
+	public TbAdmUsuario obtenerUsuarios(String login) throws ExcepcionesLogica {
 		TbAdmUsuario usuario = null;
 		
 		try {
-			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
-			usuario = usuarioDao.obtenerUsuarios(id);
+			usuario = usuarioDao.obtenerUsuarios(login);
 		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerUsuarios de la clase usuarioDao: "+ e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return usuario;
+	}
+	
+	
+	@Override
+	public Boolean existeUsuario(String login) throws ExcepcionesLogica {
+		boolean estado = false;
+		TbAdmUsuario usuario = null;
+		
+		try {
+			usuario = usuarioDao.obtenerUsuarios(login);
+		} catch (ExcepcionesDAO e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
-		 */
-		if(usuario == null){
-			//si está vacio tira una excepción
-			throw new ExcepcionesLogica("No se encontró usuario con el id "+ id);
-		}else{
-			//si no esta vacio retorna la ciudad
-			return usuario;
-		}
+		if (usuario != null)
+			estado = true;
+		
+		return estado;
 	}
+
+	
+
+	@Override
+	public Boolean validarPassword(String usuario, String paswword)	throws ExcepcionesLogica {
+		Boolean estado = false;
+		
+		return estado;
+	}
+	
+	
+	
 
 	@Override
 	public List<TbAdmUsuario> listarUsuarios() throws ExcepcionesLogica {
@@ -107,8 +123,8 @@ public class UsuarioNGCImpl implements UsuarioNGC {
 			throw new ExcepcionesLogica("El objeto usuario está vacio");
 		}
 		try {
-			int id = usuario.getNbId();
-			TbAdmUsuario usuarioConsulta = usuarioDao.obtenerUsuarios(id);
+			String login = usuario.getVrLogin();
+			TbAdmUsuario usuarioConsulta = usuarioDao.obtenerUsuarios(login);
 		
 			if(usuarioConsulta == null){
 				throw new ExcepcionesLogica("El Usuario a actualizar no existe");
@@ -118,8 +134,7 @@ public class UsuarioNGCImpl implements UsuarioNGC {
 			log.error("falló al invocar el metodo obtenerUsuarios de la clase usuarioDao: "+ e);
 		}
 		
-		try {
-			
+		try {			
 			usuarioDao.actualizarUsuarios(usuario);
 		
 		} catch (ExcepcionesDAO e) {

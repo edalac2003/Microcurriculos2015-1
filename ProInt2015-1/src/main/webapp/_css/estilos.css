@@ -19,6 +19,12 @@
 	font-style: normal
 }
 
+.tituloSession{
+	color: #FF8000;
+	font-size: large;
+	font-weighzmt: bolder
+}
+
 
 .resaltado{
 	color: Red;
@@ -73,6 +79,37 @@
     border-bottom: 0 none;
 }
 
+.z-groupbox {
+	background-color: White
+}
+
+.z-groupbox-div {
+	background-color: White
+}
+
+.z-borderlayout{
+	background-color: Silver
+}
+
+.z-north{
+	background-color: #E7FFE6
+}
+.z-east{
+	background-color: #E7FFE6
+}
+
+.z-west{
+	background-color: #E7FFE6
+}
+
+.z-center{
+	background-color: #E7FFE6
+}
+
+.z-south{
+	background-color: #E7FFE6
+}
+
 .tituloFondo{
 	height: 10px;
 	text-align: center;
@@ -110,6 +147,14 @@
 	background-color: #004000;
 	border-color: #004000;
 	border-width: medium
+}
+
+.fondoPagina{
+	background-color: #E7FFE6
+}
+
+.fondoNormal{
+	background-color: White
 }
 
 .backgroundVerde{

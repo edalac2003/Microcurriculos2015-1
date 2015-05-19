@@ -4,22 +4,21 @@
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" table="TB_ADM_USUARIO">
-        <id name="nbId" type="int">
-            <column name="NB_ID" precision="22" scale="0" />
-            <generator class="increment" />
+        <id name="vrLogin" type="string">
+            <column name="VR_LOGIN" length="20" not-null="true" />
         </id>
         <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
             <column name="VR_PERSONA" length="15" not-null="true" />
-        </many-to-one>
-        <property name="vrLogin" type="string">
-            <column name="VR_LOGIN" length="20" not-null="true" />
-        </property>
+        </many-to-one>        
         <property name="vrPassword" type="string">
-            <column name="VR_PASSWORD" length="100" />
+            <column name="VR_PASSWORD" length="256" />
         </property>
         <property name="blEstado" type="int">
-            <column name="BL_ESTADO" precision="22" scale="0" />
+            <column name="BL_ESTADO" precision="2" scale="0" />
         </property>
+        <many-to-one name="tbAdmRol" class="com.udea.proint1.microcurriculo.dto.TbAdmRol" fetch="join" lazy="false">
+            <column name="NB_ROL" precision="2" scale="0" not-null="true" />
+        </many-to-one>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>

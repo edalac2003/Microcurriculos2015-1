@@ -660,4 +660,9 @@
         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
         </bean>
+        
+        <bean id="inicioSesionCtrl" class="com.udea.proint1.microcurriculo.ctrl.InicioSesionCtrl" scope="prototype">
+        	<property name="usuarioNGC" ref="usuarioNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
+        </bean>
 </beans>
