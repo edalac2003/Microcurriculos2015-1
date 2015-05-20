@@ -4,8 +4,8 @@
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.udea.proint1.microcurriculo.dto.TbAdmRol" table="TB_ADM_ROL">
-        <id name="nbId" type="string">
-            <column name="VR_ID" precision="9" not-null="true"/>
+        <id name="nbId" type="integer">
+            <column name="NB_ID" precision="9" not-null="true"/>
             <generator class="assigned" />
         </id>
         <property name="vrNivel" type="string">

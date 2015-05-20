@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -14,6 +15,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmUsuario;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioDAO {
+	
 
 	@Override
 	public void guardarUsuarios(TbAdmUsuario usuario) throws ExcepcionesDAO {
@@ -31,14 +33,14 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 	}
 
 	@Override
-	public TbAdmUsuario obtenerUsuarios(int id) throws ExcepcionesDAO {
+	public TbAdmUsuario obtenerUsuarios(String login) throws ExcepcionesDAO {
 		Session session = null;
 		TbAdmUsuario usuario = null;
 
 		try {
 			session = getSession();
-			usuario = (TbAdmUsuario) session.get(TbAdmUsuario.class, id);
-
+			usuario = (TbAdmUsuario)session.get(TbAdmUsuario.class, login);
+			
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
 		} finally{
@@ -50,12 +52,11 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 	@Override
 	public List<TbAdmUsuario> listarUsuarios() throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmUsuario> usuarios = new ArrayList<TbAdmUsuario>();
+        List<TbAdmUsuario> usuarios = null;
         
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbAdmUsuario.class);
-			
+			Criteria criteria = session.createCriteria(TbAdmUsuario.class);			
 			usuarios = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
@@ -80,5 +81,11 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 			session.close();
 		}
 	}
-
+	
+	@Override
+	public void validarPassword(String usuario, String password) throws ExcepcionesDAO {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

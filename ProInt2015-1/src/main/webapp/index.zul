@@ -1,9 +1,10 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page title="" contentType="text/html;charset=UTF-8"?>
 <?page title="Bienvenidos a Microcurriculos" contentType="text/html; charset=UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-<window title="" border="none">
+<window border="none"  apply="${inicioSesionCtrl}">
 	<borderlayout height="650px">
 		<north height="100px" border="0" sclass="fondoEncabezado">
 			<include id="headerIdx" src="/_sections/header.zul" />							
@@ -16,7 +17,7 @@
 		</west>
 		<center border="none">
 			<borderlayout width="300px">
-				<north height="50px" border="none"></north>
+				<north height="50px" border="none" />
 				<west width="400px" border="none">
 					<div align="center">						
 						<image src="./_img/background/logo_udea.png" height="60%" width="60%"></image>
@@ -29,7 +30,7 @@
 					 		<groupbox height="220px" width="450px" mold="3d" closable="false">
 					 			<caption>
 					 				<image src="./_img/icons/128x128/lock.png"></image>
-					 				<label value="Inicio de Sesion" sclass="resaltado"></label>
+					 				<label value="Inicio de Sesion" sclass="tituloSession"></label>
 					 			</caption>
 					 			<div height="10px"></div>
 					 			<div align="center" height="50px">
@@ -46,8 +47,8 @@
 					 			</div>
 					 			<div height="50px" align="center">
 					 				<hbox align="center" height="50px">
-					 					<button label="Aceptar" width="150px"></button>
-					 					<button label="¿Olvido su Contraseña?"></button>
+					 					<button id="btnAceptar" label="Aceptar" width="150px" />
+					 					<button id="btnOlvido" label="¿Olvido su Contraseña?"  width="150px" />
 					 				</hbox>					 				
 					 			</div>
 							</groupbox>
