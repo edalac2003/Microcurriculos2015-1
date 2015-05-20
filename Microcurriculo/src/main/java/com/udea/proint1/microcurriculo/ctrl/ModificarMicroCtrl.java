@@ -738,10 +738,11 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		}
 		
 		if(listaEstados != null){
-			cmbEstado.appendChild(new Comboitem("[Seleccione]"));
 			for(TbMicEstado estado: listaEstados){
-				Comboitem item = new Comboitem(estado.getVrDescripcion());
-				cmbEstado.appendChild(item);
+				if((estado.getNbIdestado()==1)||(estado.getNbIdestado()==2)){
+					Comboitem item = new Comboitem(estado.getVrDescripcion());
+					cmbEstado.appendChild(item);
+				}
 			}
 		}		
 	}
@@ -3254,13 +3255,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			cargarEstados();
 			llenarDatos(idMicro);
 		}else{
-			panelModificarMicro.setVisible(true);
-			fichaContenidos.setVisible(false);
-			cargarUnidades();
-			cargarDependencias("");
-			cargarNucleos("");
-			cargarMaterias("");
-			cargarMicrocurriculos("");
+//			panelModificarMicro.setVisible(true);
+//			fichaContenidos.setVisible(false);
+//			cargarUnidades();
+//			cargarDependencias("");
+//			cargarNucleos("");
+//			cargarMaterias("");
+//			cargarMicrocurriculos("");
+			Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
 		}
 	}
 	

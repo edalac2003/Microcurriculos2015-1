@@ -5,7 +5,7 @@
 
 <zk>
 	<window id="formaDetallesMicro" border="0">
-		<borderlayout id="blyConsultarMicro" height="950px" apply="${detallesMicroCtrl}">
+		<borderlayout visible="false" id="blyConsultarMicro" height="950px" apply="${detallesMicroCtrl}">
 			
 			<north height="100px" border="0" sclass="fondoEncabezado">
 				<include id="headerIdx" src="/_sections/header.zul" />			
@@ -34,7 +34,7 @@
 						<center autoscroll="true" border="0">
 							<div>
 								<div height="10px"/>								
-								<panel id="panelBuscarMicro" title="${labels.microcurriculo.solicitaMicro}" border="normal" width="98%" height="260px" style="font-size: 14px">
+								<panel id="panelBuscarMicro" visible="false" title="${labels.microcurriculo.solicitaMicro}" border="normal" width="98%" height="260px" style="font-size: 14px">
 									<panelchildren>
 										<div height="10px"/>
 										<div align="center" width="940px">

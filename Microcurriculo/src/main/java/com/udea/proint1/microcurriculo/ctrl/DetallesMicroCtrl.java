@@ -2279,16 +2279,17 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 					llenarDatos(idMicro);
 				}
 			}else{
-				panelBuscarMicro.setVisible(true);
-				blyConsultarMicro.setVisible(true);
-				fichaContenidos.setVisible(false);
-				tool_print.setVisible(false);
-				tool_consulta_otro.setVisible(false);
-				cargarMaterias("");
-				cargarUnidades();
-				cargarDependencias("");
-				cargarNucleos("");
-				cargarMicrocurriculos("");
+//				panelBuscarMicro.setVisible(true);
+//				blyConsultarMicro.setVisible(true);
+//				fichaContenidos.setVisible(false);
+//				tool_print.setVisible(false);
+//				tool_consulta_otro.setVisible(false);
+//				cargarMaterias("");
+//				cargarUnidades();
+//				cargarDependencias("");
+//				cargarNucleos("");
+//				cargarMicrocurriculos("");
+				Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
 			}
 		} else if("formaInicioDocente".equals(comp.getParent().getId().toString())){
 			

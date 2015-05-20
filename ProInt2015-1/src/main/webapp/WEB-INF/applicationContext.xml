@@ -270,7 +270,7 @@
         	<property name="departamentoDao" ref="departamentoDao" />
         </bean>
         
-        <bean id="correquisitoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CorrequisitoNGCImpl">
+        <bean id="correquisitoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CorrequisitoNGCImpl" scope="singleton">
         	<property name="correquisitoDao" ref="correquisitoDao" />
         	<property name="materiaDao" ref="materiaDao" />
         </bean>

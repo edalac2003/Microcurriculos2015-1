@@ -118,8 +118,13 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	
 	
 	private static void mostrarMicrocurriculo(TbMicMicrocurriculo microcurriculo){
-		Executions.getCurrent().setAttribute("micro", microcurriculo);
-		Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+		if((microcurriculo.getTbMicEstado().getNbIdestado() == 1)||(microcurriculo.getTbMicEstado().getNbIdestado() == 4)||(microcurriculo.getTbMicEstado().getNbIdestado() == 5)){
+			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());
+			Executions.getCurrent().sendRedirect("/microcurriculo/ModificarMic.zul");
+		}else{
+			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());
+			Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+		}
 	}
 	
 	
