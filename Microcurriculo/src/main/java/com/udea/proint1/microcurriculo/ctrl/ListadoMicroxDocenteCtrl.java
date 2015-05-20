@@ -14,9 +14,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
@@ -25,9 +23,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 @SuppressWarnings("rawtypes")
 public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	/*
@@ -43,6 +39,10 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	 */
 	List<TbMicMicrocurriculo> listadoMicrocurriculo = null;
 	private static Date fechaActual = new Date();
+	String userName;
+	String nombrePersona;
+	String apellidoPersona;
+	
 	
 	/*
 	 * Clases Relacionadas
@@ -60,7 +60,18 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	}
 	
 	
-	public void listarMicrocurriculos(){		
+	
+	private void cargarDatosEncabezado(){
+		lblFechaActual.setValue(fechaActual.toString());
+		userName = Executions.getCurrent().getSession().getAttribute("userName").toString();
+		nombrePersona = Executions.getCurrent().getSession().getAttribute("nombrePersona").toString();
+		apellidoPersona = Executions.getCurrent().getSession().getAttribute("apellidoPersona").toString();
+		
+		lblNombreDocente.setValue(nombrePersona+" "+apellidoPersona);
+		lblUsuarioLogin.setValue(userName);
+	}
+	
+	private void listarMicrocurriculos(){		
 		try {
 			listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable("92532121");
 		} catch (ExcepcionesLogica e) {
@@ -85,7 +96,6 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 				Listcell celdaNucleo = null;
 				Listcell celdaMateria = null;
 				Listcell celdaID = new Listcell(micro.getVrIdmicrocurriculo());
-				System.out.println("Alias : "+micro.getTbAdmMateria().getTbAdmNucleo().getVrAlias());
 				if (micro.getTbAdmMateria().getTbAdmNucleo().getVrAlias() != null)
 					celdaNucleo = new Listcell(micro.getTbAdmMateria().getTbAdmNucleo().getVrAlias());
 				else
@@ -96,13 +106,11 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 				else
 					celdaMateria = new Listcell(micro.getTbAdmMateria().getVrNombre());
 				
-				Listcell celdaEstado = new Listcell(micro.getTbMicEstado().getVrDescripcion());
-				
+				Listcell celdaEstado = new Listcell(micro.getTbMicEstado().getVrDescripcion());				
 				listaItem.appendChild(celdaID);
 				listaItem.appendChild(celdaNucleo);
 				listaItem.appendChild(celdaMateria);
-				listaItem.appendChild(celdaEstado);
-				
+				listaItem.appendChild(celdaEstado);				
 				listaMicrocurriculo.appendChild(listaItem);
 			}
 		}
@@ -118,12 +126,9 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
-		// TODO Auto-generated method stub
 		
 		super.doAfterCompose(comp);
-		lblFechaActual.setValue(fechaActual.toString());
+		cargarDatosEncabezado();
 		listarMicrocurriculos();
-		
-//		Executions.getCurrent().getSession()
 	}
 }
