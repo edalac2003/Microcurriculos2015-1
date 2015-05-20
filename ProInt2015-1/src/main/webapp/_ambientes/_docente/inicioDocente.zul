@@ -28,10 +28,10 @@
 								<hbox height="30px" align="center">
 									<div align="left">
 										<label value="Docente : " />
-										<label id="lblNombreDocente" value="lblNombreDocente" />
+										<label id="lblNombreDocente" value="lblNombreDocente" sclass="resaltado"/>
 										<label value="  |  "></label>
 										<label value="Usuario : "></label>
-										<label id="lblUsuarioLogin" value="UsuarioLogin"></label>
+										<label id="lblUsuarioLogin" value="UsuarioLogin" sclass="resaltado" />
 									</div>
 								</hbox>
 								<hbox align="center" height="30px">
