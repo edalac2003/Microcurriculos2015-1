@@ -35,7 +35,7 @@
 						<center autoscroll="true" border="0">
 							<div>
 								<div height="10px"/>
-								<panel id="panelModificarMicro" title="${labels.microcurriculo.modificar}" border="normal" width="98%" height="260px" style="font-size: 14px">
+								<panel visible="false" id="panelModificarMicro" title="${labels.microcurriculo.modificar}" border="normal" width="98%" height="260px" style="font-size: 14px">
 									<panelchildren>
 										<div height="10px"/>
 										<div align="center" width="940px">

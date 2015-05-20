@@ -1,0 +1,145 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<?page title="Universidad de Antioquia" contentType="text/html;charset=UTF-8"?>
+<!-- <?link rel="stylesheet" type="text/css" href="/_css/estilos2.css" ?> -->
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+<window id="formaListarMicro" border="0" >
+	<borderlayout height="1050px" width="1350px" apply="${cargarDatosFormas2}">
+		<north border="0" height="110px" apply="${borrarVariablesSession}" sclass="fondoEncabezado">
+			<div>
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</div>			
+		</north>
+		
+		<west border="none" width="14%">
+			<include id="menuVertical" src="/_sections/menuVertical.zul" />					
+		</west>
+		<east width="14%" border="none">
+			<label />
+		</east>
+		
+		<center border="normal">
+			<borderlayout height="1000px" width="100%">
+				<north border="0" height="100px">
+					<div>				
+						<toolbar id="tb" sclass="vista" height="45px" width="100%" apply="${validarDatosCtrl}"> 
+							<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+							<toolbarbutton id="tool_new" label="Crear Nuevo" image="/_img/icons/32x32/new_32.png" href="/microcurriculo/crearMic.zul" />
+							<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" />
+							<toolbarbutton id="tool_refresh" label="Modificar" image="/_img/icons/32x32/pencil_32.png" href="/microcurriculo/modificarMic.zul" />
+							<toolbarbutton id="tool_duplica" label="Duplicar" image="/_img/icons/32x32/clone.png" href="/microcurriculo/duplicarMic.zul" />
+							<toolbarbutton id="tool_borrar" label="Eliminar" image="/_img/icons/32x32/erase_32.png" href="/microcurriculo/borrarMic.zul" />
+							<toolbarbutton id="tool_close" label="Regresar" image="/_img/icons/32x32/atras.png" href="/microcurriculo/inicio_mic.zul" />
+						</toolbar>
+						<div height="50px" align="center">
+							<hbox>
+								<vbox align="center">
+									<div>
+										<label value="Unidad Academica"/>
+										<combobox id="cmbUnidadAcademicaBusqueda"/>
+									</div>
+								</vbox>
+								<vbox align="center">
+									<div>
+										<label value="Dependencia"/>
+										<combobox id="cmbDependenciaBusqueda"/>
+									</div>
+								</vbox>
+							</hbox>
+						</div>
+					</div>
+				</north>	
+				
+				<center border="0" autoscroll="true">					
+					<div align="center" >
+						<grid width="98%" sclass="fuenteChica">
+							<rows>
+								<row>
+									<div>
+										<label value="${labels.microcurriculo.u_academica}" />
+										<combobox id="cmbUnidadAcademica" width="60%" />
+										<label id="lblNombreUnidadAcademica" visible="false"/>
+									</div>
+									<div>
+										<label value="${labels.microcurriculo.dependencia}" />
+										<combobox id="cmbDependencia" width="60%"/>
+										<label id="lblNombreDependencia" visible="false"/>
+									</div>
+									<div>
+										<label value="${labels.microcurriculo.nucleo}" />
+										<combobox id="cmbNucleo" />
+										<label id="lblNombreNucleo" visible="false"/>
+									</div>		
+									<div>
+										<label value="${labels.microcurriculo.idmateria}" />
+										<combobox id="cmbMateria" width="70%" />
+										<label id="lblNombreMateria" visible="false"/>
+									</div>								
+								</row>
+								<row>									
+									<div>
+										<label value="${labels.microcurriculo.semestre}" />
+										<combobox id="cmbSemestre" width="70%"/>
+										<label id="lblSemestre" />
+									</div>									
+									<div>
+										<label value="${labels.microcurriculo.docente}" />
+										<combobox id="cmbDocente" width="60%"/>
+										<label id="lblResponsable" />
+									</div>
+									<div>
+										<label value="${labels.microcurriculo.estados}" />
+										<combobox id="cmbEstado" width="68%"/>
+									</div>
+									<div align="center">
+										<button id="btnBuscar" label="${labels.microcurriculo.buscar}" />
+									</div>
+								</row>
+							</rows>											
+						</grid>
+						<separator />
+						
+						<div width="100%">
+							<borderlayout height="685px">
+								<north border="0" height="32px">
+									<listbox autopaging="true" width="98%">
+										<listhead>
+											<listheader label="${labels.microcurriculo.headerCodigo}"  align="center" width="12%"/>
+											<listheader label="${labels.microcurriculo.u_academica}" align="center"/>
+											<listheader label="${labels.microcurriculo.dependencia}" align="center"/>
+											<listheader label="${labels.microcurriculo.nucleo}" align="center"/>
+											<listheader label="${labels.microcurriculo.idmateria}" align="center"/>
+											<listheader label="${labels.microcurriculo.docente}" align="center"/>
+											<listheader label="${labels.microcurriculo.estados}" align="center"/>
+										</listhead>
+									</listbox>
+								</north>
+								<center autoscroll="true" border="none">
+									<listbox id="listaMicrocurriculo" autopaging="true" width="98%">
+										<listhead>
+											<listheader align="center" width="12%"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+											<listheader align="center"/>
+										</listhead>
+									</listbox>
+								</center>
+							</borderlayout>			
+						</div> 
+						
+					</div>
+				</center>
+			</borderlayout>
+		</center>
+		
+		<south border="0" height="80px" sclass="fondoEncabezado">
+			<include id="footerIdx" src="/_sections/footer.zul" />
+		</south>
+	</borderlayout>
+</window>
+</zk>
