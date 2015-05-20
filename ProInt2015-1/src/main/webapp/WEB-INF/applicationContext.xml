@@ -43,7 +43,7 @@
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisito.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamento.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentexnucleo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentexDependencia.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateria.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPais.hbm.xml</value>
@@ -117,7 +117,7 @@
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="docentexNucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DocentexNucleoDAOHibernate">
+        <bean id="docentexDependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DocentexDependenciaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
@@ -280,8 +280,8 @@
         	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
         </bean>
         
-        <bean id="docentexNucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DocentexNucleoNGCImpl">
-        	<property name="docentexNucleoDao" ref="docentexNucleoDao" />
+        <bean id="docentexDependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DocentexDependenciaNGCImpl">
+        	<property name="docentexDependenciaDao" ref="docentexDependenciaDao" />
         	<property name="nucleoDao" ref="nucleoDao" />
         	<property name="personaDao" ref="personaDao" />
         </bean>

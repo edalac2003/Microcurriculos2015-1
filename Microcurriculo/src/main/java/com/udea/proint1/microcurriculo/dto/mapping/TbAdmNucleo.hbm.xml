@@ -26,12 +26,7 @@
         <property name="vrModfecha" type="date">
             <column name="VR_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmDocentesxnucleos" table="TB_ADM_DOCENTESXNUCLEO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="VR_NUCLEO" length="7" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo" />
-        </set>
+        
         <set name="tbAdmMateriases" table="TB_ADM_MATERIAS" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="VR_NUCLEO" length="7" not-null="true" />

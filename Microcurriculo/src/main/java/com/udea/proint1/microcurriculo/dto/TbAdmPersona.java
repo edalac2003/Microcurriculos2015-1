@@ -11,6 +11,19 @@ import java.util.Set;
  */
 public class TbAdmPersona implements java.io.Serializable {
 
+	public Set getTbAdmDocentesxdependencias() {
+		return tbAdmDocentesxdependencias;
+	}
+
+	public void setTbAdmDocentesxdependencias(Set tbAdmDocentesxdependencias) {
+		this.tbAdmDocentesxdependencias = tbAdmDocentesxdependencias;
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String vrIdpersona;
 	private TbAdmTipopersona tbAdmTipopersona;
 	private TbAdmCiudad tbAdmCiudad;
@@ -23,9 +36,10 @@ public class TbAdmPersona implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 	private Set tbAdmUsuarioses = new HashSet(0);
-	private Set tbAdmDocentesxnucleos = new HashSet(0);
+	private Set tbAdmDocentesxdependencias = new HashSet(0);
 
 	public TbAdmPersona() {
+		
 	}
 
 	public TbAdmPersona(String vrIdpersona, TbAdmTipopersona tbAdmTipopersona,
@@ -45,7 +59,8 @@ public class TbAdmPersona implements java.io.Serializable {
 			TbAdmTipoidentificacion tbAdmTipoidentificacion, String vrNombres,
 			String vrApellidos, String vrEmail, String vrTelefono,
 			int blEstado, String vrModusuario, Date dtModfecha,
-			Set tbAdmUsuarioses, Set tbAdmDocentesxnucleos) {
+			Set tbAdmUsuarioses, Set tbAdmDocentesxdependencias) {
+		super();
 		this.vrIdpersona = vrIdpersona;
 		this.tbAdmTipopersona = tbAdmTipopersona;
 		this.tbAdmCiudad = tbAdmCiudad;
@@ -58,7 +73,7 @@ public class TbAdmPersona implements java.io.Serializable {
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 		this.tbAdmUsuarioses = tbAdmUsuarioses;
-		this.tbAdmDocentesxnucleos = tbAdmDocentesxnucleos;
+		this.tbAdmDocentesxdependencias = tbAdmDocentesxdependencias;
 	}
 
 	public String getVrIdpersona() {
@@ -158,12 +173,6 @@ public class TbAdmPersona implements java.io.Serializable {
 		this.tbAdmUsuarioses = tbAdmUsuarioses;
 	}
 
-	public Set getTbAdmDocentesxnucleos() {
-		return this.tbAdmDocentesxnucleos;
-	}
-
-	public void setTbAdmDocentesxnucleos(Set tbAdmDocentesxnucleos) {
-		this.tbAdmDocentesxnucleos = tbAdmDocentesxnucleos;
-	}
-
+	
+	
 }

@@ -26,6 +26,12 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
+        <set name="tbAdmDocentexDependencias" table="TB_ADM_DOCENTEXDEPENDENCIA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="VR_NUCLEO" length="7" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia" />
+        </set>
         <set name="tbAdmNucleo" table="TB_ADM_NUCLEO" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="VR_DEPENDENCIA" length="4" not-null="true" />

@@ -8,21 +8,21 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.udea.proint1.microcurriculo.dao.DocentexNucleoDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo;
+import com.udea.proint1.microcurriculo.dao.DocentexDependenciaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
-public class DocentexNucleoDAOHibernate extends HibernateDaoSupport implements DocentexNucleoDAO {
+public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport implements DocentexDependenciaDAO {
 
 	@Override
-	public void guardarDocentesxNucleo(TbAdmDocentexnucleo docentesxNucleo)
+	public void guardarDocentesxDependencia(TbAdmDocentexDependencia docentesxDependencia)
 			throws ExcepcionesDAO {
 		Session session = null;
 
 		try {
 			session = getSession();
-			session.save(docentesxNucleo);
+			session.save(docentesxDependencia);
 			session.flush(); 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
@@ -32,51 +32,51 @@ public class DocentexNucleoDAOHibernate extends HibernateDaoSupport implements D
 	}
 
 	@Override
-	public TbAdmDocentexnucleo obtenerDocentesxNucleo(int id)
+	public TbAdmDocentexDependencia obtenerDocentesxDependencia(int id)
 			throws ExcepcionesDAO {
 		Session session = null;
-		TbAdmDocentexnucleo docentesxnucleo = null;
+		TbAdmDocentexDependencia docentesxDependencia = null;
 
 		try {
 			session = getSession();
-			docentesxnucleo = (TbAdmDocentexnucleo) session.get(TbAdmDocentexnucleo.class, id);
+			docentesxDependencia = (TbAdmDocentexDependencia) session.get(TbAdmDocentexDependencia.class, id);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);
 		} finally{
 			session.close();
 		}
-		return docentesxnucleo;
+		return docentesxDependencia;
 	}
 
 	@Override
-	public List<TbAdmDocentexnucleo> listarDocentesxNucleo()
+	public List<TbAdmDocentexDependencia> listarDocentesxDependencia()
 			throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmDocentexnucleo> docentesxnucleo = new ArrayList<TbAdmDocentexnucleo>();
+        List<TbAdmDocentexDependencia> docentesxDependencia = new ArrayList<TbAdmDocentexDependencia>();
         
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbAdmDocentexnucleo.class);
+			Criteria criteria = session.createCriteria(TbAdmDocentexDependencia.class);
 			
-			docentesxnucleo = criteria.list();
+			docentesxDependencia = criteria.list();
 		}catch(HibernateException e){
 			throw new ExcepcionesDAO(e);
 			
 		} finally{
 			session.close();
 		}
-		return docentesxnucleo;
+		return docentesxDependencia;
 	}
 
 	@Override
-	public void actualizarDocentesxNucleo(TbAdmDocentexnucleo docentesxNucleo)
+	public void actualizarDocentesxDependencia(TbAdmDocentexDependencia docentesxDependencia)
 			throws ExcepcionesDAO {
 		Session session = null;
 
 		try {
 			session = getSession();
-			this.getHibernateTemplate().update(docentesxNucleo);
+			this.getHibernateTemplate().update(docentesxDependencia);
 
 		} catch (HibernateException e) {
 			throw new ExcepcionesDAO(e);

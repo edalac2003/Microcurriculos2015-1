@@ -44,11 +44,11 @@
             </key>
             <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" />
         </set>
-        <set name="tbAdmDocentesxnucleos" table="TB_ADM_DOCENTESXNUCLEO" inverse="true" lazy="true" fetch="select">
+        <set name="tbAdmDocentesxdependencias" table="TB_ADM_DOCENTEXDEPENDENCIA" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="VR_DOCENTE" length="15" not-null="true" />
             </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo" />
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia" />
         </set>
     </class>
 </hibernate-mapping>
