@@ -3,13 +3,13 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.udea.proint1.microcurriculo.dto.TbAdmDocentexnucleo" table="TB_ADM_DOCENTEXNUCLEO">
+    <class name="com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia" table="TB_ADM_DOCENTEXDEPENDENCIA">
         <id name="nbId" type="int">
             <column name="NB_ID" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmNucleo" class="com.udea.proint1.microcurriculo.dto.TbAdmNucleo" fetch="join" lazy="false">
-            <column name="VR_NUCLEO" length="7" not-null="true" />
+        <many-to-one name="tbAdmDependencia" class="com.udea.proint1.microcurriculo.dto.TbAdmDependencia" fetch="join" lazy="false">
+            <column name="VR_DEPENDENCIA" length="7" not-null="true" />
         </many-to-one>
         <many-to-one name="tbAdmPersona" class="com.udea.proint1.microcurriculo.dto.TbAdmPersona" fetch="join" lazy="false">
             <column name="VR_DOCENTE" length="15" not-null="true" />

@@ -19,8 +19,7 @@ public class TbAdmNucleo implements java.io.Serializable {
 	private String vrAlias;
 	private TbAdmPersona vrResponsable;
 	private String vrModusuario;
-	private Date vrModfecha;
-	private Set tbAdmDocentesxnucleos = new HashSet(0);
+	private Date vrModfecha;	
 	private Set tbAdmMateriases = new HashSet(0);
 
 	public TbAdmNucleo() {
@@ -57,13 +56,12 @@ public class TbAdmNucleo implements java.io.Serializable {
 
 	public TbAdmNucleo(String vrIdnucleo, TbAdmDependencia tbAdmDependencia,
 			String vrNombre, String vrModusuario, Date vrModfecha,
-			Set tbAdmDocentesxnucleos, Set tbAdmMateriases) {
+			Set tbAdmMateriases) {
 		this.vrIdnucleo = vrIdnucleo;
 		this.tbAdmDependencia = tbAdmDependencia;
 		this.vrNombre = vrNombre;
 		this.vrModusuario = vrModusuario;
 		this.vrModfecha = vrModfecha;
-		this.tbAdmDocentesxnucleos = tbAdmDocentesxnucleos;
 		this.tbAdmMateriases = tbAdmMateriases;
 	}
 
@@ -123,14 +121,7 @@ public class TbAdmNucleo implements java.io.Serializable {
 		this.vrModfecha = vrModfecha;
 	}
 
-	public Set getTbAdmDocentesxnucleos() {
-		return this.tbAdmDocentesxnucleos;
-	}
-
-	public void setTbAdmDocentesxnucleos(Set tbAdmDocentesxnucleos) {
-		this.tbAdmDocentesxnucleos = tbAdmDocentesxnucleos;
-	}
-
+	
 	public Set getTbAdmMateriases() {
 		return this.tbAdmMateriases;
 	}

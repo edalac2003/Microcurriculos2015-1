@@ -16,14 +16,17 @@
         <property name="blEstado" type="int">
             <column name="BL_ESTADO" precision="2" scale="0" />
         </property>
-        <many-to-one name="tbAdmRol" class="com.udea.proint1.microcurriculo.dto.TbAdmRol" fetch="join" lazy="false">
-            <column name="NB_ROL" precision="2" scale="0" not-null="true" />
-        </many-to-one>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
+        <set name="tbAdmRolxUsuarios" table="TB_ADM_ROLXUSUARIO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NB_ROL" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario" />
+        </set>
     </class>
 </hibernate-mapping>

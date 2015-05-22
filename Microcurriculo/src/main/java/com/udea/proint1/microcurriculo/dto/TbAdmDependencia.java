@@ -19,6 +19,7 @@ public class TbAdmDependencia implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 	private Set tbAdmNucleo = new HashSet(0);
+	private Set tbAdmDocentexDependencias = new HashSet(0);
 
 	public TbAdmDependencia() {
 		super();
@@ -121,5 +122,12 @@ public class TbAdmDependencia implements java.io.Serializable {
 	public void setTbAdmNucleo(Set tbAdmNucleo) {
 		this.tbAdmNucleo = tbAdmNucleo;
 	}
+	
+	public Set getTbAdmDocentexDependencias() {
+		return tbAdmDocentexDependencias;
+	}
 
+	public void setTbAdmDocentexDependencias(Set tbAdmDocentexDependencias) {
+		this.tbAdmDocentexDependencias = tbAdmDocentexDependencias;
+	}
 }

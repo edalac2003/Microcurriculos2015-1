@@ -43,7 +43,7 @@
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisito.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamento.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentexnucleo.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentexDependencia.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateria.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPais.hbm.xml</value>
@@ -51,7 +51,8 @@
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisito.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipopersona.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRol.hbm.xml</value>
+				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRolxUsuario.hbm.xml</value>				
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuario.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
@@ -76,7 +77,6 @@
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmHistorico.hbm.xml</value>
 				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateriaxsemestre.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRol.hbm.xml</value>
 			</list>
 		</property>
             
@@ -117,7 +117,7 @@
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="docentexNucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DocentexNucleoDAOHibernate">
+        <bean id="docentexDependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DocentexDependenciaDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
@@ -149,7 +149,11 @@
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="tipoPersonaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TipoPersonaDAOHibernate">
+        <bean id="rolDao" class="com.udea.proint1.microcurriculo.dao.hibernate.RolDAOHibernate">
+        	<property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+        
+        <bean id="rolxUsuarioDao" class="com.udea.proint1.microcurriculo.dao.hibernate.RolxUsuarioDAOHibernate">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
@@ -280,9 +284,9 @@
         	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
         </bean>
         
-        <bean id="docentexNucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DocentexNucleoNGCImpl">
-        	<property name="docentexNucleoDao" ref="docentexNucleoDao" />
-        	<property name="nucleoDao" ref="nucleoDao" />
+        <bean id="docentexDependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DocentexDependenciaNGCImpl">
+        	<property name="docentexDependenciaDao" ref="docentexDependenciaDao" />
+        	<property name="dependenciaDao" ref="dependenciaDao" />
         	<property name="personaDao" ref="personaDao" />
         </bean>
         
@@ -297,7 +301,7 @@
         
         <bean id="personaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl">
         	<property name="personaDao" ref="personaDao" />
-        	<property name="tipoPersonaDao" ref="tipoPersonaDao" />
+<!--         	<property name="rolxUsuarioDao" ref="rolxUsuarioDao" /> -->
         	<property name="ciudadDao" ref="ciudadDao" />
         </bean>
         
@@ -314,8 +318,12 @@
         	<property name="tipoIdentificacionDao" ref="tipoIdentificacionDao" />
         </bean>
         
-        <bean id="tipoPersonaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TipoPersonaNGCImpl">
-        	<property name="tipoPersonaDao" ref="tipoPersonaDao" />
+        <bean id="rolNGC" class="com.udea.proint1.microcurriculo.ngc.impl.RolNGCImpl">
+<!--         	<property name="rolDao" ref="rolDao" /> -->
+        </bean>
+        
+        <bean id="rolxUsuarioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.RolxUsuarioNGCImpl">
+        	<property name="rolxUsuarioDao" ref="rolxUsuarioDao" />
         </bean>
         
         <bean id="unidadAcademicaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadAcademicaNGCImpl">
@@ -553,7 +561,7 @@
         	<property name="paisNGC" ref="paisNGC" />
         	<property name="departamentoNGC" ref="departamentoNGC" />
         	<property name="tipoIdentificacionNGC" ref="tipoIdentificacionNGC" />
-        	<property name="tipoPersonaNGC" ref="tipoPersonaNGC" />
+<!--         	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" /> -->
         </bean>
         
         <bean id="cargarDatosFormas2" class="com.udea.proint1.microcurriculo.ctrl.CargarDatosFormas2" scope="prototype">
@@ -670,5 +678,6 @@
         <bean id="inicioSesionCtrl" class="com.udea.proint1.microcurriculo.ctrl.InicioSesionCtrl" scope="prototype">
         	<property name="usuarioNGC" ref="usuarioNGC" />
         	<property name="personaNGC" ref="personaNGC" />
+        	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" />
         </bean>
 </beans>

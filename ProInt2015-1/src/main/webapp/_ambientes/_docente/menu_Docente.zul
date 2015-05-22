@@ -1,0 +1,48 @@
+<?page contentType="text/html;charset=UTF-8"?>
+
+<zk xmlns:n="native">
+	<!-- Begin Menu -->
+	<vlayout width="98%">
+		<groupbox mold="3d" closable="false">
+			<caption label="${labels.microcurriculo.tituloMicro}" />
+			<hbox align="center" height="30px">
+				<a href="/microcurriculo/crearMic.zul" label="${labels.microcurriculo.tituloCrear}" />
+			</hbox>	
+			<hbox align="center" height="25px">
+				<a href="/microcurriculo/listamic.zul" label="${labels.microcurriculo.tituloListar}" />
+			</hbox>
+			<hbox align="center" height="25px">
+				<a href="" label="${labels.microcurriculo.buscar}" />
+			</hbox>
+			<hbox align="center" height="25px">
+				<a href="" label="${labels.microcurriculo.toolbar.logout}" />
+			</hbox>
+		</groupbox>
+		
+<!-- 		<groupbox mold="3d"> -->
+<!-- 			<caption image="/_img/icons/32x32/docente32.png" label="${labels.microcurriculo.tituloDocente}" /> -->
+<!-- 			<hbox align="center"  height="30px"> -->
+<!-- 				<a href="/_sections/construc.zul" label="${labels.microcurriculo.tituloDocente}" /> -->
+<!-- 			</hbox>	 -->
+<!-- 		</groupbox> -->
+		
+<!-- 		<groupbox mold="3d"> -->
+<!-- 			<caption image="/_img/icons/32x32/materia32.png" label="${labels.microcurriculo.tituloMateria}" /> -->
+<!-- 			<hbox align="center" height="30px"> -->
+<!-- 				<a href="/materia/crearMateria.zul" label="Crear Materia" /> -->
+<!-- 			</hbox>	 -->
+<!-- 			<hbox align="center" height="25px"> -->
+<!-- 				<a href="/materia/listarMaterias.zul" label="Listar Materias" /> -->
+<!-- 			</hbox> -->
+<!-- 		</groupbox> -->
+		
+<!-- 		<groupbox mold="3d"> -->
+<!-- 			<caption image="/_img/icons/32x32/nucleo32.png" label="${labels.microcurriculo.tituloNucleo}" /> -->
+<!-- 			<hbox align="center" height="30px"> -->
+<!-- 				<a href="/_nucleo/crearNucleo.zul" label="${labels.microcurriculo.tituloNucleo}" /> -->
+<!-- 			</hbox>	 -->
+<!-- 		</groupbox> -->
+	</vlayout>
+		
+	<!-- End Menu -->
+</zk>

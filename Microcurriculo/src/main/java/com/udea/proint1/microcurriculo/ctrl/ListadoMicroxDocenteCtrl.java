@@ -391,7 +391,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {
 		
 		super.doAfterCompose(comp);
-		cargarDatosEncabezado();
+//		cargarDatosEncabezado();
 		listarMicrocurriculos();
 	}
 }

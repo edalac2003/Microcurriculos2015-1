@@ -11,36 +11,56 @@ import java.util.Set;
  */
 public class TbAdmTipopersona implements java.io.Serializable {
 
-	private int nbIdpersona;
+	private int nbId;
+	private TbAdmPersona vrPersona;
 	private String vrDescripcion;
+	private String vrNivel;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbAdmPersonas = new HashSet(0);
-
+	
 	
 	public TbAdmTipopersona() {
 		super();
 	}
 
-	public TbAdmTipopersona(int nbIdpersona) {
-		this.nbIdpersona = nbIdpersona;
+	public TbAdmTipopersona(int nbId) {
+		super();
+		this.nbId = nbId;
 	}
 
-	public TbAdmTipopersona(int nbIdpersona, String vrDescripcion,
-			String vrModusuario, Date dtModfecha, Set tbAdmPersonas) {
-		this.nbIdpersona = nbIdpersona;
+	public TbAdmTipopersona(int nbId, TbAdmPersona vrPersona,
+			String vrDescripcion) {
+		super();
+		this.nbId = nbId;
+		this.vrPersona = vrPersona;
+		this.vrDescripcion = vrDescripcion;
+	}
+
+	public TbAdmTipopersona(int nbId, TbAdmPersona vrPersona,
+			String vrDescripcion, String vrModusuario, Date dtModfecha) {
+		super();
+		this.nbId = nbId;
+		this.vrPersona = vrPersona;
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbAdmPersonas = tbAdmPersonas;
 	}
 
-	public int getNbIdpersona() {
-		return this.nbIdpersona;
+
+	public int getNbId() {
+		return nbId;
 	}
 
-	public void setNbIdpersona(int nbIdpersona) {
-		this.nbIdpersona = nbIdpersona;
+	public void setNbId(int nbId) {
+		this.nbId = nbId;
+	}
+
+	public TbAdmPersona getVrPersona() {
+		return vrPersona;
+	}
+
+	public void setVrPersona(TbAdmPersona vrPersona) {
+		this.vrPersona = vrPersona;
 	}
 
 	public String getVrDescripcion() {
@@ -51,6 +71,14 @@ public class TbAdmTipopersona implements java.io.Serializable {
 		this.vrDescripcion = vrDescripcion;
 	}
 
+	public String getVrNivel() {
+		return vrNivel;
+	}
+
+	public void setVrNivel(String vrNivel) {
+		this.vrNivel = vrNivel;
+	}
+	
 	public String getVrModusuario() {
 		return this.vrModusuario;
 	}
@@ -66,13 +94,4 @@ public class TbAdmTipopersona implements java.io.Serializable {
 	public void setDtModfecha(Date dtModfecha) {
 		this.dtModfecha = dtModfecha;
 	}
-
-	public Set getTbAdmPersonas() {
-		return this.tbAdmPersonas;
-	}
-
-	public void setTbAdmPersonas(Set tbAdmPersonas) {
-		this.tbAdmPersonas = tbAdmPersonas;
-	}
-
 }

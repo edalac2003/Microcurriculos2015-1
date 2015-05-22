@@ -11,54 +11,55 @@ import java.util.Set;
  */
 public class TbAdmPersona implements java.io.Serializable {
 
-	private String vrIdpersona;
-	private TbAdmTipopersona tbAdmTipopersona;
-	private TbAdmCiudad tbAdmCiudad;
-	private TbAdmTipoidentificacion tbAdmTipoidentificacion;
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private String vrIdpersona;	
 	private String vrNombres;
 	private String vrApellidos;
 	private String vrEmail;
 	private String vrTelefono;
+	private TbAdmCiudad tbAdmCiudad;
+	private TbAdmTipoidentificacion tbAdmTipoidentificacion;
 	private int blEstado;
 	private String vrModusuario;
 	private Date dtModfecha;
 	private Set tbAdmUsuarioses = new HashSet(0);
-	private Set tbAdmDocentesxnucleos = new HashSet(0);
+	private Set tbAdmDocentesxdependencias = new HashSet(0);
+	private Set tbAdmRolesxPersonas = new HashSet(0);
 
 	public TbAdmPersona() {
+		
 	}
 
-	public TbAdmPersona(String vrIdpersona, TbAdmTipopersona tbAdmTipopersona,
-			TbAdmCiudad tbAdmCiudad,
-			TbAdmTipoidentificacion tbAdmTipoidentificacion, String vrNombres,
-			String vrApellidos) {
+	public TbAdmPersona(String vrIdpersona, String vrNombres, String vrApellidos, String vrEmail, String vrTelefono, int blEstado) {
+		super();
 		this.vrIdpersona = vrIdpersona;
-		this.tbAdmTipopersona = tbAdmTipopersona;
-		this.tbAdmCiudad = tbAdmCiudad;
-		this.tbAdmTipoidentificacion = tbAdmTipoidentificacion;
-		this.vrNombres = vrNombres;
-		this.vrApellidos = vrApellidos;
-	}
-
-	public TbAdmPersona(String vrIdpersona, TbAdmTipopersona tbAdmTipopersona,
-			TbAdmCiudad tbAdmCiudad,
-			TbAdmTipoidentificacion tbAdmTipoidentificacion, String vrNombres,
-			String vrApellidos, String vrEmail, String vrTelefono,
-			int blEstado, String vrModusuario, Date dtModfecha,
-			Set tbAdmUsuarioses, Set tbAdmDocentesxnucleos) {
-		this.vrIdpersona = vrIdpersona;
-		this.tbAdmTipopersona = tbAdmTipopersona;
-		this.tbAdmCiudad = tbAdmCiudad;
-		this.tbAdmTipoidentificacion = tbAdmTipoidentificacion;
 		this.vrNombres = vrNombres;
 		this.vrApellidos = vrApellidos;
 		this.vrEmail = vrEmail;
 		this.vrTelefono = vrTelefono;
 		this.blEstado = blEstado;
+	}
+
+	public TbAdmPersona(String vrIdpersona, String vrNombres, String vrApellidos, String vrEmail, String vrTelefono,
+			TbAdmCiudad tbAdmCiudad, TbAdmTipoidentificacion tbAdmTipoidentificacion, int blEstado,
+			String vrModusuario, Date dtModfecha) {
+		super();
+		this.vrIdpersona = vrIdpersona;
+		this.vrNombres = vrNombres;
+		this.vrApellidos = vrApellidos;
+		this.vrEmail = vrEmail;
+		this.vrTelefono = vrTelefono;
+		this.tbAdmCiudad = tbAdmCiudad;
+		this.tbAdmTipoidentificacion = tbAdmTipoidentificacion;
+		this.blEstado = blEstado;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbAdmUsuarioses = tbAdmUsuarioses;
-		this.tbAdmDocentesxnucleos = tbAdmDocentesxnucleos;
 	}
 
 	public String getVrIdpersona() {
@@ -67,14 +68,6 @@ public class TbAdmPersona implements java.io.Serializable {
 
 	public void setVrIdpersona(String vrIdpersona) {
 		this.vrIdpersona = vrIdpersona;
-	}
-
-	public TbAdmTipopersona getTbAdmTipopersona() {
-		return this.tbAdmTipopersona;
-	}
-
-	public void setTbAdmTipopersona(TbAdmTipopersona tbAdmTipopersona) {
-		this.tbAdmTipopersona = tbAdmTipopersona;
 	}
 
 	public TbAdmCiudad getTbAdmCiudad() {
@@ -158,12 +151,19 @@ public class TbAdmPersona implements java.io.Serializable {
 		this.tbAdmUsuarioses = tbAdmUsuarioses;
 	}
 
-	public Set getTbAdmDocentesxnucleos() {
-		return this.tbAdmDocentesxnucleos;
+	public Set getTbAdmDocentesxdependencias() {
+		return tbAdmDocentesxdependencias;
 	}
 
-	public void setTbAdmDocentesxnucleos(Set tbAdmDocentesxnucleos) {
-		this.tbAdmDocentesxnucleos = tbAdmDocentesxnucleos;
+	public void setTbAdmDocentesxdependencias(Set tbAdmDocentesxdependencias) {
+		this.tbAdmDocentesxdependencias = tbAdmDocentesxdependencias;
+	}
+	
+	public Set getTbAdmRolesxPersonas() {
+		return tbAdmRolesxPersonas;
 	}
 
+	public void setTbAdmRolesxPersonas(Set tbAdmRolesxPersonas) {
+		this.tbAdmRolesxPersonas = tbAdmRolesxPersonas;
+	}
 }

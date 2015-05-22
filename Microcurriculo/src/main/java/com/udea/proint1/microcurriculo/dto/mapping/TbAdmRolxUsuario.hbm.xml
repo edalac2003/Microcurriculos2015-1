@@ -3,25 +3,25 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.udea.proint1.microcurriculo.dto.TbAdmRol" table="TB_ADM_ROL">
+    <class name="com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario" table="TB_ADM_ROLXUSUARIO">
         <id name="nbId" type="integer">
             <column name="NB_ID" precision="22" scale="0" />
             <generator class="increment" />
         </id>
-        <property name="vrDescripcion" type="string">
-            <column name="VR_DESCRIPCION" length="128" />
+        <many-to-one name="tbAdmRol" class="com.udea.proint1.microcurriculo.dto.TbAdmRol" fetch="join" lazy="false">
+            <column name="NB_ROL" length="15" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbAdmUsuario" class="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" fetch="join" lazy="false">
+            <column name="VR_USUARIO" length="50" not-null="true" />
+        </many-to-one>
+        <property name="vrNivel" type="string">
+            <column name="VR_NIVEL" length="20" />
         </property>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
-        </property>
-        <set name="tbAdmRolxUsuarios" table="TB_ADM_ROLXUSUARIO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_ROL" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario" />
-        </set>
+        </property>               
     </class>
 </hibernate-mapping>

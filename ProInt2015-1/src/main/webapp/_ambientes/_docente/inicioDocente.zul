@@ -9,12 +9,12 @@
 		<north height="100px" border="0" sclass="fondoEncabezado">
 			<include id="headerIdx" src="/_sections/header.zul" />							
 		</north>
-		<east width="180px" border="0">
-			<label value="" />
-		</east>			
-		<west width="180px" border="none">
-			<label value="" />
-		</west>
+<!-- 		<east width="180px" border="0"> -->
+<!-- 			<label value="" /> -->
+<!-- 		</east>			 -->
+<!-- 		<west width="180px" border="none"> -->
+<!-- 			<label></label> -->
+<!-- 		</west> -->
 		<center border="none">
 			<borderlayout height="600px">
 				<north height="110px" border="none">
@@ -49,6 +49,10 @@
 						</hbox>
 					</div>
 				</north>
+				<west width="180px" border="none">
+					<include src="/_ambientes/_docente/menu_Docente.zul" />
+				</west>
+				<east width="180px" border="none"></east>
 				<center border="none" apply="${listadoMicroxDocente}">
 					<listbox id="listaMicrocurriculo">
 						<listhead>
