@@ -158,7 +158,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 		this.negocioMC = negocioMC;
 	}*/
 	
-	//Esta instruccion va en el controlador de la vista que se encargará de mostrar los resultados de la consulta
+	//Esta instruccion va en el controlador de la vista que se encargarï¿½ de mostrar los resultados de la consulta
 	//arg.get("objeto")
 	
 	public void setMateriaNGC(MateriaNGC materiaNGC) {
@@ -204,7 +204,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	/**
 	 * Este evento ocurre cuando se hace click en sobre el boton <AddCibergrafia>.
 	 * 
-	 * Captura y valora los valores y los adiciona al ListBox Listacibergrafia a traves del método llenarListaCibergrafia
+	 * Captura y valora los valores y los adiciona al ListBox Listacibergrafia a traves del mï¿½todo llenarListaCibergrafia
 	 * 
 	 * @param event
 	 */
@@ -219,16 +219,16 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 					if (!"".equals(cmbTipoCibergrafia.getValue())){
 						llenarListaCibergrafia();
 					} else {
-						Messagebox.show("Se Requiere información en el Campo <Tipo Cibergrafía>");
+						Messagebox.show("Se Requiere informaciï¿½n en el Campo <Tipo Cibergrafï¿½a>");
 					}
 				} else {
-					Messagebox.show("Se Requiere información en el Campo <URL Sitio>");
+					Messagebox.show("Se Requiere informaciï¿½n en el Campo <URL Sitio>");
 				}
 			} else {
-				Messagebox.show("Se Requiere información en el Campo <Nombre Sitio>");
+				Messagebox.show("Se Requiere informaciï¿½n en el Campo <Nombre Sitio>");
 			}				
 		} else {
-			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
+			Messagebox.show("Se Requiere informaciï¿½n en el Campo <Nombre de la Unidad>");
 		}
 	}
 	
@@ -361,7 +361,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 
 	
 	/**
-	 * Este Método activa acciones conforme se seleccione un Tabbox del TabPanel.
+	 * Este Mï¿½todo activa acciones conforme se seleccione un Tabbox del TabPanel.
 	 */
 	public void onSelect$fichaContenidos(){
 		Tabpanel tabpanels = (Tabpanel)fichaContenidos.getSelectedPanel();
@@ -394,15 +394,15 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	private void validarInfoUnidades(){
 		if(listaUnidades.getItems().size() < 1){
-			Messagebox.show("NO se encontró información ingresada en la sección Unidades. No será posible diligenciar este formulario hasta que haya ingresado información válida en el formulario <Unidades y Temas>.");		
+			Messagebox.show("NO se encontrï¿½ informaciï¿½n ingresada en la secciï¿½n Unidades. No serï¿½ posible diligenciar este formulario hasta que haya ingresado informaciï¿½n vï¿½lida en el formulario <Unidades y Temas>.");		
 		}
 	}
 	
 	private void validarInfoTemas(){
 		if(listaUnidades.getItems().size() < 1){
-			Messagebox.show("NO se encontró información ingresada en la sección Unidades. No será posible diligenciar este formulario hasta que haya ingresado información válida en el formulario anterior.");		
+			Messagebox.show("NO se encontrï¿½ informaciï¿½n ingresada en la secciï¿½n Unidades. No serï¿½ posible diligenciar este formulario hasta que haya ingresado informaciï¿½n vï¿½lida en el formulario anterior.");		
 		}else if (listaTemas.getItems().size() < 1){
-			Messagebox.show("NO se encontró información ingresada en la sección Temas. No será posible diligenciar este formulario hasta que haya ingresado información válida en el formulario anterior.");
+			Messagebox.show("NO se encontrï¿½ informaciï¿½n ingresada en la secciï¿½n Temas. No serï¿½ posible diligenciar este formulario hasta que haya ingresado informaciï¿½n vï¿½lida en el formulario anterior.");
 		}		
 	}
 	
@@ -414,15 +414,15 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 						if (cmbTipoBibliografia.getValue() != null && (cmbTipoBibliografia.getValue().trim().length() > 0)){
 							llenarListaBibliografia();
 						} else
-							Messagebox.show("Se Requiere información en el Campo <Tipo Bibliografia>");					
+							Messagebox.show("Se Requiere informaciï¿½n en el Campo <Tipo Bibliografia>");					
 					} else
-						Messagebox.show("Se Requiere información en el Campo <ISBN>");
+						Messagebox.show("Se Requiere informaciï¿½n en el Campo <ISBN>");
 				} else
-					Messagebox.show("Se Requiere información en el Campo <Autor>");				
+					Messagebox.show("Se Requiere informaciï¿½n en el Campo <Autor>");				
 			} else
-				Messagebox.show("Se Requiere información en el Campo <Referencia Bibliografica>");
+				Messagebox.show("Se Requiere informaciï¿½n en el Campo <Referencia Bibliografica>");
 		} else 
-			Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
+			Messagebox.show("Se Requiere informaciï¿½n en el Campo <Nombre de la Unidad>");
 	}
 	
 	private void llenarListaBibliografia(){
@@ -468,15 +468,15 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 				if (dtFechaEvaluacion.getValue() != null) {
 					llenarListaActividades();
 				} else{
-					Messagebox.show("La Información del Campo <fecha> no es válida");
+					Messagebox.show("La Informaciï¿½n del Campo <fecha> no es vï¿½lida");
 					dtFechaEvaluacion.setFocus(true);
 				}					
 			} else{
-				Messagebox.show("Se Requiere información en el Campo <Porcentaje>");
+				Messagebox.show("Se Requiere informaciï¿½n en el Campo <Porcentaje>");
 				txtPorcentajeActividad.setFocus(true);
 			}	
 		} else {
-			Messagebox.show("Se Requiere información en el Campo <Actividad>");
+			Messagebox.show("Se Requiere informaciï¿½n en el Campo <Actividad>");
 			txtActividadMicro.setFocus(true);
 		}			
 	}
@@ -537,7 +537,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			txtObjetivoEspecifico.setText(null);
 			txtObjetivoEspecifico.setValue(null);
 		} else {
-			Messagebox.show("Se Requiere información en el Campo <Objetivo Especifico>");
+			Messagebox.show("Se Requiere informaciï¿½n en el Campo <Objetivo Especifico>");
 		}
 	}
 	
@@ -663,7 +663,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 			if (listaUnidades.getItems().size() > 0)
 				cmbIdUnidad.focus();
 			else
-				Messagebox.show("Se Requiere información en el Campo <Nombre de la Unidad>");
+				Messagebox.show("Se Requiere informaciï¿½n en el Campo <Nombre de la Unidad>");
 	}
 	
 	
@@ -674,7 +674,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	 * Boton btnAddTemas Evento onClick
 	 * 
 	 * Captura el contenido de los campos idUnidad, nombreTema y numeroSemanas, la cual se almacena en una 
-	 * lista previa validación de contenido existente.
+	 * lista previa validaciï¿½n de contenido existente.
 	 * 
 	 * @param event
 	 */
@@ -687,7 +687,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	/*
 	 * Captura el contenido de los campos idUnidad, nombreTema y numeroSemanas, la cual se almacena en una 
-	 * lista previa validación de contenido existente.
+	 * lista previa validaciï¿½n de contenido existente.
 	 * 
 	 */
 	private void validarCamposTemas(String idUnidad, String nombreTema, int numeroSemanas){
@@ -698,15 +698,15 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 					cmbListaUnidades.setSelectedIndex(-1);
 					cmbListaUnidades.setValue("");
 				}else{
-					Messagebox.show("Se requiere información en el campo <Tiempo (Semanas)>");
+					Messagebox.show("Se requiere informaciï¿½n en el campo <Tiempo (Semanas)>");
 					txtNumeroSemanas.focus();
 				}
 			else{
-				Messagebox.show("Se requiere información en el campo <Nombre Tema>");
+				Messagebox.show("Se requiere informaciï¿½n en el campo <Nombre Tema>");
 				txtNombreTema.focus();
 			}
 		else{
-			Messagebox.show("Se requiere información en el campo <Nombre Unidad>");
+			Messagebox.show("Se requiere informaciï¿½n en el campo <Nombre Unidad>");
 			cmbIdUnidad.focus();
 		}
 			
@@ -783,11 +783,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 					cmbListaTemas.setValue("");;
 					cmbListaUnidades.focus();
 				} else
-					Messagebox.show("Se Requiere información en el Campo <Subtema>");
+					Messagebox.show("Se Requiere informaciï¿½n en el Campo <Subtema>");
 			} else
-				Messagebox.show("Se Requiere información en el Campo <Tema>");			
+				Messagebox.show("Se Requiere informaciï¿½n en el Campo <Tema>");			
 		} else
-			Messagebox.show("Se Requiere información en el Campo <Unidad>");
+			Messagebox.show("Se Requiere informaciï¿½n en el Campo <Unidad>");
 	}
 	
 	private void llenarListaSubTemas(){
@@ -822,7 +822,7 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 //					cmbMateria.appendChild(item);
 //				}
 //			} else {
-//				//System.out.println("El objeto está Vacio");
+//				//System.out.println("El objeto estï¿½ Vacio");
 //			}
 //		} catch (ExcepcionesLogica e) {
 //			logger.error(e);
@@ -881,10 +881,10 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 	
 	
 	/**
-	 * Este metodo de encarga de Cargar, en el ComboBox de Temas de la pestaña Subtemas, los datos hallados de acuerdo a la unidad Seleccionada.
+	 * Este metodo de encarga de Cargar, en el ComboBox de Temas de la pestaï¿½a Subtemas, los datos hallados de acuerdo a la unidad Seleccionada.
 	 * 
 	 * @param lista.  Recibe el ListBox de donde se Extraeran los registros.
-	 * @param unidad. Es el valor que se utilizará para comparar.
+	 * @param unidad. Es el valor que se utilizarï¿½ para comparar.
 	 */
 	private void cargarTemasEnSubtemas(Listbox lista, String unidad){
 		

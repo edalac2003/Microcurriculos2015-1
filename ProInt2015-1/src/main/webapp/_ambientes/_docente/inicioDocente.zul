@@ -56,6 +56,7 @@
 							<listheader label="${labels.microcurriculo.nucleo}" align="center"/>
 							<listheader label="${labels.microcurriculo.idmateria}" align="center"/>
 							<listheader label="${labels.microcurriculo.estados}" align="center" width="15%"/>
+							<listheader label="" align="center" width="15%"/>
 						</listhead>
 					</listbox>
 				</center>

@@ -25,9 +25,9 @@
 							<toolbar id="tb" sclass="vista" height="45px" width="960px">
 								<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
 								<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
-								<toolbarbutton id="tool_consulta_otro" label="Consultar Nuevo" image="/_img/icons/32x32/atras.png" />
 								<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" />
-								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
+								<toolbarbutton id="tool_atras" label="Volver atras" image="/_img/icons/32x32/atras.png" />
+<!-- 								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/> -->
 							</toolbar>
 						</north>						
 						

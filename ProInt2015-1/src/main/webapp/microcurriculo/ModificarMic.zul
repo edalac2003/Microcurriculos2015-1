@@ -18,7 +18,7 @@
 			<east width="14%" border="none">
 				<label />
 			</east>
-			<center border="0" apply="">
+			<center border="0">
 				<div align="center">
 					<borderlayout height="870px">
 						<north border="0"> 
@@ -26,9 +26,9 @@
 								<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
 								<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
 								<toolbarbutton id="tool_save" label="${labels.microcurriculo.toolbar.save}" image="/_img/icons/32x32/save.png" />
-								<toolbarbutton id="tool_modifica_otro" label="Modificar Otro" image="/_img/icons/32x32/atras.png" />
+								<toolbarbutton id="tool_atras" label="Volver atrás" image="/_img/icons/32x32/atras.png"/>
 <!-- 								<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" /> -->
-								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/>
+<!-- 								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/> -->
 							</toolbar>
 						</north>
 						

@@ -184,7 +184,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	
 	Toolbarbutton tool_save;
 	Toolbarbutton tool_print;
-	Toolbarbutton tool_modifica_otro;
+	Toolbarbutton tool_atras;
 	
 	/**
 	 * definición de formato de fecha corta
@@ -867,30 +867,38 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				llenarEvaluaciones(microcurriculo.getVrIdmicrocurriculo());
 				
 			}else{
-				ReiniciarBusqueda();
+				redireccionar();
 			}
 		}
 	}
 	
-	/**
-	 *  reinicia la busqueda de microcurriculos a modificar
-	 */
-	public void ReiniciarBusqueda(){
-		panelModificarMicro.setVisible(true);
-		fichaContenidos.setVisible(false);
-		cargarUnidades();
-		cargarDependencias("");
-		cargarNucleos("");
-		cargarMaterias("");
-		cargarMicrocurriculos("");
-		
-		/**
-		 * Remueve variables de sesion si existen
-		 */
-		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-			Executions.getCurrent().getSession().removeAttribute("idMicro");
-		}
+	public void onClick$tool_atras(){
+		redireccionar();
 	}
+	
+	public void redireccionar(){
+		Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
+	}
+	
+//	/**
+//	 *  reinicia la busqueda de microcurriculos a modificar
+//	 */
+//	public void ReiniciarBusqueda(){
+//		panelModificarMicro.setVisible(true);
+//		fichaContenidos.setVisible(false);
+//		cargarUnidades();
+//		cargarDependencias("");
+//		cargarNucleos("");
+//		cargarMaterias("");
+//		cargarMicrocurriculos("");
+//		
+//		/**
+//		 * Remueve variables de sesion si existen
+//		 */
+//		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+//			Executions.getCurrent().getSession().removeAttribute("idMicro");
+//		}
+//	}
 	
 	/**
 	 * Permite mostrar en la vista los datos asociados a la información general del microcurriculo
@@ -2034,13 +2042,13 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		}	
 	}
 	
-	/**
-	 * Ante el evento click en el botón de reinicio de duplicado, procede a
-	 * llamar el metodo que reinicia el duplicado
-	 */
-	public void onClick$tool_modifica_otro(){
-		ReiniciarBusqueda();
-	}
+//	/**
+//	 * Ante el evento click en el botón de reinicio de duplicado, procede a
+//	 * llamar el metodo que reinicia el duplicado
+//	 */
+//	public void onClick$tool_modifica_otro(){
+//		ReiniciarBusqueda();
+//	}
 	
 	/**
 	 * Boton btnAddTemas Evento onClick
@@ -3255,13 +3263,6 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			cargarEstados();
 			llenarDatos(idMicro);
 		}else{
-//			panelModificarMicro.setVisible(true);
-//			fichaContenidos.setVisible(false);
-//			cargarUnidades();
-//			cargarDependencias("");
-//			cargarNucleos("");
-//			cargarMaterias("");
-//			cargarMicrocurriculos("");
 			Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
 		}
 	}

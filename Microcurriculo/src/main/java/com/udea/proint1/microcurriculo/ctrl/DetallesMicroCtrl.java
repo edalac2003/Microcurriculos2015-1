@@ -165,7 +165,7 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	Toolbarbutton tool_save;
 	Toolbarbutton tool_print;
 	Toolbarbutton tool_duplica_otro;
-	Toolbarbutton tool_consulta_otro;
+	Toolbarbutton tool_atras;
 	
 	/**
 	 * Formatos de fecha
@@ -731,9 +731,17 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 				cmbSemestre.setDisabled(true);
 				
 			}else{
-				ReiniciarBusqueda2();
+				redireccionar();
 			}
 		}
+	}
+	
+	public void onClick$tool_atras(){
+		redireccionar();
+	}
+	
+	public void redireccionar(){
+		Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
 	}
 	
 	/**
@@ -755,25 +763,25 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
-	/**
-	 * Para la vista consultar, reinicia la busqueda del nuevo microcurriculo a consultar
-	 */
-	public void ReiniciarBusqueda2(){
-		panelBuscarMicro.setVisible(true);
-		blyConsultarMicro.setVisible(true);
-		fichaContenidos.setVisible(false);
-		tool_print.setVisible(false);
-		tool_consulta_otro.setVisible(false);
-		/**
-		 * Remueve variables de sesion si existen
-		 */
-		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-			Executions.getCurrent().getSession().removeAttribute("idMicro");
-		}
-		if(Executions.getCurrent().getSession().hasAttribute("semestre")){
-			Executions.getCurrent().getSession().removeAttribute("semestre");
-		}
-	}
+//	/**
+//	 * Para la vista consultar, reinicia la busqueda del nuevo microcurriculo a consultar
+//	 */
+//	public void ReiniciarBusqueda2(){
+//		panelBuscarMicro.setVisible(true);
+//		blyConsultarMicro.setVisible(true);
+//		fichaContenidos.setVisible(false);
+//		tool_print.setVisible(false);
+//		tool_consulta_otro.setVisible(false);
+//		/**
+//		 * Remueve variables de sesion si existen
+//		 */
+//		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+//			Executions.getCurrent().getSession().removeAttribute("idMicro");
+//		}
+//		if(Executions.getCurrent().getSession().hasAttribute("semestre")){
+//			Executions.getCurrent().getSession().removeAttribute("semestre");
+//		}
+//	}
 	
 	/**
 	 * Permite mostrar en la vista los datos asociados a las dependencias del microcurriculo y son controladas
@@ -1674,13 +1682,13 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 		ReiniciarBusqueda();
 	}
 	
-	/**
-	 * Ante el evento click en el botón de reiniciar busqueda, procede a
-	 * llamar el metodo que muestra el menú para buscar otro microcurriculo a mostrar
-	 */
-	public void onClick$tool_consulta_otro(){
-		ReiniciarBusqueda2();
-	}
+//	/**
+//	 * Ante el evento click en el botón de reiniciar busqueda, procede a
+//	 * llamar el metodo que muestra el menú para buscar otro microcurriculo a mostrar
+//	 */
+//	public void onClick$tool_consulta_otro(){
+//		ReiniciarBusqueda2();
+//	}
 	
 	/**
 	 * Boton btnAddTemas Evento onClick
