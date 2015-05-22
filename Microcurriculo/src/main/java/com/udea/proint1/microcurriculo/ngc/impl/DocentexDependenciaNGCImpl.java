@@ -14,20 +14,21 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class DocentexDependenciaNGCImpl implements DocentexDependenciaNGC {
 	
+	
 	private static Logger log=Logger.getLogger(DocentexDependenciaNGCImpl.class);
 	
 	DocentexDependenciaDAO docentexDependenciaDao;	
-	DependenciaDAO nucleoDao;	
+	DependenciaDAO dependenciaDao;	
 	PersonaDAO personaDao;
 	
 	public void setDocentexDependenciaDao(DocentexDependenciaDAO docentexDependenciaDao) {
 		this.docentexDependenciaDao = docentexDependenciaDao;
 	}
 
-	public void setDependenciaDao(DependenciaDAO nucleoDao) {
-		this.nucleoDao = nucleoDao;
+	public void setDependenciaDao(DependenciaDAO dependenciaDao) {
+		this.dependenciaDao = dependenciaDao;
 	}
-
+	
 	public void setPersonaDao(PersonaDAO personaDao) {
 		this.personaDao = personaDao;
 	}

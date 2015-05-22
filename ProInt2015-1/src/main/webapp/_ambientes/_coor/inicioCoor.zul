@@ -1,0 +1,58 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+
+<zk>
+<window border="none">
+	<borderlayout height="800px">
+		<north border="none" sclass="fondoEncabezado" height="100px">
+			<include id="headerIdx" src="/_sections/header.zul" />
+		</north>		
+		<center border="none">
+			<borderlayout>
+				<north height="110px" border="none">
+					<div align="center">
+						<div height="20px" align="right">
+							<label value="Fecha Actual : " />
+							<label id="lblFechaActual" value="lblFechaActual"/>
+						</div>
+						<hlayout width="800px" height="90px">
+							<groupbox width="110%" height="80px">
+								<hbox height="30px">
+									<div align="left">
+										<label value="Jefe de Nucleo : " />
+										<label id="lblNombreDocente" value="lblNombreDocente" sclass="resaltado"/>
+										<label value="  |  "></label>
+										<label value="Usuario : "></label>
+										<label id="lblUsuarioLogin" value="UsuarioLogin" sclass="resaltado" />
+									</div>
+								</hbox>
+								<hbox height="30px">
+									<div align="left">
+										<label value="Unidad Academica" />
+										<combobox id="cmbUnidadAcademica" />
+										<label value="Dependencia" />
+										<combobox id="cmbDependenciaAcademica" />
+									</div>																	
+								</hbox>
+							</groupbox>
+						</hlayout>
+					</div>												
+				</north>
+				
+				<west width="180px" border="none"></west>
+				<east width="180px" border="none"></east>
+				
+				<center border="none">
+					<div>
+						<listbox id="listaMicro"></listbox>
+					</div>
+				</center>
+			</borderlayout>
+		</center>		
+		<south border="none" height="100px" sclass="fondoEncabezado">
+			<include id="footerIdx" src="/_sections/footer.zul" /> 
+		</south>
+	</borderlayout>
+</window>
+</zk>

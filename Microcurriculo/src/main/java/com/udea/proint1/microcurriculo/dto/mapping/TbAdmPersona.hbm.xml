@@ -8,9 +8,6 @@
             <column name="VR_IDPERSONA" length="15" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="tbAdmTipopersona" class="com.udea.proint1.microcurriculo.dto.TbAdmTipopersona" fetch="join" lazy="false">
-            <column name="NB_TIPOPERSONA" precision="22" scale="0" not-null="true" />
-        </many-to-one>
         <many-to-one name="tbAdmCiudad" class="com.udea.proint1.microcurriculo.dto.TbAdmCiudad" fetch="join" lazy="false">
             <column name="NB_CIUDAD" precision="22" scale="0" not-null="true" />
         </many-to-one>
@@ -49,6 +46,12 @@
                 <column name="VR_DOCENTE" length="15" not-null="true" />
             </key>
             <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia" />
+        </set>
+        <set name="tbAdmRolesxPersonas" table="TB_ADM_ROLXPERSONA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="VR_PERSONA" length="15" not-null="true" />
+            </key>
+            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmRolxPersona" />
         </set>
     </class>
 </hibernate-mapping>

@@ -1,39 +1,43 @@
 package com.udea.proint1.microcurriculo.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-public class TbAdmRol {
+public class TbAdmRol implements java.io.Serializable{
 
-	private int nbId;
-	private String vrNivel;
-	private String vrDescripcion;
 	
+	private Integer nbId;
+	private String vrDescripcion;
+	private String vrModusuario;
+	private Date dtModfecha;
+	private Set tbAdmRolxUsuarios = new HashSet(0); 
 	
 	public TbAdmRol() {
-		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public TbAdmRol(int nbId, String vrNivel, String vrDescripcion) {
+	public TbAdmRol(Integer nbId, String vrDescripcion) {
 		super();
 		this.nbId = nbId;
-		this.vrNivel = vrNivel;
 		this.vrDescripcion = vrDescripcion;
 	}
 
-	public int getNbId() {
+	public TbAdmRol(Integer nbId, String vrDescripcion, String vrModusuario,
+			Date dtModfecha) {
+		super();
+		this.nbId = nbId;
+		this.vrDescripcion = vrDescripcion;
+		this.vrModusuario = vrModusuario;
+		this.dtModfecha = dtModfecha;
+	}
+
+	public Integer getNbId() {
 		return nbId;
 	}
 
-	public void setNbId(int nbId) {
+	public void setNbId(Integer nbId) {
 		this.nbId = nbId;
-	}
-
-	public String getVrNivel() {
-		return vrNivel;
-	}
-
-	public void setVrNivel(String vrNivel) {
-		this.vrNivel = vrNivel;
 	}
 
 	public String getVrDescripcion() {
@@ -43,5 +47,30 @@ public class TbAdmRol {
 	public void setVrDescripcion(String vrDescripcion) {
 		this.vrDescripcion = vrDescripcion;
 	}
+
+	public String getVrModusuario() {
+		return vrModusuario;
+	}
+
+	public void setVrModusuario(String vrModusuario) {
+		this.vrModusuario = vrModusuario;
+	}
+
+	public Date getDtModfecha() {
+		return dtModfecha;
+	}
+
+	public void setDtModfecha(Date dtModfecha) {
+		this.dtModfecha = dtModfecha;
+	}
 	
+
+	public Set getTbAdmRolxUsuarios() {
+		return tbAdmRolxUsuarios;
+	}
+
+	public void setTbAdmRolxUsuarios(Set tbAdmRolxUsuarios) {
+		this.tbAdmRolxUsuarios = tbAdmRolxUsuarios;
+	}
+
 }

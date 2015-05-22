@@ -289,7 +289,7 @@ public class CrearPersonaCtrl extends GenericForwardComposer{
 			persona.setVrTelefono(txtTelefono.getText());
 			persona.setTbAdmCiudad(listadoCiudades.get(cmbCiudad.getSelectedIndex()));
 			persona.setTbAdmTipoidentificacion(listadoTipoID.get(cmbTipoID.getSelectedIndex()));
-			persona.setTbAdmTipopersona(listadoTipoPersona.get(cmbRol.getSelectedIndex()));
+//			persona.setTbAdmTipopersona(listadoTipoPersona.get(cmbRol.getSelectedIndex()));
 			persona.setBlEstado(estado);
 			persona.setVrModusuario(modUsuario);
 			persona.setDtModfecha(modFecha);

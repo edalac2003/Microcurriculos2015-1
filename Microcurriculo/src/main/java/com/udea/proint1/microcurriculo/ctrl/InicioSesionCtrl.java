@@ -8,14 +8,15 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmUsuario;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
+import com.udea.proint1.microcurriculo.ngc.RolxUsuarioNGC;
 import com.udea.proint1.microcurriculo.ngc.UsuarioNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class InicioSesionCtrl extends GenericForwardComposer {
 	
-
 	/*
 	 * Objeto de la Clase que Invoca
 	 */
@@ -26,9 +27,11 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 	
 	UsuarioNGC usuarioNGC;
 	PersonaNGC personaNGC;
+	RolxUsuarioNGC rolxUsuarioNGC;
 	
 	TbAdmUsuario usuario;
 	TbAdmPersona persona;
+	TbAdmRolxUsuario rolxUsuario;
 	
 	
 	
@@ -40,17 +43,24 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 		this.personaNGC = personaNGC;
 	}
 	
+	public void setRolxUsuarioNGC(RolxUsuarioNGC rolxUsuarioNGC) {
+		this.rolxUsuarioNGC = rolxUsuarioNGC;
+	}
+
+	
 	private void verificarCredenciales(String login){
-		try {
-			usuario = usuarioNGC.obtenerUsuarios(login);
-		} catch (ExcepcionesLogica e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			usuario = usuarioNGC.obtenerUsuarios(login);
+//		} catch (ExcepcionesLogica e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		
 		
 		if(usuario != null){
 			persona = usuario.getTbAdmPersona();
-			int rolUsuario = usuario.getTbAdmRol().getNbId();
+			int rolUsuario = 4;
 			Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
 			Executions.getCurrent().getSession().setAttribute("nombrePersona", persona.getVrNombres());
 			Executions.getCurrent().getSession().setAttribute("apellidoPersona", persona.getVrApellidos());
