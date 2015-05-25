@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -84,21 +85,21 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 	}
 
 	@Override
-	public List<TbAdmPersona> obtenerDocentes(TbAdmTipopersona tipoPersona) throws ExcepcionesDAO {
-		Session session = null;
-        List<TbAdmPersona> personas = new ArrayList<TbAdmPersona>();
-       
-        try{
-        	session = getSession();
-        	Query query = session.createQuery("from TbAdmPersona where tbAdmTipopersona = :tipoPersona");
-        	query.setEntity("tipoPersona", tipoPersona);
-        	personas = query.list();
-        }catch(HibernateException e){
-                throw new ExcepcionesDAO(e);
-        } finally{
-			session.close();
-		}
-        return personas;
+	public List<TbAdmPersona> obtenerDocentes(TbAdmRol rol) throws ExcepcionesDAO {
+//		Session session = null;
+//        List<TbAdmPersona> personas = new ArrayList<TbAdmPersona>();
+//       
+//        try{
+//        	session = getSession();
+//        	Query query = session.createQuery("from TbAdmRolxPersona where tbAdmRol = :rol");
+//        	query.setEntity("rol", rol);
+//        	personas = query.list();
+//        }catch(HibernateException e){
+//                throw new ExcepcionesDAO(e);
+//        } finally{
+//			session.close();
+//		}
+        return null;
 	}
 
 	

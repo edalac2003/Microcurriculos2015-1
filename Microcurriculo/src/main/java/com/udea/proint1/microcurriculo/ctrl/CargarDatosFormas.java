@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -22,10 +23,13 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 
+import com.udea.proint1.microcurriculo.dao.RolxUsuarioDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
@@ -51,6 +55,7 @@ import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.PaisNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
+import com.udea.proint1.microcurriculo.ngc.RolxUsuarioNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -151,7 +156,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	private static List<TbAdmNucleo> listaNucleosxDependencia; 
 	private static List<TbAdmMateria> listaMaterias;
 	private static List<TbAdmMateria> listaMateriaxNucleo;
-	private static List<TbAdmPersona> listaDocentes;
+	private static List<TbAdmPersona> listaDocentes = new ArrayList<TbAdmPersona>();
 	private static List<TbAdmSemestre> listaSemestre;
 	private static List<TbMicEstado> listaEstados;
 	private static List<TbMicMicrocurriculo> listaMicrocurriculos;
@@ -171,6 +176,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	PaisNGC paisNGC;
 	EstadoNGC estadoNGC;
 	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
+	RolxUsuarioNGC rolxUsuarioNGC;
 	
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
@@ -211,6 +217,10 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	public void setGuardarMicrocurriculoNGC(
 			GuardarMicrocurriculoNGC guardarMicrocurriculoNGC) {
 		this.guardarMicrocurriculoNGC = guardarMicrocurriculoNGC;
+	}
+
+	public void setRolxUsuarioNGC(RolxUsuarioNGC rolxUsuarioNGC) {
+		this.rolxUsuarioNGC = rolxUsuarioNGC;
 	}
 
 	private void cargarUnidades(){
@@ -374,15 +384,19 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	private void cargarDocentes(){
 		cmbDocente.getItems().clear();
 		try {
-			listaDocentes = personaNGC.obtenerDocentes();			
+			List<TbAdmRolxUsuario> listaRolesxUsuario = rolxUsuarioNGC.listarDocentes();
+			for(TbAdmRolxUsuario rolxUsuario: listaRolesxUsuario){
+				listaDocentes.add(rolxUsuario.getTbAdmUsuario().getTbAdmPersona());
+			}
 			if (listaDocentes != null){
 				cmbDocente.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmPersona docente : listaDocentes){
 					Comboitem item = new Comboitem(docente.getVrIdpersona()+" - "+ docente.getVrApellidos()+" "+docente.getVrNombres());
 					cmbDocente.appendChild(item);
 				}
-			} else
+			} else{
 				Messagebox.show("No Se Hallaron Registros de Docentes");
+			}
 		}catch(ExcepcionesDAO expDAO){
 			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(expDAO.getMsjTecnico());
@@ -703,10 +717,24 @@ public class CargarDatosFormas extends GenericForwardComposer{
 			if(listaBibliografia.getItems().size() > 0)
 				empaquetarBibliografias(listadoUnidades);			
 			
+			/**
+			 * Verificación si el microcurriculo es duplicado o creado para crear historial
+			 */
+			TbAdmHistorico historicoGuardar = null;
+			if(Executions.getCurrent().getSession().hasAttribute("duplicar")){
+				if(Executions.getCurrent().getSession().getAttribute("duplicar").equals("verdadero")){
+					String microDuplicar = (String)Executions.getCurrent().getSession().getAttribute("idMicro");
+					String detalleModificar = "Duplicar microcurriculo: "+microDuplicar+".";
+					historicoGuardar = new TbAdmHistorico(new Date(), microcurriculo, detalleModificar, "usuario", "usuario", new Date());
+				}
+			}else{
+				String detalleModificar = "Crear microcurriculo.";
+				historicoGuardar = new TbAdmHistorico(new Date(), microcurriculo, detalleModificar, "usuario", "usuario", new Date());
+			}
 			try {
 				guardarMicrocurriculoNGC.guardarMicroxlotes(microcurriculo, microxEstado, listadoTemas, listadoSubtemas, listadoSubtemaxTema, listadoTemasxUnidad, 
 							listadoUnidades, listadoUnidadesxMicro, listadoObjetivos, listadoObjetivosxMicro, listadoBibliografia, listadoBibliografiaxUnidad, 
-							listadoEvaluaciones, listadoEvaluacionesxMicro);				
+							listadoEvaluaciones, listadoEvaluacionesxMicro, historicoGuardar);				
 			}catch(ExcepcionesDAO expDAO){
 				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
 				logger.error(expDAO.getMsjTecnico());

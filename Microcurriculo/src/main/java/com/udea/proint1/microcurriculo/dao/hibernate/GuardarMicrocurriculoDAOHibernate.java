@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl;
 import com.udea.proint1.microcurriculo.dao.GuardarMicrocurriculoDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
@@ -40,7 +41,8 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			List<TbMicBibliografia> bibliografia,
 			List<TbMicBiblioxunidad> biblioxunidad,
 			List<TbMicEvaluacion> evaluaciones,
-			List<TbMicEvaluacionxmicro> evaluacionxMicro)
+			List<TbMicEvaluacionxmicro> evaluacionxMicro,
+			TbAdmHistorico historicoGuardar)
 			throws ExcepcionesDAO {
 		
 		Session session = null;
@@ -112,6 +114,8 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 				for (TbMicBiblioxunidad bxU : biblioxunidad)
 					session.save(bxU);
 			}
+			
+			session.save(historicoGuardar);
 					
 			tx.commit();
 		} catch (Exception e) {
@@ -244,7 +248,8 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			List<TbMicBiblioxunidad> bibliosxUnidadGuardar,
 			List<TbMicEvaluacionxmicro> evaluacionesxMicroGuardar,
 			List<TbMicTemaxunidad> temasxUnidadGuardar,
-			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesDAO {
+			List<TbMicSubtemaxtema> subtemasxTemaGuardar,
+			List<TbAdmHistorico> listaObjetivosxMicroGuardar) throws ExcepcionesDAO {
 		
 		Session session = null;
 		Transaction tx = null;
@@ -341,6 +346,12 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 					session.saveOrUpdate(subtemaxTema);
 				}
 			}
+			
+			if(listaObjetivosxMicroGuardar != null){
+				for(TbAdmHistorico historico: listaObjetivosxMicroGuardar){
+					session.saveOrUpdate(historico);
+				}
+			}
 					
 			tx.commit();
 		} catch (Exception e) {
@@ -364,7 +375,8 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			List<TbMicUnidadxmicro> unidadesxMicro,
 			List<TbMicObjetivoxmicro> objetivosxMicro,
 			List<TbMicBiblioxunidad> bibliosxUnidad,
-			List<TbMicEvaluacionxmicro> evaluacionesxMicro) throws ExcepcionesDAO{
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro,
+			List<TbAdmHistorico> historicos) throws ExcepcionesDAO{
 		
 		Session session = null;
 		Transaction tx = null;
@@ -372,6 +384,12 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 		try {
 			session = getSession();
 			tx = session.beginTransaction();
+			
+			if(historicos != null){
+				for(TbAdmHistorico historico: historicos){
+					session.delete(historico);
+				}
+			}
 			
 			if(microsxEstado != null){
 				for(TbMicMicroxestado microxEstado: microsxEstado){

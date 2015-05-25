@@ -2,6 +2,7 @@ package com.udea.proint1.microcurriculo.ngc;
 
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
@@ -34,7 +35,8 @@ public interface GuardarMicrocurriculoNGC {
 			List<TbMicBibliografia> bibliografia,
 			List<TbMicBiblioxunidad> biblioxunidad,
 			List<TbMicEvaluacion> evaluaciones,
-			List<TbMicEvaluacionxmicro> evaluacionxMicro) throws ExcepcionesLogica, ExcepcionesDAO;
+			List<TbMicEvaluacionxmicro> evaluacionxMicro,
+			TbAdmHistorico historicoGuardar) throws ExcepcionesLogica, ExcepcionesDAO;
 	
 	public void modificarMicroxlotes(TbMicMicrocurriculo microcurriculo,
 			TbMicMicroxestado microxEstado,
@@ -49,7 +51,8 @@ public interface GuardarMicrocurriculoNGC {
 			List<TbMicBiblioxunidad> bibliosxUnidadGuardar,
 			List<TbMicEvaluacionxmicro> evaluacionesxMicroGuardar,
 			List<TbMicTemaxunidad> temasxUnidadGuardar,
-			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesLogica, ExcepcionesDAO;
+			List<TbMicSubtemaxtema> subtemasxTemaGuardar,
+			List<TbAdmHistorico> listaObjetivosxMicroGuardar) throws ExcepcionesLogica, ExcepcionesDAO;
 	
 	public void eliminarMicrocurridulo(TbMicMicrocurriculo microcurriculo,
 			List<TbMicMicroxestado> microxEstado,
@@ -58,6 +61,7 @@ public interface GuardarMicrocurriculoNGC {
 			List<TbMicUnidadxmicro> unidadesxmicro,
 			List<TbMicObjetivoxmicro> objetivosxMicro,
 			List<TbMicBiblioxunidad> bibliosxUnidad,
-			List<TbMicEvaluacionxmicro> evaluacionesxMicro) throws ExcepcionesLogica, ExcepcionesDAO;
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro,
+			List<TbAdmHistorico> historicos) throws ExcepcionesLogica, ExcepcionesDAO;
 	
 }

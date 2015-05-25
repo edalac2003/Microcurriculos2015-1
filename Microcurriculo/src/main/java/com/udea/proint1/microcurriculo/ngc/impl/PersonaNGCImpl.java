@@ -6,8 +6,12 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.CiudadDAO;
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
+import com.udea.proint1.microcurriculo.dao.RolDAO;
+import com.udea.proint1.microcurriculo.dao.RolxUsuarioDAO;
 import com.udea.proint1.microcurriculo.dao.TipoPersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmRol;
+import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -18,16 +22,13 @@ public class PersonaNGCImpl implements PersonaNGC {
 	private static Logger log=Logger.getLogger(PersonaNGCImpl.class);
 	
 	PersonaDAO personaDao;
-	TipoPersonaDAO tipoPersonaDao;
+//	RolDAO rolDao;
+//	RolxUsuarioDAO rolxUsuarioDAO;
 	CiudadDAO ciudadDao;
 	//TipoIdentificacionDAO tipoIdentificacionDao;
 
 	public void setPersonaDao(PersonaDAO personaDao) {
 		this.personaDao = personaDao;
-	}
-
-	public void setTipoPersonaDao(TipoPersonaDAO tipoPersonaDao) {
-		this.tipoPersonaDao = tipoPersonaDao;
 	}
 
 	public void setCiudadDao(CiudadDAO ciudadDao) {
@@ -143,33 +144,34 @@ public class PersonaNGCImpl implements PersonaNGC {
 		}
 	}
 	
-	@Override
-	public List<TbAdmPersona> obtenerDocentes() throws ExcepcionesLogica{
-		List<TbAdmPersona> listaPersonas = null;
-		
-		TbAdmTipopersona tipoPersona = null;
-		
-		try {
-			tipoPersona = tipoPersonaDao.obtenerTipoPersona(2);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo obtenerTipoPersona de la clase tipoPersonaDao: "+ e);
-		}
-		
-		try {
-			listaPersonas = personaDao.obtenerDocentes(tipoPersona);
-		} catch (ExcepcionesDAO e) {
-			log.error("falló al invocar el metodo listarPersonas de la clase personaDao: "+ e);
-		}
-		
-		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
-		 */
-		if(listaPersonas == null){
-			throw new ExcepcionesLogica("No se encontraron personas de tipo docente en la tabla personaDao");
-		}else{
-			return listaPersonas;
-		}
-	}
+//	@Override
+//	public List<TbAdmPersona> obtenerDocentes() throws ExcepcionesLogica{
+//		List<TbAdmRolxUsuario> listaRolesxUsuario = null;
+//		
+//		TbAdmRol rol = null;
+//		
+//		try {
+//			rol = rolDao.obtenerRol(4);
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo obtener rol de la clase tipoPersonaDao: "+ e);
+//		}
+//		
+//		try {
+//			listaRolesxUsuario = rolxUsuarioDAO.obtenerRolxUsuarioxRol(rol);
+//		} catch (ExcepcionesDAO e) {
+//			log.error("falló al invocar el metodo listarPersonas de tipo docente de la clase personaDao: "+ e);
+//		}
+//		
+//		/*
+//		 * Confirmamos si el objeto retornado tiene elementos en él.
+//		 */
+//		if(listaRolesxUsuario == null){
+//			throw new ExcepcionesLogica("No se encontraron personas de tipo docente en la tabla personaDao");
+//		}else{
+//			return listaRolesxUsuario;
+//		}
+//		return null;
+//	}
 
 	@Override
 	public boolean existePersona(String idPersona) throws ExcepcionesLogica {

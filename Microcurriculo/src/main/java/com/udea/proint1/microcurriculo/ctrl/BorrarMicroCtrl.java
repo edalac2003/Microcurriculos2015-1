@@ -17,6 +17,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
@@ -38,6 +39,7 @@ import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
+import com.udea.proint1.microcurriculo.ngc.RolxUsuarioNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaxUnidadNGC;
@@ -100,7 +102,12 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 	EvaluacionxMicroNGC evaluacionxMicroNGC;
 	BiblioxunidadNGC biblioxUnidadNGC;
 	MicroxEstadoNGC microxEstadoNGC;
+	RolxUsuarioNGC rolxUsuarioNGC;
 	
+	public void setRolxUsuarioNGC(RolxUsuarioNGC rolxUsuarioNGC) {
+		this.rolxUsuarioNGC = rolxUsuarioNGC;
+	}
+
 	public void setMicroxEstadoNGC(MicroxEstadoNGC microxEstadoNGC) {
 		this.microxEstadoNGC = microxEstadoNGC;
 	}
@@ -387,7 +394,10 @@ public class BorrarMicroCtrl extends GenericForwardComposer {
 		cmbDocente.getItems().clear();
 		
 		try {
-			listaDocentes = personaNGC.obtenerDocentes();			
+			List<TbAdmRolxUsuario> listaRolesxUsuario = rolxUsuarioNGC.listarDocentes();
+			for(TbAdmRolxUsuario rolxUsuario: listaRolesxUsuario){
+				listaDocentes.add(rolxUsuario.getTbAdmUsuario().getTbAdmPersona());
+			}			
 			if (listaDocentes != null){
 				cmbDocente.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmPersona docente : listaDocentes){

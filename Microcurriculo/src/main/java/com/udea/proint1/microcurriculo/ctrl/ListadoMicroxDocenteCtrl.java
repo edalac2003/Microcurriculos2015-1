@@ -12,6 +12,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
@@ -19,6 +20,8 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
+import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
+import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
@@ -30,6 +33,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
+import com.udea.proint1.microcurriculo.ngc.HistoricoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.MicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MicroxEstadoNGC;
@@ -50,7 +54,11 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	/*
 	 * Objetos de la Vista
 	 */
+	Borderlayout contenidoCargando;
+	Borderlayout contenidoInicioDocente;
+	
 	Listbox listaMicrocurriculo;
+	
 	Label lblFechaActual;
 	Label lblNombreDocente;
 	Label lblUsuarioLogin;
@@ -78,6 +86,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	SubtemaxTemaNGC subtemaxTemaNGC;
 	MicroxEstadoNGC microxEstadoNGC;
 	EvaluacionxMicroNGC evaluacionxMicroNGC;
+	HistoricoNGC historicoNGC;
 	
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
 		this.microcurriculoNGC = microcurriculoNGC;
@@ -120,6 +129,10 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		this.evaluacionxMicroNGC = evaluacionxMicroNGC;
 	}
 
+	public void setHistoricoNGC(HistoricoNGC historicoNGC) {
+		this.historicoNGC = historicoNGC;
+	}
+
 	/**
 	 * Definición de listados para guardar info
 	 */
@@ -130,6 +143,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public static List<TbMicUnidadxmicro> unidadesxMicro;
 	public static List<TbMicSubtemaxtema> subtemasxTema = new ArrayList<TbMicSubtemaxtema>();
 	public static List<TbMicTemaxunidad> temasxUnidad = new ArrayList<TbMicTemaxunidad>();
+	public static List<TbAdmHistorico> historicos = new ArrayList<TbAdmHistorico>();
 	
 	private void cargarDatosEncabezado(){
 		lblFechaActual.setValue(fechaActual.toString());
@@ -247,10 +261,12 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		cargarListasUnidadesTemasSubtemas(microcurriculo.getVrIdmicrocurriculo());
 		cargarListasEstados(microcurriculo.getVrIdmicrocurriculo());
 		cargarListasEvaluaciones(microcurriculo.getVrIdmicrocurriculo());
+		cargarListasHistoricos(microcurriculo);
 		
 		boolean ocurrioError = false;
 		try{
-			guardarMicrocurriculoNGC.eliminarMicrocurridulo(microcurriculo, microsxEstado, subtemasxTema, temasxUnidad, unidadesxMicro, objetivosxMicro, bibliosxUnidad, evaluacionesxMicro);
+			guardarMicrocurriculoNGC.eliminarMicrocurridulo(microcurriculo, microsxEstado, subtemasxTema,
+					temasxUnidad, unidadesxMicro, objetivosxMicro, bibliosxUnidad, evaluacionesxMicro, historicos);
 		}catch(ExcepcionesDAO expDAO){
 			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(expDAO.getMsjTecnico());
@@ -266,6 +282,21 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		}
 		if(!ocurrioError){
 			Messagebox.show("Se eliminó microcurriculo con exito","INFORMACION", Messagebox.OK,Messagebox.INFORMATION);
+		}
+	}
+	
+	private void cargarListasHistoricos(TbMicMicrocurriculo microcurriculo){
+		try{
+			historicos = historicoNGC.obtenerHistoricosxMicrocurriculo(microcurriculo);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 	}
 	
@@ -391,7 +422,15 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {
 		
 		super.doAfterCompose(comp);
-//		cargarDatosEncabezado();
-		listarMicrocurriculos();
+		if(((Executions.getCurrent().getSession().hasAttribute("userName"))&&(Executions.getCurrent().getSession().hasAttribute("personaLogin")))&&(Executions.getCurrent().getSession().hasAttribute("rolLogin"))){
+			TbAdmRol rolPersona = (TbAdmRol) Executions.getCurrent().getSession().getAttribute("rolLogin");
+			if(rolPersona.getNbId() == 4){
+				listarMicrocurriculos();
+				contenidoCargando.setVisible(false);
+				contenidoInicioDocente.setVisible(true);
+			}
+		}else{
+			Executions.getCurrent().sendRedirect("/index.zul");
+		}
 	}
 }

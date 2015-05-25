@@ -1,13 +1,17 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.HistoricoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class HistoricoDAOHibernate extends HibernateDaoSupport implements HistoricoDAO {
@@ -99,6 +103,32 @@ public class HistoricoDAOHibernate extends HibernateDaoSupport implements Histor
 		}
 
 		return historicos;
+	}
+	
+	public List<TbAdmHistorico> obtenerHistoricosxMicrocurriculo(TbMicMicrocurriculo microcurriculo) throws ExcepcionesDAO{
+		Session session = null;
+        List<TbAdmHistorico> historicos = new ArrayList<TbAdmHistorico>();
+       
+        try{
+               
+        	session = getSession();
+                               
+        	Query query = session.createQuery("from TbAdmHistorico where tbMicMicrocurriculo = :microcurriculo");
+               
+        	query.setEntity("microcurriculo", microcurriculo);
+               
+        	historicos = query.list();
+        } catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Historico x Microcurriculo");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+        return historicos;
 	}
 
 }

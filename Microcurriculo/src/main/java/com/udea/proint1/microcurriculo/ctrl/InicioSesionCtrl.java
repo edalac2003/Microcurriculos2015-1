@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
+import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -13,9 +14,15 @@ import com.udea.proint1.microcurriculo.dto.TbAdmUsuario;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.RolxUsuarioNGC;
 import com.udea.proint1.microcurriculo.ngc.UsuarioNGC;
+import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class InicioSesionCtrl extends GenericForwardComposer {
+	
+	/**
+	 * Logger de registro de incidencias en la aplicación
+	 */
+	private static Logger logger = Logger.getLogger(BorrarMicroCtrl.class);
 	
 	/*
 	 * Objeto de la Clase que Invoca
@@ -33,8 +40,6 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 	TbAdmPersona persona;
 	TbAdmRolxUsuario rolxUsuario;
 	
-	
-	
 	public void setUsuarioNGC(UsuarioNGC usuarioNGC) {
 		this.usuarioNGC = usuarioNGC;
 	}
@@ -48,36 +53,60 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 	}
 
 	
-	private void verificarCredenciales(String login){
-//		try {
-//			usuario = usuarioNGC.obtenerUsuarios(login);
-//		} catch (ExcepcionesLogica e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		
+	private void verificarCredenciales(String login, String password){
+		try {
+			usuario = usuarioNGC.obtenerUsuarios(login);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("Error validando usuario.","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
 		
 		if(usuario != null){
-			persona = usuario.getTbAdmPersona();
-			int rolUsuario = 4;
-			Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
-			Executions.getCurrent().getSession().setAttribute("nombrePersona", persona.getVrNombres());
-			Executions.getCurrent().getSession().setAttribute("apellidoPersona", persona.getVrApellidos());
-			if(rolUsuario == 4){
-				Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
+			if(usuario.getVrPassword().equals(password)){
+				
+				try {
+					rolxUsuario = rolxUsuarioNGC.obtenerRolxUsuario(usuario);
+				}catch(ExcepcionesDAO expDAO){
+					Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expDAO.getMsjTecnico());
+				}catch(ExcepcionesLogica expNgs){
+					Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(expNgs.getMsjTecnico());
+				}catch(Exception exp){
+					Messagebox.show("Error validando usuario.","ERROR", Messagebox.OK,Messagebox.ERROR);
+					logger.error(exp);
+				}
+				
+				persona = usuario.getTbAdmPersona();
+				
+				if(rolxUsuario.getTbAdmRol().getNbId() == 4){
+					Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
+					Executions.getCurrent().getSession().setAttribute("personaLogin", persona);
+					Executions.getCurrent().getSession().setAttribute("rolLogin", rolxUsuario.getTbAdmRol());
+					
+					Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
+				}else{
+					Messagebox.show("No autorizado para ingresar.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
+				}
+			}else{
+				Messagebox.show("Usuario o Contraseña Incorrectos.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
 			}
-			
 		}else{
-			Messagebox.show("Usuario o Contraseña Incorrectos");
+			Messagebox.show("Usuario o Contraseña Incorrectos.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
 		}
 	}
 	
 	public void onClick$btnAceptar(){
 		if(!"".equals(txtNombreUsuario.getValue())){
-			verificarCredenciales(txtNombreUsuario.getValue().toString().toUpperCase());
+			verificarCredenciales(txtNombreUsuario.getValue().toString(), txtPassword.getValue().toString());
 		} else {
-			Messagebox.show("El Usuario no puede ser vacia.","INCOMPLETO",Messagebox.OK,Messagebox.ERROR);
+			Messagebox.show("El Usuario no puede ser vacio.","INCOMPLETO",Messagebox.OK,Messagebox.ERROR);
 		}
 	}
 	

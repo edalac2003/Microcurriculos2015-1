@@ -30,7 +30,7 @@ public class TbAdmPersona implements java.io.Serializable {
 	private Date dtModfecha;
 	private Set tbAdmUsuarioses = new HashSet(0);
 	private Set tbAdmDocentesxdependencias = new HashSet(0);
-	private Set tbAdmRolesxPersonas = new HashSet(0);
+//	private Set tbAdmRolesxPersonas = new HashSet(0);
 
 	public TbAdmPersona() {
 		
@@ -159,11 +159,11 @@ public class TbAdmPersona implements java.io.Serializable {
 		this.tbAdmDocentesxdependencias = tbAdmDocentesxdependencias;
 	}
 	
-	public Set getTbAdmRolesxPersonas() {
-		return tbAdmRolesxPersonas;
-	}
-
-	public void setTbAdmRolesxPersonas(Set tbAdmRolesxPersonas) {
-		this.tbAdmRolesxPersonas = tbAdmRolesxPersonas;
-	}
+//	public Set getTbAdmRolesxPersonas() {
+//		return tbAdmRolesxPersonas;
+//	}
+//
+//	public void setTbAdmRolesxPersonas(Set tbAdmRolesxPersonas) {
+//		this.tbAdmRolesxPersonas = tbAdmRolesxPersonas;
+//	}
 }

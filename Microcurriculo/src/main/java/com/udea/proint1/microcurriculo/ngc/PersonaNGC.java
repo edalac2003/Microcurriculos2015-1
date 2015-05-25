@@ -18,6 +18,6 @@ public interface PersonaNGC {
 	
 	public List<TbAdmPersona> listarPersonas() throws ExcepcionesLogica, ExcepcionesDAO;
 	
-	public List<TbAdmPersona> obtenerDocentes() throws ExcepcionesLogica, ExcepcionesDAO;
+//	public List<TbAdmPersona> obtenerDocentes() throws ExcepcionesLogica, ExcepcionesDAO;
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.udea.proint1.microcurriculo.dao.HistoricoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
+import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.ngc.HistoricoNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -165,6 +166,23 @@ public class HistoricoNGCImpl implements HistoricoNGC {
 		}else{
 			return listaHistoricos;
 		}
+	}
+	
+	@Override
+	public List<TbAdmHistorico> obtenerHistoricosxMicrocurriculo(TbMicMicrocurriculo microcurriculo) throws ExcepcionesDAO, ExcepcionesLogica{
+		List<TbAdmHistorico> listaHistoricos = null;
+		try {
+			listaHistoricos = historicoDao.obtenerHistoricosxMicrocurriculo(microcurriculo);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Historicos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		return listaHistoricos;
 	}
 
 }

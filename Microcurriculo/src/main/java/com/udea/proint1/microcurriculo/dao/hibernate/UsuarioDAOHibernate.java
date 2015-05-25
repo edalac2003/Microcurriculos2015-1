@@ -41,8 +41,13 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 			session = getSession();
 			usuario = (TbAdmUsuario)session.get(TbAdmUsuario.class, login);
 			
-		} catch (HibernateException e) {
-			throw new ExcepcionesDAO(e);
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar obtener Usuario");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
 		} finally{
 			session.close();
 		}

@@ -23,7 +23,7 @@
                     <value>oracle.jdbc.driver.OracleDriver</value>  
             </property>
             <property name="url">
-                    <value>jdbc:oracle:thin:@localhost:1521:XE</value>
+                    <value>jdbc:oracle:thin:@192.168.1.3:1521:XE</value>
             </property>
             <property name="username">
                     <value>proint2014-2</value>
@@ -301,6 +301,7 @@
         
         <bean id="personaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl">
         	<property name="personaDao" ref="personaDao" />
+<!--         	<property name="rolDao" ref="rolDao" /> -->
 <!--         	<property name="rolxUsuarioDao" ref="rolxUsuarioDao" /> -->
         	<property name="ciudadDao" ref="ciudadDao" />
         </bean>
@@ -324,6 +325,7 @@
         
         <bean id="rolxUsuarioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.RolxUsuarioNGCImpl">
         	<property name="rolxUsuarioDao" ref="rolxUsuarioDao" />
+        	<property name="rolDao" ref="rolDao" />
         </bean>
         
         <bean id="unidadAcademicaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadAcademicaNGCImpl">
@@ -543,6 +545,7 @@
         	<property name="paisNGC" ref="paisNGC" />
         	<property name="estadoNGC" ref="estadoNGC" />
         	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
+        	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" />
 <!--         	<property name="correquisitoNGC" ref="correquisitoNGC" /> -->
 <!--         	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" /> -->
 <!--         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" /> -->
@@ -574,6 +577,7 @@
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="paisNGC" ref="paisNGC" />
         	<property name="estadoNGC" ref="estadoNGC" />
+        	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" />
         </bean>
         
         <bean id="listarMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.ListarMicroCtrl" scope="prototype">

@@ -33,6 +33,7 @@ import org.zkoss.zul.Toolbarbutton;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -230,6 +231,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	public static List<TbMicEvaluacionxmicro> listaEvaluacionesxMicroBorrar = new ArrayList<TbMicEvaluacionxmicro>();
 	public static List<TbMicBiblioxunidad> listaBibliosxUnidadGuardar = new ArrayList<TbMicBiblioxunidad>();
 	public static List<TbMicBiblioxunidad> listaBibliosxUnidadBorrar = new ArrayList<TbMicBiblioxunidad>();
+	public static List<TbAdmHistorico> listaHistoricos = new ArrayList<TbAdmHistorico>();
 	
 	/**
 	 * Variable de actualización objetivo general
@@ -2714,20 +2716,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	public void onClick$tool_save(){
 		
 		actualizarMicro();
+		generarHistoricos();
 		actualizarLote();
-		
-//		borrarObjetivos();
-//		borrarSubtemas();
-//		borrarTemas();
-//		borrarEvaluaciones();
-//		borrarBibliografias();
-//		borrarUnidades();
-//		guardarObjetivos();
-//		guardarUnidades();
-//		guardarBibliografias();
-//		guardarEvaluaciones();
-//		guardarTemas();
-//		guardarSubtemas();
 		
 	}
 	
@@ -2738,6 +2728,56 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		llenarDatos(microcurriculoGuardar.getVrIdmicrocurriculo());
 	}
 	
+	public void generarHistoricos(){
+		/**
+		 * Verificación si hubo cambios en los objetivos del microcurriculo
+		 */
+		if((listaObjetivosxMicroBorrar != null)||(listaObjetivosxMicroGuardar != null)){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar objetivos", "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
+		
+		/**
+		 * Verificación si hubo cambios en los subtemas del microcurriculo
+		 */
+		if((listaSubtemasxTemaBorrar != null)||(listaSubtemasxTemaGuardar != null)){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar subtemas", "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
+		
+		/**
+		 * Verificación si hubo cambios en los temas del microcurriculo
+		 */
+		if((listaTemasxUnidadBorrar != null)||(listaTemasxUnidadGuardar != null)){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar temas", "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
+		
+		/**
+		 * Verificación si hubo cambios en las evaluaciones del microcurriculo
+		 */
+		if((listaEvaluacionesxMicroBorrar != null)||(listaEvaluacionesxMicroGuardar != null)){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar evaluaciones", "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
+		
+		/**
+		 * Verificación si hubo cambios en las bibliografias del microcurriculo
+		 */
+		if((listaBibliosxUnidadBorrar != null)||(listaBibliosxUnidadGuardar != null)){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar bibliografias", "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
+		
+		/**
+		 * Verificación si hubo cambios en las unidades del microcurriculo
+		 */
+		if((listaUnidadesxMicroBorrar != null)||(listaUnidadesxMicroGuardar != null)){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar bibliografias", "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
+	}
+	
 	public void actualizarLote(){
 		try{
 			System.out.println("objetoNulo");
@@ -2745,7 +2785,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 					listaObjetivosxMicroBorrar, listaSubtemasxTemaBorrar, listaTemasxUnidadBorrar,
 					listaEvaluacionesxMicroBorrar, listaBibliosxUnidadBorrar, listaUnidadesxMicroBorrar,
 					listaObjetivosxMicroGuardar, listaUnidadesxMicroGuardar, listaBibliosxUnidadGuardar,
-					listaEvaluacionesxMicroGuardar, listaTemasxUnidadGuardar, listaSubtemasxTemaGuardar);
+					listaEvaluacionesxMicroGuardar, listaTemasxUnidadGuardar, listaSubtemasxTemaGuardar, listaHistoricos);
 			System.out.println("despues del objeto");
 			reiniciarEntorno();
 			Messagebox.show("Se actualizó correctamente el microcurriculo","INFORMACIÓN", Messagebox.OK,Messagebox.INFORMATION);
@@ -3157,12 +3197,25 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		TbMicEstado estadoGuardar = listaEstados.get(cmbEstado.getSelectedIndex()-1);
 		if(microcurriculoGuardar.getTbMicEstado().getNbIdestado() != estadoGuardar.getNbIdestado()){
 			microxEstadoGuardar = new TbMicMicroxestado(estadoGuardar, new Date(), microcurriculoGuardar, responsable, "SYSTEM", new Date());
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar a estado: "+estadoGuardar.getVrDescripcion(), "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
 		}
 		microcurriculoGuardar.setTbMicEstado(estadoGuardar);
+		if(!microcurriculoGuardar.getTbAdmPersona().getVrIdpersona().equals(responsable.getVrIdpersona())){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar responsable: "+responsable.getVrNombres()+" "+responsable.getVrApellidos(), "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
 		microcurriculoGuardar.setTbAdmPersona(responsable);
-		microcurriculoGuardar.setVrProposito(txtPropositoMicro.getValue().toString());
-		microcurriculoGuardar.setVrJustificacion(txtJustificacionMicro.getValue().toString());
-		microcurriculoGuardar.setVrResumen(txtResumenMicro.getValue().toString());
+		String propositoNuevo = txtPropositoMicro.getValue().toString();
+		String justificacionNueva = txtJustificacionMicro.getValue().toString();
+		String resumenNuevo = txtResumenMicro.getValue().toString();
+		if((!microcurriculoGuardar.getVrProposito().equals(propositoNuevo))||(!microcurriculoGuardar.getVrJustificacion().equals(justificacionNueva))||(!microcurriculoGuardar.getVrProposito().equals(resumenNuevo))){
+			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar datos complementarios", "SYSTEM", "SYSTEM", new Date());
+			listaHistoricos.add(historicoNuevo);
+		}
+		microcurriculoGuardar.setVrProposito(propositoNuevo);
+		microcurriculoGuardar.setVrJustificacion(justificacionNueva);
+		microcurriculoGuardar.setVrResumen(resumenNuevo);
 		microcurriculoGuardar.setDtModfecha(new Date());
 		microcurriculoGuardar.setVrModusuario("SYSTEM");
 		
@@ -3179,74 +3232,6 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			TbMicObjetivoxmicro objetivoxMicroAdicionar = new TbMicObjetivoxmicro(objetivoGeneralGuardar, microcurriculoGuardar, '1', "SYSTEM", new Date());
 			listaObjetivosxMicroGuardar.add(objetivoxMicroAdicionar);
 		}
-		
-//		TbMicObjetivoxmicro objetivoxMicroGuardar = null;
-//		if(objetivoGeneralGuardar != null){
-//			objetivoGeneralGuardar.setVrDescripcion(txtObjetivoGeneral.getValue().toString());
-//		}else{
-//			objetivoGeneralGuardar = new TbMicObjetivo(txtObjetivoGeneral.getValue().toString(), "SYSTEM", new Date());
-//			objetivoxMicroGuardar = new TbMicObjetivoxmicro(objetivoGeneralGuardar, microcurriculoGuardar, '1', "SYSTEM", new Date());
-//		}
-//		
-//		try {
-//			objetivoNGC.guardarObjetivo(objetivoGeneralGuardar);
-//		}catch(ExcepcionesDAO expDAO){
-//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//			logger.error(expDAO.getMsjTecnico());
-//		}catch(ExcepcionesLogica expNgs){
-//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//			logger.error(expNgs.getMsjTecnico());
-//		}catch(Exception exp){
-////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-//			logger.error(exp);
-//		}
-//		
-//		if(objetivoxMicroGuardar != null){
-//			try {
-//				objetivoxMicroNGC.guardarObjetivosxMicro(objetivoxMicroGuardar);
-//			}catch(ExcepcionesDAO expDAO){
-//				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//				logger.error(expDAO.getMsjTecnico());
-//			}catch(ExcepcionesLogica expNgs){
-//				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//				logger.error(expNgs.getMsjTecnico());
-//			}catch(Exception exp){
-////				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-//				logger.error(exp);
-//			}
-//		}
-//			
-//		try {
-//			microcurriculoNGC.actualizarMicrocurriculos(microcurriculoGuardar);
-//		}catch(ExcepcionesDAO expDAO){
-//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//			logger.error(expDAO.getMsjTecnico());
-//		}catch(ExcepcionesLogica expNgs){
-//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//			logger.error(expNgs.getMsjTecnico());
-//		}catch(Exception exp){
-////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-//			logger.error(exp);
-//		}
-		
-		/**
-		 * Verificamos si se cambio el estado para actualizar el historial
-		 */
-//		if(MicroxEstadoGuardar != null){
-			
-//			try {
-//				microxEstadoNGC.guardarMicroxestado(MicroxEstadoGuardar);
-//			}catch(ExcepcionesDAO expDAO){
-//				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//				logger.error(expDAO.getMsjTecnico());
-//			}catch(ExcepcionesLogica expNgs){
-//				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-//				logger.error(expNgs.getMsjTecnico());
-//			}catch(Exception exp){
-////				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-//				logger.error(exp);
-//			}
-//		}
 		
 	}
 	

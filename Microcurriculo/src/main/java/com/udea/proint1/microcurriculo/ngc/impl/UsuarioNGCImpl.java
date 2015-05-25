@@ -51,14 +51,19 @@ public class UsuarioNGCImpl implements UsuarioNGC {
 	}
 
 	@Override
-	public TbAdmUsuario obtenerUsuarios(String login) throws ExcepcionesLogica {
+	public TbAdmUsuario obtenerUsuarios(String login) throws ExcepcionesLogica, ExcepcionesDAO {
 		TbAdmUsuario usuario = null;
 		
 		try {
 			usuario = usuarioDao.obtenerUsuarios(login);
-		} catch (ExcepcionesDAO e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Usuario");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
 		}		
 		return usuario;
 	}

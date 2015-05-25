@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.ctrl.ValidarDatosCtrl;
 import com.udea.proint1.microcurriculo.dao.GuardarMicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
@@ -56,7 +57,8 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			List<TbMicBibliografia> bibliografia,
 			List<TbMicBiblioxunidad> biblioxunidad,
 			List<TbMicEvaluacion> evaluaciones,
-			List<TbMicEvaluacionxmicro> evaluacionxMicro)
+			List<TbMicEvaluacionxmicro> evaluacionxMicro,
+			TbAdmHistorico historicoGuardar)
 			throws ExcepcionesLogica, ExcepcionesDAO {
 		
 		String idMicro = microcurriculo.getVrIdmicrocurriculo();;
@@ -78,7 +80,7 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			try {
 				guardarMicrocurriculoDao.guardarMicroxlotes(microcurriculo, microxEstado, temas, subtemas, 
 						subtemaxTema, temasxunidad, unidades, unidadesxmicro, objetivos, objetivosxmicro, 
-						bibliografia, biblioxunidad, evaluaciones, evaluacionxMicro);
+						bibliografia, biblioxunidad, evaluaciones, evaluacionxMicro, historicoGuardar);
 			} catch(ExcepcionesDAO expDAO){
 				throw expDAO;
 			} catch(Exception exp){
@@ -121,12 +123,13 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			List<TbMicBiblioxunidad> bibliosxUnidadGuardar,
 			List<TbMicEvaluacionxmicro> evaluacionesxMicroGuardar,
 			List<TbMicTemaxunidad> temasxUnidadGuardar,
-			List<TbMicSubtemaxtema> subtemasxTemaGuardar) throws ExcepcionesLogica, ExcepcionesDAO{
+			List<TbMicSubtemaxtema> subtemasxTemaGuardar,
+			List<TbAdmHistorico> listaObjetivosxMicroGuardar) throws ExcepcionesLogica, ExcepcionesDAO{
 		try{
 			guardarMicrocurriculoDao.modificarMicroxlotes(microcurriculo, microxEstado, objetivosxMicroBorrar, 
 					subtemasxTemaBorrar, temasxUnidadBorrar, evaluacionesxMicroBorrar, bibliosxUnidadBorrar, 
 					unidadesxMicroBorrar, objetivosxMicroGuardar, unidadesxMicroGuardar, bibliosxUnidadGuardar, 
-					evaluacionesxMicroGuardar, temasxUnidadGuardar, subtemasxTemaGuardar);
+					evaluacionesxMicroGuardar, temasxUnidadGuardar, subtemasxTemaGuardar, listaObjetivosxMicroGuardar);
 		} catch(ExcepcionesDAO expDAO){
 			throw expDAO;
 		} catch(Exception exp){
@@ -146,12 +149,13 @@ public class GuardarMicrocurriculoNGCImpl implements GuardarMicrocurriculoNGC {
 			List<TbMicUnidadxmicro> unidadesxmicro,
 			List<TbMicObjetivoxmicro> objetivosxMicro,
 			List<TbMicBiblioxunidad> bibliosxUnidad,
-			List<TbMicEvaluacionxmicro> evaluacionesxMicro) throws ExcepcionesLogica, ExcepcionesDAO{
+			List<TbMicEvaluacionxmicro> evaluacionesxMicro,
+			List<TbAdmHistorico> historicos) throws ExcepcionesLogica, ExcepcionesDAO{
 		
 		try{
 			guardarMicrocurriculoDao.eliminarMicrocurridulo(microcurriculo, microxEstado, 
 					subtemasxTema, temasxUnidad, unidadesxmicro, objetivosxMicro, bibliosxUnidad, 
-					evaluacionesxMicro);
+					evaluacionesxMicro, historicos);
 		} catch(ExcepcionesDAO expDAO){
 			throw expDAO;
 		} catch(Exception exp){

@@ -43,7 +43,7 @@
 					 				<div height="20px">
 					 					<label value="Contraseña" width="200px"	></label>
 					 				</div>
-					 				<textbox id="txtPassword" width="200px"/>					 								 				
+					 				<textbox id="txtPassword" type="password" width="200px"/>					 								 				
 					 			</div>
 					 			<div height="50px" align="center" sclass="fondoNormal">
 					 				<hbox align="center" height="50px">
