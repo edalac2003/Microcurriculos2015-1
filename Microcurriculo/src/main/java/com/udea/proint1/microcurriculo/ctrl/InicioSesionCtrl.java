@@ -87,8 +87,7 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 				
 				if(rolxUsuario.getTbAdmRol().getNbId() == 4){
 					Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
-					Executions.getCurrent().getSession().setAttribute("personaLogin", persona);
-					Executions.getCurrent().getSession().setAttribute("rolLogin", rolxUsuario.getTbAdmRol());
+					Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);
 					
 					Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
 				}else{

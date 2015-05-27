@@ -178,3 +178,19 @@
 	font-family: Arial, Tahoma, Verdana;
 	font-weight: bold
 }**/
+
+.div_fecha{
+	color: #fff;
+	position: absolute;
+	z-index: 50;
+	width: 250px;
+	background-color: rgba(0, 0, 0, 0.6);
+	font-size: 18px;
+	padding: 5px 0px 5px 0px;
+	margin: 0 0 0 65%;
+}
+
+.espacio_debajo{
+	margin: 0 0 -10px 0;
+	padding: 0;
+}

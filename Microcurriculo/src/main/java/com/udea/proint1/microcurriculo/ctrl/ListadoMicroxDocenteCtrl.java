@@ -13,7 +13,6 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Borderlayout;
-import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -22,6 +21,7 @@ import org.zkoss.zul.Messagebox;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbAdmRol;
+import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
@@ -71,6 +71,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	String userName;
 	String nombrePersona;
 	String apellidoPersona;
+	String idPersona;
 	
 	
 	/*
@@ -146,24 +147,31 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public static List<TbAdmHistorico> historicos = new ArrayList<TbAdmHistorico>();
 	
 	private void cargarDatosEncabezado(){
-		lblFechaActual.setValue(fechaActual.toString());
+		
+		Date now = new Date();
+		DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+		String s4 = df4.format(now);
+		lblFechaActual.setValue(s4);
 //		userName = Executions.getCurrent().getSession().getAttribute("userName").toString();
 //		nombrePersona = Executions.getCurrent().getSession().getAttribute("nombrePersona").toString();
 //		apellidoPersona = Executions.getCurrent().getSession().getAttribute("apellidoPersona").toString();
 		
 		lblNombreDocente.setValue(nombrePersona+" "+apellidoPersona);
-		lblUsuarioLogin.setValue(userName);
+//		lblUsuarioLogin.setValue(userName);
 	}
 	
 	private void listarMicrocurriculos(){		
 		try {
-			listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable("92532121");
-		} catch (ExcepcionesLogica e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExcepcionesDAO e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable(idPersona);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("Error al intentar cargar microcurriculos","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
 		}
 		
 		if ((listadoMicrocurriculo != null)){
@@ -191,6 +199,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 					celdaMateria = new Listcell(micro.getTbAdmMateria().getVrNombre());
 				
 				Listcell celdaEliminar = null;
+			
 				if(micro.getTbMicEstado().getNbIdestado() == 1){
 					celdaEliminar = new Listcell();
 					celdaEliminar.setImage("/_img/icons/32x32/delete.png");
@@ -201,7 +210,6 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 						}
 					});
 				}
-				
 				Listcell celdaEstado = new Listcell(micro.getTbMicEstado().getVrDescripcion());				
 				listaItem.appendChild(celdaID);
 				listaItem.appendChild(celdaNucleo);
@@ -227,6 +235,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	public void eliminarMicrocurriculo(TbMicMicrocurriculo microcurriculo){
 		System.out.println("llegó aqui "+microcurriculo.getVrIdmicrocurriculo());
 		
@@ -412,7 +421,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(expNgs.getMsjTecnico());
 		}catch(Exception exp){
-			Messagebox.show("No se puso eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
+			Messagebox.show("No se pudo eliminar el Microcurriculo","ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(exp);
 		}
 	}
@@ -422,12 +431,20 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {
 		
 		super.doAfterCompose(comp);
-		if(((Executions.getCurrent().getSession().hasAttribute("userName"))&&(Executions.getCurrent().getSession().hasAttribute("personaLogin")))&&(Executions.getCurrent().getSession().hasAttribute("rolLogin"))){
-			TbAdmRol rolPersona = (TbAdmRol) Executions.getCurrent().getSession().getAttribute("rolLogin");
+		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
+			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+			TbAdmRol rolPersona = rolxUsuario.getTbAdmRol();
 			if(rolPersona.getNbId() == 4){
+				idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
+				nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
+				apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
+				userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
 				listarMicrocurriculos();
+				cargarDatosEncabezado();
 				contenidoCargando.setVisible(false);
 				contenidoInicioDocente.setVisible(true);
+			}else{
+				Executions.getCurrent().sendRedirect("/index.zul");
 			}
 		}else{
 			Executions.getCurrent().sendRedirect("/index.zul");
