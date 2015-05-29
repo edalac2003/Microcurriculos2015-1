@@ -2,12 +2,9 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page title="Bienvenidos a Microcurriculos" contentType="text/html; charset=UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
-<?link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" ?>
-<?script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ?>
-<?script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" ?>
 
 <zk>
-<window id="formaInicioDocente" border="none" height="100%">
+<window id="formaInicioDocente" border="none" apply="${listadoMicroxDocente}">
 	<borderlayout id="contenidoCargando">
 		<north height="40%" border="none">
 		</north>
@@ -17,11 +14,19 @@
 			</div>
 		</center>
 	</borderlayout>
-	<borderlayout id="contenidoInicioDocente" height="800px" apply="${listadoMicroxDocente}" visible="false">
-		<north height="100px" border="0" sclass="fondoEncabezado">
+	<borderlayout id="contenidoInicioDocente" height="700px" visible="false">
+		<north height="125px" border="0" sclass="fondoEncabezado">
 			<div>
 				<div sclass="div_fecha" align="center">
-					<label id="lblFechaActual" value="FechaActual"/>
+					<div sclass="cab_izquierda">
+						<a id="nlcSalir" label="Salir" sclass="enlace_salir"/>
+					</div>
+					<div sclass="cab_centro">
+						<label id="lblUsuarioLogin"/>
+					</div>
+					<div sclass="cab_derecha">
+						<label id="lblFechaActual" value="FechaActual"/>
+					</div>
 				</div>
 				<include id="headerIdx" src="/_sections/header.zul" />
 			</div>							
@@ -34,83 +39,65 @@
 		</west>
 		<center border="none">
 			<div>
-			<div align="center">
-<!-- 			<borderlayout height="600px">				 -->
-<!-- 				<north height="110px" border="none"> -->
-					<div width="960px" sclass="margen_corrida">
-					<html><![CDATA[
-					    <div>
-							<nav class="navbar navbar-default espacio_debajo">
-								<div class="container-fluid">
-								  	<div class="navbar-header">
-								    	<a class="navbar-brand" href="">Docente</a>
-								  	</div>
-								  	<div>
-								    	<ul class="nav navbar-nav">
-								      		<li class="active"><a href="">Inicio</a></li>
-								      		<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Microcurriculo <span class="caret"></span></a>
-								        		<ul class="dropdown-menu">
-								          			<li><a href="../../microcurriculo/crearMic.zul">Crear</a></li>
-		<!-- 						          			<li><a href="">Modificar</a></li> -->
-								          			<li><a href="../../microcurriculo/duplicarMic.zul">Duplicar</a></li>
-								          			<li><a href="microcurriculo/listamic.zul">Listar</a></li>
-								        		</ul>
-								      		</li>
-		<!-- 						      		<li><a href="#">Page 2</a></li> -->
-								    	</ul>
-								    	<ul class="nav navbar-nav navbar-right">
-								      		<li><a href="#"><span class="glyphicon glyphicon-user"></span> elmer.urrea</a></li>
-								      		<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-								    	</ul>
-								  	</div>
-								</div>
-							</nav>
+				<div align="center">
+					<menubar width="960px" id="menInicio">
+						<menuitem label="Inicio"/>
+						<menu label="Microcurriculo">
+							<menupopup>
+								<menuitem label="Crear"/>
+								<menuitem label="Duplicar"/>
+								<menuitem label="Listar"/>
+							</menupopup>
+						</menu>
+					</menubar>
+				</div>
+				<div align="center">
+	<!-- 			<borderlayout height="600px">				 -->
+	<!-- 				<north height="110px" border="none"> -->
+						<div width="960px">
+							<div align="center">
+								<groupbox width="960px" height="80px">
+									<hbox height="30px" align="center">
+										<div align="left">
+											<label value="Docente : " />
+											<label id="lblNombreDocente" value="lblNombreDocente" sclass="resaltado"/>
+	<!-- 										<label value="  |  "></label> -->
+	<!-- 										<label value="Usuario : "></label> -->
+	<!-- 										<label id="lblUsuarioLogin" value="UsuarioLogin" sclass="resaltado" /> -->
+										</div>
+									</hbox>
+									<hbox align="center" height="30px">
+										<div align="center">
+											<label value="Unidad Academica" />
+											<combobox id="cmbUnidadAcademica" />
+											<label value="Dependencia" />
+											<combobox id="cmbDependenciaAcademica" />
+										</div>																	
+									</hbox>								
+								</groupbox>							
+							</div>
+							<hbox>
+								<label value=""></label>
+							</hbox>
 						</div>
-         			]]>
-        		</html>			
-						<div align="center">
-							<groupbox width="600px" height="80px">
-								<hbox height="30px" align="center">
-									<div align="left">
-										<label value="Docente : " />
-										<label id="lblNombreDocente" value="lblNombreDocente" sclass="resaltado"/>
-<!-- 										<label value="  |  "></label> -->
-<!-- 										<label value="Usuario : "></label> -->
-<!-- 										<label id="lblUsuarioLogin" value="UsuarioLogin" sclass="resaltado" /> -->
-									</div>
-								</hbox>
-								<hbox align="center" height="30px">
-									<div align="center">
-										<label value="Unidad Academica" />
-										<combobox id="cmbUnidadAcademica" />
-										<label value="Dependencia" />
-										<combobox id="cmbDependenciaAcademica" />
-									</div>																	
-								</hbox>								
-							</groupbox>							
-						</div>
-						<hbox>
-							<label value=""></label>
-						</hbox>
-					</div>
-<!-- 				</north> -->
-<!-- 				<west width="180px" border="none"> -->
-<!-- 					<include src="/_ambientes/_docente/menu_Docente.zul" /> -->
-<!-- 				</west> -->
-<!-- 				<east width="180px" border="none"></east> -->
-<!-- 				<center border="none" apply="${listadoMicroxDocente}"> -->
-					<listbox id="listaMicrocurriculo" width="960px">
-						<listhead>
-							<listheader label="${labels.microcurriculo.headerCodigo}"  align="center" width="12%"/>
-							<listheader label="${labels.microcurriculo.nucleo}" align="center"/>
-							<listheader label="${labels.microcurriculo.idmateria}" align="center"/>
-							<listheader label="${labels.microcurriculo.estados}" align="center" width="15%"/>
-							<listheader label="" align="center" width="15%"/>
-						</listhead>
-					</listbox>
-<!-- 				</center> -->
-<!-- 			</borderlayout> -->
-			</div>
+	<!-- 				</north> -->
+	<!-- 				<west width="180px" border="none"> -->
+	<!-- 					<include src="/_ambientes/_docente/menu_Docente.zul" /> -->
+	<!-- 				</west> -->
+	<!-- 				<east width="180px" border="none"></east> -->
+	<!-- 				<center border="none" apply="${listadoMicroxDocente}"> -->
+						<listbox id="listaMicrocurriculo" mold="paging" autopaging="true" width="960px" height="100px">
+							<listhead>
+								<listheader label="${labels.microcurriculo.headerCodigo}"  align="center" width="12%"/>
+								<listheader label="${labels.microcurriculo.nucleo}" align="center"/>
+								<listheader label="${labels.microcurriculo.idmateria}" align="center"/>
+								<listheader label="${labels.microcurriculo.estados}" align="center" width="15%"/>
+								<listheader label="" align="center" width="15%"/>
+							</listhead>
+						</listbox>
+	<!-- 				</center> -->
+	<!-- 			</borderlayout> -->
+				</div>
 			</div>
 		</center>
 		<south border="none" height="100px" sclass="fondoEncabezado">		

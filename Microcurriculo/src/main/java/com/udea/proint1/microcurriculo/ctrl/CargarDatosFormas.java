@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
@@ -29,6 +30,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
@@ -103,6 +105,9 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	Checkbox ckbHabilitable;
 	Checkbox ckbClasificable;
 	
+	Borderlayout contenidoCargando;
+	Borderlayout contenidoPrincipal;
+	
 	Button btnBuscar;
 	
 	Grid grillaListado;
@@ -110,6 +115,16 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	Listbox listaMicrocurriculo;
 	
 	Toolbarbutton tool_save;
+	
+	/*
+	 * Variables locales
+	 */
+	List<TbMicMicrocurriculo> listadoMicrocurriculo = null;
+	private static Date fechaActual = new Date();
+	String userName;
+	String nombrePersona;
+	String apellidoPersona;
+	String idPersona;
 	
 	/**
 	 * Estos objetos los traje de ValidarDatos
@@ -370,6 +385,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 //			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(exp);
 		}
+		
 		
 		if(listaEstados != null){
 			cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
@@ -1236,28 +1252,39 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
-		
-		if (comp.getParent().getId().equals("formaCrearMicro")){
-			inicializarFormaCrear();
-			cargarEstados();
-			cargarDocentes();
-			cargarUnidades();
-			cargarSemestres();
-		} else if (comp.getParent().getId().equals("formaListarMicro")){
-			inicializarFormaListado();
-			cargarMaterias(cmbNucleo.getValue());
-			cargarMicrocurriculos();			
-			cargarDependencias();
-			cargarNucleos();			
-		} else if (comp.getParent().getId().equals("consultarMicro")){
-			cargarMicrocurriculos();
-			cargarDependencias();
-			cargarNucleos();
-			//inhabilitarControles();
+		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
+			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+			TbAdmRol rolPersona = rolxUsuario.getTbAdmRol();
+			if(rolPersona.getNbId() == 4){
+				if (comp.getParent().getId().equals("formaCrearMicro")){
+					idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
+					nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
+					apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
+					userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
+					inicializarFormaCrear();
+					cargarEstados();
+					cargarDocentes();
+					cargarUnidades();
+					cargarSemestres();
+					contenidoCargando.setVisible(false);
+					contenidoPrincipal.setVisible(true);
+				} else if (comp.getParent().getId().equals("formaListarMicro")){
+					inicializarFormaListado();
+					cargarMaterias(cmbNucleo.getValue());
+					cargarMicrocurriculos();			
+					cargarDependencias();
+					cargarNucleos();			
+				} else if (comp.getParent().getId().equals("consultarMicro")){
+					cargarMicrocurriculos();
+					cargarDependencias();
+					cargarNucleos();
+					//inhabilitarControles();
+				}
+			}else{
+				Executions.getCurrent().sendRedirect("/index.zul");
+			}
+		}else{
+			Executions.getCurrent().sendRedirect("/index.zul");
 		}
-
-//		cargarDocentes();
-//		cargarUnidades();
-//		cargarSemestres();
 	}
 }

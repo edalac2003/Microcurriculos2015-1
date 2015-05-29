@@ -181,16 +181,47 @@
 
 .div_fecha{
 	color: #fff;
-	position: absolute;
-	z-index: 50;
-	width: 250px;
-	background-color: rgba(0, 0, 0, 0.6);
+/* 	z-index: 50; */
+	width: 960px;
+/* 	background-color: rgba(0, 0, 0, 0.6); */
 	font-size: 18px;
 	padding: 5px 0px 5px 0px;
-	margin: 0 0 0 65%;
+	margin: 0 auto;
 }
 
-.espacio_debajo{
-	margin: 0 0 -10px 0;
-	padding: 0;
+.subir_margen{
+	margin: -15px 0 5px 0;
+}
+
+.cab_izquierda{
+	width: 35px;
+	text-align: left;
+	float: left;
+	margin: 0 0 5px 5px;
+	border-right-color: #FFF;
+	border-right-style: solid;
+	border-right-width: 1px; 
+}
+
+.cab_centro{
+	width: 40%px;
+	text-align: left;
+	float: left;
+	margin: 0 0 5px 5px;
+}
+
+.cab_derecha{
+	width: 40%;
+	text-align: right;
+	float: right;
+	margin: 0 5px 5px 0;
+}
+
+.enlace_salir{
+	color: #FFF;
+	text-decoration: none;
+}
+
+:HOVER.enlace_salir{
+	text-decoration: underline;
 }

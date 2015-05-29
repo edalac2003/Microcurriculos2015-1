@@ -12,7 +12,9 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.A;
 import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Html;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -62,6 +64,8 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	Label lblFechaActual;
 	Label lblNombreDocente;
 	Label lblUsuarioLogin;
+	
+	A nlcSalir;
 	
 	/*
 	 * Variables locales
@@ -426,6 +430,16 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	/**
+	 * El metodo elimina la sessión actual y procede a redireccionar al index
+	 */
+	public void onClick$nlcSalir(){
+		
+		Executions.getCurrent().getSession().removeAttribute("rolxUsuarioLogin");
+		Executions.getCurrent().sendRedirect("/index.zul");
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -439,6 +453,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 				nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
 				apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
 				userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
+				lblUsuarioLogin.setValue(userName);
 				listarMicrocurriculos();
 				cargarDatosEncabezado();
 				contenidoCargando.setVisible(false);
