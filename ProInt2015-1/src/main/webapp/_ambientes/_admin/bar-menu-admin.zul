@@ -1,0 +1,33 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div>
+<!-- 		apply="${cargarDatosFormas}" -->
+		<menubar width="100%" id="menInicio">
+			<menuitem label="Inicio" href="/_ambientes/_admin/inicioAdmin.zul" image="/_img/icons/32x32/home.png"/>
+			<menu id="menuMicros" label="Microcurriculo" image="/_img/icons/32x32/micro32.png">
+				<menupopup>
+					<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul" image="/_img/icons/32x32/new.png" />
+					<menuitem label="Listar" href="/_ambientes/_docente/inicioDocente.zul" image="/_img/icons/32x32/list.png" />
+				</menupopup>
+			</menu>
+			<menu id="menuDocentes" label="Docentes" visible="false">
+				<menupopup>
+					
+				</menupopup>
+			</menu>
+			<menu id="menuMaterias" label="Materias" image="/_img/icons/32x32/materia32.png">
+				<menupopup>
+					<menuitem label="Crear" href="/materia/crearMateria.zul" image="/_img/icons/32x32/new.png" />
+					<menuitem label="Listar" href="/materia/listarMaterias.zul" image="/_img/icons/32x32/list.png" />
+				</menupopup>
+			</menu>
+			<menuitem id="menuNucleos" label="Nucleos" image="/_img/icons/32x32/nucleo32.png" href="/_nucleo/crearNucleo.zul" />
+			<menu id="menuTools" label="Herramientas " visible="false">
+				<menupopup>
+					<menuitem id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png"/>
+					<menuitem id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png"/>
+				</menupopup>
+			</menu>
+		</menubar>
+	</div>
+</zk>

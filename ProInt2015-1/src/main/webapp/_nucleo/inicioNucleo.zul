@@ -1,0 +1,36 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
+<zk>
+<window title="" border="none">
+	<borderlayout height="700px">
+		<north border="none" height="100px">
+			<div width="100%" align="center" sclass="fondoEncabezado">
+				<include id="headerIdx" src="/_sections/header.zul" />
+			</div>			
+		</north>
+		<west border="none" width="14%">
+		</west>
+		<east width="14%" border="none">
+			<label />
+		</east>
+		<center border="none">
+			<borderlayout>
+				<north>
+					<div>
+						<include src="/_ambientes/_admin/bar-menu-admin.zul"></include>
+					</div>
+				</north>
+				<center>
+					
+				</center>
+			</borderlayout>
+		</center>
+		<south height="90px" border="none" sclass="fondoEncabezado">
+			<div width="100%" align="center">
+				<include id="footerIdx" src="/_sections/footer.zul" />
+			</div>			
+		</south>
+	</borderlayout>
+</window>
+</zk>

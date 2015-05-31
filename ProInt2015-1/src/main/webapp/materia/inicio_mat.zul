@@ -43,7 +43,7 @@
 							<hbox align="center" height="95px">
 								<a href="/index.zul" image="/_img/icons/128x128/logout_70.png" />
 								<vbox width="350px">
-									<a href="/index.zul" label="Cerrar Materias" sclass="nombreSeccion" />
+									<a href="/_ambientes/_admin/inicioAdmin.zul" label="Cerrar Materias" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
 										<label value="${labels.microcurriculo.mensajeCerrar}" />
 									</div>	

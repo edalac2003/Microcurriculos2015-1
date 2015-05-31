@@ -36,6 +36,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
+import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
@@ -168,6 +169,14 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	Toolbarbutton tool_print;
 	Toolbarbutton tool_duplica_otro;
 	Toolbarbutton tool_atras;
+	
+	Label lblFechaActual;
+	Label lblUsuarioLogin;
+	
+	private static Date fechaActual = new Date();
+	String userName;
+	String nombrePersona;
+	String apellidoPersona;
 	
 	/**
 	 * Formatos de fecha
@@ -2260,59 +2269,73 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
-		if("formaDuplicarMicro".equals(comp.getParent().getId().toString())){			
-			if(Executions.getCurrent().getSession().hasAttribute("idMicro")&&(Executions.getCurrent().getSession().hasAttribute("semestre"))){
-				panelDuplicarMicro.setVisible(false);
-				blyDuplicarMicro.setVisible(true);
-				panelSemestre.setVisible(false);
-				fichaContenidos.setVisible(true);
-				cargarDocentes();
+		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
+			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+			TbAdmRol rolPersona = rolxUsuario.getTbAdmRol();
+			if(rolPersona.getNbId() == 4){
+				/**
+				 * fecha
+				 */
+				Date now = new Date();
+				DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+				String s4 = df4.format(now);
+				lblFechaActual.setValue(s4);
 				
-				Executions.getCurrent().getSession().setAttribute("duplicar", "verdadero");
-				String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-				String idSemestre = Executions.getCurrent().getSession().getAttribute("semestre").toString();
-				llenarDatos(idMicrocurriculo, idSemestre);
-				
-			}else if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-				panelDuplicarMicro.setVisible(false);
 				blyDuplicarMicro.setVisible(true);
-				panelSemestre.setVisible(true);
-				fichaContenidos.setVisible(false);
-				String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-				cargarSemestres(idMicrocurriculo);
-				tool_print.setVisible(false);
-				tool_save.setVisible(false);
-			}else{
-				panelDuplicarMicro.setVisible(true);
-				blyDuplicarMicro.setVisible(false);
-				tool_print.setVisible(false);
-				tool_save.setVisible(false);
-			}
-		}else if("formaDetallesMicro".equals(comp.getParent().getId().toString())){
-			if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-				panelBuscarMicro.setVisible(false);
-				blyConsultarMicro.setVisible(true);
-				fichaContenidos.setVisible(true);
-				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-					llenarDatos(idMicro);
+				
+				nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
+				apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
+				userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
+				lblUsuarioLogin.setValue(userName);
+				
+				if("formaDuplicarMicro".equals(comp.getParent().getId().toString())){			
+					if(Executions.getCurrent().getSession().hasAttribute("idMicro")&&(Executions.getCurrent().getSession().hasAttribute("semestre"))){
+						panelDuplicarMicro.setVisible(false);
+						blyDuplicarMicro.setVisible(true);
+						panelSemestre.setVisible(false);
+						fichaContenidos.setVisible(true);
+						cargarDocentes();
+						
+						Executions.getCurrent().getSession().setAttribute("duplicar", "verdadero");
+						String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+						String idSemestre = Executions.getCurrent().getSession().getAttribute("semestre").toString();
+						llenarDatos(idMicrocurriculo, idSemestre);
+						
+					}else if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+						panelDuplicarMicro.setVisible(false);
+						blyDuplicarMicro.setVisible(true);
+						panelSemestre.setVisible(true);
+						fichaContenidos.setVisible(false);
+						String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+						cargarSemestres(idMicrocurriculo);
+						tool_print.setVisible(false);
+						tool_save.setVisible(false);
+					}else{
+						panelDuplicarMicro.setVisible(true);
+						blyDuplicarMicro.setVisible(false);
+						tool_print.setVisible(false);
+						tool_save.setVisible(false);
+					}
+				}else if("formaDetallesMicro".equals(comp.getParent().getId().toString())){
+					if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+						panelBuscarMicro.setVisible(false);
+						blyConsultarMicro.setVisible(true);
+						fichaContenidos.setVisible(true);
+						if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+							String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+							llenarDatos(idMicro);
+						}
+					}else{
+						Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
+					}
+				} else if("formaInicioDocente".equals(comp.getParent().getId().toString())){
+					
 				}
 			}else{
-//				panelBuscarMicro.setVisible(true);
-//				blyConsultarMicro.setVisible(true);
-//				fichaContenidos.setVisible(false);
-//				tool_print.setVisible(false);
-//				tool_consulta_otro.setVisible(false);
-//				cargarMaterias("");
-//				cargarUnidades();
-//				cargarDependencias("");
-//				cargarNucleos("");
-//				cargarMicrocurriculos("");
-				Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
+				Executions.getCurrent().sendRedirect("/index.zul");
 			}
-		} else if("formaInicioDocente".equals(comp.getParent().getId().toString())){
-			
+		}else{
+			Executions.getCurrent().sendRedirect("/index.zul");
 		}
-		
 	}
 }

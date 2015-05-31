@@ -13,7 +13,7 @@
 			</north>
 			
 			<west border="none" width="14%">
-				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+<!-- 				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					 -->
 			</west>
 			<east width="14%" border="none">
 				<label />
@@ -23,13 +23,14 @@
 				<div align="center">
 					<borderlayout height="690px">
 						<north border="0">
-							<toolbar id="tb" sclass="vista" height="45px" width="100%">
-								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
-								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new_32.png" />
-								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" />
-								<toolbarbutton id="tool_update" label="Modificar Materia" image="/_img/icons/32x32/pencil_32.png" href="/materia/modificarMateria.zul"/>
-								<toolbarbutton id="tool_close" label="Regresar" image="/_img/icons/32x32/atras.png" href="/materia/inicio_mat.zul"/>
-							</toolbar>
+							<include src="/_ambientes/_admin/bar-menu-admin.zul"></include>
+<!-- 							<toolbar id="tb" sclass="vista" height="45px" width="100%"> -->
+<!-- 								<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" /> -->
+<!-- 								<toolbarbutton id="tool_new" label="Nuevo" image="/_img/icons/32x32/new_32.png" /> -->
+<!-- 								<toolbarbutton id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png" /> -->
+<!-- 								<toolbarbutton id="tool_update" label="Modificar Materia" image="/_img/icons/32x32/pencil_32.png" href="/materia/modificarMateria.zul"/> -->
+<!-- 								<toolbarbutton id="tool_close" label="Regresar" image="/_img/icons/32x32/atras.png" href="/materia/inicio_mat.zul"/> -->
+<!-- 							</toolbar> -->
 						</north>
 						<center border="none" autoscroll="true" >
 							<div align="center">

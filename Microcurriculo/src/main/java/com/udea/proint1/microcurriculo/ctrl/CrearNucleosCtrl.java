@@ -55,7 +55,9 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	Listbox listaNuevasAreas;
 	
 	Textbox txtNombreUnidadAcademica;
+	Textbox txtAliasUnidadAcademica;
 	Textbox txtNuevoNombreUnidadAcademica;
+	Textbox txtNuevoAliasUnidadAcademica;
 	Textbox txtBuscarUnidad;
 	Textbox txtIdUnidadAcademica;
 	Textbox txtIdDependencia;
@@ -66,6 +68,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	Textbox txtNucleo;
 	Textbox txtNombreArea;
 	Textbox txtNuevoAreaAcademica;
+//	Textbox txtNuevoAreaAcademica;
 		
 	Textbox txtNombreDependenciaAcademica;
 	Textbox txtNuevoNombreDependenciaAcademica;

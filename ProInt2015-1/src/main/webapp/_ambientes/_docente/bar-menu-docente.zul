@@ -1,0 +1,21 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<div align="center">
+		<menubar width="960px" id="menInicio" apply="${cargarDatosFormas}">
+			<menuitem label="Inicio" href="/_ambientes/_docente/inicioDocente.zul"/>
+			<menu label="Microcurriculo">
+				<menupopup>
+					<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul"/>
+					<menuitem label="Duplicar" href="../../microcurriculo/duplicarMic.zul"/>
+					<menuitem label="Listar" href="/_ambientes/_docente/inicioDocente.zul"/>
+				</menupopup>
+			</menu>
+			<menu id="menOpcionesGuardar" label="Archivo" visible="false">
+				<menupopup>
+					<menuitem id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png"/>
+					<menuitem id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png"/>
+				</menupopup>
+			</menu>
+		</menubar>
+	</div>
+</zk>

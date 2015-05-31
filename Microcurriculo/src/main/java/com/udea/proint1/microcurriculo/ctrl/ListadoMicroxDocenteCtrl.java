@@ -232,7 +232,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	private static void mostrarMicrocurriculo(TbMicMicrocurriculo microcurriculo){
 		if((microcurriculo.getTbMicEstado().getNbIdestado() == 1)||(microcurriculo.getTbMicEstado().getNbIdestado() == 4)||(microcurriculo.getTbMicEstado().getNbIdestado() == 5)){
 			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());
-			Executions.getCurrent().sendRedirect("/microcurriculo/ModificarMic.zul");
+			Executions.getCurrent().sendRedirect("/_ambientes/_docente/modificarMic.zul");
 		}else{
 			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());
 			Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");

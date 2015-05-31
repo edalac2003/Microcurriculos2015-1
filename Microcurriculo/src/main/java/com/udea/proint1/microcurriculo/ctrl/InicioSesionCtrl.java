@@ -69,8 +69,7 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 		}
 		
 		if(usuario != null){
-			if(usuario.getVrPassword().equals(password)){
-				
+			if(usuario.getVrPassword().equals(password)){				
 				try {
 					rolxUsuario = rolxUsuarioNGC.obtenerRolxUsuario(usuario);
 				}catch(ExcepcionesDAO expDAO){
@@ -85,15 +84,29 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 				}
 				
 				persona = usuario.getTbAdmPersona();
-				
-				if(rolxUsuario.getTbAdmRol().getNbId() == 4){
-					Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
-					Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);
+				if (rolxUsuario != null){
+					int rol = rolxUsuario.getTbAdmRol().getNbId();
 					
-					Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
-				}else{
-					Messagebox.show("No autorizado para ingresar.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
-				}
+					switch (rol) {
+						case 1:
+							break;
+						case 2:
+							Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
+							break;
+						case 3:
+							break;
+						case 4:
+							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
+							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
+							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
+							break;
+						case 5:
+							break;
+						default:
+							Messagebox.show("No autorizado para ingresar.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
+							break;
+					}
+				}				
 			}else{
 				Messagebox.show("Usuario o Contraseña Incorrectos.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
 			}

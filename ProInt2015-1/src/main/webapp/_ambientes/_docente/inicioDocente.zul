@@ -39,18 +39,21 @@
 		</west>
 		<center border="none">
 			<div>
-				<div align="center">
-					<menubar width="960px" id="menInicio">
-						<menuitem label="Inicio"/>
-						<menu label="Microcurriculo">
-							<menupopup>
-								<menuitem label="Crear"/>
-								<menuitem label="Duplicar"/>
-								<menuitem label="Listar"/>
-							</menupopup>
-						</menu>
-					</menubar>
-				</div>
+				<include src="/_ambientes/_docente/bar-menu-docente.zul"></include>
+<!-- 				<div align="center"> -->
+<!-- 					<menubar width="960px" id="menInicio"> -->
+<!-- 						<menuitem label="Inicio"/> -->
+<!-- 						<menu label="Microcurriculo"> -->
+<!-- 							<menupopup> -->
+<!-- 								<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul"/> -->
+<!-- 								<menuitem label="Duplicar" href="../../microcurriculo/duplicarMic.zul"/> -->
+<!-- 								<menuitem label="Listar"/> -->
+<!-- 							</menupopup> -->
+<!-- 						</menu> -->
+<!-- 					</menubar> -->
+<!-- 				</div> -->
+			
+				<div height="5px"></div>
 				<div align="center">
 	<!-- 			<borderlayout height="600px">				 -->
 	<!-- 				<north height="110px" border="none"> -->
@@ -80,13 +83,14 @@
 								<label value=""></label>
 							</hbox>
 						</div>
+						<div height="5px"></div>
 	<!-- 				</north> -->
 	<!-- 				<west width="180px" border="none"> -->
 	<!-- 					<include src="/_ambientes/_docente/menu_Docente.zul" /> -->
 	<!-- 				</west> -->
 	<!-- 				<east width="180px" border="none"></east> -->
 	<!-- 				<center border="none" apply="${listadoMicroxDocente}"> -->
-						<listbox id="listaMicrocurriculo" mold="paging" autopaging="true" width="960px" height="100px">
+						<listbox id="listaMicrocurriculo" mold="paging" autopaging="true" width="960px" height="350px">
 							<listhead>
 								<listheader label="${labels.microcurriculo.headerCodigo}"  align="center" width="12%"/>
 								<listheader label="${labels.microcurriculo.nucleo}" align="center"/>

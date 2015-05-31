@@ -20,6 +20,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Menu;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
@@ -149,6 +150,10 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	Label lblidMicrocurriculo;
 	
+	Label lblUsuarioLogin;
+	Label lblFechaActual;
+	
+	Menu menOpcionesGuardar;
 	
 	private static List<TbMicUnidadxmicro> listadoUnidadesxMicro;
 	private static List<TbMicTemaxunidad> listadoTemasxUnidad;
@@ -1257,15 +1262,25 @@ public class CargarDatosFormas extends GenericForwardComposer{
 			TbAdmRol rolPersona = rolxUsuario.getTbAdmRol();
 			if(rolPersona.getNbId() == 4){
 				if (comp.getParent().getId().equals("formaCrearMicro")){
+					menOpcionesGuardar.setVisible(true);
 					idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
 					nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
 					apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
 					userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
+					lblUsuarioLogin.setValue(userName);
 					inicializarFormaCrear();
 					cargarEstados();
 					cargarDocentes();
 					cargarUnidades();
 					cargarSemestres();
+					/**
+					 * fecha
+					 */
+					Date now = new Date();
+					DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+					String s4 = df4.format(now);
+					lblFechaActual.setValue(s4);
+					
 					contenidoCargando.setVisible(false);
 					contenidoPrincipal.setVisible(true);
 				} else if (comp.getParent().getId().equals("formaListarMicro")){

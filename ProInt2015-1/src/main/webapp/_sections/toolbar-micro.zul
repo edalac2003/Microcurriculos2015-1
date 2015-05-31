@@ -3,10 +3,10 @@
 
 <zk>
 	<toolbar id="toolbar_micro" sclass="vista" height="45px" apply="${cargarDatosFormas}">
-		<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
+		<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="inicioDocente.zul" />
 		<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" />
 		<toolbarbutton id="tool_save" label="${labels.microcurriculo.toolbar.save}" image="/_img/icons/32x32/save.png" />
 <!-- 		<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" /> -->
-		<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.back}" image="/_img/icons/32x32/atras.png" href="/microcurriculo/inicio_mic.zul"/>
+<!-- 		<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.back}" image="/_img/icons/32x32/atras.png" href="/microcurriculo/inicio_mic.zul"/> -->
 	</toolbar>	
 </zk>

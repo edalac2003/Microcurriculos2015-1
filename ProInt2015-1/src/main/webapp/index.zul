@@ -27,7 +27,7 @@
 					<div align="center" width="450px">
 						<div height="30px" />
 						<vbox sclass="fondoNormal">
-					 		<groupbox height="220px" width="450px" mold="3d" closable="false" >
+					 		<groupbox height="250px" width="450px" mold="3d" closable="false" >
 					 			<caption>
 					 				<image src="./_img/icons/128x128/lock.png"></image>
 					 				<label value="Inicio de Sesion" sclass="tituloSession"></label>
