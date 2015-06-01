@@ -3,17 +3,21 @@ package com.udea.proint1.microcurriculo.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.DocentexDependenciaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport implements DocentexDependenciaDAO {
+
 
 	@Override
 	public void guardarDocentesxDependencia(TbAdmDocentexDependencia docentesxDependencia)
@@ -50,25 +54,46 @@ public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport impleme
 	}
 
 	@Override
-	public List<TbAdmDocentexDependencia> listarDocentesxDependencia()
-			throws ExcepcionesDAO {
+	public List<TbAdmDocentexDependencia> listarDocentesxDependencia() throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmDocentexDependencia> docentesxDependencia = new ArrayList<TbAdmDocentexDependencia>();
+        List<TbAdmDocentexDependencia> docentesxDependencia = null;
         
 		try {
 			session = getSession();
-			Criteria criteria = session.createCriteria(TbAdmDocentexDependencia.class);
+//			Criteria criteria = session.createCriteria(TbAdmDocentexDependencia.class);
+			Criteria criteria = (Criteria) session.createCriteria(TbAdmDocentexDependencia.class);
+			criteria.setResultTransformer(criteria.DISTINCT_ROOT_ENTITY);
 			
 			docentesxDependencia = criteria.list();
 		}catch(HibernateException e){
-			throw new ExcepcionesDAO(e);
-			
+			throw new ExcepcionesDAO(e);			
 		} finally{
 			session.close();
 		}
 		return docentesxDependencia;
 	}
 
+
+	@Override
+	public List<TbAdmDocentexDependencia> listaDocentesxDependencia(TbAdmDependencia dependencia) throws ExcepcionesDAO {
+		Session session = null;
+		List<TbAdmDocentexDependencia> docentesxDependencias = null;
+		
+		try{
+			session = getSession();
+			Query query = session.createQuery("from tbAdmDocentexDependencia where vrDependencia := dependencia");
+			query.setEntity("dependencia", dependencia);
+			docentesxDependencias = query.list();
+			
+		} catch(HibernateException e){
+			throw new ExcepcionesDAO(e);
+		} finally {
+			session.close();
+		}
+		
+		return null;
+	}
+	
 	@Override
 	public void actualizarDocentesxDependencia(TbAdmDocentexDependencia docentesxDependencia)
 			throws ExcepcionesDAO {

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.DocentexDependenciaDAO;
 import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.ngc.DocentexDependenciaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -14,7 +15,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class DocentexDependenciaNGCImpl implements DocentexDependenciaNGC {
 	
-	
+
 	private static Logger log=Logger.getLogger(DocentexDependenciaNGCImpl.class);
 	
 	DocentexDependenciaDAO docentexDependenciaDao;	
@@ -98,22 +99,35 @@ public class DocentexDependenciaNGCImpl implements DocentexDependenciaNGC {
 	@Override
 	public List<TbAdmDocentexDependencia> listarDocentesxDependencia() throws ExcepcionesLogica {
 		List<TbAdmDocentexDependencia> listaDocentesxDependencia = null;
+		
 		try {
 			listaDocentesxDependencia = docentexDependenciaDao.listarDocentesxDependencia();
 		} catch (ExcepcionesDAO e) {
 			log.error("falló al invocar el metodo listarDocentesxDependencia de la clase docentexDependenciaDao: "+ e);
 		}
 		
-		/*
-		 * Confirmamos si el objeto retornado tiene elementos en él.
-		 */
-		if(listaDocentesxDependencia == null){
-			throw new ExcepcionesLogica("No se encontraron docentesxDependencia en la tabla TbAdmDocentesxnucleo");
-		}else{
-			return listaDocentesxDependencia;
-		}
+		return listaDocentesxDependencia;
+		
 	}
 
+
+	
+	@Override
+	public List<TbAdmDocentexDependencia> listarDocentesxDependencia(TbAdmDependencia dependencia) throws ExcepcionesLogica {
+		List<TbAdmDocentexDependencia> listaDocentexDependencia = null;
+		
+		try {
+			listaDocentexDependencia = docentexDependenciaDao.listaDocentesxDependencia(dependencia);
+		} catch (ExcepcionesDAO e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaDocentexDependencia;
+	}
+
+
+	
 	@Override
 	public TbAdmDocentexDependencia obtenerDocentexDependencia(int id) throws ExcepcionesLogica {
 		/*

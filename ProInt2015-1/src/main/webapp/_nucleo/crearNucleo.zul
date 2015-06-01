@@ -23,6 +23,7 @@
 					<north border="none">
 						<div align="center">
 							<include src="/_ambientes/_admin/bar-menu-admin.zul" />
+<!-- 							<include src="/_sections/toolbar-nucleo.zul"></include> -->
 						</div>
 					</north>
 					
@@ -62,7 +63,7 @@
 															<button id="btnCambiarNombreUnidad" label="${labels.microcurriculo.modificar}" />
 														</hbox>
 													</groupbox>
-													<div height="5px" />
+													<div height="7px" />
 													
 													<groupbox mold="3d" height="395px" width="500px" hflex="1" closable="false">
 														<caption image="/_img/icons/32x32/add_32.png" label="${labels.microcurriculo.addUnidadAcademica}" />
@@ -181,17 +182,19 @@
 											<hbox width="5px" />
 											<hbox>
 												<vbox>
-													<groupbox mold="3d" width="600px" height="90px" closable="false">
+													<groupbox mold="3d" width="600px" height="130px" closable="false">
 														<caption image="/_img/icons/32x32/pencil_32.png" label="${labels.microcurriculo.editNucleoAcademico}" />
-														<hbox height="35px" align="center">
-															
-															<textbox id="txtDependencia" width="150px" disabled="true"/>
+														<hbox height="35px" align="center">															
+															<textbox id="txtDependencia" width="250px" disabled="true"/>
 <!-- 															<label value="${labels.microcurriculo.Dependencia}" /> -->
 															<label value="${labels.microcurriculo.nucleo}" />
-															<textbox id="txtNuevoNucleoAcademico" width="210px"/>
+															<textbox id="txtNuevoNucleoAcademico" width="210px"/>															
+														</hbox>
+														<hbox height="35px" align="center">															
+															<label value="${labels.microcurriculo.alias}" />
+															<textbox id="txtNuevoAliasNucleo" width="200px" />
 															<button id="btnCambiarNombreNucleo" label="${labels.microcurriculo.modificar}" />
 														</hbox>
-														
 													</groupbox>
 													<div height="5px" />
 													<groupbox mold="3d" width="600px" height="425px" closable="false">
@@ -213,8 +216,10 @@
 															<textbox id="txtNombreNucleo" width="250px"/>															
 														</hbox>
 														<hbox height="35px" align="center" width="100%">
+															<label value="${labels.microcurriculo.alias}"></label>
+															<textbox id="txtAliasNucleo"></textbox>
 															<label value="${labels.microcurriculo.jefeNucleo}" />
-															<combobox id="responsableNucleo" width="300px"/>
+															<combobox id="cmbResponsableNucleo" width="200px"/>
 															<button id="btnAdicionarNombreNucleo" label="${labels.microcurriculo.add}" />
 														</hbox>															
 														<div align="center">
@@ -244,29 +249,26 @@
 													<div height="35px">
 														<label value="${labels.microcurriculo.nucleo}" />
 														<combobox id="cmbNucleo"></combobox>
-													</div>
-<!-- 													<div height="35px"> -->
-<!-- 														<label value="${labels.microcurriculo.buscar}" /> -->
-<!-- 														<textbox id="txtBuscarNucleo" /> -->
-<!-- 														<button id="btnBuscarNucleo" label="${labels.microcurriculo.buscar}"/>	 -->
-<!-- 													</div> -->																			
+													</div>																		
 													<listbox id="listaAreaAcademica" emptyMessage="${labels.microcurriculo.sinRegistro}" height="330px" autopaging="true" />
 												</groupbox>
 											</hbox>
 											<hbox width="5px" />
 											<hbox>
 												<vbox>
-													<groupbox mold="3d" width="600px" height="90px" closable="false">
+													<groupbox mold="3d" width="600px" height="130px" closable="false">
 														<caption image="/_img/icons/32x32/pencil_32.png" label="${labels.microcurriculo.editAreaAcademica}" />
-														<hbox height="35px" align="center">
-															
+														<hbox height="35px" align="center">															
 															<textbox id="txtNucleo" width="150px" disabled="true"/>
-<!-- 															<label value="${labels.microcurriculo.Dependencia}" /> -->
 															<label value="${labels.microcurriculo.area}" />
 															<textbox id="txtNuevaAreaAcademica" width="210px"/>
+															
+														</hbox>
+														<hbox height="35px" align="center">
+															<label value="${labels.microcurriculo.alias}" />
+															<textbox id="txtNuevoAliasAreaAcademica" width="210px"/>
 															<button id="btnCambiarNombreArea" label="${labels.microcurriculo.modificar}" />
 														</hbox>
-														
 													</groupbox>
 													<div height="5px" />
 													<groupbox mold="3d" width="600px" height="425px" closable="false">
@@ -284,15 +286,20 @@
 															<div>
 																<label value="${labels.microcurriculo.nucleo}" />
 																<combobox id="cmbNucleo2" width="200px"/>
+																<label value="${labels.microcurriculo.id}"/>
+																<textbox id="txtPreIdArea" width="45px" disabled="true"/>
+																<textbox id="txtIdArea" width="100px" />
 															</div>
 														</hbox>
 														<hbox height="30px" align="center" width="100%">
-															
-															<label value="${labels.microcurriculo.id}"/>
-															<textbox id="txtPreIdArea" width="45px" disabled="true"/>
-															<textbox id="txtIdArea" width="100px" />
 															<label value="${labels.microcurriculo.area}" />
-															<textbox id="txtNombreArea" width="250px"/>
+															<textbox id="txtNombreAreaAcademica" width="200px"/>
+															<label value="${labels.microcurriculo.alias}" />
+															<textbox id="txtAliasAreaAcademica" width="200px" />
+														</hbox>
+														<hbox height="30px" align="center" width="100%">
+															<label value="${labels.microcurriculo.jefeArea}" />
+															<combobox id="cmbResponsableArea" width="200px" />
 															<button id="btnAdicionarNombreArea" label="${labels.microcurriculo.add}" />
 														</hbox>
 														<separator />

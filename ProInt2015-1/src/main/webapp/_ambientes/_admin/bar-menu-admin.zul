@@ -21,7 +21,13 @@
 					<menuitem label="Listar" href="/materia/listarMaterias.zul" image="/_img/icons/32x32/list.png" />
 				</menupopup>
 			</menu>
-			<menuitem id="menuNucleos" label="Nucleos" image="/_img/icons/32x32/nucleo32.png" href="/_nucleo/crearNucleo.zul" />
+			<menu id="menuNucleos" label="Nucleos" image="/_img/icons/32x32/nucleo32.png" >
+				<menupopup>
+					<menuitem id="OpcionNucleos" label="Nucleos" href="/_nucleo/crearNucleo.zul" image="/_img/icons/32x32/nucleo32.png" />					
+				</menupopup>				
+			</menu>
+			<menuitem id="opcionGuardarNucleo" label="Guardar Nucleos" image="/_img/icons/32x32/save.png" apply="${crearNucleosCtrl}"/>
+			
 			<menu id="menuTools" label="Herramientas " visible="false">
 				<menupopup>
 					<menuitem id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png"/>

@@ -658,6 +658,8 @@
         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="docentexDependenciaNGC" ref="docentexDependenciaNGC" />
+        	<property name="personaNGC" ref="personaNGC" />
 <!--         	<property name="guardarNucleoNGC" ref="guardarNucleoNGC" /> -->
         </bean>
         
