@@ -115,6 +115,14 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 		}
 	}
 	
+	public void onOK$txtPassword(){
+		if(!"".equals(txtNombreUsuario.getValue())){
+			verificarCredenciales(txtNombreUsuario.getValue().toString(), txtPassword.getValue().toString());
+		} else {
+			Messagebox.show("El Usuario no puede ser vacio.","INCOMPLETO",Messagebox.OK,Messagebox.ERROR);
+		}
+	}
+	
 	public void onClick$btnAceptar(){
 		if(!"".equals(txtNombreUsuario.getValue())){
 			verificarCredenciales(txtNombreUsuario.getValue().toString(), txtPassword.getValue().toString());

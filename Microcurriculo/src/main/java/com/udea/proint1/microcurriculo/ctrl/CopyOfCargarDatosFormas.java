@@ -66,14 +66,14 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
 @SuppressWarnings("rawtypes")
-public class CargarDatosFormas extends GenericForwardComposer{
+public class CopyOfCargarDatosFormas extends GenericForwardComposer{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static Logger logger = Logger.getLogger(CargarDatosFormas.class);
+	private static Logger logger = Logger.getLogger(CopyOfCargarDatosFormas.class);
 	
 	private static String modUsuario = "SYSTEM";
 	private static Date modFecha = new Date();

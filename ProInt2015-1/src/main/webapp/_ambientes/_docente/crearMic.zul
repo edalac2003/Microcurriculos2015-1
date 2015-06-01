@@ -43,8 +43,24 @@
 					<borderlayout height="770px">
 						<north border="none">
 							<div>
-								<include src="/_ambientes/_docente/bar-menu-docente.zul"></include>
-<!-- 								<include id="menuCrearMicro" src="/_sections/toolbar-micro.zul" width="955px"/> -->
+								<div align="center" id="menubarDocente">
+									<menubar width="960px">
+										<menuitem label="Inicio" href="/_ambientes/_docente/inicioDocente.zul"/>
+										<menu label="Microcurriculo">
+											<menupopup>
+												<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul"/>
+												<menuitem label="Duplicar" href="../../microcurriculo/duplicarMic.zul"/>
+												<menuitem label="Listar" href="/_ambientes/_docente/inicioDocente.zul"/>
+											</menupopup>
+										</menu>
+										<menu id="menOpcionesGuardar" label="Archivo">
+											<menupopup>
+												<menuitem id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png"/>
+												<menuitem id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png"/>
+											</menupopup>
+										</menu>
+									</menubar>
+								</div>
 							</div>
 						</north>					
 						
