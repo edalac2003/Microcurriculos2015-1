@@ -374,5 +374,104 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		 */
 		return listaMicrocurriculos;
 	}
+	
+	@Override
+	public List<TbMicMicrocurriculo> listarMicrocurriculosxResponsablexUnidad(String idResponsable, String unidad) throws ExcepcionesLogica, ExcepcionesDAO{
+		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
+		List<TbMicMicrocurriculo> listaMicrocurriculosFiltrada = new ArrayList<TbMicMicrocurriculo>();
+		
+		TbAdmPersona responsable= null;
+		
+		try {
+			responsable = personaDao.obtenerPersona(idResponsable);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Persona Responsable");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+		if(responsable == null){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No existe responsable a consultar");
+			throw expLog;
+		}
+		
+		try {
+			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorResponsable(responsable);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		if(listaMicrocurriculos != null){
+			for(TbMicMicrocurriculo micro: listaMicrocurriculos){
+				if(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad().equals(unidad)){
+					listaMicrocurriculosFiltrada.add(micro);
+				}
+			}
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
+		 */
+		return listaMicrocurriculosFiltrada;
+	}
+	
+	public List<TbMicMicrocurriculo> listarMicrocurriculosxResponsablexDependencia(String idResponsable, String dependencia) throws ExcepcionesLogica, ExcepcionesDAO{
+		List<TbMicMicrocurriculo> listaMicrocurriculos = null;
+		List<TbMicMicrocurriculo> listaMicrocurriculosFiltrada = new ArrayList<TbMicMicrocurriculo>();
+		
+		TbAdmPersona responsable= null;
+		
+		try {
+			responsable = personaDao.obtenerPersona(idResponsable);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Persona Responsable");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+		if(responsable == null){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("No existe responsable a consultar");
+			throw expLog;
+		}
+		
+		try {
+			listaMicrocurriculos = microcurriculoDao.listarMicrocurriculosPorResponsable(responsable);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		if(listaMicrocurriculos != null){
+			for(TbMicMicrocurriculo micro: listaMicrocurriculos){
+				if(micro.getTbAdmMateria().getTbAdmNucleo().getTbAdmDependencia().getVrIddependencia().equals(dependencia)){
+					listaMicrocurriculosFiltrada.add(micro);
+				}
+			}
+		}
+		
+		/*
+		 * Confirmamos si el objeto retornado tiene elementos en Ã©l.
+		 */
+		return listaMicrocurriculosFiltrada;
+	}
 
 }

@@ -14,6 +14,8 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Borderlayout;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Html;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
@@ -21,9 +23,13 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
@@ -33,6 +39,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
 import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
+import com.udea.proint1.microcurriculo.ngc.DocentexDependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.HistoricoNGC;
@@ -65,18 +72,28 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	Label lblNombreDocente;
 	Label lblUsuarioLogin;
 	
+	Combobox cmbUnidadAcademica;
+	Combobox cmbDependenciaAcademica;
+	
 	A nlcSalir;
 	
 	/*
 	 * Variables locales
 	 */
 	List<TbMicMicrocurriculo> listadoMicrocurriculo = null;
+	List<TbAdmDocentexDependencia> dependenciasDocente = null;
+	List<TbAdmDocentexDependencia> dependenciasDocenteAuxiliar = null;
+	List<TbAdmUnidadAcademica> unidadesxDocente = new ArrayList<TbAdmUnidadAcademica>();
 	private static Date fechaActual = new Date();
 	String userName;
 	String nombrePersona;
 	String apellidoPersona;
 	String idPersona;
 	
+	/**
+	 * Objeto docente logueado en session.
+	 */
+	TbAdmPersona docenteSession = null;
 	
 	/*
 	 * Clases Relacionadas
@@ -92,7 +109,13 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	MicroxEstadoNGC microxEstadoNGC;
 	EvaluacionxMicroNGC evaluacionxMicroNGC;
 	HistoricoNGC historicoNGC;
+	DocentexDependenciaNGC docentexDependenciaNGC;
 	
+	public void setDocentexDependenciaNGC(
+			DocentexDependenciaNGC docentexDependenciaNGC) {
+		this.docentexDependenciaNGC = docentexDependenciaNGC;
+	}
+
 	public void setMicrocurriculoNGC(MicrocurriculoNGC microcurriculoNGC) {
 		this.microcurriculoNGC = microcurriculoNGC;
 	}
@@ -440,6 +463,167 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		
 	}
 	
+	private void verificarDependencias(TbAdmPersona docente){
+		try{
+			dependenciasDocente = docentexDependenciaNGC.listarDependenciasxDocente(docente);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se pudo listar dependencias x docente","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		dependenciasDocenteAuxiliar = dependenciasDocente;
+		if(dependenciasDocente != null){
+			if(dependenciasDocente.size()<=1){
+				cmbUnidadAcademica.setDisabled(true);
+				cmbDependenciaAcademica.setDisabled(true);
+			}else{
+				llenarUnidades();
+				if(unidadesxDocente != null){
+					if((unidadesxDocente.size()<=1)){
+						cmbUnidadAcademica.setDisabled(true);
+						llenarComboboxDependencias();
+					}else{
+						llenarComboboxDependencias();
+						llenarComboboxUnidades();
+					}
+				}
+			}
+		}
+	}
+	
+	private void llenarComboboxDependencias(){
+		cmbDependenciaAcademica.getItems().clear();
+		
+		if(dependenciasDocente != null){
+			cmbDependenciaAcademica.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmDocentexDependencia dependencia: dependenciasDocente){
+				Comboitem item = new Comboitem(dependencia.getTbAdmDependencia().getVrIddependencia()+" - "+dependencia.getTbAdmDependencia().getVrNombre());
+				cmbDependenciaAcademica.appendChild(item);
+			}
+		}
+	} 
+	
+	private void llenarComboboxUnidades(){
+		cmbUnidadAcademica.getItems().clear();
+		
+		if(dependenciasDocente != null){
+			cmbUnidadAcademica.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmUnidadAcademica unidad: unidadesxDocente){
+				Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+unidad.getVrNombre());
+				cmbUnidadAcademica.appendChild(item);
+			}
+		}
+	}
+	
+	private void llenarUnidades(){
+		if(dependenciasDocente != null){
+			for(TbAdmDocentexDependencia dependenciaxDocente: dependenciasDocente){
+				if(unidadesxDocente==null){
+					unidadesxDocente.add(dependenciaxDocente.getTbAdmDependencia().getTbAdmUnidadAcademica());
+				}else{
+					boolean encontrado = false;
+					for(TbAdmUnidadAcademica unidad: unidadesxDocente){
+						if(unidad.getVrIdunidad().equals(dependenciaxDocente.getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad())){
+							encontrado = true;
+						}
+					}
+					if(encontrado){
+						unidadesxDocente.add(dependenciaxDocente.getTbAdmDependencia().getTbAdmUnidadAcademica());
+					}
+				}
+			}
+		}
+	}
+	
+	private void recargarDependenciaPorUnidadAcademica(TbAdmUnidadAcademica unidad){
+		cmbDependenciaAcademica.getItems().clear();
+		
+		try{
+			dependenciasDocente = docentexDependenciaNGC.listarDependenciasxDocentexUnidad(docenteSession, unidad);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se pudo listar dependencias x docente","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		
+		if(dependenciasDocente != null){
+			cmbDependenciaAcademica.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmDocentexDependencia dependencia: dependenciasDocente){
+				Comboitem item = new Comboitem(dependencia.getTbAdmDependencia().getVrIddependencia()+" - "+dependencia.getTbAdmDependencia().getVrNombre());
+				cmbDependenciaAcademica.appendChild(item);
+			}
+		}
+	}
+	
+	public void onSelect$cmbUnidadAcademica(){
+		if(cmbUnidadAcademica.getSelectedIndex() > 0){
+			TbAdmUnidadAcademica unidad = unidadesxDocente.get(cmbUnidadAcademica.getSelectedIndex()-1);
+			buscarMicrocurriculos(unidad);
+			recargarDependenciaPorUnidadAcademica(unidad);
+		}else{
+			dependenciasDocente = dependenciasDocenteAuxiliar;
+			llenarComboboxDependencias();
+		}
+	}
+	
+	public void onSelect$cmbDependenciaAcademica(){
+		if(cmbDependenciaAcademica.getSelectedIndex() > 0){
+			TbAdmDocentexDependencia dependencia = dependenciasDocente.get(cmbDependenciaAcademica.getSelectedIndex()-1);
+			buscarMicrocurriculos(dependencia.getTbAdmDependencia());
+		}else{
+			if(cmbUnidadAcademica.getSelectedIndex() > 0){
+				TbAdmUnidadAcademica unidad = unidadesxDocente.get(cmbUnidadAcademica.getSelectedIndex()-1);
+				buscarMicrocurriculos(unidad);
+				recargarDependenciaPorUnidadAcademica(unidad);
+			}else{
+				dependenciasDocente = dependenciasDocenteAuxiliar;
+				llenarComboboxDependencias();
+			}
+		}
+	}
+	
+	private void buscarMicrocurriculos(TbAdmUnidadAcademica unidad){
+		try{
+			listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosxResponsablexUnidad(docenteSession.getVrIdpersona(), unidad.getVrIdunidad());
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se pudo listar dependencias x docente","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		listarMicrocurriculos();
+	}
+	
+	private void buscarMicrocurriculos(TbAdmDependencia dependencia){
+		try{
+			listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosxResponsablexDependencia(docenteSession.getVrIdpersona(), dependencia.getVrIddependencia());
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se pudo listar dependencias x docente","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		listarMicrocurriculos();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -454,6 +638,8 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 				apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
 				userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
 				lblUsuarioLogin.setValue(userName);
+				docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
+				verificarDependencias(docenteSession);
 				listarMicrocurriculos();
 				cargarDatosEncabezado();
 				contenidoCargando.setVisible(false);

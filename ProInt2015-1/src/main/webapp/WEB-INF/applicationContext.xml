@@ -598,6 +598,7 @@
         	<property name="evaluacionxMicroNGC" ref="evaluacionxMicroNGC" />
         	<property name="biblioxUnidadNGC" ref="biblioxUnidadNGC" />
         	<property name="microxEstadoNGC" ref="microxEstadoNGC" />
+        	<property name="docentexDependenciaNGC" ref="docentexDependenciaNGC" />
         </bean>
         
         <bean id="detallesMicroCtrl" class="com.udea.proint1.microcurriculo.ctrl.DetallesMicroCtrl" scope="prototype">

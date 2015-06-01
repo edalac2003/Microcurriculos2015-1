@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.DocentexDependenciaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -81,7 +82,7 @@ public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport impleme
 		
 		try{
 			session = getSession();
-			Query query = session.createQuery("from tbAdmDocentexDependencia where vrDependencia := dependencia");
+			Query query = session.createQuery("from TbAdmDocentexDependencia where vrDependencia = :dependencia");
 			query.setEntity("dependencia", dependencia);
 			docentesxDependencias = query.list();
 			
@@ -92,6 +93,31 @@ public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport impleme
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public List<TbAdmDocentexDependencia> listarDependenciasxDocente(TbAdmPersona docente) throws ExcepcionesDAO {
+		Session session = null;
+		List<TbAdmDocentexDependencia> docentesxDependencias = null;
+		
+		try{
+			session = getSession();
+			Query query = session.createQuery("from TbAdmDocentexDependencia where tbAdmPersona = :docente");
+			query.setEntity("docente", docente);
+			docentesxDependencias = query.list();
+			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Dependencias x Docente");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+		
+		return docentesxDependencias;
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package com.udea.proint1.microcurriculo.ngc.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,6 +10,9 @@ import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.ngc.DocentexDependenciaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
@@ -154,6 +158,61 @@ public class DocentexDependenciaNGCImpl implements DocentexDependenciaNGC {
 		}else{
 			return docentesxDependencia;
 		}
+	}
+	
+	public List<TbAdmDocentexDependencia> listarDependenciasxDocente(TbAdmPersona docente) throws ExcepcionesDAO, ExcepcionesLogica{
+		if(docente == null){
+			throw new ExcepcionesLogica("No se encontró una identificación de docente");
+		}
+		
+		List<TbAdmDocentexDependencia> dependeciasxDocente = null;
+		
+		try {
+			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
+			dependeciasxDocente = docentexDependenciaDao.listarDependenciasxDocente(docente);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+		return dependeciasxDocente;
+	}
+	
+	public List<TbAdmDocentexDependencia> listarDependenciasxDocentexUnidad(TbAdmPersona docente, TbAdmUnidadAcademica unidadAcademica) throws ExcepcionesDAO, ExcepcionesLogica{
+		if(docente == null){
+			throw new ExcepcionesLogica("No se encontró una identificación de docente");
+		}
+		
+		List<TbAdmDocentexDependencia> dependeciasxDocente = null;
+		
+		try {
+			//le pedimos a la clase Dao que nos traiga la ciudad con dicho id
+			dependeciasxDocente = docentexDependenciaDao.listarDependenciasxDocente(docente);
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo obtener Objetivo");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+		List<TbAdmDocentexDependencia> dependeciasxDocenteFiltrada = new ArrayList<TbAdmDocentexDependencia>();
+		if(dependeciasxDocente != null){
+			for(TbAdmDocentexDependencia dependecia: dependeciasxDocente){
+				if(dependecia.getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad().equals(unidadAcademica.getVrIdunidad())){
+					dependeciasxDocenteFiltrada.add(dependecia);
+				}
+			}
+		}
+		
+		return dependeciasxDocenteFiltrada;
 	}
 
 }

@@ -24,4 +24,7 @@ public interface MicrocurriculoNGC {
 	
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(String idResponsable) throws ExcepcionesLogica, ExcepcionesDAO;
 
+	public List<TbMicMicrocurriculo> listarMicrocurriculosxResponsablexUnidad(String idResponsable, String unidad) throws ExcepcionesLogica, ExcepcionesDAO;
+	
+	public List<TbMicMicrocurriculo> listarMicrocurriculosxResponsablexDependencia(String idResponsable, String dependencia) throws ExcepcionesLogica, ExcepcionesDAO;
 }
