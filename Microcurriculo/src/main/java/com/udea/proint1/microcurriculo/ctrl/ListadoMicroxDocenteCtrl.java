@@ -56,7 +56,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 @SuppressWarnings("rawtypes")
 public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	
-	private static Logger logger = Logger.getLogger(BorrarMicroCtrl.class);
+	private static Logger logger = Logger.getLogger(ListadoMicroxDocenteCtrl.class);
 	
 	private static final long serialVersionUID = 1L;
 	

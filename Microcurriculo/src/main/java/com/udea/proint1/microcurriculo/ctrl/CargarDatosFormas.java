@@ -27,6 +27,7 @@ import org.zkoss.zul.Toolbarbutton;
 
 import com.udea.proint1.microcurriculo.dao.RolxUsuarioDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
@@ -51,6 +52,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
+import com.udea.proint1.microcurriculo.ngc.DocentexDependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.GuardarMicrocurriculoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
@@ -68,6 +70,11 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 @SuppressWarnings("rawtypes")
 public class CargarDatosFormas extends GenericForwardComposer{
 
+	/**
+	 * Objeto docente logueado en session.
+	 */
+	TbAdmPersona docenteSession = null;
+	
 	/**
 	 * 
 	 */
@@ -126,6 +133,13 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	String nombrePersona;
 	String apellidoPersona;
 	String idPersona;
+	TbAdmRol rolPersona;
+	
+	List<TbAdmDependencia> listaDependenciasCargadas = new ArrayList<TbAdmDependencia>();
+	
+	List<TbAdmDocentexDependencia> dependenciasDocente = null;
+	List<TbAdmDocentexDependencia> dependenciasDocenteAuxiliar = null;
+	List<TbAdmUnidadAcademica> unidadesxDocente = new ArrayList<TbAdmUnidadAcademica>();
 	
 	/**
 	 * Estos objetos los traje de ValidarDatos
@@ -197,7 +211,13 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	EstadoNGC estadoNGC;
 	GuardarMicrocurriculoNGC guardarMicrocurriculoNGC;
 	RolxUsuarioNGC rolxUsuarioNGC;
+	DocentexDependenciaNGC docentexDependenciaNGC;
 	
+	public void setDocentexDependenciaNGC(
+			DocentexDependenciaNGC docentexDependenciaNGC) {
+		this.docentexDependenciaNGC = docentexDependenciaNGC;
+	}
+
 	public void setUnidadAcademicaNGC(UnidadAcademicaNGC unidadAcademicaNGC) {
 		this.unidadAcademicaNGC = unidadAcademicaNGC;
 	}
@@ -357,10 +377,14 @@ public class CargarDatosFormas extends GenericForwardComposer{
 			listaSemestre = semestreNGC.listarSemestres();
 			cmbSemestre.getItems().clear();
 			if (listaSemestre != null){
-				cmbSemestre.appendChild(new Comboitem("[Seleccione]"));
-				for (TbAdmSemestre semestre : listaSemestre){
-					Comboitem item = new Comboitem(semestre.getVrIdsemestre());
-					cmbSemestre.appendChild(item);
+				if(rolPersona.getNbId() == 4){
+					cmbSemestre.appendChild(new Comboitem("[Seleccione]"));
+					for (TbAdmSemestre semestre : listaSemestre){
+						if(semestre.getBlHabilitado()){
+							Comboitem item = new Comboitem(semestre.getVrIdsemestre());
+							cmbSemestre.appendChild(item);
+						}
+					}
 				}
 			} else
 				Messagebox.show("No se Encontraron Registros de Semestres");
@@ -391,15 +415,23 @@ public class CargarDatosFormas extends GenericForwardComposer{
 			logger.error(exp);
 		}
 		
-		
+		imprimirEstados();
+				
+	}
+	
+	private void imprimirEstados(){
 		if(listaEstados != null){
-			cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
-			for(TbMicEstado estado: listaEstados){
-				Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
-				item.setDescription(estado.getVrDescripcion());
-				cmbEstado.appendChild(item);
+			if(rolPersona.getNbId() == 4){
+				cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
+				for(TbMicEstado estado: listaEstados){
+					if((estado.getNbIdestado() == 1)||(estado.getNbIdestado() == 2)){
+						Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
+						item.setDescription(estado.getVrDescripcion());
+						cmbEstado.appendChild(item);
+					}
+				}
 			}
-		}		
+		}
 	}
 	
 	private void cargarDocentes(){
@@ -510,10 +542,17 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		try {		
 			listaDependenciasxUnidad = dependenciaNGC.listarDependenciasPorUnidad(unidad);			
 			cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
-			if (listaDependenciasxUnidad != null){
-				for(TbAdmDependencia dependencia : listaDependenciasxUnidad){
-					Comboitem item = new Comboitem(dependencia.getVrIddependencia()+" - "+ dependencia.getVrNombre());
-					cmbDependencia.appendChild(item);
+			if(rolPersona.getNbId() == 4){
+				if (listaDependenciasxUnidad != null){
+					for(TbAdmDependencia dependencia : listaDependenciasxUnidad){
+						for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
+							if(dependencia.getVrIddependencia().equals(dependenciaDocente.getTbAdmDependencia().getVrIddependencia())){
+								Comboitem item = new Comboitem(dependencia.getVrIddependencia()+" - "+ dependencia.getVrNombre());
+								cmbDependencia.appendChild(item);
+								listaDependenciasCargadas.add(dependencia);
+							}
+						}
+					}
 				}
 			}
 			cmbDependencia.setValue("[Seleccione]");
@@ -648,7 +687,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	public void onSelect$cmbDependencia(){
 		cmbNucleo.setDisabled(false);
 		if (cmbDependencia.getSelectedIndex() > 0){
-			TbAdmDependencia dependencia = listaDependenciasxUnidad.get(cmbDependencia.getSelectedIndex()-1);
+			TbAdmDependencia dependencia = listaDependenciasCargadas.get(cmbDependencia.getSelectedIndex()-1);
 			cargarNucleosPorDependencia(dependencia);
 		}
 	}
@@ -1252,6 +1291,111 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		return estado;
 	}
 	
+	private void verificarDependencias(TbAdmPersona docente){
+		try{
+			dependenciasDocente = docentexDependenciaNGC.listarDependenciasxDocente(docente);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se pudo listar dependencias x docente","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		dependenciasDocenteAuxiliar = dependenciasDocente;
+		if(dependenciasDocente != null){
+			if(dependenciasDocente.size()==1){
+				cmbUnidadAcademica.setValue(dependenciasDocente.get(0).getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad()+" - "+dependenciasDocente.get(0).getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
+				cmbDependencia.setValue(dependenciasDocente.get(0).getTbAdmDependencia().getVrIddependencia()+" - "+dependenciasDocente.get(0).getTbAdmDependencia().getVrNombre());
+				cmbUnidadAcademica.setDisabled(true);
+				cmbDependencia.setDisabled(true);
+				cargarNucleosPorDependencia(dependenciasDocente.get(0).getTbAdmDependencia());
+			}else{
+				llenarUnidades();
+				if(unidadesxDocente != null){
+					if((unidadesxDocente.size()==1)){
+						cmbUnidadAcademica.setValue(unidadesxDocente.get(0).getVrIdunidad()+" - "+unidadesxDocente.get(0).getVrNombre());
+						cmbUnidadAcademica.setDisabled(true);
+						llenarComboboxDependencias();
+					}else{
+						llenarComboboxDependencias();
+						llenarComboboxUnidades();
+					}
+				}
+			}
+		}
+	}
+	
+	private void llenarComboboxDependencias(){
+		cmbDependencia.getItems().clear();
+		
+		if(dependenciasDocente != null){
+			cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmDocentexDependencia dependencia: dependenciasDocente){
+				Comboitem item = new Comboitem(dependencia.getTbAdmDependencia().getVrIddependencia()+" - "+dependencia.getTbAdmDependencia().getVrNombre());
+				cmbDependencia.appendChild(item);
+			}
+		}
+	} 
+	
+	private void llenarComboboxUnidades(){
+		cmbUnidadAcademica.getItems().clear();
+		
+		if(dependenciasDocente != null){
+			cmbUnidadAcademica.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmUnidadAcademica unidad: unidadesxDocente){
+				Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+unidad.getVrNombre());
+				cmbUnidadAcademica.appendChild(item);
+			}
+		}
+	}
+	
+	private void llenarUnidades(){
+		if(dependenciasDocente != null){
+			for(TbAdmDocentexDependencia dependenciaxDocente: dependenciasDocente){
+				if(unidadesxDocente==null){
+					unidadesxDocente.add(dependenciaxDocente.getTbAdmDependencia().getTbAdmUnidadAcademica());
+				}else{
+					boolean encontrado = false;
+					for(TbAdmUnidadAcademica unidad: unidadesxDocente){
+						if(unidad.getVrIdunidad().equals(dependenciaxDocente.getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad())){
+							encontrado = true;
+						}
+					}
+					if(encontrado){
+						unidadesxDocente.add(dependenciaxDocente.getTbAdmDependencia().getTbAdmUnidadAcademica());
+					}
+				}
+			}
+		}
+	}
+	
+	private void recargarDependenciaPorUnidadAcademica(TbAdmUnidadAcademica unidad){
+		cmbDependencia.getItems().clear();
+		
+		try{
+			dependenciasDocente = docentexDependenciaNGC.listarDependenciasxDocentexUnidad(docenteSession, unidad);
+		}catch(ExcepcionesDAO expDAO){
+			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expDAO.getMsjTecnico());
+		}catch(ExcepcionesLogica expNgs){
+			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(expNgs.getMsjTecnico());
+		}catch(Exception exp){
+			Messagebox.show("No se pudo listar dependencias x docente","ERROR", Messagebox.OK,Messagebox.ERROR);
+			logger.error(exp);
+		}
+		
+		if(dependenciasDocente != null){
+			cmbDependencia.appendChild(new Comboitem("[Seleccione]"));
+			for(TbAdmDocentexDependencia dependencia: dependenciasDocente){
+				Comboitem item = new Comboitem(dependencia.getTbAdmDependencia().getVrIddependencia()+" - "+dependencia.getTbAdmDependencia().getVrNombre());
+				cmbDependencia.appendChild(item);
+			}
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -1259,7 +1403,8 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		super.doAfterCompose(comp);
 		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
 			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
-			TbAdmRol rolPersona = rolxUsuario.getTbAdmRol();
+			rolPersona = rolxUsuario.getTbAdmRol();
+			docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
 			if(rolPersona.getNbId() == 4){
 				if (comp.getParent().getId().equals("formaCrearMicro")){
 					idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
@@ -1267,10 +1412,11 @@ public class CargarDatosFormas extends GenericForwardComposer{
 					apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
 					userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
 					lblUsuarioLogin.setValue(userName);
+					verificarDependencias(docenteSession);
 					inicializarFormaCrear();
 					cargarEstados();
 					cargarDocentes();
-					cargarUnidades();
+//					cargarUnidades();
 					cargarSemestres();
 					/**
 					 * fecha

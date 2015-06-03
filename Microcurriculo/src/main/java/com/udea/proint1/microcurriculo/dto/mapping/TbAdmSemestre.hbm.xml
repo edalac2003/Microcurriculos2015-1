@@ -17,6 +17,9 @@
         <property name="dtFechafin" type="date">
             <column name="DT_FECHAFIN" length="10" />
         </property>
+        <property name="blHabilitado" type="java.lang.Boolean">
+            <column name="BL_HABILITADO"/>
+        </property>
         <property name="vrModusuario" type="string">
             <column name="VR_MODUSUARIO" length="20" />
         </property>

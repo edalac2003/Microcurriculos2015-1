@@ -23,7 +23,7 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 	/**
 	 * Logger de registro de incidencias en la aplicación
 	 */
-	private static Logger logger = Logger.getLogger(BorrarMicroCtrl.class);
+	private static Logger logger = Logger.getLogger(InicioSesionCtrl.class);
 	
 	/*
 	 * Objeto de la Clase que Invoca

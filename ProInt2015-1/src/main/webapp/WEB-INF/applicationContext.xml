@@ -546,6 +546,7 @@
         	<property name="estadoNGC" ref="estadoNGC" />
         	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
         	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" />
+        	<property name="docentexDependenciaNGC" ref="docentexDependenciaNGC" />
 <!--         	<property name="correquisitoNGC" ref="correquisitoNGC" /> -->
 <!--         	<property name="prerrequisitoNGC" ref="prerrequisitoNGC" /> -->
 <!--         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" /> -->
