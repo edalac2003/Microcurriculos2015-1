@@ -5,7 +5,7 @@
 
 <zk>
 	<window id="formaModificarMicro" border="0" >
-		<borderlayout id="blyModificarMicro" height="950px" apply="${modificarMicroCtrl}">
+		<borderlayout id="blyModificarMicro" height="950px" apply="${modificarMicroCtrl}" visible="false">
 			
 			<north border="none" height="100px">
 				<div width="100%" align="center" sclass="fondoEncabezado">
@@ -13,7 +13,7 @@
 				</div>			
 			</north>
 			<west border="none" width="14%">
-				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
+<!-- 				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					 -->
 			</west>
 			<east width="14%" border="none">
 				<label />
@@ -21,82 +21,115 @@
 			<center border="0">
 				<div align="center">
 					<borderlayout height="870px">
-						<north border="0"> 
-							<toolbar id="tb" sclass="vista" height="45px" width="100%">
-								<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" />
-								<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/>
-								<toolbarbutton id="tool_save" label="${labels.microcurriculo.toolbar.save}" image="/_img/icons/32x32/save.png" />
-								<toolbarbutton id="tool_atras" label="Volver atrás" image="/_img/icons/32x32/atras.png"/>
-<!-- 								<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" /> -->
-<!-- 								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/> -->
-							</toolbar>
+						<north border="0">
+							<div>
+								<div align="center" id="menubarDocente">
+									<menubar width="960px">
+										<menuitem label="Inicio" href="/_ambientes/_docente/inicioDocente.zul"/>
+										<menu label="Microcurriculo">
+											<menupopup>
+												<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul"/>
+												<menuitem label="Duplicar" href="../../microcurriculo/duplicarMic.zul"/>
+												<menuitem label="Listar" href="/_ambientes/_docente/inicioDocente.zul"/>
+												<menuitem label="Modificar" href="/_ambientes/_docente/modificarMic.zul"/>
+											</menupopup>
+										</menu>
+										<menu id="menOpcionesGuardar" label="Archivo">
+											<menupopup>
+												<menuitem id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png" href="../../_ambientes/_docente/crearMic.zul"/>
+												<menuitem id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png"/>
+											</menupopup>
+										</menu>
+									</menubar>
+								</div>
+							</div>
+<!-- 							<toolbar id="tb" sclass="vista" height="45px" width="100%"> -->
+<!-- 								<toolbarbutton id="tool_home" label="${labels.microcurriculo.toolbar.home}" image="/_img/icons/32x32/home.png" href="/index.zul" /> -->
+<!-- 								<toolbarbutton id="tool_new" label="${labels.microcurriculo.toolbar.nuevo}" image="/_img/icons/32x32/new.png" href="/microcurriculo/crearMic.zul"/> -->
+<!-- 								<toolbarbutton id="tool_save" label="${labels.microcurriculo.toolbar.save}" image="/_img/icons/32x32/save.png" /> -->
+<!-- 								<toolbarbutton id="tool_atras" label="Volver atrás" image="/_img/icons/32x32/atras.png"/> -->
+<!--  								<toolbarbutton id="tool_print" label="${labels.microcurriculo.toolbar.print}" image="/_img/icons/32x32/printer.png" /> --> 
+<!-- 								<toolbarbutton id="tool_close" label="${labels.microcurriculo.toolbar.close}" image="/_img/icons/32x32/close.png" href="/microcurriculo/inicio_mic.zul"/> --> 
+<!-- 							</toolbar> -->
 						</north>
 						
 						<center autoscroll="true" border="0">
 							<div>
 								<div height="10px"/>
-								<panel visible="false" id="panelModificarMicro" title="${labels.microcurriculo.modificar}" border="normal" width="98%" height="260px" style="font-size: 14px">
-									<panelchildren>
-										<div height="10px"/>
-										<div align="center" width="940px">
-											<toolbar>
-												<label value="${labels.microcurriculo.criterio}" style="font-size:13px; margin:0 0 0 413px;"/>
-											</toolbar>
-											<grid>												
-												<columns>
-													<column width="15%"/>
-													<column width="35%"/>
-													<column width="15%"/>
-													<column width="35%"/>
-												</columns>
-												
-												<rows>
-													<row>
-						                				<label value="${labels.microcurriculo.u_academica}" width="30%"/>
-								                        <div>
-								                        	<combobox id="cmbUnidadAcademica2" width="100%"/>
-								                        </div>
-								                        <label value="${labels.microcurriculo.dependencia}" width="30%"/>
-								                        <div>
-								                        	<combobox id="cmbDependencia2" width="100%"/>
-								                        </div>
-							                		</row>
-							                		
-							                		<row>
-						                				<label value="${labels.microcurriculo.nucleo}" width="30%"/>
-								                        <div>
-								                        	<combobox id="cmbNucleo2" width="100%"/>
-								                        </div>
-								                        <label value="${labels.microcurriculo.idmateria}" />
-									                    <div>
-									                        <combobox id="cmbMateria2" width="100%"/>
-									                    </div>
-							                		</row>
-							                	</rows>
-							                	
-							                </grid>
-							                
-							                <div height="25px"/>
-							                <grid width="300px">
-							                	<columns>
-							                		<column width="40%"/>
-							                		<column width="60%"/>
-							                	</columns>
-							                	<rows>
-							                		<row>
-														<label value="${labels.microcurriculo.tituloMicro}" />
-									                    <div align="center">
-									                        <combobox id="cmbMicrocurriculo" width="100%"/>
-									                    </div>
-							                		</row>
-												</rows>
-											</grid>
+								<div id="divSeleccionaMicrocurriculo" visible="false">
+									<div height="100px"></div>
+									<window title="Seleccione Microcurriculo a Modificar" border="normal" width="300px">
+										<div align="center">
+											<separator/>
+											<combobox id="cmbMicrocurriculo" width="100%"/>
+											<separator/>
+											<button label="Modificar" href="/_ambientes/_docente/modificarMic.zul"/>
+											<separator/>
 										</div>
-									</panelchildren>
-									<toolbar>
-										<button id="btnModificar" label="${labels.microcurriculo.modificar}" style="margin:0 0 0 435px;" href="/microcurriculo/modificarMic.zul"/>
-									</toolbar>
-								</panel>
+									</window>
+								</div>
+<!-- 								<panel visible="false" id="panelModificarMicro" title="${labels.microcurriculo.modificar}" border="normal" width="98%" height="260px" style="font-size: 14px"> -->
+<!-- 									<panelchildren> -->
+<!-- 										<div height="10px"/> -->
+<!-- 										<div align="center" width="940px"> -->
+<!-- 											<toolbar> -->
+<!-- 												<label value="${labels.microcurriculo.criterio}" style="font-size:13px; margin:0 0 0 413px;"/> -->
+<!-- 											</toolbar> -->
+<!-- 											<grid>												 -->
+<!-- 												<columns> -->
+<!-- 													<column width="15%"/> -->
+<!-- 													<column width="35%"/> -->
+<!-- 													<column width="15%"/> -->
+<!-- 													<column width="35%"/> -->
+<!-- 												</columns> -->
+												
+<!-- 												<rows> -->
+<!-- 													<row> -->
+<!-- 						                				<label value="${labels.microcurriculo.u_academica}" width="30%"/> -->
+<!-- 								                        <div> -->
+<!-- 								                        	<combobox id="cmbUnidadAcademica2" width="100%"/> -->
+<!-- 								                        </div> -->
+<!-- 								                        <label value="${labels.microcurriculo.dependencia}" width="30%"/> -->
+<!-- 								                        <div> -->
+<!-- 								                        	<combobox id="cmbDependencia2" width="100%"/> -->
+<!-- 								                        </div> -->
+<!-- 							                		</row> -->
+							                		
+<!-- 							                		<row> -->
+<!-- 						                				<label value="${labels.microcurriculo.nucleo}" width="30%"/> -->
+<!-- 								                        <div> -->
+<!-- 								                        	<combobox id="cmbNucleo2" width="100%"/> -->
+<!-- 								                        </div> -->
+<!-- 								                        <label value="${labels.microcurriculo.idmateria}" /> -->
+<!-- 									                    <div> -->
+<!-- 									                        <combobox id="cmbMateria2" width="100%"/> -->
+<!-- 									                    </div> -->
+<!-- 							                		</row> -->
+<!-- 							                	</rows> -->
+							                	
+<!-- 							                </grid> -->
+							                
+<!-- 							                <div height="25px"/> -->
+<!-- 							                <grid width="300px"> -->
+<!-- 							                	<columns> -->
+<!-- 							                		<column width="40%"/> -->
+<!-- 							                		<column width="60%"/> -->
+<!-- 							                	</columns> -->
+<!-- 							                	<rows> -->
+<!-- 							                		<row> -->
+<!-- 														<label value="${labels.microcurriculo.tituloMicro}" /> -->
+<!-- 									                    <div align="center"> -->
+<!-- 									                        <combobox id="cmbMicrocurriculo" width="100%"/> -->
+<!-- 									                    </div> -->
+<!-- 							                		</row> -->
+<!-- 												</rows> -->
+<!-- 											</grid> -->
+<!-- 										</div> -->
+<!-- 									</panelchildren> -->
+<!-- 									<toolbar> -->
+<!-- 										<button id="btnModificar" label="${labels.microcurriculo.modificar}" style="margin:0 0 0 435px;" href="/microcurriculo/modificarMic.zul"/> -->
+<!-- 									</toolbar> -->
+<!-- 								</panel> -->
 													
 								<tabbox id="fichaContenidos" sclass="tabbox" width="98%" visible="false">
 									<tabs style="">

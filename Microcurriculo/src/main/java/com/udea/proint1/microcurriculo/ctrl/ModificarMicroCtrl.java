@@ -18,6 +18,7 @@ import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
@@ -30,6 +31,7 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
+import org.zkoss.zul.Window;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
@@ -38,6 +40,8 @@ import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
+import com.udea.proint1.microcurriculo.dto.TbAdmRol;
+import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
@@ -72,6 +76,7 @@ import com.udea.proint1.microcurriculo.ngc.ObjetivoNGC;
 import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.ngc.PersonaNGC;
 import com.udea.proint1.microcurriculo.ngc.PrerrequisitoNGC;
+import com.udea.proint1.microcurriculo.ngc.RolxUsuarioNGC;
 import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
 import com.udea.proint1.microcurriculo.ngc.SubtemaxTemaNGC;
@@ -92,6 +97,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 
 	private static Logger logger = Logger.getLogger(ModificarMicroCtrl.class);
 	
+	Div divSeleccionaMicrocurriculo;
+	
 	Panel panelModificarMicro;
 	
 	Button btnAddObjetivo;
@@ -106,6 +113,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	
 	Borderlayout blyDuplicarMicro;
 	Borderlayout blyConsultarMicro;
+	Borderlayout blyModificarMicro;
 	
 	Tabbox fichaContenidos;
 	
@@ -187,6 +195,13 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	Toolbarbutton tool_print;
 	Toolbarbutton tool_atras;
 	
+	TbAdmRol rolPersona;
+	
+	/**
+	 * Objeto docente logueado en session.
+	 */
+	TbAdmPersona docenteSession = null;
+	
 	/**
 	 * definición de formato de fecha corta
 	 */
@@ -267,7 +282,12 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	NucleoNGC nucleoNGC;
 	MateriaNGC materiaNGC;
 	EstadoNGC estadoNGC;
+	RolxUsuarioNGC rolxUsuarioNGC;
 	
+	public void setRolxUsuarioNGC(RolxUsuarioNGC rolxUsuarioNGC) {
+		this.rolxUsuarioNGC = rolxUsuarioNGC;
+	}
+
 	/**
 	 * Metodo set para la inyección de dependencia y gestionar datos en la gestion de microcurriculo por lotes
 	 * @param guardarMicrocurriculoNGC variable de acceso a los metodos de la capa del negocio
@@ -652,7 +672,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todos los microcurriculos existentes y los ubica en el combobox cmbMicrocurriculo
 	 */
 	private void cargarMicrocurriculos(String buscaMicro){
-		if(cmbMicrocurriculo != null){
+//		if(cmbMicrocurriculo != null){
 			if (!buscaMicro.equals("")){
 				try {
 					buscaMicro = buscaMicro + "%";
@@ -691,7 +711,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				}
 				cmbMicrocurriculo.setValue("[Seleccione]");
 			}
-		}
+//		}
 	}
 	
 	/**
@@ -699,16 +719,21 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 */
 	private void cargarDocentes(){
 		cmbDocente.getItems().clear();
+		listaDocentes = new ArrayList<TbAdmPersona>();
 		try {
-			listaDocentes = personaNGC.obtenerDocentes();			
+			List<TbAdmRolxUsuario> listaRolesxUsuario = rolxUsuarioNGC.listarDocentes();
+			for(TbAdmRolxUsuario rolxUsuario: listaRolesxUsuario){
+				listaDocentes.add(rolxUsuario.getTbAdmUsuario().getTbAdmPersona());
+			}
 			if (listaDocentes != null){
 				cmbDocente.appendChild(new Comboitem("[Seleccione]"));
 				for(TbAdmPersona docente : listaDocentes){
 					Comboitem item = new Comboitem(docente.getVrIdpersona()+" - "+ docente.getVrApellidos()+" "+docente.getVrNombres());
 					cmbDocente.appendChild(item);
 				}
-			} else
+			} else{
 				Messagebox.show("No Se Hallaron Registros de Docentes");
+			}
 		}catch(ExcepcionesDAO expDAO){
 			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(expDAO.getMsjTecnico());
@@ -3239,16 +3264,30 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
-		if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-			panelModificarMicro.setVisible(false);
-			fichaContenidos.setVisible(true);
-			String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-			reiniciarListas();
-			cargarDocentes();
-			cargarEstados();
-			llenarDatos(idMicro);
+		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
+			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+			rolPersona = rolxUsuario.getTbAdmRol();
+			docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
+			if(rolPersona.getNbId() == 4){
+				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+					blyModificarMicro.setVisible(true);
+//					panelModificarMicro.setVisible(false);
+					fichaContenidos.setVisible(true);
+					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+					reiniciarListas();
+					cargarDocentes();
+					cargarEstados();
+					llenarDatos(idMicro);
+				}else{
+					blyModificarMicro.setVisible(true);
+					divSeleccionaMicrocurriculo.setVisible(true);
+					cargarMicrocurriculos("");
+				}
+			}else{
+				Executions.getCurrent().sendRedirect("/index.zul");
+			}
 		}else{
-			Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
+			Executions.getCurrent().sendRedirect("/index.zul");
 		}
 	}
 	

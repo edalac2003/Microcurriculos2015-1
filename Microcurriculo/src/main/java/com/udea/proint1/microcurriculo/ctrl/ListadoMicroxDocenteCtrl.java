@@ -478,13 +478,28 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		}
 		dependenciasDocenteAuxiliar = dependenciasDocente;
 		if(dependenciasDocente != null){
-			if(dependenciasDocente.size()<=1){
+			if(dependenciasDocente.size()<=0){
+				cmbUnidadAcademica.setDisabled(true);
+				cmbDependenciaAcademica.setDisabled(true);
+			}else if(dependenciasDocente.size()==1){
+				Comboitem itemUnidad = new Comboitem(dependenciasDocente.get(0).getTbAdmDependencia().getTbAdmUnidadAcademica().getVrIdunidad()+" - "+dependenciasDocente.get(0).getTbAdmDependencia().getTbAdmUnidadAcademica().getVrNombre());
+				cmbUnidadAcademica.appendChild(itemUnidad);
+				cmbUnidadAcademica.setSelectedIndex(0);
+				Comboitem itemDependencia = new Comboitem(dependenciasDocente.get(0).getTbAdmDependencia().getVrIddependencia()+" - "+dependenciasDocente.get(0).getTbAdmDependencia().getVrNombre());
+				cmbDependenciaAcademica.appendChild(itemDependencia);
+				cmbDependenciaAcademica.setSelectedIndex(0);
 				cmbUnidadAcademica.setDisabled(true);
 				cmbDependenciaAcademica.setDisabled(true);
 			}else{
 				llenarUnidades();
 				if(unidadesxDocente != null){
-					if((unidadesxDocente.size()<=1)){
+					if((unidadesxDocente.size()<=0)){
+						cmbUnidadAcademica.setDisabled(true);
+						llenarComboboxDependencias();
+					}else if((unidadesxDocente.size()==1)){
+						Comboitem item = new Comboitem(unidadesxDocente.get(0).getVrIdunidad()+" - "+unidadesxDocente.get(0).getVrNombre());
+						cmbUnidadAcademica.appendChild(item);
+						cmbUnidadAcademica.setSelectedIndex(0);
 						cmbUnidadAcademica.setDisabled(true);
 						llenarComboboxDependencias();
 					}else{
@@ -505,19 +520,21 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 				Comboitem item = new Comboitem(dependencia.getTbAdmDependencia().getVrIddependencia()+" - "+dependencia.getTbAdmDependencia().getVrNombre());
 				cmbDependenciaAcademica.appendChild(item);
 			}
+			cmbDependenciaAcademica.setSelectedIndex(0);
 		}
-	} 
+	}  
 	
 	private void llenarComboboxUnidades(){
 		cmbUnidadAcademica.getItems().clear();
 		
-		if(dependenciasDocente != null){
+		if(unidadesxDocente != null){
 			cmbUnidadAcademica.appendChild(new Comboitem("[Seleccione]"));
 			for(TbAdmUnidadAcademica unidad: unidadesxDocente){
 				Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+unidad.getVrNombre());
 				cmbUnidadAcademica.appendChild(item);
 			}
 		}
+		cmbUnidadAcademica.setSelectedIndex(0);
 	}
 	
 	private void llenarUnidades(){
@@ -532,7 +549,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 							encontrado = true;
 						}
 					}
-					if(encontrado){
+					if(!encontrado){
 						unidadesxDocente.add(dependenciaxDocente.getTbAdmDependencia().getTbAdmUnidadAcademica());
 					}
 				}

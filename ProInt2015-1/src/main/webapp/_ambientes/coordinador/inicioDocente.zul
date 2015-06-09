@@ -4,7 +4,7 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-<window id="formaInicioDocente" apply="${listadoMicroxDocente}">
+<window id="formaInicioDocente" border="none" apply="${listadoMicroxDocente}">
 	<borderlayout id="contenidoCargando">
 		<north height="40%" border="none">
 		</north>
@@ -14,7 +14,7 @@
 			</div>
 		</center>
 	</borderlayout>
-	<borderlayout id="contenidoInicioDocente" height="700px" visible="false" apply="${borrarVariablesSession}">
+	<borderlayout id="contenidoInicioDocente" height="700px" visible="false">
 		<north height="125px" border="0" sclass="fondoEncabezado">
 			<div>
 				<div sclass="div_fecha" align="center">

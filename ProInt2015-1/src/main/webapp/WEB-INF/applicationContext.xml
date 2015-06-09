@@ -645,6 +645,7 @@
         	<property name="evaluacionNGC" ref="evaluacionNGC" />
         	<property name="unidadNGC" ref="unidadNGC" />
         	<property name="guardarMicrocurriculoNGC" ref="guardarMicrocurriculoNGC" />
+        	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" />
         </bean>
         
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">

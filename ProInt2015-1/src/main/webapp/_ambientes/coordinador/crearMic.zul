@@ -49,7 +49,6 @@
 										<menu label="Microcurriculo">
 											<menupopup>
 												<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul"/>
-												<menuitem label="Modificar" href="/_ambientes/_docente/modificarMic.zul"/>
 												<menuitem label="Duplicar" href="../../microcurriculo/duplicarMic.zul"/>
 												<menuitem label="Listar" href="/_ambientes/_docente/inicioDocente.zul"/>
 											</menupopup>
