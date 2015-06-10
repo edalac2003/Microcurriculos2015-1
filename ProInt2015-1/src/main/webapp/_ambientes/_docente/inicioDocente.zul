@@ -14,7 +14,8 @@
 			</div>
 		</center>
 	</borderlayout>
-	<borderlayout id="contenidoInicioDocente" height="700px" visible="false" apply="${borrarVariablesSession}">
+<!-- 	apply="${borrarVariablesSession}" -->
+	<borderlayout id="contenidoInicioDocente" height="700px" visible="false" >
 		<north height="125px" border="0" sclass="fondoEncabezado">
 			<div>
 				<div sclass="div_fecha" align="center">

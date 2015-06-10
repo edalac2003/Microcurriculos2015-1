@@ -672,7 +672,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todos los microcurriculos existentes y los ubica en el combobox cmbMicrocurriculo
 	 */
 	private void cargarMicrocurriculos(String buscaMicro){
-//		if(cmbMicrocurriculo != null){
+		if(cmbMicrocurriculo != null){
 			if (!buscaMicro.equals("")){
 				try {
 					buscaMicro = buscaMicro + "%";
@@ -711,7 +711,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 				}
 				cmbMicrocurriculo.setValue("[Seleccione]");
 			}
-//		}
+		}
 	}
 	
 	/**
@@ -3267,6 +3267,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
 			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
 			rolPersona = rolxUsuario.getTbAdmRol();
+			System.out.println(Executions.getCurrent().getSession().getAttribute("idMicro"));
 			docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
 			if(rolPersona.getNbId() == 4){
 				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
