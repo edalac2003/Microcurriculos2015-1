@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -231,5 +232,30 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		}
 		return microcurriculos;
 	}
+	
+//	public List<TbMicMicrocurriculo> listarMicrocurriculosPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesDAO{
+//		Session session = null;
+//		List<TbMicMicrocurriculo> microcurriculos = new ArrayList<TbMicMicrocurriculo>();
+//
+//		try {
+//			session = getSession();
+//			Query query = session.createSQLQuery("select m.* from tb_mic_Microcurriculo m, tb_adm_materia ma, "
+//					+ "tb_adm_nucleo n, tb_adm_dependencia d "
+//					+ "where m.vr_materia = ma.vr_idmateria and ma.vr_nucleo = n.vr_idnucleo "
+//					+ "and n.vr_dependencia = d.vr_iddependencia and d.vr_iddependencia = '"+dependencia.getVrIddependencia()");
+////			query.setEntity("dependencia", dependencia);
+//			microcurriculos = query.list();
+//		} catch (Exception e) {
+//			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+//			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+//			expDAO.setMsjTecnico(e.getMessage());
+//			expDAO.setOrigen(e);
+//			
+//			throw expDAO;
+//		} finally{
+//			session.close();
+//		}
+//		return microcurriculos;
+//	}
 
 }

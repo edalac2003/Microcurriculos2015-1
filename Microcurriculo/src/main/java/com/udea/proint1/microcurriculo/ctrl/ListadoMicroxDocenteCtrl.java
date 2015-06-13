@@ -16,7 +16,6 @@ import org.zkoss.zul.A;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
-import org.zkoss.zul.Html;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -27,7 +26,6 @@ import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
@@ -71,6 +69,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	Label lblFechaActual;
 	Label lblNombreDocente;
 	Label lblUsuarioLogin;
+	Label lblRol;
 	
 	Combobox cmbUnidadAcademica;
 	Combobox cmbDependenciaAcademica;
@@ -84,11 +83,13 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	List<TbAdmDocentexDependencia> dependenciasDocente = null;
 	List<TbAdmDocentexDependencia> dependenciasDocenteAuxiliar = null;
 	List<TbAdmUnidadAcademica> unidadesxDocente = new ArrayList<TbAdmUnidadAcademica>();
-	private static Date fechaActual = new Date();
+	
 	String userName;
 	String nombrePersona;
 	String apellidoPersona;
-	String idPersona;
+	TbAdmPersona persona;
+	int rol;
+	TbAdmDependencia dependenciaUsuario;
 	
 	/**
 	 * Objeto docente logueado en session.
@@ -173,23 +174,68 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public static List<TbMicTemaxunidad> temasxUnidad = new ArrayList<TbMicTemaxunidad>();
 	public static List<TbAdmHistorico> historicos = new ArrayList<TbAdmHistorico>();
 	
-	private void cargarDatosEncabezado(){
+	private void cargarDatosEncabezadoDocente(){
 		
 		Date now = new Date();
 		DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
 		String s4 = df4.format(now);
+		lblRol.setValue("Docente : ");
 		lblFechaActual.setValue(s4);
-//		userName = Executions.getCurrent().getSession().getAttribute("userName").toString();
-//		nombrePersona = Executions.getCurrent().getSession().getAttribute("nombrePersona").toString();
-//		apellidoPersona = Executions.getCurrent().getSession().getAttribute("apellidoPersona").toString();
-		
 		lblNombreDocente.setValue(nombrePersona+" "+apellidoPersona);
-//		lblUsuarioLogin.setValue(userName);
+	}
+	
+	private void cargarDatosEncabezadoComite(){
+		
+		Date now = new Date();
+		DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+		String s4 = df4.format(now);
+		lblRol.setValue("Jefe del Comité : ");
+		lblFechaActual.setValue(s4);
+		lblNombreDocente.setValue(nombrePersona+" "+apellidoPersona);
+	}
+	
+	private void cargarDatosEncabezadoCoordinador(){
+		
+		Date now = new Date();
+		DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+		String s4 = df4.format(now);
+		lblRol.setValue("Coordinador : ");
+		lblFechaActual.setValue(s4);
+		lblNombreDocente.setValue(nombrePersona+" "+apellidoPersona);
 	}
 	
 	private void listarMicrocurriculos(){		
 		try {
-			listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable(idPersona);
+			List<TbMicMicrocurriculo> microcurriculos;
+			List<TbAdmDocentexDependencia> dependenciasDocente = docentexDependenciaNGC.listarDependenciasxDocente(persona);
+			switch (rol) {
+				case 1:
+					break;
+				case 2:
+					Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
+					break;
+				case 3:
+					for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
+						microcurriculos = microcurriculoNGC.listarMicrocurriculosPorDependencia(dependenciaDocente.getTbAdmDependencia());
+						if(microcurriculos != null){
+							agregarMicrocurriculos((List<TbMicMicrocurriculo>)microcurriculos);
+						}
+					}
+					break;
+				case 4:
+					listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable(persona.getVrIdpersona());
+					break;
+				case 5:
+					break;
+				case 7:
+					for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
+						microcurriculos = microcurriculoNGC.listarMicrocurriculosPorDependencia(dependenciaDocente.getTbAdmDependencia());
+						if(microcurriculos != null){
+							agregarMicrocurriculos((List<TbMicMicrocurriculo>)microcurriculos);
+						}
+					}
+					break;
+			}
 		}catch(ExcepcionesDAO expDAO){
 			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(expDAO.getMsjTecnico());
@@ -254,6 +300,28 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 					listaItem.appendChild(new Listcell(""));
 				}
 				listaMicrocurriculo.appendChild(listaItem);
+			}
+		}
+	}
+	
+	/**
+	 * El metodo agrega en una lista los metodos que no esten repetidos
+	 * @param microcurriculos a agregar en la lista
+	 */
+	private void agregarMicrocurriculos(List<TbMicMicrocurriculo> microcurriculos){
+		listadoMicrocurriculo = new ArrayList<TbMicMicrocurriculo>();
+		boolean encontrado = false;
+		for(TbMicMicrocurriculo microcurriculo: microcurriculos){
+			if(listadoMicrocurriculo != null){
+				encontrado = false;
+				for(TbMicMicrocurriculo microcurriculo2: listadoMicrocurriculo){
+					if(microcurriculo2.getVrIdmicrocurriculo().equals(microcurriculo.getVrIdmicrocurriculo())){
+						encontrado = true;
+					}
+				}
+			}
+			if(!encontrado){
+				listadoMicrocurriculo.add(microcurriculo);
 			}
 		}
 	}
@@ -655,29 +723,57 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		listarMicrocurriculos();
 	}
 	
+	private void extraerInformacion(){
+		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+		persona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
+		nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
+		apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
+		userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
+		lblUsuarioLogin.setValue(userName);
+		docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
+		rol = rolxUsuario.getTbAdmRol().getNbId();
+	}
+	
+	private void permisos(){
+		
+		switch (rol) {
+			case 1:
+				break;
+			case 2:
+				Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
+				break;
+			case 3:
+				verificarDependencias(docenteSession);
+				listarMicrocurriculos();
+				cargarDatosEncabezadoCoordinador();
+				contenidoInicioDocente.setVisible(true);
+				break;
+			case 4:
+				verificarDependencias(docenteSession);
+				listarMicrocurriculos();
+				cargarDatosEncabezadoDocente();
+				contenidoInicioDocente.setVisible(true);
+				break;
+			case 7:
+				verificarDependencias(docenteSession);
+				listarMicrocurriculos();
+				cargarDatosEncabezadoComite();
+				contenidoInicioDocente.setVisible(true);
+				break;
+			default:
+				Executions.getCurrent().sendRedirect("/index.zul");
+				break;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		
 		super.doAfterCompose(comp);
 		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
-			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
-			TbAdmRol rolPersona = rolxUsuario.getTbAdmRol();
-			if(rolPersona.getNbId() == 4){
-				idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
-				nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
-				apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
-				userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
-				lblUsuarioLogin.setValue(userName);
-				docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
-				verificarDependencias(docenteSession);
-				listarMicrocurriculos();
-				cargarDatosEncabezado();
-				contenidoCargando.setVisible(false);
-				contenidoInicioDocente.setVisible(true);
-			}else{
-				Executions.getCurrent().sendRedirect("/index.zul");
-			}
+			extraerInformacion();
+			permisos();
 		}else{
 			Executions.getCurrent().sendRedirect("/index.zul");
 		}

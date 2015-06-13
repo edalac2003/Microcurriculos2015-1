@@ -9,76 +9,57 @@
 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
         
-        <!-- BEANS  CONFIGURACION DATASOURCE-->
-<!--         <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
-<!-- 		    <property name="jdbc/ConexionOracle"> -->
-<!-- 		    	<value>java:/comp/env/jdbc/ConexionOracle</value> -->
-<!-- 		    </property> -->
-<!-- 		</bean> -->
-<!--         <jdbc:embedded-database> -->
-<!--         	<jdbc:script/> -->
-<!--         </jdbc:embedded-database> -->
-        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-            <property name="driverClassName">
-                    <value>oracle.jdbc.driver.OracleDriver</value>  
-            </property>
-            <property name="url">
-                    <value>jdbc:oracle:thin:@192.168.1.4:1521:XE</value>
-            </property>
-            <property name="username">
-                    <value>proint2014-2</value>
-            </property>
-            <property name="password"> 
-                    <value>proint2014-2</value>
-            </property>
-        </bean>
+        <!-- BEANS  CONFIGURACION JNDI DATASOURCE-->
+		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	        <property name="jndiName" value="java:comp/env/jdbc/proint2014-2" />
+	    </bean>
         
         <!-- BEANS CONFIGURACION HIBERNATE-->
         <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="mappingResources">
-			<list>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmArea.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudad.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisito.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamento.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentexDependencia.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateria.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPais.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPersona.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisito.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRol.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRolxUsuario.hbm.xml</value>				
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuario.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstado.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacion.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacionxmicro.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriaxpensum.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculo.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivo.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivoxmicro.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtema.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemaxtema.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTema.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemaxunidad.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidad.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadxmicro.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActaxmicro.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActividadxmicro.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmHistorico.hbm.xml</value>
-				<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateriaxsemestre.hbm.xml</value>
-			</list>
-		</property>
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="mappingResources">
+				<list>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmArea.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCiudad.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmCorrequisito.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDepartamento.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDependencia.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmDocentexDependencia.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateria.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmNucleo.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPais.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPersona.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmPrerrequisito.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmSemestre.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmTipoidentificacion.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRol.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmRolxUsuario.hbm.xml</value>				
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUnidadAcademica.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmUsuario.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBibliografia.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicBiblioxunidad.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEstado.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacion.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicEvaluacionxmicro.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMateriaxpensum.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicrocurriculo.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicMicroxestado.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivo.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObjetivoxmicro.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicPensum.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtema.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicSubtemaxtema.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTema.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicTemaxunidad.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidad.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicUnidadxmicro.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActaxmicro.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicActividadxmicro.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbMicObservacion.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmHistorico.hbm.xml</value>
+					<value>com/udea/proint1/microcurriculo/dto/mapping/TbAdmMateriaxsemestre.hbm.xml</value>
+				</list>
+			</property>
             
             <property name="hibernateProperties">
                  <props>

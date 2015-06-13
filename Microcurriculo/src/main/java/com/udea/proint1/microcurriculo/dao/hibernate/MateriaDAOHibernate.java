@@ -190,5 +190,29 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 		}
         return materias;
 	}
+	
+	@Override
+	public List<String> listarIdMateriasxDependencia(String idDependencia) throws ExcepcionesDAO{
+		Session session = null;
+		List<String> microcurriculos = new ArrayList<String>();
+
+		try {
+			session = getSession();
+			Query query = session.createSQLQuery("select vr_idmateria from tb_adm_materia m, tb_adm_nucleo n, tb_adm_dependencia d "
+					+ "where n.vr_dependencia = d.vr_iddependencia and m.vr_nucleo = n.vr_idnucleo and d.vr_iddependencia = '"+idDependencia+"'");
+//			query.setEntity("dependencia", dependencia);
+			microcurriculos = (List<String>)query.list();
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Microcurriculos");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}
+		return microcurriculos;
+	}
 
 }

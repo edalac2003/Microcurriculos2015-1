@@ -108,6 +108,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	Button btnAddEvaluacion;
 	Button btnAddBibliografia;
 	Button btnAddCibergrafia;
+	Button btnGuardar;
 	
 	Include panelDuplicarMicro;
 	
@@ -116,6 +117,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	Borderlayout blyModificarMicro;
 	
 	Tabbox fichaContenidos;
+	
+	Div divContenido;
 	
 	Panel panelSemestre;
 	Panel panelBuscarMicro;
@@ -159,6 +162,8 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	Label lblPropositoMicro;
 	Label lblJustificacionMicro;
 	Label lblObjetivoGeneral;
+	Label lblUsuarioLogin;
+	Label lblFechaActual;
 	
 	Checkbox ckbValidable;
 	Checkbox ckbHabilitable;
@@ -196,6 +201,12 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	Toolbarbutton tool_atras;
 	
 	TbAdmRol rolPersona;
+	
+	private static Date fechaActual = new Date();
+	String userName;
+	String nombrePersona;
+	String apellidoPersona;
+	String idPersona;
 	
 	/**
 	 * Objeto docente logueado en session.
@@ -899,9 +910,9 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
-	public void onClick$tool_atras(){
-		redireccionar();
-	}
+//	public void onClick$tool_atras(){
+//		redireccionar();
+//	}
 	
 	public void redireccionar(){
 		Executions.getCurrent().sendRedirect("/_ambientes/_docente/inicioDocente.zul");
@@ -2738,6 +2749,14 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
+	public void onClick$btnGuardar(){
+		
+		actualizarMicro();
+		generarHistoricos();
+		actualizarLote();
+		
+	}
+	
 	public void onClick$tool_save(){
 		
 		actualizarMicro();
@@ -3269,11 +3288,21 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			rolPersona = rolxUsuario.getTbAdmRol();
 			System.out.println(Executions.getCurrent().getSession().getAttribute("idMicro"));
 			docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
+			Date now = new Date();
+			DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+			String s4 = df4.format(now);
+			lblFechaActual.setValue(s4);
+			
+			idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
+			nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
+			apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
+			userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
+			lblUsuarioLogin.setValue(userName);
+			blyModificarMicro.setVisible(true);
 			if(rolPersona.getNbId() == 4){
 				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-					blyModificarMicro.setVisible(true);
 //					panelModificarMicro.setVisible(false);
-					fichaContenidos.setVisible(true);
+					divContenido.setVisible(true);
 					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
 					reiniciarListas();
 					cargarDocentes();

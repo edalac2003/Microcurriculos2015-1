@@ -4,70 +4,44 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-<window id="formaInicioDocente" apply="${listadoMicroxDocente}">
-	<borderlayout id="contenidoCargando">
-		<north height="40%" border="none">
-		</north>
-		<center border="none">
-			<div align="center">
-				<image src="/_img/iconoCargando.gif" />
-			</div>
-		</center>
-	</borderlayout>
-<!-- 	apply="${borrarVariablesSession}" -->
-	<borderlayout id="contenidoInicioDocente" height="700px" visible="false" >
-		<north height="125px" border="0" sclass="fondoEncabezado">
-			<div>
-				<div sclass="div_fecha" align="center">
-					<div sclass="cab_izquierda">
-						<a id="nlcSalir" label="Salir" sclass="enlace_salir"/>
+<window id="formaInicioDocente" apply="${borrarVariablesSession}">
+	<div apply="${listadoMicroxDocente}">
+		<borderlayout id="contenidoInicioDocente" height="700px" visible="false" >
+			<north height="125px" border="0" sclass="fondoEncabezado">
+				<div>
+					<div sclass="div_fecha" align="center">
+						<div sclass="cab_izquierda">
+							<a id="nlcSalir" label="Salir" sclass="enlace_salir"/>
+						</div>
+						<div sclass="cab_centro">
+							<label id="lblUsuarioLogin"/>
+						</div>
+						<div sclass="cab_derecha">
+							<label id="lblFechaActual" value="FechaActual"/>
+						</div>
 					</div>
-					<div sclass="cab_centro">
-						<label id="lblUsuarioLogin"/>
-					</div>
-					<div sclass="cab_derecha">
-						<label id="lblFechaActual" value="FechaActual"/>
-					</div>
-				</div>
-				<include id="headerIdx" src="/_sections/header.zul" />
-			</div>							
-		</north>
-		<east width="180px" border="0">
-			<label value="" />
-		</east>			
-		<west width="180px" border="none">
-			<label></label>
-		</west>
-		<center border="none">
-			<div>
-				<include src="/_ambientes/_docente/bar-menu-docente.zul"></include>
-<!-- 				<div align="center"> -->
-<!-- 					<menubar width="960px" id="menInicio"> -->
-<!-- 						<menuitem label="Inicio"/> -->
-<!-- 						<menu label="Microcurriculo"> -->
-<!-- 							<menupopup> -->
-<!-- 								<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul"/> -->
-<!-- 								<menuitem label="Duplicar" href="../../microcurriculo/duplicarMic.zul"/> -->
-<!-- 								<menuitem label="Listar"/> -->
-<!-- 							</menupopup> -->
-<!-- 						</menu> -->
-<!-- 					</menubar> -->
-<!-- 				</div> -->
-			
-				<div height="5px"></div>
-				<div align="center">
-	<!-- 			<borderlayout height="600px">				 -->
-	<!-- 				<north height="110px" border="none"> -->
+					<include id="headerIdx" src="/_sections/header.zul" />
+				</div>							
+			</north>
+			<east width="180px" border="0">
+				<label value="" />
+			</east>			
+			<west width="180px" border="none">
+				<label></label>
+			</west>
+			<center border="none">
+				<div>
+					<include src="/_ambientes/_docente/bar-menu-docente.zul"></include>
+				
+					<div height="5px"></div>
+					<div align="center">
 						<div width="960px">
 							<div align="center">
 								<groupbox width="960px" height="80px">
 									<hbox height="30px" align="center">
 										<div align="left">
-											<label value="Docente : " />
+											<label id="lblRol" />
 											<label id="lblNombreDocente" value="lblNombreDocente" sclass="resaltado"/>
-	<!-- 										<label value="  |  "></label> -->
-	<!-- 										<label value="Usuario : "></label> -->
-	<!-- 										<label id="lblUsuarioLogin" value="UsuarioLogin" sclass="resaltado" /> -->
 										</div>
 									</hbox>
 									<hbox align="center" height="30px">
@@ -85,12 +59,6 @@
 							</hbox>
 						</div>
 						<div height="5px"></div>
-	<!-- 				</north> -->
-	<!-- 				<west width="180px" border="none"> -->
-	<!-- 					<include src="/_ambientes/_docente/menu_Docente.zul" /> -->
-	<!-- 				</west> -->
-	<!-- 				<east width="180px" border="none"></east> -->
-	<!-- 				<center border="none" apply="${listadoMicroxDocente}"> -->
 						<listbox id="listaMicrocurriculo" mold="paging" autopaging="true" width="960px" height="350px">
 							<listhead>
 								<listheader label="${labels.microcurriculo.headerCodigo}"  align="center" width="12%"/>
@@ -100,16 +68,15 @@
 								<listheader label="" align="center" width="15%"/>
 							</listhead>
 						</listbox>
-	<!-- 				</center> -->
-	<!-- 			</borderlayout> -->
+					</div>
 				</div>
-			</div>
-		</center>
-		<south border="none" height="100px" sclass="fondoEncabezado">		
-			<div> 
-				<include id="footerIdx" src="/_sections/footer.zul" /> 
-			</div>					
-		</south>
-	</borderlayout>
+			</center>
+			<south border="none" height="100px" sclass="fondoEncabezado">		
+				<div> 
+					<include id="footerIdx" src="/_sections/footer.zul" />
+				</div>					
+			</south>
+		</borderlayout>
+	</div>
 </window>
 </zk>

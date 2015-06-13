@@ -9,6 +9,7 @@ import com.udea.proint1.microcurriculo.dao.MateriaDAO;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -473,5 +474,42 @@ public class MicrocurriculoNGCImpl implements MicrocurriculoNGC {
 		 */
 		return listaMicrocurriculosFiltrada;
 	}
-
+	
+	public List<TbMicMicrocurriculo> listarMicrocurriculosPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesDAO, ExcepcionesLogica{
+		List<String> materias = new ArrayList<String>();
+		try {
+			materias = materiaDao.listarIdMateriasxDependencia(dependencia.getVrIddependencia());
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos por dependencia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+		List<TbMicMicrocurriculo> microcurriculosEncontrados = new ArrayList<TbMicMicrocurriculo>();
+		List<TbMicMicrocurriculo> microcurriculosEnviar = new ArrayList<TbMicMicrocurriculo>();
+		try {
+			if(materias != null){
+				for(String materia: materias){
+					microcurriculosEncontrados = microcurriculoDao.listarMicrocurriculosPorMateria(materia);
+					for(TbMicMicrocurriculo microcurriculo: microcurriculosEncontrados){
+						microcurriculosEnviar.add(microcurriculo);
+					}
+				}
+			}
+		} catch(ExcepcionesDAO expDAO){
+			throw expDAO;
+		} catch(Exception exp){
+			ExcepcionesLogica expLog = new ExcepcionesLogica();
+			expLog.setMsjUsuario("Error al invocar el metodo listar Microcurriculos por dependencia");
+			expLog.setMsjTecnico(exp.getMessage());
+			expLog.setOrigen(exp);
+			throw expLog;
+		}
+		
+		return microcurriculosEnviar;
+	}
 }

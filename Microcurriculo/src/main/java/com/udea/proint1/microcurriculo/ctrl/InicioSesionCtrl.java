@@ -94,6 +94,9 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 							Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
 							break;
 						case 3:
+							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
+							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
+							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
 							break;
 						case 4:
 							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
@@ -101,6 +104,11 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
 							break;
 						case 5:
+							break;
+						case 7:
+							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
+							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
+							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
 							break;
 						default:
 							Messagebox.show("No autorizado para ingresar.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
@@ -123,6 +131,14 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 		}
 	}
 	
+	public void onOK$txtNombreUsuario(){
+		if(!"".equals(txtNombreUsuario.getValue())){
+			txtPassword.setFocus(true);
+		} else {
+			Messagebox.show("El Usuario no puede ser vacio.","INCOMPLETO",Messagebox.OK,Messagebox.ERROR);
+		}
+	}
+	
 	public void onClick$btnAceptar(){
 		if(!"".equals(txtNombreUsuario.getValue())){
 			verificarCredenciales(txtNombreUsuario.getValue().toString(), txtPassword.getValue().toString());
@@ -134,5 +150,6 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
+		txtNombreUsuario.setFocus(true);
 	}
 }

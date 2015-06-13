@@ -21,4 +21,6 @@ public interface MateriaDAO {
 	public void actualizarMateria(TbAdmMateria materia) throws ExcepcionesDAO;
 	
 	public List<TbAdmMateria> buscarMaterias(String buscar) throws ExcepcionesDAO;
+	
+	public List<String> listarIdMateriasxDependencia(String idDependencia) throws ExcepcionesDAO;
 }

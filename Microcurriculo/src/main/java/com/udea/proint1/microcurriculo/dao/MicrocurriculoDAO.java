@@ -2,6 +2,7 @@ package com.udea.proint1.microcurriculo.dao;
 
 import java.util.List;
 
+import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -35,5 +36,7 @@ public interface MicrocurriculoDAO {
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(String materia) throws ExcepcionesDAO;
 	
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(TbAdmPersona responsable) throws ExcepcionesDAO;
+	
+//	public List<TbMicMicrocurriculo> listarMicrocurriculosPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesDAO;
 	
 }

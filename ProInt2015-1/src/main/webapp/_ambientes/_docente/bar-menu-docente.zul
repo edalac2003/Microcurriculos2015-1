@@ -1,7 +1,7 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<div align="center" id="menubarDocente">
-		<menubar width="960px" apply="${cargarDatosFormas}">
+		<menubar width="960px">
 			<menuitem label="Inicio" href="/_ambientes/_docente/inicioDocente.zul"/>
 			<menu label="Microcurriculo">
 				<menupopup>
