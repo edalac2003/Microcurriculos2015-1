@@ -78,179 +78,179 @@
 		
 		
 		<!-- SE CREAN LOS BEANS CORRESPONDIENTES A LOS DAO's -->
-		<bean id="areaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.AreaDAOHibernate">
+		<bean id="areaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.AreaDAOHibernate" scope="singleton">
+        	<property name="sessionFactory" ref="sessionFactory"/>
+        </bean>
+        
+        <bean id="ciudadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="ciudadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.CiudadDAOHibernate">
+        <bean id="correquisitoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="correquisitoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.CorrequisitoDAOHibernate">
+        <bean id="departamentoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="departamentoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DepartamentoDAOHibernate">
+        <bean id="dependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DependenciaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="dependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DependenciaDAOHibernate">
+        <bean id="docentexDependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DocentexDependenciaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="docentexDependenciaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.DocentexDependenciaDAOHibernate">
+        <bean id="materiaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="materiaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriaDAOHibernate">
+        <bean id="nucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.NucleoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="nucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.NucleoDAOHibernate">
+        <bean id="paisDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PaisDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="paisDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PaisDAOHibernate">
+        <bean id="personaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PersonaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="personaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PersonaDAOHibernate">
+        <bean id="prerrequisitoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PrerrequisitoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="prerrequisitoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PrerrequisitoDAOHibernate">
+        <bean id="semestreDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="semestreDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SemestreDAOHibernate">
+        <bean id="tipoIdentificacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TipoIdentificacionDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="tipoIdentificacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TipoIdentificacionDAOHibernate">
+        <bean id="rolDao" class="com.udea.proint1.microcurriculo.dao.hibernate.RolDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="rolDao" class="com.udea.proint1.microcurriculo.dao.hibernate.RolDAOHibernate">
+        <bean id="rolxUsuarioDao" class="com.udea.proint1.microcurriculo.dao.hibernate.RolxUsuarioDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="rolxUsuarioDao" class="com.udea.proint1.microcurriculo.dao.hibernate.RolxUsuarioDAOHibernate">
+        <bean id="unidadAcademicaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadAcademicaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="unidadAcademicaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadAcademicaDAOHibernate">
+        <bean id="usuarioDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UsuarioDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="usuarioDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UsuarioDAOHibernate">
+        <bean id="actaxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ActaxMicroDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="actaxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ActaxMicroDAOHibernate">
-        	<property name="sessionFactory" ref="sessionFactory" />
-        </bean>
-        
-        <bean id="actividadxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ActividadxMicroDAOHibernate">
+        <bean id="actividadxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ActividadxMicroDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
                 
-        <bean id="bibliografiaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiaDAOHibernate">
+        <bean id="bibliografiaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.BibliografiaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="biblioxUnidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.BiblioxUnidadDAOHibernate">
+        <bean id="biblioxUnidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.BiblioxUnidadDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="estadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EstadoDAOHibernate">
+        <bean id="estadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EstadoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="evaluacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionDAOHibernate">
+        <bean id="evaluacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="evaluacionxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionxMicroDAOHibernate">
+        <bean id="evaluacionxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.EvaluacionxMicroDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="materiaxPensumDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriaxPensumDAOHibernate">
+        <bean id="materiaxPensumDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MateriaxPensumDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="microcurriculoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculoDAOHibernate">
+        <bean id="microcurriculoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicrocurriculoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="microxEstadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxEstadoDAOHibernate">
+        <bean id="microxEstadoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.MicroxEstadoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
                 
-        <bean id="objetivoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoDAOHibernate">
+        <bean id="objetivoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="objetivoxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoxMicroDAOHibernate">
+        <bean id="objetivoxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObjetivoxMicroDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="observacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObservacionDAOHibernate">
+        <bean id="observacionDao" class="com.udea.proint1.microcurriculo.dao.hibernate.ObservacionDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="pensumDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PensumDAOHibernate">
+        <bean id="pensumDao" class="com.udea.proint1.microcurriculo.dao.hibernate.PensumDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="guardarMicrocurriculoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.GuardarMicrocurriculoDAOHibernate">
+        <bean id="guardarMicrocurriculoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.GuardarMicrocurriculoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="guardarNucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.GuardarNucleoDAOHibernate">
+        <bean id="guardarNucleoDao" class="com.udea.proint1.microcurriculo.dao.hibernate.GuardarNucleoDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="subtemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaDAOHibernate">
+        <bean id="subtemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="subtemaxTemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaxTemaDAOHibernate">
+        <bean id="subtemaxTemaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.SubtemaxTemaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="temaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TemaDAOHibernate">
+        <bean id="temaDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TemaDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="temaxUnidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TemaxUnidadDAOHibernate">
+        <bean id="temaxUnidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.TemaxUnidadDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="unidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadDAOHibernate">
+        <bean id="unidadDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
         
-        <bean id="unidadxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadxMicroDAOHibernate">
+        <bean id="unidadxMicroDao" class="com.udea.proint1.microcurriculo.dao.hibernate.UnidadxMicroDAOHibernate" scope="singleton">
         	<property name="sessionFactory" ref="sessionFactory" />
         </bean>
 
 
 		<!-- AQUI SE DEFINEN LOS BEANS CORRESPONDIENTES A LA LOGICA -->
 		 
-        <bean id="areaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.AreaNGCImpl">
+        <bean id="areaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.AreaNGCImpl" scope="singleton">
         	<property name="areaDao" ref="areaDao" />
         </bean>
         
-        <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl">
+        <bean id="paisNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PaisNGCImpl" scope="singleton">
         	<property name="paisDao" ref="paisDao" />
         </bean>
         
-        <bean id="departamentoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DepartamentoNGCImpl">
+        <bean id="departamentoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DepartamentoNGCImpl" scope="singleton">
         	<property name="paisDao" ref="paisDao" />
         	<property name="departamentoDao" ref="departamentoDao" />
         </bean>
         
-        <bean id="ciudadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CiudadNGCImpl">
+        <bean id="ciudadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.CiudadNGCImpl" scope="singleton">
         	<property name="ciudadDao" ref="ciudadDao" />
         	<property name="departamentoDao" ref="departamentoDao" />
         </bean>
@@ -260,164 +260,164 @@
         	<property name="materiaDao" ref="materiaDao" />
         </bean>
         
-        <bean id="dependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DependenciaNGCImpl">
+        <bean id="dependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DependenciaNGCImpl" scope="singleton">
         	<property name="dependenciaDao" ref="dependenciaDao" />
         	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
         </bean>
         
-        <bean id="docentexDependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DocentexDependenciaNGCImpl">
+        <bean id="docentexDependenciaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.DocentexDependenciaNGCImpl" scope="singleton">
         	<property name="docentexDependenciaDao" ref="docentexDependenciaDao" />
         	<property name="dependenciaDao" ref="dependenciaDao" />
         	<property name="personaDao" ref="personaDao" />
         </bean>
         
-        <bean id="materiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriaNGCImpl">
+        <bean id="materiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriaNGCImpl" scope="singleton">
         	<property name="materiaDao" ref="materiaDao" />
         	<property name="nucleoDao" ref="nucleoDao" />
         </bean>
         
-        <bean id="nucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl">
+        <bean id="nucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl" scope="singleton">
         	<property name="nucleoDao" ref="nucleoDao" />
-        </bean>    
+        </bean>
         
-        <bean id="personaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl">
+        <bean id="personaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PersonaNGCImpl" scope="singleton">
         	<property name="personaDao" ref="personaDao" />
 <!--         	<property name="rolDao" ref="rolDao" /> -->
 <!--         	<property name="rolxUsuarioDao" ref="rolxUsuarioDao" /> -->
         	<property name="ciudadDao" ref="ciudadDao" />
         </bean>
         
-        <bean id="prerrequisitoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PrerrequisitoNGCImpl">
+        <bean id="prerrequisitoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PrerrequisitoNGCImpl" scope="singleton">
         	<property name="prerrequisitoDao" ref="prerrequisitoDao" />
         	<property name="materiaDao" ref="materiaDao" />
         </bean>
         
-        <bean id="semestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl">
+        <bean id="semestreNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl" scope="singleton">
         	<property name="semestreDao" ref="semestreDao" />
         </bean>
         
-        <bean id="tipoIdentificacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TipoIdentificacionNGCImpl">
+        <bean id="tipoIdentificacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TipoIdentificacionNGCImpl" scope="singleton">
         	<property name="tipoIdentificacionDao" ref="tipoIdentificacionDao" />
         </bean>
         
-        <bean id="rolNGC" class="com.udea.proint1.microcurriculo.ngc.impl.RolNGCImpl">
+        <bean id="rolNGC" class="com.udea.proint1.microcurriculo.ngc.impl.RolNGCImpl" scope="singleton">
 <!--         	<property name="rolDao" ref="rolDao" /> -->
         </bean>
         
-        <bean id="rolxUsuarioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.RolxUsuarioNGCImpl">
+        <bean id="rolxUsuarioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.RolxUsuarioNGCImpl" scope="singleton">
         	<property name="rolxUsuarioDao" ref="rolxUsuarioDao" />
         	<property name="rolDao" ref="rolDao" />
         </bean>
         
-        <bean id="unidadAcademicaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadAcademicaNGCImpl">
+        <bean id="unidadAcademicaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadAcademicaNGCImpl" scope="singleton">
         	<property name="unidadAcademicaDao" ref="unidadAcademicaDao" />
         </bean>
         
-        <bean id="usuarioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UsuarioNGCImpl">
+        <bean id="usuarioNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UsuarioNGCImpl" scope="singleton">
         	<property name="usuarioDao" ref="usuarioDao" />
         </bean>
         
-        <bean id="actaxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ActaxMicroNGCImpl">
+        <bean id="actaxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ActaxMicroNGCImpl" scope="singleton">
         	<property name="actaxMicroDao" ref="actaxMicroDao" />
         </bean>
         
-        <bean id="actividadxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ActividadxMicroNGCImpl">
+        <bean id="actividadxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ActividadxMicroNGCImpl" scope="singleton">
         	<property name="actividadxMicroDao" ref="actividadxMicroDao" />
         </bean>
         
-        <bean id="bibliografiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BibliografiaNGCImpl">
+        <bean id="bibliografiaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BibliografiaNGCImpl" scope="singleton">
         	<property name="bibliografiaDao" ref="bibliografiaDao" />
         </bean>
         
-        <bean id="biblioxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BiblioxUnidadNGCImpl">
+        <bean id="biblioxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.BiblioxUnidadNGCImpl" scope="singleton">
         	<property name="biblioxUnidadDao" ref="biblioxUnidadDao" />
         	<property name="unidadDao" ref="unidadDao" />
         </bean>
         
-        <bean id="estadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EstadoNGCImpl">
+        <bean id="estadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EstadoNGCImpl" scope="singleton">
         	<property name="estadoDao" ref="estadoDao" />
         </bean>
         
-        <bean id="evaluacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionNGCImpl">
+        <bean id="evaluacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionNGCImpl" scope="singleton">
         	<property name="evaluacionDao" ref="evaluacionDao" />
         </bean>
         
-        <bean id="evaluacionxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionxMicroNGCImpl">
+        <bean id="evaluacionxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.EvaluacionxMicroNGCImpl" scope="singleton">
         	<property name="evaluacionxMicroDao" ref="evaluacionxMicroDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         	<property name="evaluacionDao" ref="evaluacionDao" />
         </bean>
         
-        <bean id="materiaxPensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriaxPensumNGCImpl">
+        <bean id="materiaxPensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MateriaxPensumNGCImpl" scope="singleton">
         	<property name="materiaxPensumDao" ref="materiaxPensumDao" />
         </bean>
         
-        <bean id="microcurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicrocurriculoNGCImpl">
+        <bean id="microcurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicrocurriculoNGCImpl" scope="singleton">
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         	<property name="materiaDao" ref="materiaDao" />
         	<property name="nucleoDao" ref="nucleoDao" />
         	<property name="personaDao" ref="personaDao" />
         </bean>
         
-        <bean id="microxEstadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxEstadoNGCImpl">
+        <bean id="microxEstadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxEstadoNGCImpl" scope="singleton">
         	<property name="microxEstadoDao" ref="microxEstadoDao" />
         	<property name="estadoDao" ref="estadoDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         </bean>
         
-        <bean id="objetivoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoNGCImpl">
+        <bean id="objetivoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoNGCImpl" scope="singleton">
         	<property name="objetivoDao" ref="objetivoDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         </bean>
         
-        <bean id="objetivoxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoxMicroNGCImpl">
+        <bean id="objetivoxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoxMicroNGCImpl" scope="singleton">
         	<property name="objetivoxMicroDao" ref="objetivoxMicroDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         	<property name="objetivoDao" ref="objetivoDao" />
         </bean>
         
-        <bean id="observacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObservacionNGCImpl">
+        <bean id="observacionNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObservacionNGCImpl" scope="singleton">
         	<property name="observacionDao" ref="observacionDao" />
         </bean>
         
-       <bean id="pensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PensumNGCImpl">
+       <bean id="pensumNGC" class="com.udea.proint1.microcurriculo.ngc.impl.PensumNGCImpl" scope="singleton">
         	<property name="pensumDao" ref="pensumDao" />
         </bean>
         
-        <bean id="guardarMicrocurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.GuardarMicrocurriculoNGCImpl">
+        <bean id="guardarMicrocurriculoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.GuardarMicrocurriculoNGCImpl" scope="singleton">
         	<property name="guardarMicrocurriculoDao" ref="guardarMicrocurriculoDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         </bean>
         
-        <bean id="guardarNucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.GuardarNucleoNGCImpl">
+        <bean id="guardarNucleoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.GuardarNucleoNGCImpl" scope="singleton">
         	<property name="guardarNucleoDao" ref="guardarNucleoDao" />
         </bean>
    
-   		<bean id="temaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaNGCImpl">
+   		<bean id="temaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaNGCImpl" scope="singleton">
         	<property name="temaDao" ref="temaDao" />
         </bean>
         
-        <bean id="subtemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaNGCImpl">
+        <bean id="subtemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaNGCImpl" scope="singleton">
         	<property name="subtemaDao" ref="subtemaDao" />
         	<property name="temaDao" ref="temaDao" />
         </bean>
         
-        <bean id="subtemaxTemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaxTemaNGCImpl">
+        <bean id="subtemaxTemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaxTemaNGCImpl" scope="singleton">
         	<property name="subtemaxTemaDao" ref="subtemaxTemaDao" />
         	<property name="temaDao" ref="temaDao" />
         </bean>
         
-        <bean id="temaxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaxUnidadNGCImpl">
+        <bean id="temaxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaxUnidadNGCImpl" scope="singleton">
         	<property name="temaxUnidadDao" ref="temaxUnidadDao" />
         	<property name="unidadDao" ref="unidadDao" />
         	<property name="temaDao" ref="temaDao" />
         </bean>
         
-        <bean id="unidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadNGCImpl">
+        <bean id="unidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadNGCImpl" scope="singleton">
         	<property name="unidadDao" ref="unidadDao" />
         </bean>
         
-        <bean id="unidadxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadxMicroNGCImpl">
+        <bean id="unidadxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadxMicroNGCImpl" scope="singleton">
         	<property name="unidadxMicroDao" ref="unidadxMicroDao" />
         	<property name="microcurriculoDao" ref="microcurriculoDao" />
         </bean>

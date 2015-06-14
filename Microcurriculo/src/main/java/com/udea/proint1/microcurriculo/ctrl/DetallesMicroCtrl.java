@@ -2279,9 +2279,9 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 				Date now = new Date();
 				DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
 				String s4 = df4.format(now);
-				lblFechaActual.setValue(s4);
+//				lblFechaActual.setValue(s4);
 				
-				blyDuplicarMicro.setVisible(true);
+//				blyDuplicarMicro.setVisible(true);
 				
 				nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
 				apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
