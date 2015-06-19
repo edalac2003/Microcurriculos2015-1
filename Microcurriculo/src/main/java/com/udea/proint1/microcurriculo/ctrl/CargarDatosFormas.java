@@ -75,6 +75,8 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	 */
 	TbAdmPersona docenteSession = null;
 	
+	int rol;
+	
 	/**
 	 * 
 	 */
@@ -421,8 +423,16 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	private void imprimirEstados(){
 		if(listaEstados != null){
-			if(rolPersona.getNbId() == 4){
-				cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
+			cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
+			
+			switch (rol) {
+			case 1:
+				
+				break;
+			case 2:
+				
+				break;
+			case 3:
 				for(TbMicEstado estado: listaEstados){
 					if((estado.getNbIdestado() == 1)||(estado.getNbIdestado() == 2)){
 						Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
@@ -430,6 +440,25 @@ public class CargarDatosFormas extends GenericForwardComposer{
 						cmbEstado.appendChild(item);
 					}
 				}
+				break;
+			case 4:
+				for(TbMicEstado estado: listaEstados){
+					if((estado.getNbIdestado() == 1)||(estado.getNbIdestado() == 2)){
+						Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
+						item.setDescription(estado.getVrDescripcion());
+						cmbEstado.appendChild(item);
+					}
+				}
+				break;
+			case 7:
+				for(TbMicEstado estado: listaEstados){
+					if((estado.getNbIdestado() == 1)||(estado.getNbIdestado() == 2)){
+						Comboitem item = new Comboitem(Integer.toString(estado.getNbIdestado()));
+						item.setDescription(estado.getVrDescripcion());
+						cmbEstado.appendChild(item);
+					}
+				}
+				break;
 			}
 		}
 	}
@@ -1398,37 +1427,76 @@ public class CargarDatosFormas extends GenericForwardComposer{
 		}
 	}
 	
+	private void extraerInformacion(){
+		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+//		persona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
+		nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
+		rolPersona = rolxUsuario.getTbAdmRol();
+		apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
+		userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
+		lblUsuarioLogin.setValue(userName);
+		docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
+		idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
+		rol = rolxUsuario.getTbAdmRol().getNbId();
+		
+		Date now = new Date();
+		DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+		String s4 = df4.format(now);
+		lblFechaActual.setValue(s4);
+	}
+	
+	private void permisos(){
+		
+		switch (rol) {
+			case 1:
+				break;
+			case 2:
+				Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
+				break;
+			case 3:
+				verificarDependencias(docenteSession);
+				inicializarFormaCrear();
+				cargarEstados();
+				cargarDocentes();
+				cargarSemestres();
+				contenidoCargando.setVisible(false);
+				contenidoPrincipal.setVisible(true);
+				break;
+			case 4:
+				verificarDependencias(docenteSession);
+				inicializarFormaCrear();
+				cargarEstados();
+				cargarDocentes();
+				cargarSemestres();
+				contenidoCargando.setVisible(false);
+				contenidoPrincipal.setVisible(true);
+				break;
+			case 7:
+				verificarDependencias(docenteSession);
+				inicializarFormaCrear();
+				cargarEstados();
+				cargarDocentes();
+				cargarSemestres();
+				contenidoCargando.setVisible(false);
+				contenidoPrincipal.setVisible(true);
+				break;
+			default:
+				Executions.getCurrent().sendRedirect("/index.zul");
+				break;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
-		super.doAfterCompose(comp);
-		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
-			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
-			rolPersona = rolxUsuario.getTbAdmRol();
-			docenteSession = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
-			if(rolPersona.getNbId() == 4){
 				if (comp.getParent().getId().equals("formaCrearMicro")){
-					idPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrIdpersona();
-					nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
-					apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
-					userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
-					lblUsuarioLogin.setValue(userName);
-					verificarDependencias(docenteSession);
-					inicializarFormaCrear();
-					cargarEstados();
-					cargarDocentes();
-//					cargarUnidades();
-					cargarSemestres();
-					/**
-					 * fecha
-					 */
-					Date now = new Date();
-					DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
-					String s4 = df4.format(now);
-					lblFechaActual.setValue(s4);
-					
-					contenidoCargando.setVisible(false);
-					contenidoPrincipal.setVisible(true);
+					super.doAfterCompose(comp);
+					if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
+						extraerInformacion();
+						permisos();
+					}else{
+						Executions.getCurrent().sendRedirect("/index.zul");
+					}
 				} else if (comp.getParent().getId().equals("formaListarMicro")){
 					inicializarFormaListado();
 					cargarMaterias(cmbNucleo.getValue());
@@ -1441,11 +1509,5 @@ public class CargarDatosFormas extends GenericForwardComposer{
 					cargarNucleos();
 					//inhabilitarControles();
 				}
-			}else{
-				Executions.getCurrent().sendRedirect("/index.zul");
-			}
-		}else{
-			Executions.getCurrent().sendRedirect("/index.zul");
-		}
 	}
 }
