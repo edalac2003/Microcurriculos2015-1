@@ -16,18 +16,18 @@
 			<label></label>
 		</east>			
 		<center border="none">
-			<borderlayout width="300px" >
+			<borderlayout width="300px">
 				<north height="50px" border="none" />
 				<west width="400px" border="none">
 					<div align="center">						
 						<image src="./_img/background/logo_udea.png" height="60%" width="60%"></image>
 					</div>					
 				</west>
-				<center border="none" >
+				<center border="none">
 					<div align="center" width="450px">
 						<div height="30px" />
-						<vbox>
-					 		<groupbox height="230px" width="450px" mold="3d" closable="false">
+						<vbox sclass="fondoNormal">
+					 		<groupbox height="230px" width="450px" mold="3d" closable="false" >
 					 			<caption>
 					 				<image src="./_img/icons/128x128/lock.png"></image>
 					 				<label value="Inicio de Sesion" sclass="tituloSession"></label>
@@ -45,17 +45,19 @@
 					 				</div>
 					 				<textbox id="txtPassword" type="password" width="200px"/>					 								 				
 					 			</div>
-					 			<div height="50px" align="center">
+					 			<div height="50px" align="center" sclass="fondoNormal">
 					 				<hbox align="center" height="50px">
 					 					<button id="btnAceptar" label="Aceptar" width="150px" />
 					 					<button id="btnOlvido" label="¿Olvido su Contraseña?"  width="150px" />
 					 				</hbox>					 				
 					 			</div>
-							</groupbox>							
+							</groupbox>
 						</vbox>						
 					</div>	
 				</center>			
-			</borderlayout>			
+			</borderlayout>
+			
+			
 		</center>
 		<south border="0" height="100px" sclass="fondoEncabezado">		
 			<div> 

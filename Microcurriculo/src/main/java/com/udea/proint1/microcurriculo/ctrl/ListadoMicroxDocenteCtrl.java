@@ -327,21 +327,24 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	}
 	
 	private static void mostrarMicrocurriculo(TbMicMicrocurriculo microcurriculo){
+		asignarVariableSession(microcurriculo);
 		if((microcurriculo.getTbMicEstado().getNbIdestado() == 1)||(microcurriculo.getTbMicEstado().getNbIdestado() == 4)||(microcurriculo.getTbMicEstado().getNbIdestado() == 5)){
-			asignarVariableSession(microcurriculo);
+			
 			Executions.getCurrent().sendRedirect("/_ambientes/_docente/modificarMic.zul");
 		}else{
-			asignarVariableSession(microcurriculo);
+//			asignarVariableSession(microcurriculo);
 			Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
 		}
 	}
 	
 	private static void asignarVariableSession(TbMicMicrocurriculo microcurriculo){
-		if((microcurriculo.getTbMicEstado().getNbIdestado() == 1)||(microcurriculo.getTbMicEstado().getNbIdestado() == 4)||(microcurriculo.getTbMicEstado().getNbIdestado() == 5)){
-			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());			
-		}else{
-			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());			
-		}
+		Executions.getCurrent().getSession().setAttribute("microcurriculo", microcurriculo);
+//		Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());
+//		if((microcurriculo.getTbMicEstado().getNbIdestado() == 1)||(microcurriculo.getTbMicEstado().getNbIdestado() == 4)||(microcurriculo.getTbMicEstado().getNbIdestado() == 5)){
+//			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());			
+//		}else{
+//			Executions.getCurrent().getSession().setAttribute("idMicro", microcurriculo.getVrIdmicrocurriculo());			
+//		}
 	}
 	
 	@SuppressWarnings("unused")

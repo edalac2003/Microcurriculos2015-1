@@ -5,7 +5,8 @@
 
 <zk>
 	<window id="formaModificarMicro" border="0" >
-		<borderlayout id="blyModificarMicro" height="1025px" apply="${modificarMicroCtrl}" visible="false">
+<!-- 		apply="${modificarMicroCtrl}" -->
+		<borderlayout id="blyModificarMicro" height="1025px" apply="${modificarMicrocurriculoCtrl}" visible="true">
 			
 			<north height="125px" border="0" sclass="fondoEncabezado">
 				<div>
@@ -71,7 +72,7 @@
 										</div>
 									</window>
 								</div>
-								<div id="divContenido" visible="false">	
+								<div id="divContenido" visible="true">	
 									<tabbox sclass="tabbox" width="98%" id="fichaContenidos">
 										<tabs style="">
 											<tab label="${labels.microcurriculo.tab1}" id="infoGeneral"/>
@@ -211,15 +212,15 @@
 													<rows >
 														<row>
 										                    <label value="${labels.microcurriculo.proposito}" sclass="campoobligatorio"/>
-										                    <textbox id="txtPropositoMicro"  value="Proposito" multiline="true" width="100%"/>									                    
+										                    <textbox id="txtPropositoMicro"  multiline="true" width="100%"/>									                    
 										                </row>
 														<row>
 										                    <label value="${labels.microcurriculo.justifica}" sclass="campoobligatorio"/>
-										                    <textbox id="txtJustificacionMicro"  value="Justificacion" multiline="true" width="100%"/>									                    
+										                    <textbox id="txtJustificacionMicro"  multiline="true" width="100%"/>									                    
 										                </row>
 										                <row>
 										                    <label value="${labels.microcurriculo.general}" sclass="campoobligatorio"/>
-										                    <textbox id="txtObjetivoGeneral"  value="Objetivo General" multiline="true" width="100%"/>									                    
+										                    <textbox id="txtObjetivoGeneral"  multiline="true" width="100%"/>									                    
 										                </row>
 										                <row>
 										                    <label value="${labels.microcurriculo.especificos}" sclass="campoobligatorio"/>
@@ -236,7 +237,7 @@
 										                </row>
 										                <row>
 										                    <label value="${labels.microcurriculo.resumen}" sclass="campoobligatorio"/>
-										                    <textbox id="txtResumenMicro"  value="Resumen" multiline="true" width="100%"/>
+										                    <textbox id="txtResumenMicro"  multiline="true" width="100%"/>
 										                </row>
 													</rows>
 												</grid>
@@ -409,7 +410,7 @@
 												<listbox id="listaCibergrafia">
 													<listhead>
 														<listheader align="center">
-															<label value="${labels.microcurriculo.nombreSitio}" sclass="resaltadonormal"/>
+															<label value="${labels.microcurriculo.nombresitio}" sclass="resaltadonormal"/>
 															<div>
 																<textbox id="txtNombreSitioCiber" width="100%"/>
 															</div>

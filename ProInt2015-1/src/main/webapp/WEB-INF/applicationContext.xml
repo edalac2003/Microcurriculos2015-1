@@ -629,6 +629,10 @@
         	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" />
         </bean>
         
+        <bean id="modificarMicrocurriculoCtrl" class="com.udea.proint1.microcurriculo.ctrl.ModificarMicrocurriculoCtrl" scope="prototype">
+        
+        </bean>
+        
         <bean id="eventosPanelDuplicarMicro" class="com.udea.proint1.microcurriculo.ctrl.EventosPanelDuplicarMicro" scope="prototype">
         	<property name="microcurriculoNGC" ref="microcurriculoNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
