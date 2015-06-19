@@ -8,6 +8,13 @@
             loginWin.doHighlighted();
         ]]></attribute>
     </button>
+    <button id="pruebaBtn" label="Cerrar">
+        <attribute name="onClick"><![CDATA[
+            if (!loginWin.isVisible())
+                loginWin.setVisible(true);
+            loginWin.doHighlighted();
+        ]]></attribute>
+    </button>
     <window id="loginWin" title="Login with zk/zk" width="300px" visible="false" minimizable="true" onOK="loginCheck()" border='normal'>
         <attribute name="onMinimize"><![CDATA[
         if (self.isMinimized())

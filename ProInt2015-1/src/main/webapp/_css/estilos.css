@@ -92,18 +92,18 @@
 }
 
 .z-north{
-	background-color: #E7FFE6
+	background-color: White
 }
 .z-east{
-	background-color: #E7FFE6
+	background-color: White
 }
 
 .z-west{
-	background-color: #E7FFE6
+	background-color: White
 }
 
 .z-center{
-	background-color: #E7FFE6
+	background-color: White
 }
 
 .z-south{
@@ -121,6 +121,12 @@
 	font-weight: bolder;
 	padding: 10;
 	border-bottom: 10
+}
+
+.tituloPrincipal{
+	color: White;
+	font-size: 48px;
+	font-family: Times New Roman, Tahoma
 }
 
 .nombreSeccion{
@@ -150,7 +156,7 @@
 }
 
 .fondoPagina{
-	background-color: #E7FFE6
+	background-image: url("./../_img/background/libros01.jpg");
 }
 
 .fondoNormal{
@@ -165,19 +171,12 @@
 	background: -o-linear-gradient(-45deg,  #14470e 0%,#2c961c 51%,#14470e 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(-45deg,  #14470e 0%,#2c961c 51%,#14470e 100%); /* IE10+ */
 	background: linear-gradient(135deg, #14470e 0%,#2c961c 51%,#14470e 100%); /* W3C */
-	filter: ='#14470e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	filter: ="#14470e", GradientType =1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .imageBack {
 	background-image: url("./../_img/background/backgroundVerde.png")
-}/**.z-div, .z-div-label{
-	margin: px;
-	padding: px;
-	color: Red;
-	font-size: large;
-	font-family: Arial, Tahoma, Verdana;
-	font-weight: bold
-}**/
+}
 
 .div_fecha{
 	color: #fff;
