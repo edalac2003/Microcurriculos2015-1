@@ -958,6 +958,7 @@ public class CargarDatosFormas2 extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
+		
 		if (comp.getParent().getId().equals("formaListarMicro")){
 			inicializarFormaListado();
 			cargarMaterias("");

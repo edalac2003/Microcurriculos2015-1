@@ -52,67 +52,67 @@ public class GuardarMicrocurriculoDAOHibernate extends HibernateDaoSupport imple
 			session = getSession();
 			tx = session.beginTransaction();
 			
-			session.save(microcurriculo);
+			session.saveOrUpdate(microcurriculo);
 			session.saveOrUpdate(microxEstado);
 			
 			if (unidades != null){
 				for(TbMicUnidad unidad:unidades)
-					session.save(unidad);
+					session.saveOrUpdate(unidad);
 			}
 			
 			if (temas != null){
 				for(TbMicTema tema:temas)
-					session.save(tema);	
+					session.saveOrUpdate(tema);	
 			}
 			
 			if (objetivos != null){
 				for(TbMicObjetivo objetivo:objetivos)
-					session.save(objetivo);	
+					session.saveOrUpdate(objetivo);	
 			}
 			
 			if (evaluaciones != null){
 				for(TbMicEvaluacion evalua:evaluaciones)
-					session.save(evalua);
+					session.saveOrUpdate(evalua);
 			}
 			
 			if (subtemas != null){
 				for(TbMicSubtema subtema:subtemas)
-					session.save(subtema);
+					session.saveOrUpdate(subtema);
 			}
 			
 			if (bibliografia != null){
 				for(TbMicBibliografia biblio:bibliografia)
-					session.save(biblio);	
+					session.saveOrUpdate(biblio);	
 			}
 			
 			if (unidadesxmicro != null){
 				for(TbMicUnidadxmicro unidadxmicro:unidadesxmicro)
-					session.save(unidadxmicro);	
+					session.saveOrUpdate(unidadxmicro);	
 			}
 			
 			if(objetivosxmicro != null){
 				for(TbMicObjetivoxmicro objetivoxmicro:objetivosxmicro)
-					session.save(objetivoxmicro);	
+					session.saveOrUpdate(objetivoxmicro);	
 			}
 			
 			if (temasxunidad != null){
 				for(TbMicTemaxunidad temasxUnidad:temasxunidad)
-					session.save(temasxUnidad);	
+					session.saveOrUpdate(temasxUnidad);	
 			}
 			
 			if (evaluacionxMicro != null){
 				for(TbMicEvaluacionxmicro exM : evaluacionxMicro)
-					session.save(exM);			
+					session.saveOrUpdate(exM);			
 			}
 			
 			if (subtemaxTema != null){
 				for(TbMicSubtemaxtema sxT : subtemaxTema)
-					session.save(sxT);
+					session.saveOrUpdate(sxT);
 			}
 			
 			if(biblioxunidad != null){
 				for (TbMicBiblioxunidad bxU : biblioxunidad)
-					session.save(bxU);
+					session.saveOrUpdate(bxU);
 			}
 			
 			session.save(historicoGuardar);

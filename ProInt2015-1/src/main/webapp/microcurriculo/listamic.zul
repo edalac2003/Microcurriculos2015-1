@@ -24,7 +24,7 @@
 			<borderlayout height="1000px" width="100%">
 				<north border="0" height="50px">				
 					<toolbar id="tb" sclass="vista" height="45px" width="100%" apply="${validarDatosCtrl}"> 
-						<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/index.zul" />
+						<toolbarbutton id="tool_home" label="Inicio" image="/_img/icons/32x32/home.png" href="/_ambientes/_admin/inicioAdmin.zul" />
 						<toolbarbutton id="tool_new" label="Crear Nuevo" image="/_img/icons/32x32/new_32.png" href="/microcurriculo/crearMic.zul" />
 						<toolbarbutton id="tool_details" label="Ver Detalles" image="/_img/icons/32x32/details.png" href="/microcurriculo/detallesMic.zul" />
 						<toolbarbutton id="tool_refresh" label="Modificar" image="/_img/icons/32x32/pencil_32.png" href="/microcurriculo/modificarMic.zul" />

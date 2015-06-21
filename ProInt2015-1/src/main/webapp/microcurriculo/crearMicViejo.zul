@@ -13,26 +13,15 @@
 				</div>
 			</center>
 		</borderlayout>
-		<borderlayout id="contenidoPrincipal" height="980px" width="1330px" apply="${cargarDatosFormas}" visible="false" >			
-			<north height="125px" border="0" sclass="fondoEncabezado">
-				<div>
-					<div sclass="div_fecha" align="center">
-						<div sclass="cab_izquierda">
-							<a id="nlcSalir" label="Salir" sclass="enlace_salir"/>
-						</div>
-						<div sclass="cab_centro">
-							<label id="lblUsuarioLogin"/>
-						</div>
-						<div sclass="cab_derecha">
-							<label id="lblFechaActual" value="FechaActual"/>
-						</div>
-					</div>
-					<include id="headerIdx" src="/_sections/header.zul" />
+		<borderlayout id="contenidoPrincipal" height="950px" width="1350px" apply="${cargarDatosFormas}" visible="false" >			
+			<north height="100px" border="0">
+				<div width="100%" align="center" sclass="fondoEncabezado">
+					<include id="headerIdx" src="/_sections/header.zul" />	
 				</div>				
 			</north>
 			
 			<west border="none" width="14%">
-<!-- 				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					 -->
+				<include id="menuVertical" src="/_sections/menuVertical.zul"/>					
 			</west>
 			<east width="14%" border="none">
 				<label />
@@ -40,37 +29,17 @@
 			
 			<center border="normal">
 				<div align="center">
-					<borderlayout height="770px">
+					<borderlayout height="880px">
 						<north border="none">
-<!-- 							<include src="/_ambientes/_docente/bar-menu-docente.zul"></include> -->
-							<div>
-								<div align="center" id="menubarDocente">
-									<menubar width="960px">
-										<menuitem label="Inicio" href="/_ambientes/_docente/inicioDocente.zul"/>
-										<menu label="Microcurriculo">
-											<menupopup>
-												<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul"/>
-												<menuitem label="Modificar" href="/_ambientes/_docente/modificarMic.zul"/>
-												<menuitem label="Duplicar" href="../../microcurriculo/duplicarMic.zul"/>
-												<menuitem label="Listar" href="/_ambientes/_docente/inicioDocente.zul"/>
-											</menupopup>
-										</menu>
-										<menu id="menOpcionesGuardar" label="Archivo">
-											<menupopup>
-												<menuitem id="tool_new" label="Nuevo" image="/_img/icons/32x32/new.png"/>
-												<menuitem id="tool_save" label="Guardar" image="/_img/icons/32x32/save.png"/>
-											</menupopup>
-										</menu>
-									</menubar>
-								</div>
-							</div>
+							<include src="/_ambientes/_docente/bar-menu-docente.zul"></include>
+<!-- 							<include id="menuCrearMicro" src="/_sections/toolbar-micro.zul" width="100%"/> -->
 						</north>					
 						
 						<center autoscroll="true" border="none">
 							
-							<div width="950px" align="center">
+							<div width="98%" align="center">
 							<div height="5px"></div>														
-								<tabbox id="fichaContenidos" sclass="tabbox" width="98%">
+								<tabbox id="fichaContenidos" sclass="tabbox" width="100%">
 									<tabs>
 										<tab label="${labels.microcurriculo.tab1}" id="infoGeneral"/>
 										<tab label="${labels.microcurriculo.tab2}" id="infoComplemento"/>

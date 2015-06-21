@@ -831,12 +831,27 @@ public class CargarDatosFormas extends GenericForwardComposer{
 						"debe estar completamente Diligenciado.", "REGISTRO ALMACENADO", Messagebox.OK,Messagebox.INFORMATION);
 			} else{
 				Messagebox.show("Errores al guardar.  Revise la información.");
-			}				
+			}			
 		} else{
 			Messagebox.show("El formulario no cumple con la información minina necesaria para crear un Microcurriculo. \n Por favor verifique los campos e intentelo nuevamente.","ERROR",Messagebox.OK,Messagebox.ERROR);
 		}
 	}
 
+	
+//	private void inicializarListados(){
+//		listadoTemas = null;
+//		listadoSubtemas = null;
+//		listadoSubtemaxTema = null;
+//		listadoTemasxUnidad = null; 
+//		listadoUnidades = null;
+//		listadoUnidadesxMicro = null;
+//		listadoObjetivos = null;
+//		listadoObjetivosxMicro = null;
+//		listadoBibliografia = null;
+//		listadoBibliografiaxUnidad = null;
+//		listadoEvaluaciones = null;
+//		listadoEvaluacionesxMicro = null;	
+//	}
 	
 	/*
 	 * Este método se encarga de empaquetar la información y devolver un Objeto de tipo Microcurriculo
@@ -1428,7 +1443,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	private void extraerInformacion(){
-		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuario");
 //		persona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
 		nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
 		rolPersona = rolxUsuario.getTbAdmRol();
@@ -1488,26 +1503,26 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void doAfterCompose(Component comp) throws Exception {				
-				if (comp.getParent().getId().equals("formaCrearMicro")){
-					super.doAfterCompose(comp);
-					if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
-						extraerInformacion();
-						permisos();
-					}else{
-						Executions.getCurrent().sendRedirect("/index.zul");
-					}
-				} else if (comp.getParent().getId().equals("formaListarMicro")){
-					inicializarFormaListado();
-					cargarMaterias(cmbNucleo.getValue());
-					cargarMicrocurriculos();			
-					cargarDependencias();
-					cargarNucleos();			
-				} else if (comp.getParent().getId().equals("consultarMicro")){
-					cargarMicrocurriculos();
-					cargarDependencias();
-					cargarNucleos();
-					//inhabilitarControles();
-				}
+	public void doAfterCompose(Component comp) throws Exception {	
+		if (comp.getParent().getId().equals("formaCrearMicro")){
+			super.doAfterCompose(comp);
+			if(Executions.getCurrent().getSession().hasAttribute("rolxUsuario")){
+				extraerInformacion();
+				permisos();
+			}else{
+				Executions.getCurrent().sendRedirect("/index.zul");
+			}
+		} else if (comp.getParent().getId().equals("formaListarMicro")){
+			inicializarFormaListado();
+			cargarMaterias(cmbNucleo.getValue());
+			cargarMicrocurriculos();			
+			cargarDependencias();
+			cargarNucleos();			
+		} else if (comp.getParent().getId().equals("consultarMicro")){
+			cargarMicrocurriculos();
+			cargarDependencias();
+			cargarNucleos();
+			//inhabilitarControles();
+		}
 	}
 }

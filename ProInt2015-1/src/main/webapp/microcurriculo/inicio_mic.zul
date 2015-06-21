@@ -3,7 +3,8 @@
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>	
-	<window id="index" border="0" apply="${borrarVariablesSession}">	
+<!-- 	apply="${borrarVariablesSession}" -->
+	<window border="0" >	
 		<borderlayout height="650px" >			
 			<north height="100px" border="0" sclass="fondoEncabezado">
 				<include id="headerIdx" src="/_sections/header.zul" />							
@@ -23,7 +24,7 @@
 					<div align="center">
 						<vbox>
 							<hbox align="center" height="95px">
-								<a href="/microcurriculo/crearMic.zul" image="/_img/icons/128x128/new.png" width="75px"/>
+								<a href="/microcurriculo/crearMic.zul" image="/_img/icons/128x128/make_micro.png" width="75px"/>
 								<vbox width="350px">
 									<a href="/microcurriculo/crearMic.zul" label="${labels.microcurriculo.tituloCrear}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
@@ -32,7 +33,7 @@
 								</vbox>								
 							</hbox>
 							<hbox align="center" height="95px">
-								<a href="/microcurriculo/listamic.zul" image="/_img/icons/128x128/list.png" width="75px"/>
+								<a href="/microcurriculo/listamic.zul" image="/_img/icons/128x128/view_tree.png" width="75px"/>
 								<vbox width="350px">
 									<a href="/microcurriculo/listamic.zul" label="${labels.microcurriculo.tituloListar}" sclass="nombreSeccion" />	
 									<div sclass="contenidoSeccion">
@@ -40,19 +41,10 @@
 									</div>	
 								</vbox>	
 							</hbox>
-<!-- 							<hbox align="center" height="95px"> -->
-<!-- 								<a href="" image="/_img/icons/128x128/print.png" width="75px"/> -->
-<!-- 								<vbox width="350px"> -->
-<!-- 									<a href="" label="${labels.microcurriculo.tituloImprimir}" sclass="nombreSeccion" /> -->
-<!-- 									<div sclass="contenidoSeccion"> -->
-<!-- 										<label value="${labels.microcurriculo.mensajeImprimir}" /> -->
-<!-- 									</div>	 -->
-<!-- 								</vbox>		 -->
-<!-- 							</hbox> -->
 							<hbox align="center" height="95px">
-								<a href="/index.zul" image="/_img/icons/128x128/logout_70.png" width="75px"/>
+								<a href="/index.zul" image="/_img/icons/128x128/exit.png" width="75px"/>
 								<vbox width="350px">
-									<a href="/index.zul" label="${labels.microcurriculo.tituloCerrar}" sclass="nombreSeccion" />
+									<a href="/_ambientes/_admin/inicioAdmin.zul" label="${labels.microcurriculo.tituloCerrar}" sclass="nombreSeccion" />
 									<div sclass="contenidoSeccion">
 										<label value="${labels.microcurriculo.mensajeCerrar}" />
 									</div>	

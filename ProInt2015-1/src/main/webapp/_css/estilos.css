@@ -22,7 +22,9 @@
 .tituloSession{
 	color: #FF8000;
 	font-size: large;
-	font-weighzmt: bolder
+	font-weighzmt: bolder;
+	margin: 5px;
+	padding: 5
 }
 
 

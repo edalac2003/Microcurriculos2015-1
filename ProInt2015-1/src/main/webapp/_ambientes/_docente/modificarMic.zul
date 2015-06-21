@@ -6,7 +6,7 @@
 <zk>
 	<window id="formaModificarMicro" border="0" >
 <!-- 		apply="${modificarMicroCtrl}" -->
-		<borderlayout id="blyModificarMicro" height="1025px" apply="${modificarMicrocurriculoCtrl}" visible="true">
+		<borderlayout id="blyModificarMicro" height="1025px" apply="${modificarMicroCtrl}" visible="true">
 			
 			<north height="125px" border="0" sclass="fondoEncabezado">
 				<div>
@@ -261,7 +261,7 @@
 												</listbox>
 												
 												<separator />
-													<label value="${labels.microcurriculo.ttitulo2}" sclass="titulos" />	
+													<label value="${labels.microcurriculo.titulo2}" sclass="titulos" />	
 												<separator />											
 												
 												<listbox id="listaTemas">
@@ -437,9 +437,9 @@
 											</tabpanel>
 										</tabpanels>
 									</tabbox>
-									<separator height="15px"/>
-									<button id="btnGuardar" label="Guardar" width="100px" height="35px"/>
-									<separator height="15px"/>
+<!-- 									<separator height="15px"/> -->
+<!-- 									<button id="btnGuardar" label="Guardar" width="100px" height="35px"/> -->
+<!-- 									<separator height="15px"/> -->
 								</div>
 							</div>		
 						</center>

@@ -783,11 +783,11 @@ public class CrearMicroCtrl extends GenericForwardComposer {
 					cmbListaTemas.setValue("");;
 					cmbListaUnidades.focus();
 				} else
-					Messagebox.show("Se Requiere informaci�n en el Campo <Subtema>");
+					Messagebox.show("Se Requiere información en el Campo <Subtema>");
 			} else
-				Messagebox.show("Se Requiere informaci�n en el Campo <Tema>");			
+				Messagebox.show("Se Requiere información en el Campo <Tema>");			
 		} else
-			Messagebox.show("Se Requiere informaci�n en el Campo <Unidad>");
+			Messagebox.show("Se Requiere información en el Campo <Unidad>");
 	}
 	
 	private void llenarListaSubTemas(){

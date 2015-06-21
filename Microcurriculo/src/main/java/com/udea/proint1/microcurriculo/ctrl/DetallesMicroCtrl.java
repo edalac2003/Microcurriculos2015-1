@@ -657,23 +657,23 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	 * @param idMicro cadena de caracteres con identificacion de microcurriculo
 	 * @param idSemestre cadena de caracteres con identificacion de semestre
 	 */
-	public void llenarDatos(String idMicro, String idSemestre){
+	public void llenarDatos(TbMicMicrocurriculo micro, String idSemestre){
 		
-		TbMicMicrocurriculo microcurriculo = null;
+		TbMicMicrocurriculo microcurriculo = micro;
 		
-		if(!idMicro.equals("") && (!idMicro.equals(null))){
-			try {
-				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
-			}catch(ExcepcionesDAO expDAO){
-				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expDAO.getMsjTecnico());
-			}catch(ExcepcionesLogica expNgs){
-				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expNgs.getMsjTecnico());
-			}catch(Exception exp){
-//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(exp);
-			}
+//		if(!idMicro.equals("") && (!idMicro.equals(null))){
+//			try {
+//				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
+//			}catch(ExcepcionesDAO expDAO){
+//				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expDAO.getMsjTecnico());
+//			}catch(ExcepcionesLogica expNgs){
+//				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expNgs.getMsjTecnico());
+//			}catch(Exception exp){
+////				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(exp);
+//			}
 			
 			/**
 			 * Verifica que el microcurriculo retornado no es nulo o si no reinicia busqueda para seleccionar nuevo
@@ -699,7 +699,7 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 			}else{
 				ReiniciarBusqueda();
 			}
-		}
+//		}
 	}
 	
 	/**
@@ -2269,8 +2269,8 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
-		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
-			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuario")){
+			TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuario");
 			TbAdmRol rolPersona = rolxUsuario.getTbAdmRol();
 			if(rolPersona.getNbId() == 4){
 				/**
@@ -2286,10 +2286,10 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 				nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
 				apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
 				userName = rolxUsuario.getTbAdmUsuario().getVrLogin();
-				lblUsuarioLogin.setValue(userName);
+//				lblUsuarioLogin.setValue(userName);
 				
 				if("formaDuplicarMicro".equals(comp.getParent().getId().toString())){			
-					if(Executions.getCurrent().getSession().hasAttribute("idMicro")&&(Executions.getCurrent().getSession().hasAttribute("semestre"))){
+					if(Executions.getCurrent().getSession().hasAttribute("microcurriculo")&&(Executions.getCurrent().getSession().hasAttribute("semestre"))){
 						panelDuplicarMicro.setVisible(false);
 						blyDuplicarMicro.setVisible(true);
 						panelSemestre.setVisible(false);
@@ -2297,11 +2297,15 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 						cargarDocentes();
 						
 						Executions.getCurrent().getSession().setAttribute("duplicar", "verdadero");
-						String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-						String idSemestre = Executions.getCurrent().getSession().getAttribute("semestre").toString();
-						llenarDatos(idMicrocurriculo, idSemestre);
 						
-					}else if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+//						String idMicrocurriculo = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+//						String idSemestre = Executions.getCurrent().getSession().getAttribute("semestre").toString();
+						TbMicMicrocurriculo microcurriculo = (TbMicMicrocurriculo)Executions.getCurrent().getSession().getAttribute("idMicro");
+						String idSemestre = microcurriculo.getTbAdmSemestre().getVrIdsemestre();
+						
+						llenarDatos(microcurriculo, idSemestre);
+						
+					}else if(Executions.getCurrent().getSession().hasAttribute("microcurriculo")){
 						panelDuplicarMicro.setVisible(false);
 						blyDuplicarMicro.setVisible(true);
 						panelSemestre.setVisible(true);

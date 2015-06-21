@@ -4,7 +4,7 @@
 <!-- 		apply="${cargarDatosFormas}" -->
 		<menubar width="100%" id="menInicio">
 			<menuitem label="Inicio" href="/_ambientes/_admin/inicioAdmin.zul" image="/_img/icons/32x32/home.png"/>
-			<menu id="menuMicros" label="Microcurriculo" image="/_img/icons/32x32/micro32.png">
+			<menu id="menuMicros" label="Microcurriculo" image="/_img/icons/32x32/micro_32.png">
 				<menupopup>
 					<menuitem label="Crear" href="../../_ambientes/_docente/crearMic.zul" image="/_img/icons/32x32/new.png" />
 					<menuitem label="Listar" href="/_ambientes/_docente/inicioDocente.zul" image="/_img/icons/32x32/list.png" />
@@ -26,7 +26,7 @@
 					<menuitem id="OpcionNucleos" label="Nucleos" href="/_nucleo/crearNucleo.zul" image="/_img/icons/32x32/nucleo32.png" />					
 				</menupopup>				
 			</menu>
-			<menuitem id="opcionGuardarNucleo" label="Guardar Nucleos" image="/_img/icons/32x32/save.png" apply="${crearNucleosCtrl}"/>
+			<menuitem id="opcionGuardarNucleo" label="Guardar Registros" image="/_img/icons/32x32/save.png" apply="${crearNucleosCtrl}"/>
 			
 			<menu id="menuTools" label="Herramientas " visible="false">
 				<menupopup>

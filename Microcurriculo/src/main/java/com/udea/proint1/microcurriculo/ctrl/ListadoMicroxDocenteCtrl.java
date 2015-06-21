@@ -206,36 +206,43 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	
 	private void listarMicrocurriculos(){		
 		try {
-			List<TbMicMicrocurriculo> microcurriculos;
+//			List<TbMicMicrocurriculo> microcurriculos;
 			List<TbAdmDocentexDependencia> dependenciasDocente = docentexDependenciaNGC.listarDependenciasxDocente(persona);
-			switch (rol) {
-				case 1:
-					break;
-				case 2:
-					Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
-					break;
-				case 3:
-					for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
-						microcurriculos = microcurriculoNGC.listarMicrocurriculosPorDependencia(dependenciaDocente.getTbAdmDependencia());
-						if(microcurriculos != null){
-							agregarMicrocurriculos((List<TbMicMicrocurriculo>)microcurriculos);
-						}
-					}
-					break;
-				case 4:
-					listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable(persona.getVrIdpersona());
-					break;
-				case 5:
-					break;
-				case 7:
-					for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
-						microcurriculos = microcurriculoNGC.listarMicrocurriculosPorDependencia(dependenciaDocente.getTbAdmDependencia());
-						if(microcurriculos != null){
-							agregarMicrocurriculos((List<TbMicMicrocurriculo>)microcurriculos);
-						}
-					}
-					break;
+			listadoMicrocurriculo = null;
+			for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
+				List<TbMicMicrocurriculo> microcurriculos = microcurriculoNGC.listarMicrocurriculosPorDependencia(dependenciaDocente.getTbAdmDependencia());
+				if(microcurriculos != null){
+					agregarMicrocurriculos(microcurriculos);
+				}
 			}
+//			switch (rol) {
+//				case 1:
+//					break;
+//				case 2:
+//					Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
+//					break;
+//				case 3:
+//					for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
+//						microcurriculos = microcurriculoNGC.listarMicrocurriculosPorDependencia(dependenciaDocente.getTbAdmDependencia());
+//						if(microcurriculos != null){
+//							agregarMicrocurriculos((List<TbMicMicrocurriculo>)microcurriculos);
+//						}
+//					}
+//					break;
+//				case 4:
+//					listadoMicrocurriculo = microcurriculoNGC.listarMicrocurriculosPorResponsable(persona.getVrIdpersona());
+//					break;
+//				case 5:
+//					break;
+//				case 7:
+//					for(TbAdmDocentexDependencia dependenciaDocente: dependenciasDocente){
+//						microcurriculos = microcurriculoNGC.listarMicrocurriculosPorDependencia(dependenciaDocente.getTbAdmDependencia());
+//						if(microcurriculos != null){
+//							agregarMicrocurriculos((List<TbMicMicrocurriculo>)microcurriculos);
+//						}
+//					}
+//					break;
+//			}
 		}catch(ExcepcionesDAO expDAO){
 			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
 			logger.error(expDAO.getMsjTecnico());
@@ -309,7 +316,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	 * @param microcurriculos a agregar en la lista
 	 */
 	private void agregarMicrocurriculos(List<TbMicMicrocurriculo> microcurriculos){
-		listadoMicrocurriculo = new ArrayList<TbMicMicrocurriculo>();
+		
 		boolean encontrado = false;
 		for(TbMicMicrocurriculo microcurriculo: microcurriculos){
 			if(listadoMicrocurriculo != null){
@@ -319,6 +326,8 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 						encontrado = true;
 					}
 				}
+			} else {
+				listadoMicrocurriculo = new ArrayList<TbMicMicrocurriculo>();
 			}
 			if(!encontrado){
 				listadoMicrocurriculo.add(microcurriculo);
@@ -333,7 +342,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 			Executions.getCurrent().sendRedirect("/_ambientes/_docente/modificarMic.zul");
 		}else{
 //			asignarVariableSession(microcurriculo);
-			Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+			Executions.getCurrent().sendRedirect("/_ambientes/_docente/detallesMic.zul");
 		}
 	}
 	
@@ -682,16 +691,19 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 		if(cmbDependenciaAcademica.getSelectedIndex() > 0){
 			TbAdmDocentexDependencia dependencia = dependenciasDocente.get(cmbDependenciaAcademica.getSelectedIndex()-1);
 			buscarMicrocurriculos(dependencia.getTbAdmDependencia());
-		}else{
-			if(cmbUnidadAcademica.getSelectedIndex() > 0){
-				TbAdmUnidadAcademica unidad = unidadesxDocente.get(cmbUnidadAcademica.getSelectedIndex()-1);
-				buscarMicrocurriculos(unidad);
-				recargarDependenciaPorUnidadAcademica(unidad);
-			}else{
-				dependenciasDocente = dependenciasDocenteAuxiliar;
-				llenarComboboxDependencias();
-			}
 		}
+		
+//		TE COMENTO PORQUE NO SE SI REALMENTE ERES NECESARIO.....
+//		else{
+//			if(cmbUnidadAcademica.getSelectedIndex() > 0){
+//				TbAdmUnidadAcademica unidad = unidadesxDocente.get(cmbUnidadAcademica.getSelectedIndex()-1);
+//				buscarMicrocurriculos(unidad);
+//				recargarDependenciaPorUnidadAcademica(unidad);
+//			}else{
+//				dependenciasDocente = dependenciasDocenteAuxiliar;
+//				llenarComboboxDependencias();
+//			}
+//		}
 	}
 	
 	private void buscarMicrocurriculos(TbAdmUnidadAcademica unidad){
@@ -727,7 +739,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	}
 	
 	private void extraerInformacion(){
-		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuario");
 		persona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
 		nombrePersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrNombres();
 		apellidoPersona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona().getVrApellidos();
@@ -774,7 +786,7 @@ public class ListadoMicroxDocenteCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {
 		
 		super.doAfterCompose(comp);
-		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
+		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuario")){
 			extraerInformacion();
 			permisos();
 		}else{

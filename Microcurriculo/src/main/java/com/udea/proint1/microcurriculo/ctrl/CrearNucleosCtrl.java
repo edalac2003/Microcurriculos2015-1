@@ -521,6 +521,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 				Listcell celda = new Listcell(id+" - "+unidad);
 				item.appendChild(celda);
 				listaNuevasUnidades.appendChild(item);
+				txtIdUnidadAcademica.setText("");
+				txtAliasAreaAcademica.setText("");
 				txtNombreUnidadAcademica.setText("");
 				txtNombreUnidadAcademica.focus();				
 			}else{
@@ -531,6 +533,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		}	else {
 				Messagebox.show("El Código de la Unidad Academica ya Existe en uno de los Listados o el Contenido está Vacio.  \nPor favor verifique el Código.",
 						"REGISTRO EXISTENTE",Messagebox.OK,Messagebox.EXCLAMATION);
+			
 			txtIdDependencia.focus();
 		}			
 	}
@@ -1045,7 +1048,8 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 		String alias = txtAliasUnidadAcademica.getText().toUpperCase();
 		TbAdmPersona responsable;
 		if (cmbResponsableUnidad.getSelectedIndex() >= 0){
-			responsable = listadoResponsables.get(cmbResponsableUnidad.getSelectedIndex()).getTbAdmPersona();
+			responsable = listadoPersonas.get(cmbResponsableUnidad.getSelectedIndex());
+//			responsable = listadoResponsables.get(cmbResponsableUnidad.getSelectedIndex()).getTbAdmPersona();
 			adicionarUnidad(id,nombreUnidad,alias,responsable);
 		} else {
 			Messagebox.show("No ha seleccionado ningun Responsable.");

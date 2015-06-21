@@ -2,7 +2,7 @@
 <zk>	
 	<div>
 		<hbox align="center" height="100px">
-			<a href="/microcurriculo/inicio_mic.zul" image="/_img/icons/128x128/microcurriculos.png" width="80px"/>
+			<a href="/microcurriculo/inicio_mic.zul" image="/_img/icons/128x128/micro70.png" width="80px"/>
 			<vbox width="400px">
 				<a href="/microcurriculo/inicio_mic.zul" label="${labels.microcurriculo.tituloMicro}" sclass="nombreSeccion" />
 				<div sclass="contenidoSeccion">

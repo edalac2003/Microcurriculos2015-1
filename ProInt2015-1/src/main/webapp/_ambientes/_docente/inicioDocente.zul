@@ -6,7 +6,7 @@
 <zk>
 <window id="formaInicioDocente">
 	<div apply="${listadoMicroxDocente}">
-		<borderlayout id="contenidoInicioDocente" height="700px" visible="false" >
+		<borderlayout id="contenidoInicioDocente" height="700px" visible="true" >
 			<north height="125px" border="0" sclass="fondoEncabezado">
 				<div>
 					<div sclass="div_fecha" align="center">

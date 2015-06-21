@@ -22,7 +22,7 @@
 				</hbox>
 				<hbox height="40px" />
 				<hbox  align="center">
-					<a href="/index.zul" label="Pagina de Inicio" sclass="tituloFondo"/>					
+					<a href="/_ambientes/_admin/inicioAdmin.zul" label="Pagina de Inicio" sclass="tituloFondo"/>					
 				</hbox>
 			</div>
 			

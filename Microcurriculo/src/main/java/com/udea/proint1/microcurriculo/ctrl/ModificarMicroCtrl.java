@@ -928,31 +928,30 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * El Metodo gestiona el llenado de datos a modificar en el nuevo microcurriculo
 	 * @param idMicro cadena de caracteres con identificacion de microcurriculo
 	 */
-	public void llenarDatos(String idMicro){
+	public void llenarDatos(TbMicMicrocurriculo micro){
 		
-		TbMicMicrocurriculo microcurriculo = null;
+		TbMicMicrocurriculo microcurriculo = micro;
 		
-		if(idMicro != null&&(!idMicro.equals(""))){
-			try {
-				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
-			}catch(ExcepcionesDAO expDAO){
-				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expDAO.getMsjTecnico());
-			}catch(ExcepcionesLogica expNgs){
-				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expNgs.getMsjTecnico());
-			}catch(Exception exp){
-//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(exp);
-			}
+//		if(idMicro != null&&(!idMicro.equals(""))){
+//			try {
+//				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicro);
+//			}catch(ExcepcionesDAO expDAO){
+//				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expDAO.getMsjTecnico());
+//			}catch(ExcepcionesLogica expNgs){
+//				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expNgs.getMsjTecnico());
+//			}catch(Exception exp){
+////				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(exp);
+//			}
 			
 			/**
 			 * Verifica que el microcurriculo retornado no es nulo o si no reinicia busqueda para seleccionar nuevo
 			 * microcurriculo a duplicar
 			 */
 			
-			if(microcurriculo != null){
-				
+			if(microcurriculo != null){				
 				microcurriculoGuardar = microcurriculo;
 				reiniciarListas();
 				llenarInfoGeneral(microcurriculo);
@@ -967,7 +966,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 			}else{
 				redireccionar();
 			}
-		}
+//		}
 	}
 	
 //	public void onClick$tool_atras(){
@@ -2829,7 +2828,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		reiniciarListas();
 		cargarDocentes();
 		cargarEstados();
-		llenarDatos(microcurriculoGuardar.getVrIdmicrocurriculo());
+//		llenarDatos(microcurriculoGuardar.getVrIdmicrocurriculo());
 	}
 	
 	public void generarHistoricos(){
@@ -2884,13 +2883,11 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	
 	public void actualizarLote(){
 		try{
-			System.out.println("objetoNulo");
 			guardarMicrocurriculoNGC.modificarMicroxlotes(microcurriculoGuardar, microxEstadoGuardar,
 					listaObjetivosxMicroBorrar, listaSubtemasxTemaBorrar, listaTemasxUnidadBorrar,
 					listaEvaluacionesxMicroBorrar, listaBibliosxUnidadBorrar, listaUnidadesxMicroBorrar,
 					listaObjetivosxMicroGuardar, listaUnidadesxMicroGuardar, listaBibliosxUnidadGuardar,
 					listaEvaluacionesxMicroGuardar, listaTemasxUnidadGuardar, listaSubtemasxTemaGuardar, listaHistoricos);
-			System.out.println("despues del objeto");
 			reiniciarEntorno();
 			Messagebox.show("Se actualizó correctamente el microcurriculo","INFORMACIÓN", Messagebox.OK,Messagebox.INFORMATION);
 		}catch(ExcepcionesDAO expDAO){
@@ -3295,10 +3292,9 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		}
 	}
 	
-	public void actualizarMicro(){
-		
+	public void actualizarMicro(){		
 		TbAdmPersona responsable = listaDocentes.get(cmbDocente.getSelectedIndex()-1);
-		TbMicEstado estadoGuardar = listaEstados.get(cmbEstado.getSelectedIndex()-1);
+		TbMicEstado estadoGuardar = listaEstados.get(cmbEstado.getSelectedIndex()+1);
 		if(microcurriculoGuardar.getTbMicEstado().getNbIdestado() != estadoGuardar.getNbIdestado()){
 			microxEstadoGuardar = new TbMicMicroxestado(estadoGuardar, new Date(), microcurriculoGuardar, responsable, "SYSTEM", new Date());
 			TbAdmHistorico historicoNuevo = new TbAdmHistorico(new Date(), microcurriculoGuardar, "Cambiar a estado: "+estadoGuardar.getVrDescripcion(), "SYSTEM", "SYSTEM", new Date());
@@ -3340,7 +3336,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	}
 	
 	private void extraerInformacion(){
-		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuarioLogin");
+		TbAdmRolxUsuario rolxUsuario = (TbAdmRolxUsuario) Executions.getCurrent().getSession().getAttribute("rolxUsuario");
 //		persona = rolxUsuario.getTbAdmUsuario().getTbAdmPersona();
 		rol = rolxUsuario.getTbAdmRol().getNbId();
 		
@@ -3364,234 +3360,311 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * de lo contrario será enviado solo a verlo
 	 */
 	private void verificarModificabilidad(){
-		String idMicrocurriculo = (String) Executions.getCurrent().getSession().getAttribute("idMicro");
-		if(idMicrocurriculo != null && (!idMicrocurriculo.endsWith(""))){
-			TbMicMicrocurriculo microcurriculo = null;
+//		String idMicrocurriculo = (String) Executions.getCurrent().getSession().getAttribute("idMicro");
+//		if(idMicrocurriculo != null && (!idMicrocurriculo.endsWith(""))){
+			TbMicMicrocurriculo microcurriculo = (TbMicMicrocurriculo)Executions.getCurrent().getSession().getAttribute("microcurriculo");
 			
-			try {
-				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
-			}catch(ExcepcionesDAO expDAO){
-				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expDAO.getMsjTecnico());
-			}catch(ExcepcionesLogica expNgs){
-				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(expNgs.getMsjTecnico());
-			}catch(Exception exp){
-//				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-				logger.error(exp);
-			}
+//			try {
+//				microcurriculo = microcurriculoNGC.obtenerMicrocurriculos(idMicrocurriculo);
+//			}catch(ExcepcionesDAO expDAO){
+//				Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expDAO.getMsjTecnico());
+//			}catch(ExcepcionesLogica expNgs){
+//				Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(expNgs.getMsjTecnico());
+//			}catch(Exception exp){
+////				Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//				logger.error(exp);
+//			}
 			if(microcurriculo != null){
-				
-				switch (rol) {
+				int estado = microcurriculo.getTbMicEstado().getNbIdestado(); 
+				switch (estado) {
 				case 1:
-					
-					break;
-				case 2:
-					
-					break;
-				case 3:
-					switch (microcurriculo.getTbMicEstado().getNbIdestado()) {
-					case 1:
-						Executions.getCurrent().getSession().removeAttribute("idMicro");
+					if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+//						Executions.getCurrent().getSession().removeAttribute("idMicro");
 						blyModificarMicro.setVisible(true);
 						divSeleccionaMicrocurriculo.setVisible(true);
 						cargarMicrocurriculos("");
-						break;
-					case 2:
-						
-						break;
-					case 3:
-						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-						break;
-					case 4:
-						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-						break;
-					case 5:
-						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-						break;
-					case 6:
-						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-						break;
-					default:
-						Executions.getCurrent().sendRedirect("/index.zul");
-						break;
-				}
-					break;
-				case 4:
-					switch (microcurriculo.getTbMicEstado().getNbIdestado()) {
-						case 1:
-							if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
-								Executions.getCurrent().getSession().removeAttribute("idMicro");
-								blyModificarMicro.setVisible(true);
-								divSeleccionaMicrocurriculo.setVisible(true);
-								cargarMicrocurriculos("");
-							}
-							break;
-						case 2:
-							if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
-								Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-							}else{
-								Executions.getCurrent().getSession().removeAttribute("idMicro");
-								blyModificarMicro.setVisible(true);
-								divSeleccionaMicrocurriculo.setVisible(true);
-								cargarMicrocurriculos("");
-							}
-							break;
-						case 3:
-							if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
-								Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-							}else{
-								Executions.getCurrent().getSession().removeAttribute("idMicro");
-								blyModificarMicro.setVisible(true);
-								divSeleccionaMicrocurriculo.setVisible(true);
-								cargarMicrocurriculos("");
-							}
-							break;
-						case 4:
-							if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
-								Executions.getCurrent().getSession().removeAttribute("idMicro");
-								blyModificarMicro.setVisible(true);
-								divSeleccionaMicrocurriculo.setVisible(true);
-								cargarMicrocurriculos("");
-							}
-							break;
-						case 5:
-							if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
-								Executions.getCurrent().getSession().removeAttribute("idMicro");
-								blyModificarMicro.setVisible(true);
-								divSeleccionaMicrocurriculo.setVisible(true);
-								cargarMicrocurriculos("");
-							}
-							break;
-						case 6:
-							if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
-								Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-							}else{
-								Executions.getCurrent().getSession().removeAttribute("idMicro");
-								blyModificarMicro.setVisible(true);
-								divSeleccionaMicrocurriculo.setVisible(true);
-								cargarMicrocurriculos("");
-							}
-							break;
-						default:
-							Executions.getCurrent().sendRedirect("/index.zul");
-							break;
 					}
 					break;
-				case 7:
-					switch (microcurriculo.getTbMicEstado().getNbIdestado()) {
-					case 1:
-						Executions.getCurrent().getSession().removeAttribute("idMicro");
-						blyModificarMicro.setVisible(true);
-						divSeleccionaMicrocurriculo.setVisible(true);
-						cargarMicrocurriculos("");
-						break;
-					case 2:
-						Executions.getCurrent().getSession().removeAttribute("idMicro");
-						blyModificarMicro.setVisible(true);
-						divSeleccionaMicrocurriculo.setVisible(true);
-						cargarMicrocurriculos("");
-						break;
-					case 3:
-						
-						break;
-					case 4:
-						Executions.getCurrent().getSession().removeAttribute("idMicro");
-						blyModificarMicro.setVisible(true);
-						divSeleccionaMicrocurriculo.setVisible(true);
-						cargarMicrocurriculos("");
-						break;
-					case 5:
+				case 2:
+					if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
 						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-						break;
-					case 6:
+					}else{
+						Executions.getCurrent().getSession().removeAttribute("idMicro");
+						blyModificarMicro.setVisible(true);
+						divSeleccionaMicrocurriculo.setVisible(true);
+						cargarMicrocurriculos("");
+					}
+					break;
+				case 3:
+					if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
 						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
-						break;
-					default:
-						Executions.getCurrent().sendRedirect("/index.zul");
-						break;
-				}
+					}else{
+						Executions.getCurrent().getSession().removeAttribute("idMicro");
+						blyModificarMicro.setVisible(true);
+						divSeleccionaMicrocurriculo.setVisible(true);
+						cargarMicrocurriculos("");
+					}
+					break;
+				case 4:
+					if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+						Executions.getCurrent().getSession().removeAttribute("idMicro");
+						blyModificarMicro.setVisible(true);
+						divSeleccionaMicrocurriculo.setVisible(true);
+						cargarMicrocurriculos("");
+					}
+					break;
+				case 5:
+					if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+						Executions.getCurrent().getSession().removeAttribute("idMicro");
+						blyModificarMicro.setVisible(true);
+						divSeleccionaMicrocurriculo.setVisible(true);
+						cargarMicrocurriculos("");
+					}
+					break;
+				case 6:
+					if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+					}else{
+						Executions.getCurrent().getSession().removeAttribute("idMicro");
+						blyModificarMicro.setVisible(true);
+						divSeleccionaMicrocurriculo.setVisible(true);
+						cargarMicrocurriculos("");
+					}
 					break;
 				default:
 					Executions.getCurrent().sendRedirect("/index.zul");
 					break;
 			}
-				
-			}else{
-				Executions.getCurrent().getSession().removeAttribute("idMicro");
-				blyModificarMicro.setVisible(true);
-				divSeleccionaMicrocurriculo.setVisible(true);
-				cargarMicrocurriculos("");
 			}
+				
+//				switch (rol) {
+//				case 1:
+//					
+//					break;
+//				case 2:
+//					
+//					break;
+//				case 3:
+//					switch (microcurriculo.getTbMicEstado().getNbIdestado()) {
+//					case 1:
+//						Executions.getCurrent().getSession().removeAttribute("idMicro");
+//						blyModificarMicro.setVisible(true);
+//						divSeleccionaMicrocurriculo.setVisible(true);
+//						cargarMicrocurriculos("");
+//						break;
+//					case 2:
+//						
+//						break;
+//					case 3:
+//						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//						break;
+//					case 4:
+//						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//						break;
+//					case 5:
+//						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//						break;
+//					case 6:
+//						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//						break;
+//					default:
+//						Executions.getCurrent().sendRedirect("/index.zul");
+//						break;
+//				}
+//					break;
+//				case 4:
+//					switch (microcurriculo.getTbMicEstado().getNbIdestado()) {
+//						case 1:
+//							if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+//								Executions.getCurrent().getSession().removeAttribute("idMicro");
+//								blyModificarMicro.setVisible(true);
+//								divSeleccionaMicrocurriculo.setVisible(true);
+//								cargarMicrocurriculos("");
+//							}
+//							break;
+//						case 2:
+//							if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+//								Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//							}else{
+//								Executions.getCurrent().getSession().removeAttribute("idMicro");
+//								blyModificarMicro.setVisible(true);
+//								divSeleccionaMicrocurriculo.setVisible(true);
+//								cargarMicrocurriculos("");
+//							}
+//							break;
+//						case 3:
+//							if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+//								Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//							}else{
+//								Executions.getCurrent().getSession().removeAttribute("idMicro");
+//								blyModificarMicro.setVisible(true);
+//								divSeleccionaMicrocurriculo.setVisible(true);
+//								cargarMicrocurriculos("");
+//							}
+//							break;
+//						case 4:
+//							if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+//								Executions.getCurrent().getSession().removeAttribute("idMicro");
+//								blyModificarMicro.setVisible(true);
+//								divSeleccionaMicrocurriculo.setVisible(true);
+//								cargarMicrocurriculos("");
+//							}
+//							break;
+//						case 5:
+//							if(!microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+//								Executions.getCurrent().getSession().removeAttribute("idMicro");
+//								blyModificarMicro.setVisible(true);
+//								divSeleccionaMicrocurriculo.setVisible(true);
+//								cargarMicrocurriculos("");
+//							}
+//							break;
+//						case 6:
+//							if(microcurriculo.getTbAdmPersona().getVrIdpersona().equals(idPersona)){
+//								Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//							}else{
+//								Executions.getCurrent().getSession().removeAttribute("idMicro");
+//								blyModificarMicro.setVisible(true);
+//								divSeleccionaMicrocurriculo.setVisible(true);
+//								cargarMicrocurriculos("");
+//							}
+//							break;
+//						default:
+//							Executions.getCurrent().sendRedirect("/index.zul");
+//							break;
+//					}
+//					break;
+//				case 7:
+//					switch (microcurriculo.getTbMicEstado().getNbIdestado()) {
+//					case 1:
+//						Executions.getCurrent().getSession().removeAttribute("idMicro");
+//						blyModificarMicro.setVisible(true);
+//						divSeleccionaMicrocurriculo.setVisible(true);
+//						cargarMicrocurriculos("");
+//						break;
+//					case 2:
+//						Executions.getCurrent().getSession().removeAttribute("idMicro");
+//						blyModificarMicro.setVisible(true);
+//						divSeleccionaMicrocurriculo.setVisible(true);
+//						cargarMicrocurriculos("");
+//						break;
+//					case 3:
+//						
+//						break;
+//					case 4:
+//						Executions.getCurrent().getSession().removeAttribute("idMicro");
+//						blyModificarMicro.setVisible(true);
+//						divSeleccionaMicrocurriculo.setVisible(true);
+//						cargarMicrocurriculos("");
+//						break;
+//					case 5:
+//						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//						break;
+//					case 6:
+//						Executions.getCurrent().sendRedirect("/microcurriculo/detallesMic.zul");
+//						break;
+//					default:
+//						Executions.getCurrent().sendRedirect("/index.zul");
+//						break;
+//				}
+//					break;
+//				default:
+//					Executions.getCurrent().sendRedirect("/index.zul");
+//					break;
+//			}
+//				
+//			}else{
+//				Executions.getCurrent().getSession().removeAttribute("idMicro");
+//				blyModificarMicro.setVisible(true);
+//				divSeleccionaMicrocurriculo.setVisible(true);
+//				cargarMicrocurriculos("");
+//			}
 			
-		}else{
-			Executions.getCurrent().getSession().removeAttribute("idMicro");
-//			Executions.getCurrent().sendRedirect("/_ambientes/_docente/modificarMicro.zul");
-			blyModificarMicro.setVisible(false);
-			divSeleccionaMicrocurriculo.setVisible(true);
-			cargarMicrocurriculos("");
-		}
+//		}else{
+//			Executions.getCurrent().getSession().removeAttribute("idMicro");
+////			Executions.getCurrent().sendRedirect("/_ambientes/_docente/modificarMicro.zul");
+//			blyModificarMicro.setVisible(false);
+//			divSeleccionaMicrocurriculo.setVisible(true);
+//			cargarMicrocurriculos("");
+//		}
 	}
 	
 	private void permisos(){
-		
-		switch (rol) {
-			case 1:
-				break;
-			case 2:
-				Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
-				break;
-			case 3:
-				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-					System.out.println("MIcrocurriculo: "+Executions.getCurrent().getSession().hasAttribute("idMicro"));
-//					panelModificarMicro.setVisible(false);
-					divContenido.setVisible(true);
-					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-					reiniciarListas();
-					cargarDocentes();
-					cargarEstados();
-					llenarDatos(idMicro);
-				}else{
-					blyModificarMicro.setVisible(true);
-					divSeleccionaMicrocurriculo.setVisible(true);
-					cargarMicrocurriculos("");
-				}
-				break;
-			case 4:
-				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-					verificarModificabilidad();
-//					panelModificarMicro.setVisible(false);
-					divContenido.setVisible(true);
-					String idMicro = (String)Executions.getCurrent().getSession().getAttribute("idMicro");
-					reiniciarListas();
-					cargarDocentes();
-					cargarEstados();
-					llenarDatos(idMicro);
-				}else{
-					blyModificarMicro.setVisible(true);
-					divSeleccionaMicrocurriculo.setVisible(true);
-					cargarMicrocurriculos("");
-				}
-				break;
-			case 7:
-				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
-//					panelModificarMicro.setVisible(false);
-					divContenido.setVisible(true);
-					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
-					reiniciarListas();
-					cargarDocentes();
-					cargarEstados();
-					llenarDatos(idMicro);
-				}else{
-					blyModificarMicro.setVisible(true);
-					divSeleccionaMicrocurriculo.setVisible(true);
-					cargarMicrocurriculos("");
-				}
-				break;
-			default:
-				Executions.getCurrent().sendRedirect("/index.zul");
-				break;
+		if(Executions.getCurrent().getSession().hasAttribute("microcurriculo")){
+			verificarModificabilidad();
+//			panelModificarMicro.setVisible(false);
+			divContenido.setVisible(true);
+//			String idMicro = (String)Executions.getCurrent().getSession().getAttribute("idMicro");
+			TbMicMicrocurriculo microcurriculo = (TbMicMicrocurriculo)Executions.getCurrent().getSession().getAttribute("microcurriculo");
+			reiniciarListas();
+			cargarDocentes();
+			cargarEstados();
+			llenarDatos(microcurriculo);
+			
+		}else{
+			blyModificarMicro.setVisible(true);
+			divSeleccionaMicrocurriculo.setVisible(true);
+			cargarMicrocurriculos("");
 		}
+		
+//		switch (rol) {
+//			case 1:
+//				break;
+//			case 2:
+//				Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
+//				break;
+//			case 3:
+//				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+//					System.out.println("MIcrocurriculo: "+Executions.getCurrent().getSession().hasAttribute("idMicro"));
+////					panelModificarMicro.setVisible(false);
+//					divContenido.setVisible(true);
+//					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+//					reiniciarListas();
+//					cargarDocentes();
+//					cargarEstados();
+//					llenarDatos(idMicro);
+//				}else{
+//					blyModificarMicro.setVisible(true);
+//					divSeleccionaMicrocurriculo.setVisible(true);
+//					cargarMicrocurriculos("");
+//				}
+//				break;
+//			case 4:
+//				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+//					verificarModificabilidad();
+////					panelModificarMicro.setVisible(false);
+//					divContenido.setVisible(true);
+//					String idMicro = (String)Executions.getCurrent().getSession().getAttribute("idMicro");
+//					reiniciarListas();
+//					cargarDocentes();
+//					cargarEstados();
+//					llenarDatos(idMicro);
+//				}else{
+//					blyModificarMicro.setVisible(true);
+//					divSeleccionaMicrocurriculo.setVisible(true);
+//					cargarMicrocurriculos("");
+//				}
+//				break;
+//			case 7:
+//				if(Executions.getCurrent().getSession().hasAttribute("idMicro")){
+////					panelModificarMicro.setVisible(false);
+//					divContenido.setVisible(true);
+//					String idMicro = Executions.getCurrent().getSession().getAttribute("idMicro").toString();
+//					reiniciarListas();
+//					cargarDocentes();
+//					cargarEstados();
+//					llenarDatos(idMicro);
+//				}else{
+//					blyModificarMicro.setVisible(true);
+//					divSeleccionaMicrocurriculo.setVisible(true);
+//					cargarMicrocurriculos("");
+//				}
+//				break;
+//			default:
+//				Executions.getCurrent().sendRedirect("/index.zul");
+//				break;
+//		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -3599,7 +3672,7 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	public void doAfterCompose(Component comp) throws Exception {				
 		super.doAfterCompose(comp);
 		
-		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuarioLogin")){
+		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuario")){
 			extraerInformacion();
 			permisos();
 		}else{

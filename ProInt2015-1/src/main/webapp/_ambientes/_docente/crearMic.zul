@@ -42,6 +42,7 @@
 				<div align="center">
 					<borderlayout height="770px">
 						<north border="none">
+<!-- 							<include src="/_ambientes/_docente/bar-menu-docente.zul"></include> -->
 							<div>
 								<div align="center" id="menubarDocente">
 									<menubar width="960px">

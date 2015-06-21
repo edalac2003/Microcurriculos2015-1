@@ -83,32 +83,34 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 					logger.error(exp);
 				}
 				
-				persona = usuario.getTbAdmPersona();
+//				persona = usuario.getTbAdmPersona();
 				if (rolxUsuario != null){
 					int rol = rolxUsuario.getTbAdmRol().getNbId();
 					
 					switch (rol) {
-						case 1:
+						case 1: 	//Rol SUPERUSUARIO
 							break;
-						case 2:
+						case 2:		// Rol ADMINISTRADOR
+							Executions.getCurrent().getSession().setAttribute("rolxUsuario", rolxUsuario);
 							Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
 							break;
-						case 3:
-							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
-							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
+						case 3:		// Rol COORDINADOR
+//							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
+//							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
+//							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
+							break;
+						case 4:		// Rol DOCENTE
+//							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
+//							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);
+							Executions.getCurrent().getSession().setAttribute("rolxUsuario", rolxUsuario);
 							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
 							break;
-						case 4:
-							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
-							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
-							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
+						case 5:		// Rol Docente
 							break;
-						case 5:
-							break;
-						case 7:
-							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
-							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
-							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
+						case 6:		// Rol Invitado
+//							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
+//							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
+//							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
 							break;
 						default:
 							Messagebox.show("No autorizado para ingresar.","NO AUTORIZADO",Messagebox.OK,Messagebox.ERROR);
@@ -147,6 +149,7 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
