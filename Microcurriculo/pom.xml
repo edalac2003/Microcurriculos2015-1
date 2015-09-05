@@ -7,312 +7,363 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Microcurriculo-MVN</name>
-  <url>http://maven.apache.org</url>
+<!--   <name>Microcurriculo-MVN</name> -->
+<!--   <url>http://maven.apache.org</url> -->
 
+  <name>Microcurriculo-MVN</name>
+  <url>http://192.168.1.6:8081/nexus/content/repositories/central/</url>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+	<repositories>
+		<repository>
+			<id>hibernate</id>
+			<name>Hibernate</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate/</url>
+		</repository>
+		<repository>
+			<id>hibernate-annotations</id>
+			<name>Hibernate Annotations</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate-annotations/</url>
+		</repository>
+		<repository>
+			<id>hibernate-commons</id>
+			<name>Hibernate Commons Annotations</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate-commons-annotations/</url>
+		</repository>
+		<repository>
+			<id>hibernate-core</id>
+			<name>Hibernate Core</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate-core/</url>
+		</repository>
+		<repository>
+			<id>hibernate-core</id>
+			<name>Hibernate Core</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate-core/</url>
+		</repository>
+		<repository>
+			<id>hibernate-entitymanager</id>
+			<name>Hibernate Entity Manager</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate-entitymanager/</url>
+		</repository>
+		<repository>
+			<id>hibernate-tools</id>
+			<name>Hibernate Tools</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate-tools/</url>
+		</repository>
+		<repository>
+			<id>hibernate-tools-hibernate</id>
+			<name>Hibernate Tools Hibernate</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/hibernate-tools-hibernate/</url>
+		</repository>
+		
+		<repository>
+			<id>jboss-ejb3</id>
+			<name>JBoss EJC</name>
+			<url>http://192.168.1.6:8081/nexus/content/repositories/jboss-ejb3/</url>
+		</repository>
+		
+	</repositories>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+  
+<!--     <dependency> -->
+<!--       <groupId>junit</groupId> -->
+<!--       <artifactId>junit</artifactId> -->
+<!--       <version>3.8.1</version> -->
+<!--       <scope>test</scope> -->
+<!--     </dependency>     -->
     
+<!--     <dependency> -->
+<!-- 		<groupId>org.eclipse.jetty</groupId> -->
+<!-- 		<artifactId>jetty-jndi</artifactId> -->
+<!-- 		<version>9.3.0.M2</version> -->
+<!-- 	</dependency> -->
     
-    
-    <dependency>
-		<groupId>org.eclipse.jetty</groupId>
-		<artifactId>jetty-jndi</artifactId>
-		<version>9.3.0.M2</version>
-	</dependency>
-    
-    <!-- DEPENDENCIAS DE HIBERNATE -->
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-annotations</artifactId>
-		<version>3.5.0-Final</version>
-	</dependency>
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-core</artifactId>
-		<version>3.5.0-Final</version>
-	</dependency>
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-entitymanager</artifactId>
-		<version>3.5.0-Final</version>
-	</dependency>
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-commons-annotations</artifactId>
-		<version>3.3.0.ga</version>
-	</dependency>
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>ejb3-persistence</artifactId>
-		<version>1.0.2.GA</version>
-	</dependency>
-	<dependency>
-		<groupId>org.hibernate.javax.persistence</groupId>
-		<artifactId>hibernate-jpa-2.0-api</artifactId>
-		<version>1.0.1.Final</version>
-	</dependency>
+<!--     DEPENDENCIAS DE HIBERNATE -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.hibernate</groupId> -->
+<!-- 		<artifactId>hibernate-annotations</artifactId> -->
+<!-- 		<version>3.5.0-Final</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.hibernate</groupId> -->
+<!-- 		<artifactId>hibernate-core</artifactId> -->
+<!-- 		<version>3.5.0-Final</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.hibernate</groupId> -->
+<!-- 		<artifactId>hibernate-entitymanager</artifactId> -->
+<!-- 		<version>3.5.0-Final</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.hibernate</groupId> -->
+<!-- 		<artifactId>hibernate-commons-annotations</artifactId> -->
+<!-- 		<version>3.3.0.ga</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.hibernate</groupId> -->
+<!-- 		<artifactId>ejb3-persistence</artifactId> -->
+<!-- 		<version>1.0.2.GA</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.hibernate.javax.persistence</groupId> -->
+<!-- 		<artifactId>hibernate-jpa-2.0-api</artifactId> -->
+<!-- 		<version>1.0.1.Final</version> -->
+<!-- 	</dependency> -->
 	
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-tools</artifactId>
-		<version>3.2.0.ga</version>
-	</dependency>
-	<!-- DEPENDENCIAS DE SPRING -->
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-aop</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-beans</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-context</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-core</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-expression</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-jdbc</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-orm</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-test</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-tx</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-web</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-webmvc</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-hibernate3</artifactId>
-		<version>2.0.8</version>
-	</dependency>
-    <!-- DEPENDENCIAS DE ZK -->
-    <dependency>
-		<groupId>org.zkoss.common</groupId>
-		<artifactId>zcommon</artifactId>
-		<version>7.0.3</version>
-	</dependency>    
-	<dependency>
-		<groupId>org.zkoss.zk</groupId>
-		<artifactId>zul</artifactId>
-		<version>7.0.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.zkoss.zk</groupId>
-		<artifactId>zk</artifactId>
-		<version>7.0.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.zkoss.zk</groupId>
-		<artifactId>zkplus</artifactId>
-		<version>7.0.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.zkoss.zk</groupId>
-		<artifactId>zhtml</artifactId>
-		<version>7.0.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.zkoss.zk</groupId>
-		<artifactId>zkbind</artifactId>
-		<version>7.0.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.zkoss.common</groupId>
-		<artifactId>zel</artifactId>
-		<version>7.0.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.zkoss.common</groupId>
-		<artifactId>zweb</artifactId>
-		<version>7.0.3</version>
-	</dependency>
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.hibernate</groupId> -->
+<!-- 		<artifactId>hibernate-tools</artifactId> -->
+<!-- 		<version>3.2.0.ga</version> -->
+<!-- 	</dependency> -->
+<!--    //DEPENDENCIAS DE SPRING -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-aop</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-beans</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-context</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-core</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-expression</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-jdbc</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-orm</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-test</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-tx</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-web</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-webmvc</artifactId> -->
+<!-- 		<version>3.2.0.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework</groupId> -->
+<!-- 		<artifactId>spring-hibernate3</artifactId> -->
+<!-- 		<version>2.0.8</version> -->
+<!-- 	</dependency> -->
+<!--     DEPENDENCIAS DE ZK -->
+<!--     <dependency> -->
+<!-- 		<groupId>org.zkoss.common</groupId> -->
+<!-- 		<artifactId>zcommon</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency>     -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.zkoss.zk</groupId> -->
+<!-- 		<artifactId>zul</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.zkoss.zk</groupId> -->
+<!-- 		<artifactId>zk</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.zkoss.zk</groupId> -->
+<!-- 		<artifactId>zkplus</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.zkoss.zk</groupId> -->
+<!-- 		<artifactId>zhtml</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.zkoss.zk</groupId> -->
+<!-- 		<artifactId>zkbind</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.zkoss.common</groupId> -->
+<!-- 		<artifactId>zel</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.zkoss.common</groupId> -->
+<!-- 		<artifactId>zweb</artifactId> -->
+<!-- 		<version>7.0.3</version> -->
+<!-- 	</dependency> -->
 	
-	<!-- DEPENDENCIAS COMMONS -->
-	<dependency>
-		<groupId>commons-logging</groupId>
-		<artifactId>commons-logging</artifactId>
-		<version>1.1.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.commons</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>1.3.2</version>
-	</dependency>
-	<dependency>
-		<groupId>commons-dbcp</groupId>
-		<artifactId>commons-dbcp</artifactId>
-		<version>1.2.2</version>
-	</dependency>
-	<dependency>
-		<groupId>commons-digester</groupId>
-		<artifactId>commons-digester</artifactId>
-		<version>2.1</version>
-	</dependency>
-	<dependency>
-		<groupId>commons-fileupload</groupId>
-		<artifactId>commons-fileupload</artifactId>
-		<version>1.2</version>
-	</dependency>
-	<dependency>
-		<groupId>com.google.code.maven-play-plugin.org.apache.commons</groupId>
-		<artifactId>commons-javaflow</artifactId>
-		<version>1209105</version>
-	</dependency>
-	<dependency>
-		<groupId>commons-pool</groupId>
-		<artifactId>commons-pool</artifactId>
-		<version>1.4</version>
-	</dependency>
-	<!-- OTRAS DEPENDENCIAS -->
-	<dependency>
-		<groupId>commons-collections</groupId>
-		<artifactId>commons-collections</artifactId>
-		<version>3.1</version>
-	</dependency>
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-api</artifactId>
-		<version>1.7.5</version>
-	</dependency>
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-log4j12</artifactId>
-		<version>1.7.5</version>
-	</dependency>
-	<dependency>
-		<groupId>log4j</groupId>
-		<artifactId>log4j</artifactId>
-		<version>1.2.17</version>
-	</dependency>
-	<dependency>
-		<groupId>org.antlr</groupId>
-		<artifactId>antlr</artifactId>
-		<version>3.4</version>
-	</dependency>
-	<dependency>
-		<groupId>dom4j</groupId>
-		<artifactId>dom4j</artifactId>
-		<version>1.6.1</version>
-	</dependency>
-	<dependency>
-		<groupId>javassist</groupId>
-		<artifactId>javassist</artifactId>
-		<version>3.12.0.GA</version>
-	</dependency>
-	<dependency>
-		<groupId>javax.transaction</groupId>
-		<artifactId>jta</artifactId>
-		<version>1.1</version>
-	</dependency>
-	<dependency>
-	    <groupId>com.oracle</groupId>
-	    <artifactId>ojdbc14</artifactId>
-	    <version>10.2.0</version>
-	</dependency>    
+<!-- 	// DEPENDENCIAS COMMONS -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>commons-logging</groupId> -->
+<!-- 		<artifactId>commons-logging</artifactId> -->
+<!-- 		<version>1.1.3</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.apache.commons</groupId> -->
+<!-- 		<artifactId>commons-io</artifactId> -->
+<!-- 		<version>1.3.2</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>commons-dbcp</groupId> -->
+<!-- 		<artifactId>commons-dbcp</artifactId> -->
+<!-- 		<version>1.2.2</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>commons-digester</groupId> -->
+<!-- 		<artifactId>commons-digester</artifactId> -->
+<!-- 		<version>2.1</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>commons-fileupload</groupId> -->
+<!-- 		<artifactId>commons-fileupload</artifactId> -->
+<!-- 		<version>1.2</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>com.google.code.maven-play-plugin.org.apache.commons</groupId> -->
+<!-- 		<artifactId>commons-javaflow</artifactId> -->
+<!-- 		<version>1209105</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>commons-pool</groupId> -->
+<!-- 		<artifactId>commons-pool</artifactId> -->
+<!-- 		<version>1.4</version> -->
+<!-- 	</dependency> -->
+<!-- 	// OTRAS DEPENDENCIAS -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>commons-collections</groupId> -->
+<!-- 		<artifactId>commons-collections</artifactId> -->
+<!-- 		<version>3.1</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.slf4j</groupId> -->
+<!-- 		<artifactId>slf4j-api</artifactId> -->
+<!-- 		<version>1.7.5</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.slf4j</groupId> -->
+<!-- 		<artifactId>slf4j-log4j12</artifactId> -->
+<!-- 		<version>1.7.5</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>log4j</groupId> -->
+<!-- 		<artifactId>log4j</artifactId> -->
+<!-- 		<version>1.2.17</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.antlr</groupId> -->
+<!-- 		<artifactId>antlr</artifactId> -->
+<!-- 		<version>3.4</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>dom4j</groupId> -->
+<!-- 		<artifactId>dom4j</artifactId> -->
+<!-- 		<version>1.6.1</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>javassist</groupId> -->
+<!-- 		<artifactId>javassist</artifactId> -->
+<!-- 		<version>3.12.0.GA</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>javax.transaction</groupId> -->
+<!-- 		<artifactId>jta</artifactId> -->
+<!-- 		<version>1.1</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 	    <groupId>com.oracle</groupId> -->
+<!-- 	    <artifactId>ojdbc6</artifactId> -->
+<!-- 	    <version>11.2.0.2.0</version> -->
+<!-- 	</dependency>     -->
   </dependencies>
   
    <build>
         <plugins>
-        	<plugin>  
-		        <artifactId>maven-compiler-plugin</artifactId>  
-		        <configuration>  
-		          <source>1.5</source>  
-		          <target>1.5</target>  
-		        <encoding>UTF-8</encoding>  
-		        </configuration>  
-	      	</plugin>
-	      	<plugin>  
-		        <groupId>org.apache.maven.plugins</groupId>  
-		        <artifactId>maven-resources-plugin</artifactId>  
-		        <configuration>  
-		          <encoding>UTF-8</encoding>  
-		        </configuration>  
-	      	</plugin> 
-	      	<plugin>  
-		        <groupId>org.apache.maven.plugins</groupId>  
-		        <artifactId>maven-site-plugin</artifactId>  
-		        <configuration>  
-		          <inputEncoding>UTF-8</inputEncoding>  
-		          <outputEncoding>UTF-8</outputEncoding>  
-		        </configuration>  
-      		</plugin>  
-            <plugin>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                    </additionalProjectnatures>
-                    <additionalBuildcommands>
-                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>org.test.int1.Main</mainClass>
-                </configuration>
-            </plugin>
+<!--         	<plugin>   -->
+<!-- 		        <artifactId>maven-compiler-plugin</artifactId>   -->
+<!-- 		        <configuration>   -->
+<!-- 		          <source>1.5</source>   -->
+<!-- 		          <target>1.5</target>   -->
+<!-- 		        <encoding>UTF-8</encoding>   -->
+<!-- 		        </configuration>   -->
+<!-- 	      	</plugin> -->
+<!-- 	      	<plugin>   -->
+<!-- 		        <groupId>org.apache.maven.plugins</groupId>   -->
+<!-- 		        <artifactId>maven-resources-plugin</artifactId>   -->
+<!-- 		        <configuration>   -->
+<!-- 		          <encoding>UTF-8</encoding>   -->
+<!-- 		        </configuration>   -->
+<!-- 	      	</plugin>  -->
+<!-- 	      	<plugin>   -->
+<!-- 		        <groupId>org.apache.maven.plugins</groupId>   -->
+<!-- 		        <artifactId>maven-site-plugin</artifactId>   -->
+<!-- 		        <configuration>   -->
+<!-- 		          <inputEncoding>UTF-8</inputEncoding>   -->
+<!-- 		          <outputEncoding>UTF-8</outputEncoding>   -->
+<!-- 		        </configuration>   -->
+<!--       		</plugin>   -->
+<!--             <plugin> -->
+<!--                 <artifactId>maven-eclipse-plugin</artifactId> -->
+<!--                 <version>2.9</version> -->
+<!--                 <configuration> -->
+<!--                     <additionalProjectnatures> -->
+<!--                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature> -->
+<!--                     </additionalProjectnatures> -->
+<!--                     <additionalBuildcommands> -->
+<!--                         <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand> -->
+<!--                     </additionalBuildcommands> -->
+<!--                     <downloadSources>true</downloadSources> -->
+<!--                     <downloadJavadocs>true</downloadJavadocs> -->
+<!--                 </configuration> -->
+<!--             </plugin> -->
+<!--             <plugin> -->
+<!--                 <groupId>org.apache.maven.plugins</groupId> -->
+<!--                 <artifactId>maven-compiler-plugin</artifactId> -->
+<!--                 <version>2.5.1</version> -->
+<!--                 <configuration> -->
+<!--                     <source>1.6</source> -->
+<!--                     <target>1.6</target> -->
+<!--                     <compilerArgument>-Xlint:all</compilerArgument> -->
+<!--                     <showWarnings>true</showWarnings> -->
+<!--                     <showDeprecation>true</showDeprecation> -->
+<!--                 </configuration> -->
+<!--             </plugin> -->
+<!--             <plugin> -->
+<!--                 <groupId>org.codehaus.mojo</groupId> -->
+<!--                 <artifactId>exec-maven-plugin</artifactId> -->
+<!--                 <version>1.2.1</version> -->
+<!--                 <configuration> -->
+<!--                     <mainClass>org.test.int1.Main</mainClass> -->
+<!--                 </configuration> -->
+<!--             </plugin> -->
 <!--             <plugin>   -->
 <!-- 			      <groupId>org.codehaus.mojo</groupId>   -->
 <!-- 			      <artifactId>native2ascii-maven-plugin</artifactId>   -->
