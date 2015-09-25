@@ -5,7 +5,6 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Html;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -18,6 +17,7 @@ import com.udea.proint1.microcurriculo.ngc.UsuarioNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
+@SuppressWarnings({ "rawtypes", "serial" })
 public class InicioSesionCtrl extends GenericForwardComposer {
 	
 	/**
@@ -91,13 +91,14 @@ public class InicioSesionCtrl extends GenericForwardComposer {
 						case 1: 	//Rol SUPERUSUARIO
 							break;
 						case 2:		// Rol ADMINISTRADOR
+//							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
 							Executions.getCurrent().getSession().setAttribute("rolxUsuario", rolxUsuario);
 							Executions.getCurrent().sendRedirect("./_ambientes/_admin/inicioAdmin.zul");
 							break;
 						case 3:		// Rol COORDINADOR
 //							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());
-//							Executions.getCurrent().getSession().setAttribute("rolxUsuarioLogin", rolxUsuario);					
-//							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
+							Executions.getCurrent().getSession().setAttribute("rolxUsuario", rolxUsuario);					
+							Executions.getCurrent().sendRedirect("./_ambientes/_docente/inicioDocente.zul");
 							break;
 						case 4:		// Rol DOCENTE
 //							Executions.getCurrent().getSession().setAttribute("userName", usuario.getVrLogin());

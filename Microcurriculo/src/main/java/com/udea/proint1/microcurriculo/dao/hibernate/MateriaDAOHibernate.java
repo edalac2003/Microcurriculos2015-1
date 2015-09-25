@@ -114,6 +114,32 @@ public class MateriaDAOHibernate extends HibernateDaoSupport implements MateriaD
 		}	
 		return materias;
 	}
+	
+	@Override
+	public List<TbAdmMateria> listarMateriasPorNucleo(String nucleo) throws ExcepcionesDAO {
+		Session session = null;
+		List<TbAdmMateria> materias = null;
+		
+		try {
+			session = getSession();
+			Query query = session.createQuery("FROM TbAdmMateria where tbAdmNucleo = :nucleo");
+			query.setString("nucleo", nucleo);
+			
+            materias = query.list();			
+		} catch (Exception e) {
+			ExcepcionesDAO expDAO = new ExcepcionesDAO();
+			expDAO.setMsjUsuario("Error al intentar listar Materias");
+			expDAO.setMsjTecnico(e.getMessage());
+			expDAO.setOrigen(e);
+			
+			throw expDAO;
+		} finally{
+			session.close();
+		}	
+		return materias;
+	}
+	
+	
 
 	@Override
 	public List<TbAdmMateria> listarMateriasPorSemestre(int semestre) throws ExcepcionesDAO {

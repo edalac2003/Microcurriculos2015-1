@@ -1,10 +1,10 @@
-<?page title="" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?page title="Bienvenidos a Microcurriculos" contentType="text/html; charset=UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>
-<window title="" border="none">
-	<borderlayout height="700px">
+<window title="" border="none" apply="${inicioAdminCtrl}">
+	<borderlayout height="700px" >
 		<north height="130px" border="0" sclass="fondoEncabezado">
 			<div>
 				<div sclass="div_fecha" align="center">

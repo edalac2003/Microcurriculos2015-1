@@ -2,6 +2,8 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
+import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
+
 import com.udea.proint1.microcurriculo.dao.AreaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmArea;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
@@ -52,10 +54,16 @@ public class AreaNGCImpl implements AreaNGC {
 	}
 
 	@Override
-	public List<TbAdmArea> listarAreasPorNucleo(TbAdmNucleo nucleo)
-			throws ExcepcionesLogica, ExcepcionesDAO {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TbAdmArea> listarAreasPorNucleo(String nucleo) throws ExcepcionesLogica, ExcepcionesDAO {
+		List<TbAdmArea> listaAreas = null;
+		
+		try {
+			listaAreas = areaDao.listarAreasPorNucleo(nucleo);
+		} catch (Exception e) {
+			throw new ExcepcionesLogica(e.toString());
+		}		
+		
+		return listaAreas;
 	}
 
 }

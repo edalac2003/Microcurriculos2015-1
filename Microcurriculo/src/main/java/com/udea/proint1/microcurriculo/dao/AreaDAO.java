@@ -16,7 +16,7 @@ public interface AreaDAO {
 	
 	public List<TbAdmArea> listarAreas() throws ExcepcionesDAO;
 	
-	public List<TbAdmArea> listarAreasPorNucleo(TbAdmNucleo nucleo) throws ExcepcionesDAO;
+	public List<TbAdmArea> listarAreasPorNucleo(String nucleo) throws ExcepcionesDAO;
 	
 
 }

@@ -16,6 +16,8 @@ public interface MateriaDAO {
 	
 	public List<TbAdmMateria> listarMateriasPorNucleo(TbAdmNucleo nucleo) throws ExcepcionesDAO;
 	
+	public List<TbAdmMateria> listarMateriasPorNucleo(String nucleo) throws ExcepcionesDAO;
+	
 	public List<TbAdmMateria> listarMateriasPorSemestre(int semestre) throws ExcepcionesDAO;
 	
 	public void actualizarMateria(TbAdmMateria materia) throws ExcepcionesDAO;

@@ -1,12 +1,28 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?page title="Pantalla Inicial Microcurriculos" contentType="text/html;charset=UTF-8"?>
+<?page title="Ventana Principal de Materias" contentType="text/html;charset=UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>	
-	<window id="index" border="0">	
+	<window id="index" border="0" apply="${inicioAdminCtrl}">	
 		<borderlayout height="630px">			
-			<north height="100px" border="0" sclass="fondoEncabezado">
-				<include id="headerIdx" src="/_sections/header.zul" />							
+<!-- 			<north height="100px" border="0" sclass="fondoEncabezado"> -->
+<!-- 				<include id="headerIdx" src="/_sections/header.zul" />							 -->
+<!-- 			</north> -->
+			<north height="130px" border="0" sclass="fondoEncabezado">
+				<div>
+					<div sclass="div_fecha" align="center">
+						<div sclass="cab_izquierda">
+							<a id="nlcSalir" label="Salir" sclass="enlace_salir"/>
+						</div>
+						<div sclass="cab_centro">
+							<label id="lblUsuarioLogin"/>
+						</div>
+						<div sclass="cab_derecha">
+							<label id="lblFechaActual" value="FechaActual"/>
+						</div>
+					</div>
+					<include id="headerIdx" src="/_sections/header.zul" />
+				</div>								
 			</north>
 			<east width="180px" border="0">
 				<label value="" />

@@ -1,6 +1,5 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<?page title="" contentType="text/html;charset=UTF-8"?>
-<?page title="Bienvenidos a Microcurriculos" contentType="text/html; charset=UTF-8"?>
+<?page title="Bienvenidos a la Sección de Administracion" contentType="text/html; charset=UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/_css/estilos.css" ?>
 
 <zk>

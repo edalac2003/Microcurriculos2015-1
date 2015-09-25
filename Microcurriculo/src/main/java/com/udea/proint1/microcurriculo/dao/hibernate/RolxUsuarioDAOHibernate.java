@@ -55,7 +55,7 @@ public class RolxUsuarioDAOHibernate extends HibernateDaoSupport implements Rolx
 	@Override
 	public List<TbAdmRolxUsuario> obtenerRolxUsuarioxRol(TbAdmRol rol) throws ExcepcionesDAO {
 		Session session = null;
-        List<TbAdmRolxUsuario> usuariosxRol = new ArrayList<TbAdmRolxUsuario>();
+        List<TbAdmRolxUsuario> usuariosxRol = null;
        
         try{
         	session = getSession();

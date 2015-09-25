@@ -194,7 +194,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	private static List<TbAdmMateria> listaMateriaxNucleo;
 	private static List<TbAdmPersona> listaDocentes = new ArrayList<TbAdmPersona>();
 	private static List<TbAdmSemestre> listaSemestre;
-	private static List<TbMicEstado> listaEstados;
+	private static List<TbMicEstado> listaEstados = null;
 	private static List<TbMicMicrocurriculo> listaMicrocurriculos;
 	
 
@@ -423,7 +423,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	
 	private void imprimirEstados(){
 		if(listaEstados != null){
-			cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
+//			cmbEstado.setValue(listaEstados.get(0).getVrDescripcion());
 			
 			switch (rol) {
 			case 1:
@@ -1461,6 +1461,13 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	}
 	
 	private void permisos(){
+//		verificarDependencias(docenteSession);
+		inicializarFormaCrear();
+		cargarEstados();
+		cargarDocentes();
+		cargarSemestres();
+		contenidoCargando.setVisible(false);
+		contenidoPrincipal.setVisible(true);
 		
 		switch (rol) {
 			case 1:
@@ -1496,7 +1503,7 @@ public class CargarDatosFormas extends GenericForwardComposer{
 				contenidoPrincipal.setVisible(true);
 				break;
 			default:
-				Executions.getCurrent().sendRedirect("/index.zul");
+//				Executions.getCurrent().sendRedirect("/index.zul");
 				break;
 		}
 	}
@@ -1504,25 +1511,27 @@ public class CargarDatosFormas extends GenericForwardComposer{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {	
-		if (comp.getParent().getId().equals("formaCrearMicro")){
-			super.doAfterCompose(comp);
-			if(Executions.getCurrent().getSession().hasAttribute("rolxUsuario")){
-				extraerInformacion();
-				permisos();
-			}else{
-				Executions.getCurrent().sendRedirect("/index.zul");
-			}
-		} else if (comp.getParent().getId().equals("formaListarMicro")){
-			inicializarFormaListado();
-			cargarMaterias(cmbNucleo.getValue());
-			cargarMicrocurriculos();			
-			cargarDependencias();
-			cargarNucleos();			
-		} else if (comp.getParent().getId().equals("consultarMicro")){
-			cargarMicrocurriculos();
-			cargarDependencias();
-			cargarNucleos();
-			//inhabilitarControles();
-		}
+		super.doAfterCompose(comp);
+		permisos();
+//		if (comp.getParent().getId().equals("formaCrearMicro")){
+//			super.doAfterCompose(comp);
+//			if(Executions.getCurrent().getSession().hasAttribute("rolxUsuario")){
+//				extraerInformacion();
+//				permisos();
+//			}else{
+//				Executions.getCurrent().sendRedirect("/index.zul");
+//			}
+//		} else if (comp.getParent().getId().equals("formaListarMicro")){
+//			inicializarFormaListado();
+//			cargarMaterias(cmbNucleo.getValue());
+//			cargarMicrocurriculos();			
+//			cargarDependencias();
+//			cargarNucleos();			
+//		} else if (comp.getParent().getId().equals("consultarMicro")){
+//			cargarMicrocurriculos();
+//			cargarDependencias();
+//			cargarNucleos();
+//			//inhabilitarControles();
+//		}
 	}
 }

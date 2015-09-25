@@ -91,7 +91,7 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 	@Override
 	public List<TbMicEstado> listarEstados() throws ExcepcionesDAO {
 		Session session = null;
-		List<TbMicEstado> estados = new ArrayList<TbMicEstado>();
+		List<TbMicEstado> estados = null;
 		
 		try{
 			session = getSession();

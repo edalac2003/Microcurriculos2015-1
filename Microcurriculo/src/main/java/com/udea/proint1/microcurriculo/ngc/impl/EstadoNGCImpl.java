@@ -145,13 +145,15 @@ public class EstadoNGCImpl implements EstadoNGC {
 		/*
 		 * Confirmamos si el objeto retornado tiene elementos en él.
 		 */
-		if(listaEstados == null){
-			ExcepcionesLogica expLog = new ExcepcionesLogica();
-			expLog.setMsjUsuario("No se encontraron datos en listado de unidades x Microcurriculo");
-			throw expLog;
-		}else{
-			return listaEstados;
-		}
+//		if(listaEstados == null){
+//			ExcepcionesLogica expLog = new ExcepcionesLogica();
+//			expLog.setMsjUsuario("No se encontraron datos en listado de unidades x Microcurriculo");
+//			throw expLog;
+//		}else{
+//			return listaEstados;
+//		}
+		
+		return listaEstados;
 	}
 	
 	@Override

@@ -10,9 +10,24 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
         
         <!-- BEANS  CONFIGURACION JNDI DATASOURCE-->
-		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-	        <property name="jndiName" value="java:comp/env/jdbc/proint2014-2" />
-	    </bean>
+<!-- 		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!-- 	        <property name="jndiName" value="java:comp/env/jdbc/proint2014-2" /> -->
+<!-- 	    </bean> -->
+
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+            <property name="driverClassName">
+                    <value>oracle.jdbc.driver.OracleDriver</value>  
+            </property>
+            <property name="url">
+                    <value>jdbc:oracle:thin:@localhost:1521:XE</value>
+            </property>
+            <property name="username">
+                    <value>proint2014-2</value>
+            </property>
+            <property name="password"> 
+                    <value>proint2014-2</value>
+            </property>
+        </bean>
         
         <!-- BEANS CONFIGURACION HIBERNATE-->
         <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -441,6 +456,7 @@
         <bean id="crearMateriaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearMateriaCtrl" scope="prototype">
         	<property name="materiaNGC" ref="materiaNGC" />
         	<property name="nucleoNGC" ref="nucleoNGC" />
+        	<property name="areaNGC" ref="areaNGC" />
         	<property name="semestreNGC" ref="semestreNGC" />
         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
         	<property name="dependenciaNGC" ref="dependenciaNGC" />
@@ -673,5 +689,9 @@
         	<property name="usuarioNGC" ref="usuarioNGC" />
         	<property name="personaNGC" ref="personaNGC" />
         	<property name="rolxUsuarioNGC" ref="rolxUsuarioNGC" />
+        </bean>
+        
+        <bean id="inicioAdminCtrl" class="com.udea.proint1.microcurriculo.ctrl.InicioAdminCtrl" scope="prototype">
+        	
         </bean>
 </beans>

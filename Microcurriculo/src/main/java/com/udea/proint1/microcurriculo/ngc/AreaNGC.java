@@ -17,5 +17,5 @@ public interface AreaNGC {
 	
 	public List<TbAdmArea> listarAreas() throws ExcepcionesLogica, ExcepcionesDAO;
 	
-	public List<TbAdmArea> listarAreasPorNucleo(TbAdmNucleo nucleo) throws ExcepcionesLogica, ExcepcionesDAO;
+	public List<TbAdmArea> listarAreasPorNucleo(String nucleo) throws ExcepcionesLogica, ExcepcionesDAO;
 }

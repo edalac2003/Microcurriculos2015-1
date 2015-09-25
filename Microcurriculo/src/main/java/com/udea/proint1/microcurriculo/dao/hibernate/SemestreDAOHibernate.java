@@ -61,9 +61,8 @@ public class SemestreDAOHibernate extends HibernateDaoSupport implements Semestr
 
 	@Override
 	public List<TbAdmSemestre> listarSemestres() throws ExcepcionesDAO {
-		Session session = null;
-		
-		List<TbAdmSemestre> listaSemestre = new ArrayList<TbAdmSemestre>();
+		Session session = null;		
+		List<TbAdmSemestre> listaSemestre = null;
 		try {
 			session= getSession();
 			Criteria criteria = session.createCriteria(TbAdmSemestre.class);

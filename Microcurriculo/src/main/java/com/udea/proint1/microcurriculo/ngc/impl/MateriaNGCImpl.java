@@ -188,20 +188,20 @@ public class MateriaNGCImpl implements MateriaNGC {
 		
 		TbAdmNucleo nucleoConsulta = null;
 		
-		try {
-			nucleoConsulta = nucleoDao.obtenerNucleo(nucleo);
-		} catch(ExcepcionesDAO expDAO){
-			throw expDAO;
-		} catch(Exception exp){
-			ExcepcionesLogica expLog = new ExcepcionesLogica();
-			expLog.setMsjUsuario("Error al invocar el metodo obtener Materia");
-			expLog.setMsjTecnico(exp.getMessage());
-			expLog.setOrigen(exp);
-			throw expLog;
-		}
+//		try {
+//			nucleoConsulta = nucleoDao.obtenerNucleo(nucleo);
+//		} catch(ExcepcionesDAO expDAO){
+//			throw expDAO;
+//		} catch(Exception exp){
+//			ExcepcionesLogica expLog = new ExcepcionesLogica();
+//			expLog.setMsjUsuario("Error al invocar el metodo obtener Materia");
+//			expLog.setMsjTecnico(exp.getMessage());
+//			expLog.setOrigen(exp);
+//			throw expLog;
+//		}
 		
 		try {
-			listaMaterias = materiaDao.listarMateriasPorNucleo(nucleoConsulta);
+			listaMaterias = materiaDao.listarMateriasPorNucleo(nucleo);
 		} catch(ExcepcionesDAO expDAO){
 			throw expDAO;
 		} catch(Exception exp){
