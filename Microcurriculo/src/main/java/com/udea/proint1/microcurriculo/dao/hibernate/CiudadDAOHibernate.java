@@ -1,6 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -12,8 +12,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.CiudadDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmCiudad;
 import com.udea.proint1.microcurriculo.dto.TbAdmDepartamento;
-import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+//import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+//import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO {
@@ -35,6 +35,7 @@ public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO
 		return ciudad;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmCiudad> listarCiudades() throws ExcepcionesDAO {
 		Session session = null;
@@ -53,6 +54,7 @@ public class CiudadDAOHibernate extends HibernateDaoSupport implements CiudadDAO
 		return ciudades;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmCiudad> listarCiudadesxDepartamento(TbAdmDepartamento idDepartamento) throws ExcepcionesDAO {
 		Session session = null;

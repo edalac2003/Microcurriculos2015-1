@@ -93,6 +93,11 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  */
 public class ModificarMicroCtrl extends GenericForwardComposer{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static Logger logger = Logger.getLogger(ModificarMicroCtrl.class);
 	
 	Div divSeleccionaMicrocurriculo;
@@ -519,29 +524,29 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todas las unidades existentes y las ubica en el combobox cmbUnidadAcademica
 	 * Si existe el combobox cmbUnidadAcademica se procede a llenar dicho elemento tambien
 	 */
-	private void cargarUnidades(){
-		try {
-			listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
-			if (listaUnidadAcademica != null){			
-				cmbUnidadAcademica2.appendChild(new Comboitem("[Seleccione]"));
-				for(TbAdmUnidadAcademica unidad : listaUnidadAcademica){
-					Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+ unidad.getVrNombre());
-					cmbUnidadAcademica2.appendChild(item);
-				}
-				cmbUnidadAcademica2.setValue("[Seleccione]");
-			}
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}		
-	}
-	
+//	private void cargarUnidades(){
+//		try {
+//			listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
+//			if (listaUnidadAcademica != null){			
+//				cmbUnidadAcademica2.appendChild(new Comboitem("[Seleccione]"));
+//				for(TbAdmUnidadAcademica unidad : listaUnidadAcademica){
+//					Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+ unidad.getVrNombre());
+//					cmbUnidadAcademica2.appendChild(item);
+//				}
+//				cmbUnidadAcademica2.setValue("[Seleccione]");
+//			}
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//	}		
+//	}
+//	
 	/**
 	 * Solicita de la capa del negocio todas las dependencias existentes y las ubica en el combobox cmbDependencia
 	 * Si existe el combobox cmbDependencia2 se procede a llenar dicho elemento tambien
@@ -2644,28 +2649,28 @@ public class ModificarMicroCtrl extends GenericForwardComposer{
 		
 	}
 	
-	private String mostrarNombreDocente(String idDocente){
-		String nombre = "";
-		TbAdmPersona persona = null;
-	
-		try {
-			persona = personaNGC.obtenerPersona(idDocente);
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}
-		
-		if (persona != null){
-			nombre = persona.getVrApellidos()+" "+persona.getVrNombres();
-		}	
-		return nombre;
-	}
+//	private String mostrarNombreDocente(String idDocente){
+//		String nombre = "";
+//		TbAdmPersona persona = null;
+//	
+//		try {
+//			persona = personaNGC.obtenerPersona(idDocente);
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}
+//		
+//		if (persona != null){
+//			nombre = persona.getVrApellidos()+" "+persona.getVrNombres();
+//		}	
+//		return nombre;
+//	}
 	
 	/**
 	 * Este evento ocurre cuando se hace click en sobre el boton <AddCibergrafia>.

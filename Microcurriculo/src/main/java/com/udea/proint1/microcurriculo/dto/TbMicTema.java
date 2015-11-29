@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.dto;
 // Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,12 +10,16 @@ import java.util.Set;
  */
 public class TbMicTema implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbIdtema;
 	private String vrDescripcion;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbMicSubtemases = new HashSet(0);
-	private Set tbMicTemasxunidads = new HashSet(0);
+//	private Set tbMicSubtemases = new HashSet(0);
+//	private Set tbMicTemasxunidads = new HashSet(0);
 
 
 	
@@ -27,7 +30,7 @@ public class TbMicTema implements java.io.Serializable {
 	public TbMicTema(String vrDescripcion, String vrModusuario,
 			Date dtModfecha) {
 		super();
-		this.nbIdtema = nbIdtema;
+//		this.nbIdtema = nbIdtema;
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
@@ -35,6 +38,7 @@ public class TbMicTema implements java.io.Serializable {
 
 
 
+	@SuppressWarnings("rawtypes")
 	public TbMicTema(int nbIdtema, String vrDescripcion,
 			String vrModusuario, Date dtModfecha, Set tbMicSubtemases,
 			Set tbMicTemasxunidads) {
@@ -42,8 +46,8 @@ public class TbMicTema implements java.io.Serializable {
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbMicSubtemases = tbMicSubtemases;
-		this.tbMicTemasxunidads = tbMicTemasxunidads;
+//		this.tbMicSubtemases = tbMicSubtemases;
+//		this.tbMicTemasxunidads = tbMicTemasxunidads;
 	}
 
 	public int getNbIdtema() {
@@ -78,20 +82,4 @@ public class TbMicTema implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
-	public Set getTbMicSubtemases() {
-		return this.tbMicSubtemases;
 	}
-
-	public void setTbMicSubtemases(Set tbMicSubtemases) {
-		this.tbMicSubtemases = tbMicSubtemases;
-	}
-
-	public Set getTbMicTemasxunidads() {
-		return this.tbMicTemasxunidads;
-	}
-
-	public void setTbMicTemasxunidads(Set tbMicTemasxunidads) {
-		this.tbMicTemasxunidads = tbMicTemasxunidads;
-	}
-
-}

@@ -1,16 +1,16 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+//import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.UsuarioDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbAdmUsuario;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -54,6 +54,7 @@ public class UsuarioDAOHibernate extends HibernateDaoSupport implements UsuarioD
 		return usuario;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmUsuario> listarUsuarios() throws ExcepcionesDAO {
 		Session session = null;

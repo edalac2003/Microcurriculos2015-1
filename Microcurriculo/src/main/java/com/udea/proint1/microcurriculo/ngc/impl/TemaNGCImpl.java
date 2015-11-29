@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.TemaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicTema;
-import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
 import com.udea.proint1.microcurriculo.ngc.TemaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;

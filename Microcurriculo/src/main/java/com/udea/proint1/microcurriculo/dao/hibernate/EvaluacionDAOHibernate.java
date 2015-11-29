@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
+//import org.hibernate.HibernateException;
+//import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.EvaluacionDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+//import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
+//import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class EvaluacionDAOHibernate extends HibernateDaoSupport implements EvaluacionDAO {
@@ -64,6 +64,7 @@ public class EvaluacionDAOHibernate extends HibernateDaoSupport implements Evalu
 		return evaluacion;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicEvaluacion> listarEvaluaciones() throws ExcepcionesDAO {
 		Session session = null;

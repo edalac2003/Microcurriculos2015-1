@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.HistoricoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmHistorico;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+//import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class HistoricoDAOHibernate extends HibernateDaoSupport implements HistoricoDAO {
@@ -82,6 +82,7 @@ public class HistoricoDAOHibernate extends HibernateDaoSupport implements Histor
 		return historico;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmHistorico> listarHistoricos() throws ExcepcionesDAO {
 		Session session = null;
@@ -105,6 +106,7 @@ public class HistoricoDAOHibernate extends HibernateDaoSupport implements Histor
 		return historicos;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<TbAdmHistorico> obtenerHistoricosxMicrocurriculo(TbMicMicrocurriculo microcurriculo) throws ExcepcionesDAO{
 		Session session = null;
         List<TbAdmHistorico> historicos = new ArrayList<TbAdmHistorico>();

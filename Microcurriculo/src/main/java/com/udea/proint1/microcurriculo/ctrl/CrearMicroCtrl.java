@@ -1,21 +1,23 @@
 package com.udea.proint1.microcurriculo.ctrl;
 
 import java.text.DateFormat;
-import java.text.ParseException;
+//import java.text.ParseException;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+//import java.util.Iterator;
+//import java.util.List;
+
+
 
 import org.apache.log4j.Logger;
-import org.w3c.dom.ls.LSInput;
+//import org.w3c.dom.ls.LSInput;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.WrongValueException;
+//import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Cell;
+//import org.zkoss.zul.Cell;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
@@ -26,20 +28,22 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Tab;
+//import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
-import org.zkoss.zul.Tabpanels;
-import org.zkoss.zul.Tabs;
+//import org.zkoss.zul.Tabpanels;
+//import org.zkoss.zul.Tabs;
 import org.zkoss.zul.Textbox;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
-import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
-import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
-import com.udea.proint1.microcurriculo.dto.TbAdmPais;
-import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+
+
+//import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+//import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+//import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+//import com.udea.proint1.microcurriculo.dto.TbAdmPais;
+//import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+//import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
 import com.udea.proint1.microcurriculo.ngc.NucleoNGC;
@@ -49,12 +53,19 @@ import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
 import com.udea.proint1.microcurriculo.ngc.TemaNGC;
 import com.udea.proint1.microcurriculo.ngc.UnidadAcademicaNGC;
-import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
-import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
+//import com.udea.proint1.microcurriculo.ngc.UnidadxMicroNGC;
+//import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
+@SuppressWarnings("rawtypes")
 public class CrearMicroCtrl extends GenericForwardComposer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
 	
 	Tabbox fichaContenidos;

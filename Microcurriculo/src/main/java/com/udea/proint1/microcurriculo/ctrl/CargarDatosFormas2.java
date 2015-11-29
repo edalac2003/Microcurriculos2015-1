@@ -23,20 +23,8 @@ import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
-import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
-import com.udea.proint1.microcurriculo.dto.TbMicTema;
-import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
 import com.udea.proint1.microcurriculo.ngc.EstadoNGC;
 import com.udea.proint1.microcurriculo.ngc.MateriaNGC;
@@ -55,7 +43,13 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  * @author Elmer Urrea & Edwin Acosta
  *
  */
+@SuppressWarnings("rawtypes")
 public class CargarDatosFormas2 extends GenericForwardComposer{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(CargarDatosFormas2.class);
 	

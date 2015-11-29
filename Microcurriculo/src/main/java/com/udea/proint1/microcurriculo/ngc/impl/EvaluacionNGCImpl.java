@@ -6,13 +6,14 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.EvaluacionDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
+//import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class EvaluacionNGCImpl implements EvaluacionNGC {
 	
+	@SuppressWarnings("unused")
 	private static Logger log=Logger.getLogger(EvaluacionNGCImpl.class);
 	
 	EvaluacionDAO evaluacionDao;

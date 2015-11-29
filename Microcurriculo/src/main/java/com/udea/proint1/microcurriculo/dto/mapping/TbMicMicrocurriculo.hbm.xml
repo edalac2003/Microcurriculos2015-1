@@ -35,24 +35,5 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-               
-        <set name="tbMicObjetivosxmicros" table="TB_MIC_OBJETIVOSXMICRO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_MICROCURRICULO" length="20" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro" />
-        </set>
-        <set name="tbMicUnidadesxmicros" table="TB_MIC_UNIDADESXMICRO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_MICROCURRICULO" length="20" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro" />
-        </set>
-        <set name="tbMicMicroxestados" table="TB_MIC_MICROXESTADO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_MICROCURRICULO" length="20" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMicroxestado" />
-        </set>
     </class>
 </hibernate-mapping>

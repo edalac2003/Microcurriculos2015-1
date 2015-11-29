@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.EstadoDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
+//import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO {
@@ -88,6 +88,7 @@ public class EstadoDAOHibernate extends HibernateDaoSupport implements EstadoDAO
 		return listaEstados;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicEstado> listarEstados() throws ExcepcionesDAO {
 		Session session = null;

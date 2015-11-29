@@ -9,27 +9,30 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listcell;
-import org.zkoss.zul.Listitem;
+//import org.zkoss.zul.Listcell;
+//import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Toolbarbutton;
 
-import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
+
+
+
+//import com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
-import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicEstado;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
+//import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+//import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+//import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+//import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicMicroxestado;
-import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
-import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
-import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
+//import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
+//import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+//import com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad;
+//import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
+//import com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
@@ -53,7 +56,13 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  * @author Elmer
  *
  */
+@SuppressWarnings("rawtypes")
 public class ConsultarMicroCtrl extends GenericForwardComposer{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
 	
@@ -337,6 +346,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 //		}
 //	}
 	
+	@SuppressWarnings("unused")
 	private void cargarEstados(){
 //		List<TbMicEstado> listaEstados = null;
 //		cmbEstado.getItems().clear();
@@ -690,6 +700,7 @@ public class ConsultarMicroCtrl extends GenericForwardComposer{
 //		
 //	}
 	
+	@SuppressWarnings("unused")
 	private void mostrarInfoBasicaResumen(TbMicMicrocurriculo microcurriculo){
 		int idMicroxEstado = Integer.parseInt(microcurriculo.getVrIdmicrocurriculo());
 		

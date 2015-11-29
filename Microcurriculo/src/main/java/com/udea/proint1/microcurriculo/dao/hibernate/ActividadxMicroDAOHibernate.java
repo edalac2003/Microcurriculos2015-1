@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -58,6 +58,7 @@ public class ActividadxMicroDAOHibernate extends HibernateDaoSupport implements 
 		return actividadxmicro;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicActividadxmicro> listarActividadxMicro()
 			throws ExcepcionesDAO {

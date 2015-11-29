@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,7 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.NucleoDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+//import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO {
@@ -114,6 +114,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 		return nucleo;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmNucleo> listarNucleos() throws ExcepcionesDAO {
 		Session session = null;
@@ -138,6 +139,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmNucleo> listarNucleoPorDependencia(String dependencia) throws ExcepcionesDAO {
 		Session session = null;
@@ -163,6 +165,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmNucleo> listarNucleoPorDependencia(TbAdmDependencia dependencia) throws ExcepcionesDAO {
 		List<TbAdmNucleo> listaNucleos = null;
@@ -187,6 +190,7 @@ public class NucleoDAOHibernate extends HibernateDaoSupport implements NucleoDAO
 		return listaNucleos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmNucleo> buscarNucleos(String buscar)throws ExcepcionesDAO{
 		Session session = null;

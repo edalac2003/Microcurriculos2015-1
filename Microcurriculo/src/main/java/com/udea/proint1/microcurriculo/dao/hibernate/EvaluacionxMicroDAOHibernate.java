@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,7 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.EvaluacionxMicroDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+//import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements EvaluacionxMicroDAO {
@@ -128,6 +128,7 @@ public class EvaluacionxMicroDAOHibernate extends HibernateDaoSupport implements
 //		return registro;
 //	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicEvaluacionxmicro> ListarEvaluacionxMicroxMicro(TbMicMicrocurriculo microcurriculo)
 			throws ExcepcionesDAO {

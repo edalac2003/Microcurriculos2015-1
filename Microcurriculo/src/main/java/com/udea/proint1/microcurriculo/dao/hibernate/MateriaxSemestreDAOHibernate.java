@@ -1,22 +1,22 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+//import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MateriaxSemestreDAO;
-import com.udea.proint1.microcurriculo.dao.NucleoDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+//import com.udea.proint1.microcurriculo.dao.NucleoDAO;
+//import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateriaxsemestre;
-import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+//import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+//import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class MateriaxSemestreDAOHibernate extends HibernateDaoSupport implements MateriaxSemestreDAO {

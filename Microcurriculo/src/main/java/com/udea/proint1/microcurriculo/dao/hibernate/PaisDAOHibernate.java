@@ -1,6 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -9,9 +9,9 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.PaisDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmCiudad;
+//import com.udea.proint1.microcurriculo.dto.TbAdmCiudad;
 import com.udea.proint1.microcurriculo.dto.TbAdmPais;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+//import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class PaisDAOHibernate extends HibernateDaoSupport implements PaisDAO{
@@ -33,6 +33,7 @@ public class PaisDAOHibernate extends HibernateDaoSupport implements PaisDAO{
 		return pais;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmPais> listarPaises() throws ExcepcionesDAO {
 		Session session = null;

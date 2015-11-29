@@ -1,16 +1,16 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
-import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
-import org.hibernate.HibernateException;
+//import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.RolxUsuarioDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+//import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmUsuario;

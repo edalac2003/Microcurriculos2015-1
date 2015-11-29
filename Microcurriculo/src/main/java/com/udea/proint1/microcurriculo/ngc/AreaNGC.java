@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.ngc;
 import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmArea;
-import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 

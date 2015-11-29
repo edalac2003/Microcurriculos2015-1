@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.SubtemaDAO;
 import com.udea.proint1.microcurriculo.dao.TemaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
+//import com.udea.proint1.microcurriculo.dto.TbMicSubtemaxtema;
 import com.udea.proint1.microcurriculo.dto.TbMicTema;
 import com.udea.proint1.microcurriculo.ngc.SubtemaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -15,6 +15,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class SubtemaNGCImpl implements SubtemaNGC {
 		
+	@SuppressWarnings("unused")
 	private static Logger log=Logger.getLogger(SubtemaNGCImpl.class);
 		
 	SubtemaDAO subtemaDao;

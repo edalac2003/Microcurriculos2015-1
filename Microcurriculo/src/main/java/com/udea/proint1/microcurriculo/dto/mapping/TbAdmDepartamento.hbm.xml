@@ -20,11 +20,6 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmCiudad" table="TB_ADM_CIUDAD" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_DEPARTAMENTO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmCiudad" />
-        </set>
+       
     </class>
 </hibernate-mapping>

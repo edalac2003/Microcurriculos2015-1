@@ -1,6 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.TipoIdentificacionDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmTipoidentificacion;
-import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
+//import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implements TipoIdentificacionDAO {
@@ -49,6 +49,7 @@ public class TipoIdentificacionDAOHibernate extends HibernateDaoSupport implemen
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmTipoidentificacion> listarTipoIdentificacion()	throws ExcepcionesDAO {
 		Session session = null;

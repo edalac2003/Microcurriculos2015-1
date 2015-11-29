@@ -20,7 +20,7 @@ public class TbAdmNucleo implements java.io.Serializable {
 	private TbAdmPersona vrResponsable;
 	private String vrModusuario;
 	private Date vrModfecha;	
-	private Set tbAdmMateriases = new HashSet(0);
+//	private Set tbAdmMateriases = new HashSet(0);
 
 	public TbAdmNucleo() {
 		super();
@@ -122,12 +122,4 @@ public class TbAdmNucleo implements java.io.Serializable {
 	}
 
 	
-	public Set getTbAdmMateriases() {
-		return this.tbAdmMateriases;
 	}
-
-	public void setTbAdmMateriases(Set tbAdmMateriases) {
-		this.tbAdmMateriases = tbAdmMateriases;
-	}
-
-}

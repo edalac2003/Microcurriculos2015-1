@@ -409,14 +409,14 @@ public class ModificarMateriaCtrl extends GenericForwardComposer{
 	 * Metodo para limpiar campo TextBox con Constraint
 	 * @param textbox
 	 */
-	private void limpiarCampoConstraint(Textbox textbox){
-		if (textbox.getConstraint() != null){
-			Constraint c = textbox.getConstraint();
-			textbox.setConstraint((String)null);
-			textbox.setText("");
-			textbox.setConstraint(c);
-		}
-	}
+//	private void limpiarCampoConstraint(Textbox textbox){
+//		if (textbox.getConstraint() != null){
+//			Constraint c = textbox.getConstraint();
+//			textbox.setConstraint((String)null);
+//			textbox.setText("");
+//			textbox.setConstraint(c);
+//		}
+//	}
 
 	private void llenarDatos(TbAdmMateria materia) {
 		

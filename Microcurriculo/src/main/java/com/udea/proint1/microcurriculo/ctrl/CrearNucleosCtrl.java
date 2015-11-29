@@ -23,13 +23,11 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Toolbarbutton;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
@@ -153,6 +151,7 @@ public class CrearNucleosCtrl extends GenericForwardComposer {
 	private static List<TbAdmUnidadAcademica> listaTotalUnidades;
 	private static List<TbAdmDependencia> listaTotalDependencias;
 	private static List<TbAdmNucleo> listaTotalNucleos;
+	@SuppressWarnings("unused")
 	private static List<TbAdmDocentexDependencia> listadoResponsables;
 	private static List<TbAdmPersona> listadoPersonas;
 

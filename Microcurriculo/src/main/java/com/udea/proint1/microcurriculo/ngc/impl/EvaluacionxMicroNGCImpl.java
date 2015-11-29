@@ -9,13 +9,14 @@ import com.udea.proint1.microcurriculo.dao.EvaluacionxMicroDAO;
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
-import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
+//import com.udea.proint1.microcurriculo.dto.TbMicSubtema;
 import com.udea.proint1.microcurriculo.ngc.EvaluacionxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class EvaluacionxMicroNGCImpl implements EvaluacionxMicroNGC {
 	
+	@SuppressWarnings("unused")
 	private static Logger log=Logger.getLogger(EvaluacionNGCImpl.class);
 	
 	MicrocurriculoDAO microcurriculoDao;

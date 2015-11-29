@@ -23,11 +23,5 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbMicMateriasxpensums" table="TB_MIC_MATERIASXPENSUM" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_PENSUM" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum" />
-        </set>
-    </class>
+          </class>
 </hibernate-mapping>

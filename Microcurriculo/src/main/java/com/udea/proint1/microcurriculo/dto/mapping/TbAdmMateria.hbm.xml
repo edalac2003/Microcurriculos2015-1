@@ -53,41 +53,5 @@
         <property name="blEstado" type="int">
             <column name="BL_ESTADO" precision="22" scale="0" />
         </property>
-        <set name="tbMicMicrocurriculo" table="TB_MIC_MICROCURRICULO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_MATERIA" length="10" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo" />
-        </set>
-        <set name="tbMicMateriasxpensums" table="TB_MIC_MATERIAXPENSUM" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_MATERIA" length="10" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum" />
-        </set>
-        <set name="tbAdmPrerrequisitosesForVrMateria" table="TB_ADM_PRERREQUISITO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_MATERIA" length="10" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito" />
-        </set>
-        <set name="tbAdmCorrequisitosesForVrCorrequisito" table="TB_ADM_CORREQUISITO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_CORREQUISITO" length="10" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito" />
-        </set>
-        <set name="tbAdmPrerrequisitosesForVrPrerrequisito" table="TB_ADM_PRERREQUISITO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_PRERREQUISITO" length="10" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito" />
-        </set>
-        <set name="tbAdmCorrequisitosesForVrMateria" table="TB_ADM_CORREQUISITO" inverse="true" lazy="false" fetch="select">
-            <key>
-                <column name="VR_MATERIA" length="10" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmCorrequisito" />
-        </set>
-    </class>
+            </class>
 </hibernate-mapping>

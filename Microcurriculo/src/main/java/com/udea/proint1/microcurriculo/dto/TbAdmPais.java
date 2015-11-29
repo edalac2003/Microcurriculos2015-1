@@ -11,6 +11,10 @@ import java.util.Set;
  */
 public class TbAdmPais implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbIdpais;
 	private String vrNombre;
 	private String vrModusuario;

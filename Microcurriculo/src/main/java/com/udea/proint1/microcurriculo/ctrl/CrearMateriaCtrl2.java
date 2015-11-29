@@ -5,19 +5,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javassist.expr.NewArray;
+//import javassist.expr.NewArray;
+
+
+
+
 
 import org.apache.log4j.Logger;
-import org.zkoss.util.resource.Labels;
+//import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.WrongValueException;
+//import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Button;
+//import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
@@ -42,7 +46,7 @@ import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicEstado;
-import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
+//import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
 import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
@@ -53,9 +57,15 @@ import com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
-import com.udea.proint1.microcurriculo.util.exception.Validaciones;
+//import com.udea.proint1.microcurriculo.util.exception.Validaciones;
 
+@SuppressWarnings("rawtypes")
 public class CrearMateriaCtrl2 extends GenericForwardComposer{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(CrearMateriaCtrl2.class);
 	
@@ -622,6 +632,7 @@ public class CrearMateriaCtrl2 extends GenericForwardComposer{
 		this.listBoxMaterias.setModel(new ListModelList<TbAdmMateria>(listaFiltrada));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void onSelect$listBoxMaterias(){
 		Set<TbAdmMateria> selection = ((Selectable<TbAdmMateria>)listBoxMaterias.getModel()).getSelection();
 		TbAdmMateria materia = selection.iterator().next();
@@ -700,6 +711,7 @@ public class CrearMateriaCtrl2 extends GenericForwardComposer{
 	 * Metodo para limpiar campo TextBox con Constraint
 	 * @param textbox
 	 */
+	@SuppressWarnings("unused")
 	private void limpiarCampoConstraint(Textbox textbox){
 		if (textbox.getConstraint() != null){
 			Constraint c = textbox.getConstraint();
@@ -1046,6 +1058,7 @@ public class CrearMateriaCtrl2 extends GenericForwardComposer{
 		verificarCorrequisito();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		cargarUnidadesAcademicas();

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import com.udea.proint1.microcurriculo.dao.BiblioxUnidadDAO;
 import com.udea.proint1.microcurriculo.dao.UnidadDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
+//import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.ngc.BiblioxunidadNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
@@ -15,6 +15,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class BiblioxUnidadNGCImpl implements BiblioxunidadNGC{
 
+	@SuppressWarnings("unused")
 	private static Logger log=Logger.getLogger(BiblioxUnidadNGCImpl.class);
 	
 	BiblioxUnidadDAO biblioxUnidadDao;

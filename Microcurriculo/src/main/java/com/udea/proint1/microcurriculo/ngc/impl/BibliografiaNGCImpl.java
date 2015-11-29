@@ -6,13 +6,14 @@ import org.apache.log4j.Logger;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
-import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+//import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
 import com.udea.proint1.microcurriculo.ngc.BibliografiaNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public class BibliografiaNGCImpl implements BibliografiaNGC {
 	
+	@SuppressWarnings("unused")
 	private static Logger log=Logger.getLogger(BibliografiaNGCImpl.class);
 	
 	BibliografiaDAO bibliografiaDao;

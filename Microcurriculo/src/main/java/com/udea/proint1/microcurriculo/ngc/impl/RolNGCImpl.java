@@ -2,7 +2,7 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 
 import java.util.List;
 
-import com.udea.proint1.microcurriculo.dao.RolDAO;
+//import com.udea.proint1.microcurriculo.dao.RolDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmRol;
 import com.udea.proint1.microcurriculo.ngc.RolNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;

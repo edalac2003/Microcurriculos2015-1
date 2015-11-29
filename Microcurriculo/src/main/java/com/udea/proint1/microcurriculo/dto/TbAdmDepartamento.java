@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.dto;
 // Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,12 +10,16 @@ import java.util.Set;
  */
 public class TbAdmDepartamento implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbIddepartamento;
 	private TbAdmPais tbAdmPais;
 	private String vrNombres;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbAdmCiudad = new HashSet(0);
+//	private Set tbAdmCiudad = new HashSet(0);
 
 	
 	public TbAdmDepartamento() {
@@ -29,6 +32,7 @@ public class TbAdmDepartamento implements java.io.Serializable {
 		this.tbAdmPais = tbAdmPais;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public TbAdmDepartamento(int nbIddepartamento,
 			TbAdmPais tbAdmPais, String vrNombres, String vrModusuario,
 			Date dtModfecha, Set tbAdmCiudad) {
@@ -37,7 +41,7 @@ public class TbAdmDepartamento implements java.io.Serializable {
 		this.vrNombres = vrNombres;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbAdmCiudad = tbAdmCiudad;
+//		this.tbAdmCiudad = tbAdmCiudad;
 	}
 
 	public int getNbIddepartamento() {
@@ -80,12 +84,5 @@ public class TbAdmDepartamento implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
-	public Set getTbAdmCiudad() {
-		return this.tbAdmCiudad;
-	}
-
-	public void setTbAdmCiudad(Set tbAdmCiudad) {
-		this.tbAdmCiudad = tbAdmCiudad;
-	}
-
+	
 }

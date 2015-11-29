@@ -10,9 +10,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
         
         <!-- BEANS  CONFIGURACION JNDI DATASOURCE-->
-<!-- 		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
-<!-- 	        <property name="jndiName" value="java:comp/env/jdbc/proint2014-2" /> -->
-<!-- 	    </bean> -->
+ 		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	        <property name="jndiName" value="java:comp/env/jdbc/proint2014-2" />
+	    </bean>
 
 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
             <property name="driverClassName">
@@ -375,15 +375,15 @@
         </bean>
         
         <bean id="microxEstadoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.MicroxEstadoNGCImpl" scope="singleton">
-        	<property name="microxEstadoDao" ref="microxEstadoDao" />
-        	<property name="estadoDao" ref="estadoDao" />
-        	<property name="microcurriculoDao" ref="microcurriculoDao" />
-        </bean>
+         	<property name="microxEstadoDao" ref="microxEstadoDao" />
+         	<property name="estadoDao" ref="estadoDao" />
+         	<property name="microcurriculoDao" ref="microcurriculoDao" />
+         </bean>
         
-        <bean id="objetivoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoNGCImpl" scope="singleton">
-        	<property name="objetivoDao" ref="objetivoDao" />
-        	<property name="microcurriculoDao" ref="microcurriculoDao" />
-        </bean>
+         <bean id="objetivoNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoNGCImpl" scope="singleton">
+         	<property name="objetivoDao" ref="objetivoDao" />
+         	<property name="microcurriculoDao" ref="microcurriculoDao" />
+         </bean>
         
         <bean id="objetivoxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.ObjetivoxMicroNGCImpl" scope="singleton">
         	<property name="objetivoxMicroDao" ref="objetivoxMicroDao" />
@@ -412,25 +412,25 @@
         	<property name="temaDao" ref="temaDao" />
         </bean>
         
-        <bean id="subtemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaNGCImpl" scope="singleton">
+         <bean id="subtemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaNGCImpl" scope="singleton">
         	<property name="subtemaDao" ref="subtemaDao" />
-        	<property name="temaDao" ref="temaDao" />
-        </bean>
+         	<property name="temaDao" ref="temaDao" />
+         </bean>
         
         <bean id="subtemaxTemaNGC" class="com.udea.proint1.microcurriculo.ngc.impl.SubtemaxTemaNGCImpl" scope="singleton">
         	<property name="subtemaxTemaDao" ref="subtemaxTemaDao" />
         	<property name="temaDao" ref="temaDao" />
         </bean>
         
-        <bean id="temaxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaxUnidadNGCImpl" scope="singleton">
-        	<property name="temaxUnidadDao" ref="temaxUnidadDao" />
-        	<property name="unidadDao" ref="unidadDao" />
-        	<property name="temaDao" ref="temaDao" />
+         <bean id="temaxUnidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.TemaxUnidadNGCImpl" scope="singleton">
+         	<property name="temaxUnidadDao" ref="temaxUnidadDao" />
+         	<property name="unidadDao" ref="unidadDao" />
+         	<property name="temaDao" ref="temaDao" />
         </bean>
         
-        <bean id="unidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadNGCImpl" scope="singleton">
-        	<property name="unidadDao" ref="unidadDao" />
-        </bean>
+         <bean id="unidadNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadNGCImpl" scope="singleton">
+         	<property name="unidadDao" ref="unidadDao" />
+         </bean>
         
         <bean id="unidadxMicroNGC" class="com.udea.proint1.microcurriculo.ngc.impl.UnidadxMicroNGCImpl" scope="singleton">
         	<property name="unidadxMicroDao" ref="unidadxMicroDao" />
@@ -549,12 +549,12 @@
 <!--         	<property name="objetivoxMicroNGC" ref="objetivoxMicroNGC" /> -->
         </bean>
         
-        <bean id="cargarDatos" class="com.udea.proint1.microcurriculo.ctrl.CargarDatos" scope="prototype">
-        	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" />
-        	<property name="dependenciaNGC" ref="dependenciaNGC" />
-        	<property name="nucleoNGC" ref="nucleoNGC" />
-        	<property name="materiaNGC" ref="materiaNGC" />
-        </bean>
+<!--         <bean id="cargarDatos" class="com.udea.proint1.microcurriculo.ctrl.CargarDatos" scope="prototype"> -->
+<!--         	<property name="unidadAcademicaNGC" ref="unidadAcademicaNGC" /> -->
+<!--         	<property name="dependenciaNGC" ref="dependenciaNGC" /> -->
+<!--         	<property name="nucleoNGC" ref="nucleoNGC" /> -->
+<!--         	<property name="materiaNGC" ref="materiaNGC" /> -->
+<!--         </bean> -->
         
         <bean id="crearPersonaCtrl" class="com.udea.proint1.microcurriculo.ctrl.CrearPersonaCtrl" scope="prototype">
         	<property name="personaNGC" ref="personaNGC"/>

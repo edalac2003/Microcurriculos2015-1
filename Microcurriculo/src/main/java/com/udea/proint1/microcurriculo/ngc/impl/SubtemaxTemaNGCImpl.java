@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.ngc.impl;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.zkoss.zul.Messagebox;
 
 import com.udea.proint1.microcurriculo.dao.SubtemaxTemaDAO;
 import com.udea.proint1.microcurriculo.dao.TemaDAO;

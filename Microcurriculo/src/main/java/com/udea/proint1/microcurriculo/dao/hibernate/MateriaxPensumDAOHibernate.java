@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.MateriaxPensumDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -49,6 +49,7 @@ public class MateriaxPensumDAOHibernate extends HibernateDaoSupport implements M
 		return materiasxPensum;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicMateriaxpensum> listarMateriasxPensum()
 			throws ExcepcionesDAO {

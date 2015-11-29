@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.dto;
 // Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,13 +10,17 @@ import java.util.Set;
  */
 public class TbMicUnidad implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbIdunidad;
 	private String vrNombre;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbMicTemasxunidads = new HashSet(0);
-	private Set tbMicUnidadesxmicros = new HashSet(0);
-	private Set tbMicBiblioxunidads = new HashSet(0);
+//	private Set tbMicTemasxunidads = new HashSet(0);
+//	private Set tbMicUnidadesxmicros = new HashSet(0);
+//	private Set tbMicBiblioxunidads = new HashSet(0);
 
 	public TbMicUnidad() {
 		super();
@@ -34,6 +37,7 @@ public class TbMicUnidad implements java.io.Serializable {
 		this.nbIdunidad = nbIdunidad;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public TbMicUnidad(int nbIdunidad, String vrNombre,
 			String vrModusuario, Date dtModfecha, Set tbMicTemasxunidads,
 			Set tbMicUnidadesxmicros, Set tbMicBiblioxunidads) {
@@ -41,9 +45,9 @@ public class TbMicUnidad implements java.io.Serializable {
 		this.vrNombre = vrNombre;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbMicTemasxunidads = tbMicTemasxunidads;
-		this.tbMicUnidadesxmicros = tbMicUnidadesxmicros;
-		this.tbMicBiblioxunidads = tbMicBiblioxunidads;
+//		this.tbMicTemasxunidads = tbMicTemasxunidads;
+//		this.tbMicUnidadesxmicros = tbMicUnidadesxmicros;
+//		this.tbMicBiblioxunidads = tbMicBiblioxunidads;
 	}
 
 	public int getNbIdunidad() {
@@ -78,28 +82,5 @@ public class TbMicUnidad implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
-	public Set getTbMicTemasxunidads() {
-		return this.tbMicTemasxunidads;
-	}
-
-	public void setTbMicTemasxunidads(Set tbMicTemasxunidads) {
-		this.tbMicTemasxunidads = tbMicTemasxunidads;
-	}
-
-	public Set getTbMicUnidadesxmicros() {
-		return this.tbMicUnidadesxmicros;
-	}
-
-	public void setTbMicUnidadesxmicros(Set tbMicUnidadesxmicros) {
-		this.tbMicUnidadesxmicros = tbMicUnidadesxmicros;
-	}
-
-	public Set getTbMicBiblioxunidads() {
-		return this.tbMicBiblioxunidads;
-	}
-
-	public void setTbMicBiblioxunidads(Set tbMicBiblioxunidads) {
-		this.tbMicBiblioxunidads = tbMicBiblioxunidads;
-	}
-
+	
 }

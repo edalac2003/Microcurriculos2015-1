@@ -1,8 +1,6 @@
 package com.udea.proint1.microcurriculo.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class TbAdmArea {
 
@@ -22,7 +20,7 @@ public class TbAdmArea {
 	private TbAdmPersona vrResponsable;
 	private String vrModusuario;
 	private Date dtModfecha;	
-	private Set tbAdmMateriases = new HashSet(0);
+//	private Set tbAdmMateriases = new HashSet(0);
 	
 	public TbAdmArea() {
 		super();
@@ -99,14 +97,4 @@ public class TbAdmArea {
 		this.vrModusuario = vrModusuario;
 	}
 
-	
-
-	public Set getTbAdmMateriases() {
-		return tbAdmMateriases;
-	}
-
-	public void setTbAdmMateriases(Set tbAdmMateriases) {
-		this.tbAdmMateriases = tbAdmMateriases;
-	}
-	
 }

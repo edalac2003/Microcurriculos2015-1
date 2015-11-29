@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class TbMicBiblioxunidad implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbId;
 	private TbMicBibliografia tbMicBibliografia;
 	private TbMicUnidad tbMicUnidad;

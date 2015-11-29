@@ -65,7 +65,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "unused" })
 public class CopyOfCargarDatosFormas extends GenericForwardComposer{
 
 	/**

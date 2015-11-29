@@ -17,11 +17,11 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmRolxUsuarios" table="TB_ADM_ROLXUSUARIO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_ROL" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario" />
-        </set>
+<!--         <set name="tbAdmRolxUsuarios" table="TB_ADM_ROLXUSUARIO" inverse="true" lazy="true" fetch="select"> -->
+<!--             <key> -->
+<!--                 <column name="NB_ROL" precision="22" scale="0" not-null="true" /> -->
+<!--             </key> -->
+<!--             <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario" /> -->
+<!--         </set> -->
     </class>
 </hibernate-mapping>

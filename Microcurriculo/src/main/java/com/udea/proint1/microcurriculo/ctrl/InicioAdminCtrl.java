@@ -14,6 +14,11 @@ import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 
 public class InicioAdminCtrl extends GenericForwardComposer {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static Logger logger = Logger.getLogger(InicioAdminCtrl.class);
 
 	Label lblFechaActual;

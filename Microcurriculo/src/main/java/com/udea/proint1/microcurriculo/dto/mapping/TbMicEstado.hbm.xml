@@ -17,11 +17,6 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbMicMicroxestados" table="TB_MIC_MICROXESTADO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_ESTADO" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicMicroxestado" />
-        </set>
+    
     </class>
 </hibernate-mapping>

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.BibliografiaDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBibliografia;
-import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+//import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
+//import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class BibliografiaDAOHibernate extends HibernateDaoSupport implements BibliografiaDAO {
@@ -88,6 +88,7 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicBibliografia> listarBibliografia(String idMicrocurriculo) throws ExcepcionesDAO {
 		Session session = null;
@@ -112,6 +113,7 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 		return bibliografias;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicBibliografia> listarBibliografiaxTipo(char tipo) throws ExcepcionesDAO {
 		Session session = null;
@@ -162,6 +164,7 @@ public class BibliografiaDAOHibernate extends HibernateDaoSupport implements Bib
 //		return registro;
 //	}
 	
+	@SuppressWarnings("unchecked")
 	public List<TbMicBibliografia> listarBibliografias() throws ExcepcionesDAO{
 		Session session = null;
         List<TbMicBibliografia> bibliografias = new ArrayList<TbMicBibliografia>();

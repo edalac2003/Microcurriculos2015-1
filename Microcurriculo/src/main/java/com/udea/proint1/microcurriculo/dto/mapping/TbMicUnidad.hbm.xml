@@ -17,23 +17,5 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbMicTemasxunidads" table="TB_MIC_TEMASXUNIDAD" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_UNIDAD" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicTemaxunidad" />
-        </set>
-        <set name="tbMicUnidadesxmicros" table="TB_MIC_UNIDADESXMICRO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_UNIDAD" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicUnidadxmicro" />
-        </set>
-        <set name="tbMicBiblioxunidads" table="TB_MIC_BIBLIOXUNIDAD" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_UNIDAD" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad" />
-        </set>
     </class>
 </hibernate-mapping>

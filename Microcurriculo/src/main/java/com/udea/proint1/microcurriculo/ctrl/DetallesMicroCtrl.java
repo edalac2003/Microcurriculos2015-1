@@ -74,6 +74,11 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  */
 public class DetallesMicroCtrl extends GenericForwardComposer{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static Logger logger = Logger.getLogger(DetallesMicroCtrl.class);
 	
 	Button btnAddObjetivo;
@@ -335,28 +340,28 @@ public class DetallesMicroCtrl extends GenericForwardComposer{
 	 * Solicita de la capa del negocio todas las unidades existentes y las ubica en el combobox cmbUnidadAcademica
 	 * Si existe el combobox cmbUnidadAcademica se procede a llenar dicho elemento tambien
 	 */
-	private void cargarUnidades(){
-		try {
-			listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
-			if (listaUnidadAcademica != null){			
-				cmbUnidadAcademica2.appendChild(new Comboitem("[Seleccione]"));
-				for(TbAdmUnidadAcademica unidad : listaUnidadAcademica){
-					Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+ unidad.getVrNombre());
-					cmbUnidadAcademica2.appendChild(item);
-				}
-				cmbUnidadAcademica2.setValue("[Seleccione]");
-			}
-		}catch(ExcepcionesDAO expDAO){
-			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expDAO.getMsjTecnico());
-		}catch(ExcepcionesLogica expNgs){
-			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(expNgs.getMsjTecnico());
-		}catch(Exception exp){
-//			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
-			logger.error(exp);
-		}		
-	}
+//	private void cargarUnidades(){
+//		try {
+//			listaUnidadAcademica = unidadAcademicaNGC.listarUnidadAcademicas();			
+//			if (listaUnidadAcademica != null){			
+//				cmbUnidadAcademica2.appendChild(new Comboitem("[Seleccione]"));
+//				for(TbAdmUnidadAcademica unidad : listaUnidadAcademica){
+//					Comboitem item = new Comboitem(unidad.getVrIdunidad()+" - "+ unidad.getVrNombre());
+//					cmbUnidadAcademica2.appendChild(item);
+//				}
+//				cmbUnidadAcademica2.setValue("[Seleccione]");
+//			}
+//		}catch(ExcepcionesDAO expDAO){
+//			Messagebox.show(expDAO.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expDAO.getMsjTecnico());
+//		}catch(ExcepcionesLogica expNgs){
+//			Messagebox.show(expNgs.getMsjUsuario(),"ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(expNgs.getMsjTecnico());
+//		}catch(Exception exp){
+////			Messagebox.show("","ERROR", Messagebox.OK,Messagebox.ERROR);
+//			logger.error(exp);
+//		}		
+//	}
 	
 	/**
 	 * Solicita de la capa del negocio todas las dependencias existentes y las ubica en el combobox cmbDependencia

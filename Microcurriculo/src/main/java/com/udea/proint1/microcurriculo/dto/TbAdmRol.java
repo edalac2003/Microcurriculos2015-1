@@ -1,17 +1,20 @@
 package com.udea.proint1.microcurriculo.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+//import java.util.HashSet;
 
 public class TbAdmRol implements java.io.Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer nbId;
 	private String vrDescripcion;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbAdmRolxUsuarios = new HashSet(0); 
+//	private Set tbAdmRolxUsuarios = new HashSet(0); 
 	
 	public TbAdmRol() {
 		// TODO Auto-generated constructor stub
@@ -65,12 +68,4 @@ public class TbAdmRol implements java.io.Serializable{
 	}
 	
 
-	public Set getTbAdmRolxUsuarios() {
-		return tbAdmRolxUsuarios;
 	}
-
-	public void setTbAdmRolxUsuarios(Set tbAdmRolxUsuarios) {
-		this.tbAdmRolxUsuarios = tbAdmRolxUsuarios;
-	}
-
-}

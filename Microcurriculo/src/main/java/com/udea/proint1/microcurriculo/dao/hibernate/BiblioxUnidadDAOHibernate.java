@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.BiblioxUnidadDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+//import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicBiblioxunidad;
-import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
+//import com.udea.proint1.microcurriculo.dto.TbMicEvaluacion;
 import com.udea.proint1.microcurriculo.dto.TbMicUnidad;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -85,6 +85,7 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 		return BiblioxUnidad;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad()
 			throws ExcepcionesDAO {
@@ -109,6 +110,7 @@ public class BiblioxUnidadDAOHibernate extends HibernateDaoSupport implements Bi
 		return BibliosxUnidad;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicBiblioxunidad> listadoBiblioxUnidad(TbMicUnidad unidad)
 			throws ExcepcionesDAO {

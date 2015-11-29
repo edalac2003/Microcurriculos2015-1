@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+extraProperties=sonar.jdbc.username\=sonarqube\r\nsonar.host.url\=http\://localhost\:9000/\r\nsonar.jdbc.password\=sonarqube\r\nsonar.jdbc.url\=jdbc\:mysql\://localhost\:9000/sonarqube?useUnicode\=true&characterEncoding\=utf8&rewriteBatchedStatements\=true\r\nsonar.scm.disabled\=true
+projectKey=com.udea.isis\:ProInt2015-1
+serverUrl=http\://localhost\:9000
+version=2

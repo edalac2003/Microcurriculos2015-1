@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.udea.proint1.microcurriculo.dao.MicrocurriculoDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+//import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
@@ -84,6 +84,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculos() throws ExcepcionesDAO {
 		Session session = null;
@@ -107,6 +108,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		return microcurriculos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorSemestre(String idSemestre) throws ExcepcionesDAO {
 		Session session = null;
@@ -132,6 +134,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		return microcurriculos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorNucleo(
 			TbAdmNucleo nucleo) throws ExcepcionesDAO {
@@ -156,6 +159,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		return microcurriculos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorMateria(
 			TbAdmMateria materia) throws ExcepcionesDAO {
@@ -209,6 +213,7 @@ public class MicrocurriculoDAOHibernate extends HibernateDaoSupport implements M
 		return microcurriculos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicMicrocurriculo> listarMicrocurriculosPorResponsable(
 			TbAdmPersona responsable) throws ExcepcionesDAO {

@@ -14,6 +14,7 @@ import com.udea.proint1.microcurriculo.ngc.ObjetivoxMicroNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
+@SuppressWarnings("unused")
 public class ObjetivoxMicroNGCImpl implements ObjetivoxMicroNGC {
 
 	private static Logger log=Logger.getLogger(ObjetivoxMicroNGC.class);

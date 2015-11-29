@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.dto;
 // Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,11 +10,15 @@ import java.util.Set;
  */
 public class TbMicObjetivo implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbIdobjetivo;
 	private String vrDescripcion;
 	private String vrModusuario;
 	private Date dtModfecha;
-	private Set tbMicObjetivosxmicros = new HashSet(0);
+//	private Set tbMicObjetivosxmicros = new HashSet(0);
 
 	
 	public TbMicObjetivo() {
@@ -29,11 +32,12 @@ public class TbMicObjetivo implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public TbMicObjetivo(String vrDescripcion, String vrModusuario, Date dtModfecha, Set tbMicObjetivosxmicros) {
 		this.vrDescripcion = vrDescripcion;
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
-		this.tbMicObjetivosxmicros = tbMicObjetivosxmicros;
+//		this.tbMicObjetivosxmicros = tbMicObjetivosxmicros;
 	}
 
 	public int getNbIdobjetivo() {
@@ -68,12 +72,6 @@ public class TbMicObjetivo implements java.io.Serializable {
 		this.dtModfecha = dtModfecha;
 	}
 
-	public Set getTbMicObjetivosxmicros() {
-		return this.tbMicObjetivosxmicros;
-	}
 
-	public void setTbMicObjetivosxmicros(Set tbMicObjetivosxmicros) {
-		this.tbMicObjetivosxmicros = tbMicObjetivosxmicros;
-	}
 
 }

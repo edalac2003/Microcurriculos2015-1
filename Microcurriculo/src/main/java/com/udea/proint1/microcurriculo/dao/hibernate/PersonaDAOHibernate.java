@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+//import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -13,7 +13,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.udea.proint1.microcurriculo.dao.PersonaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmRol;
-import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
+//import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 /**
@@ -128,6 +128,7 @@ public class PersonaDAOHibernate extends HibernateDaoSupport implements PersonaD
 		return hallado;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmPersona> listarPersonas() throws ExcepcionesDAO {
 		Session session = null;

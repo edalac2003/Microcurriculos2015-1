@@ -6,7 +6,7 @@ import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivo;
 import com.udea.proint1.microcurriculo.dto.TbMicObjetivoxmicro;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
-import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
+//import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface ObjetivoxMicroDAO {
 	

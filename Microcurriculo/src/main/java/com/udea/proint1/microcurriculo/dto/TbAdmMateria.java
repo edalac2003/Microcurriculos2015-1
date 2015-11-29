@@ -3,7 +3,6 @@ package com.udea.proint1.microcurriculo.dto;
 // Generated 21/10/2014 12:17:56 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,6 +10,10 @@ import java.util.Set;
  */
 public class TbAdmMateria implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String vrIdmateria;
 	private TbAdmNucleo tbAdmNucleo;
 	private TbAdmArea tbAdmArea;
@@ -27,12 +30,12 @@ public class TbAdmMateria implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 	private int blEstado;
-	private Set tbMicMicrocurriculo = new HashSet(0);
-	private Set tbMicMateriasxpensums = new HashSet(0);
-	private Set tbAdmPrerrequisitosesForVrMateria = new HashSet(0);
-	private Set tbAdmCorrequisitosesForVrCorrequisito = new HashSet(0);
-	private Set tbAdmPrerrequisitosesForVrPrerrequisito = new HashSet(0);
-	private Set tbAdmCorrequisitosesForVrMateria = new HashSet(0);
+//	private Set tbMicMicrocurriculo = new HashSet(0);
+//	private Set tbMicMateriasxpensums = new HashSet(0);
+//	private Set tbAdmPrerrequisitosesForVrMateria = new HashSet(0);
+//	private Set tbAdmCorrequisitosesForVrCorrequisito = new HashSet(0);
+//	private Set tbAdmPrerrequisitosesForVrPrerrequisito = new HashSet(0);
+//	private Set tbAdmCorrequisitosesForVrMateria = new HashSet(0);
 
 	public TbAdmMateria() {
 	}
@@ -69,6 +72,7 @@ public class TbAdmMateria implements java.io.Serializable {
 		this.blEstado = blEstado;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public TbAdmMateria(String vrIdmateria, TbAdmNucleo tbAdmNucleo,
 			String vrNombre, int nbSemestre, int nbCreditos,
 			int blHabilitable, int blValidable,
@@ -93,12 +97,12 @@ public class TbAdmMateria implements java.io.Serializable {
 		this.vrModusuario = vrModusuario;
 		this.dtModfecha = dtModfecha;
 		this.blEstado = blEstado;
-		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
-		this.tbMicMateriasxpensums = tbMicMateriasxpensums;
-		this.tbAdmPrerrequisitosesForVrMateria = tbAdmPrerrequisitosesForVrMateria;
-		this.tbAdmCorrequisitosesForVrCorrequisito = tbAdmCorrequisitosesForVrCorrequisito;
-		this.tbAdmPrerrequisitosesForVrPrerrequisito = tbAdmPrerrequisitosesForVrPrerrequisito;
-		this.tbAdmCorrequisitosesForVrMateria = tbAdmCorrequisitosesForVrMateria;
+//		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
+//		this.tbMicMateriasxpensums = tbMicMateriasxpensums;
+//		this.tbAdmPrerrequisitosesForVrMateria = tbAdmPrerrequisitosesForVrMateria;
+//		this.tbAdmCorrequisitosesForVrCorrequisito = tbAdmCorrequisitosesForVrCorrequisito;
+//		this.tbAdmPrerrequisitosesForVrPrerrequisito = tbAdmPrerrequisitosesForVrPrerrequisito;
+//		this.tbAdmCorrequisitosesForVrMateria = tbAdmCorrequisitosesForVrMateria;
 	}
 
 	public String getVrIdmateria() {
@@ -231,56 +235,4 @@ public class TbAdmMateria implements java.io.Serializable {
 		this.vrAlias = vrAlias;
 	}
 
-	public Set getTbMicMicrocurriculo() {
-		return this.tbMicMicrocurriculo;
 	}
-
-	public void setTbMicMicrocurriculo(Set tbMicMicrocurriculo) {
-		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
-	}
-
-	public Set getTbMicMateriasxpensums() {
-		return this.tbMicMateriasxpensums;
-	}
-
-	public void setTbMicMateriasxpensums(Set tbMicMateriasxpensums) {
-		this.tbMicMateriasxpensums = tbMicMateriasxpensums;
-	}
-
-	public Set getTbAdmPrerrequisitosesForVrMateria() {
-		return this.tbAdmPrerrequisitosesForVrMateria;
-	}
-
-	public void setTbAdmPrerrequisitosesForVrMateria(
-			Set tbAdmPrerrequisitosesForVrMateria) {
-		this.tbAdmPrerrequisitosesForVrMateria = tbAdmPrerrequisitosesForVrMateria;
-	}
-
-	public Set getTbAdmCorrequisitosesForVrCorrequisito() {
-		return this.tbAdmCorrequisitosesForVrCorrequisito;
-	}
-
-	public void setTbAdmCorrequisitosesForVrCorrequisito(
-			Set tbAdmCorrequisitosesForVrCorrequisito) {
-		this.tbAdmCorrequisitosesForVrCorrequisito = tbAdmCorrequisitosesForVrCorrequisito;
-	}
-
-	public Set getTbAdmPrerrequisitosesForVrPrerrequisito() {
-		return this.tbAdmPrerrequisitosesForVrPrerrequisito;
-	}
-
-	public void setTbAdmPrerrequisitosesForVrPrerrequisito(
-			Set tbAdmPrerrequisitosesForVrPrerrequisito) {
-		this.tbAdmPrerrequisitosesForVrPrerrequisito = tbAdmPrerrequisitosesForVrPrerrequisito;
-	}
-
-	public Set getTbAdmCorrequisitosesForVrMateria() {
-		return this.tbAdmCorrequisitosesForVrMateria;
-	}
-
-	public void setTbAdmCorrequisitosesForVrMateria(
-			Set tbAdmCorrequisitosesForVrMateria) {
-		this.tbAdmCorrequisitosesForVrMateria = tbAdmCorrequisitosesForVrMateria;
-	}
-
-}

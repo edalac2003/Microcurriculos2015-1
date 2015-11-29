@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
 import com.udea.proint1.microcurriculo.dto.TbAdmRol;
-import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
+//import com.udea.proint1.microcurriculo.dto.TbAdmTipopersona;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public interface PersonaDAO {

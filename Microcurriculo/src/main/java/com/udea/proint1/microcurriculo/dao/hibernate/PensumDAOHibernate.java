@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.PensumDAO;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.dto.TbMicPensum;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
@@ -47,6 +47,7 @@ public class PensumDAOHibernate extends HibernateDaoSupport implements PensumDAO
 		return pensum;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbMicPensum> listarPensum() throws ExcepcionesDAO {
 		Session session = null;

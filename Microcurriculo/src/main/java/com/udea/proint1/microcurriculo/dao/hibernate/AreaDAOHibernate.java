@@ -1,6 +1,6 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,8 +10,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.AreaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmArea;
-import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
-import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
+//import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
+//import com.udea.proint1.microcurriculo.dto.TbAdmNucleo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class AreaDAOHibernate extends HibernateDaoSupport implements AreaDAO {
@@ -38,6 +38,7 @@ public class AreaDAOHibernate extends HibernateDaoSupport implements AreaDAO {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmArea> listarAreas() throws ExcepcionesDAO {
 		Session session = null;
@@ -61,6 +62,7 @@ public class AreaDAOHibernate extends HibernateDaoSupport implements AreaDAO {
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmArea> listarAreasPorNucleo(String nucleo)	throws ExcepcionesDAO {
 		

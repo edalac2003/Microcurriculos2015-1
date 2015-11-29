@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.udea.proint1.microcurriculo.dto.TbAdmDepartamento;
 import com.udea.proint1.microcurriculo.dto.TbAdmPais;
-import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
+//import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 public interface DepartamentoNGC {

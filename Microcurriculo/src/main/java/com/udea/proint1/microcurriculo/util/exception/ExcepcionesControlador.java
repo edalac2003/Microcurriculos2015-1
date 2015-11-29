@@ -2,6 +2,11 @@ package com.udea.proint1.microcurriculo.util.exception;
 
 public class ExcepcionesControlador extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ExcepcionesControlador() {
 		// TODO Auto-generated constructor stub
 	}

@@ -35,23 +35,6 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmUsuarioses" table="TB_ADM_USUARIOS" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="VR_PERSONA" length="15" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmUsuario" />
-        </set>
-        <set name="tbAdmDocentesxdependencias" table="TB_ADM_DOCENTEXDEPENDENCIA" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="VR_DOCENTE" length="15" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia" />
-        </set>
-<!--         <set name="tbAdmRolesxPersonas" table="TB_ADM_ROLXUSUARIO" inverse="true" lazy="true" fetch="select"> -->
-<!--             <key> -->
-<!--                 <column name="VR_PERSONA" length="15" not-null="true" /> -->
-<!--             </key> -->
-<!--             <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario" /> -->
-<!--         </set> -->
+        
     </class>
 </hibernate-mapping>

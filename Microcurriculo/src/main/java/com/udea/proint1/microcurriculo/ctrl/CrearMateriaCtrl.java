@@ -45,9 +45,9 @@ import com.udea.proint1.microcurriculo.dto.TbAdmPrerrequisito;
 import com.udea.proint1.microcurriculo.dto.TbAdmRolxUsuario;
 import com.udea.proint1.microcurriculo.dto.TbAdmSemestre;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicEstado;
-import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+//import com.udea.proint1.microcurriculo.dto.TbMicEstado;
+//import com.udea.proint1.microcurriculo.dto.TbMicMateriaxpensum;
+//import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.ngc.AreaNGC;
 import com.udea.proint1.microcurriculo.ngc.CorrequisitoNGC;
 import com.udea.proint1.microcurriculo.ngc.DependenciaNGC;
@@ -58,8 +58,9 @@ import com.udea.proint1.microcurriculo.ngc.impl.NucleoNGCImpl;
 import com.udea.proint1.microcurriculo.ngc.impl.SemestreNGCImpl;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
-import com.udea.proint1.microcurriculo.util.exception.Validaciones;
+//import com.udea.proint1.microcurriculo.util.exception.Validaciones;
 
+@SuppressWarnings({ "serial", "unused", "rawtypes" })
 public class CrearMateriaCtrl extends GenericForwardComposer{
 
 	private static Logger logger = Logger.getLogger(CrearMateriaCtrl.class);
@@ -952,15 +953,15 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 								materia.setTbAdmArea(ListadoAreas.get(cmbArea.getSelectedIndex()));
 								materia.setTbAdmNucleo(listadoNucleos.get(cmbNucleo.getSelectedIndex()));
 								materia.setBlEstado(1);
-								if (ckbHabilitable.getValue())
+								if (ckbHabilitable.isChecked())
 									materia.setBlHabilitable(1);
 								else
 									materia.setBlHabilitable(0);
-								if(ckbValidable.getValue())
+								if(ckbValidable.isChecked())
 									materia.setBlValidable(1);
 								else
 									materia.setBlHabilitable(0);
-								if(ckbClasificable.getValue())
+								if(ckbClasificable.isChecked())
 									materia.setBlClasificable(1);
 								else
 									materia.setBlClasificable(0);
@@ -1257,6 +1258,7 @@ public class CrearMateriaCtrl extends GenericForwardComposer{
 		lblUsuarioLogin.setValue(userName);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 //		if(Executions.getCurrent().getSession().hasAttribute("rolxUsuario")){

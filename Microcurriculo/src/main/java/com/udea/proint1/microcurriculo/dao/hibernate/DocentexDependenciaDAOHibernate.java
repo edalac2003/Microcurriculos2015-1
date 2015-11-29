@@ -1,9 +1,12 @@
 package com.udea.proint1.microcurriculo.dao.hibernate;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
-import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
+
+
+
+//import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -14,7 +17,7 @@ import com.udea.proint1.microcurriculo.dao.DocentexDependenciaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmDocentexDependencia;
 import com.udea.proint1.microcurriculo.dto.TbAdmPersona;
-import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
+//import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport implements DocentexDependenciaDAO {
@@ -54,6 +57,7 @@ public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport impleme
 		return docentesxDependencia;
 	}
 
+	@SuppressWarnings({ "static-access", "unchecked" })
 	@Override
 	public List<TbAdmDocentexDependencia> listarDocentesxDependencia() throws ExcepcionesDAO {
 		Session session = null;
@@ -75,6 +79,7 @@ public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport impleme
 	}
 
 
+	@SuppressWarnings({ "unused", "unchecked" })
 	@Override
 	public List<TbAdmDocentexDependencia> listaDocentesxDependencia(TbAdmDependencia dependencia) throws ExcepcionesDAO {
 		Session session = null;
@@ -95,6 +100,7 @@ public class DocentexDependenciaDAOHibernate extends HibernateDaoSupport impleme
 		return null;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmDocentexDependencia> listarDependenciasxDocente(TbAdmPersona docente) throws ExcepcionesDAO {
 		Session session = null;

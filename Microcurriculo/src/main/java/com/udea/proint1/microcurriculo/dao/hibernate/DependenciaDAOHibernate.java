@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+//import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,9 +12,9 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.udea.proint1.microcurriculo.dao.DependenciaDAO;
 import com.udea.proint1.microcurriculo.dto.TbAdmDependencia;
-import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
+//import com.udea.proint1.microcurriculo.dto.TbAdmMateria;
 import com.udea.proint1.microcurriculo.dto.TbAdmUnidadAcademica;
-import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
+//import com.udea.proint1.microcurriculo.dto.TbMicMicrocurriculo;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 
 public class DependenciaDAOHibernate extends HibernateDaoSupport implements DependenciaDAO {
@@ -118,6 +118,7 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmDependencia> listarDependencias() throws ExcepcionesDAO {
 		Session session = null;
@@ -166,6 +167,7 @@ public class DependenciaDAOHibernate extends HibernateDaoSupport implements Depe
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TbAdmDependencia> listarDependenciasPorUnidad(TbAdmUnidadAcademica unidad) throws ExcepcionesDAO {
 		List<TbAdmDependencia> listaDependencias = null;
