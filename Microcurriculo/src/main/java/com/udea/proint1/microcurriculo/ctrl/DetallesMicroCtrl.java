@@ -72,6 +72,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
  * @author Elmer Urrea & Edwin Acosta
  *
  */
+@SuppressWarnings("rawtypes")
 public class DetallesMicroCtrl extends GenericForwardComposer{
 	
 	/**

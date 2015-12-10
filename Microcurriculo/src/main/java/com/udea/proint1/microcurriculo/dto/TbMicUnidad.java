@@ -18,10 +18,7 @@ public class TbMicUnidad implements java.io.Serializable {
 	private String vrNombre;
 	private String vrModusuario;
 	private Date dtModfecha;
-//	private Set tbMicTemasxunidads = new HashSet(0);
-//	private Set tbMicUnidadesxmicros = new HashSet(0);
-//	private Set tbMicBiblioxunidads = new HashSet(0);
-
+	
 	public TbMicUnidad() {
 		super();
 	}

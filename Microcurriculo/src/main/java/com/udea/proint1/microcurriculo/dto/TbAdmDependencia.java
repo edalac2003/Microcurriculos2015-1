@@ -20,8 +20,6 @@ public class TbAdmDependencia implements java.io.Serializable {
 	private TbAdmPersona vrResponsable;
 	private String vrModusuario;
 	private Date dtModfecha;
-//	private Set tbAdmNucleo = new HashSet(0);
-//	private Set tbAdmDocentexDependencias = new HashSet(0);
 
 	public TbAdmDependencia() {
 		super();

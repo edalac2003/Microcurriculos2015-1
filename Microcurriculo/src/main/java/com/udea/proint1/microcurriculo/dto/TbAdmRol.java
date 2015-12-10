@@ -14,10 +14,8 @@ public class TbAdmRol implements java.io.Serializable{
 	private String vrDescripcion;
 	private String vrModusuario;
 	private Date dtModfecha;
-//	private Set tbAdmRolxUsuarios = new HashSet(0); 
 	
 	public TbAdmRol() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public TbAdmRol(Integer nbId, String vrDescripcion) {

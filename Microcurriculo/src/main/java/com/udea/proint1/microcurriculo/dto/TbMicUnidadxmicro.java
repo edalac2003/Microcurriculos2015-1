@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class TbMicUnidadxmicro implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbId;
 	private TbMicUnidad tbMicUnidad;
 	private TbMicMicrocurriculo tbMicMicrocurriculo;

@@ -17,7 +17,13 @@ import com.udea.proint1.microcurriculo.ngc.SemestreNGC;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
+@SuppressWarnings("rawtypes")
 public class EventosPanelDuplicarMicro extends GenericForwardComposer {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(EventosPanelDuplicarMicro.class);
 	

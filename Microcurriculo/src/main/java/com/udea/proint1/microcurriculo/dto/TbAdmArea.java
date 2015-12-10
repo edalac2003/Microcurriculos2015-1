@@ -19,8 +19,7 @@ public class TbAdmArea {
 	private String vrAlias;
 	private TbAdmPersona vrResponsable;
 	private String vrModusuario;
-	private Date dtModfecha;	
-//	private Set tbAdmMateriases = new HashSet(0);
+	private Date dtModfecha;
 	
 	public TbAdmArea() {
 		super();

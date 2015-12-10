@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class TbAdmDocentexDependencia implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbId;
 	private TbAdmDependencia tbAdmDependencia;
 	private TbAdmPersona tbAdmPersona;

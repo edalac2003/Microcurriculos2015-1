@@ -19,8 +19,6 @@ public class TbAdmDepartamento implements java.io.Serializable {
 	private String vrNombres;
 	private String vrModusuario;
 	private Date dtModfecha;
-//	private Set tbAdmCiudad = new HashSet(0);
-
 	
 	public TbAdmDepartamento() {
 		super();

@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class TbMicSubtema implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbIdsubtema;
 	private String vrDescripcion;
 	private String vrModusuario;

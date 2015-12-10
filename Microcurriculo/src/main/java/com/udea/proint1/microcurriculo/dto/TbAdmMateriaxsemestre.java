@@ -11,8 +11,7 @@ public class TbAdmMateriaxsemestre {
 	private String dtModUsuario;
 	private Date dtModfecha;
 
-	public TbAdmMateriaxsemestre(TbAdmMateria tbAdmMateria,
-			TbAdmSemestre tbAdmSemestre, Date vrModusuario,
+	public TbAdmMateriaxsemestre(TbAdmMateria tbAdmMateria,	TbAdmSemestre tbAdmSemestre, Date vrModusuario,
 			String dtModUsuario, Date dtModfecha) {
 		super();
 		this.tbAdmMateria = tbAdmMateria;

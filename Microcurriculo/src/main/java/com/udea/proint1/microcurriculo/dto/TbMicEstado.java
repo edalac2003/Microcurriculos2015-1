@@ -18,7 +18,6 @@ public class TbMicEstado implements java.io.Serializable {
 	private String vrDescripcion;
 	private String vrModusuario;
 	private Date dtModfecha;
-//	private Set tbMicMicroxestados = new HashSet(0);
 
 	
 	public TbMicEstado() {

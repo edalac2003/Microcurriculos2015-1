@@ -24,36 +24,10 @@ public class TbMicMicrocurriculo implements java.io.Serializable {
 	private TbMicEstado tbMicEstado;
 	private String vrModusuario;
 	private Date dtModfecha;
-//	private Set tbMicObjetivosxmicros = new HashSet(0);
-//	private Set tbMicUnidadesxmicros = new HashSet(0);
-//	private Set tbMicMicroxestados = new HashSet(0);
 
 	public TbMicMicrocurriculo() {
 		
 	}
-
-//	public TbMicMicrocurriculo(String vrIdmicrocurriculo,
-//			TbAdmMateria tbAdmMateria, TbAdmSemestre tbAdmSemestre,
-//			String vrProposito, String vrJustificacion, String vrResumen,
-//			TbAdmPersona tbAdmPersona, String vrModusuario, Date dtModfecha,
-//			Set tbMicObjetivosxmicros, Set tbMicUnidadesxmicros,
-//			Set tbMicMicroxestados) {
-//		super();
-//		this.vrIdmicrocurriculo = vrIdmicrocurriculo;
-//		this.tbAdmMateria = tbAdmMateria;
-//		this.tbAdmSemestre = tbAdmSemestre;
-//		this.vrProposito = vrProposito;
-//		this.vrJustificacion = vrJustificacion;
-//		this.vrResumen = vrResumen;
-//		this.tbAdmPersona = tbAdmPersona;
-//		this.vrModusuario = vrModusuario;
-//		this.dtModfecha = dtModfecha;
-//		this.tbMicObjetivosxmicros = tbMicObjetivosxmicros;
-//		this.tbMicUnidadesxmicros = tbMicUnidadesxmicros;
-//		this.tbMicMicroxestados = tbMicMicroxestados;
-//	}
-
-	
 
 	public TbMicMicrocurriculo(String vrIdmicrocurriculo,
 		TbAdmMateria tbAdmMateria, TbAdmSemestre tbAdmSemestre,

@@ -12,8 +12,7 @@ public class TbAdmHistorico {
 	private String vrModusuario;
 	private Date dtModfecha;
 	
-	public TbAdmHistorico(Date dtFecha,
-			TbMicMicrocurriculo tbMicMicrocurriculo, String vrCampo,
+	public TbAdmHistorico(Date dtFecha,	TbMicMicrocurriculo tbMicMicrocurriculo, String vrCampo,
 			String vrUsuario, String vrModusuario, Date dtModfecha) {
 		super();
 		this.dtFecha = dtFecha;

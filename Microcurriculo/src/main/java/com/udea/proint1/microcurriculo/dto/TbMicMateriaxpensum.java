@@ -9,6 +9,10 @@ import java.util.Date;
  */
 public class TbMicMateriaxpensum implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int nbId;
 	private TbAdmMateria tbAdmMateria;
 	private TbMicPensum tbMicPensum;

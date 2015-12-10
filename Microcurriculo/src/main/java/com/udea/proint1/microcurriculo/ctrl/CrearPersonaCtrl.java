@@ -32,8 +32,13 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesDAO;
 import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 
 
+@SuppressWarnings("rawtypes")
 public class CrearPersonaCtrl extends GenericForwardComposer{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Logger logger = Logger.getLogger(CrearMicroCtrl.class);
 	private static String modUsuario = "SYSTEM";
 	private static Date modFecha = new Date();

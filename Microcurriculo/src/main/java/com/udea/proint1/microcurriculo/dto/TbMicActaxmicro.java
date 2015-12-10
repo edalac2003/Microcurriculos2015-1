@@ -14,8 +14,7 @@ public class TbMicActaxmicro {
 		super();
 	}
 
-	public TbMicActaxmicro(int nbIdactas, TbMicMicrocurriculo tbMicMicrocurriculo,
-			TbAdmUsuario tbAdmUsuario) {
+	public TbMicActaxmicro(int nbIdactas, TbMicMicrocurriculo tbMicMicrocurriculo, TbAdmUsuario tbAdmUsuario) {
 		this.nbIdactas = nbIdactas;
 		this.tbMicMicrocurriculo = tbMicMicrocurriculo;
 		this.tbAdmUsuario = tbAdmUsuario;

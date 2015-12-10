@@ -30,12 +30,6 @@ public class TbAdmMateria implements java.io.Serializable {
 	private String vrModusuario;
 	private Date dtModfecha;
 	private int blEstado;
-//	private Set tbMicMicrocurriculo = new HashSet(0);
-//	private Set tbMicMateriasxpensums = new HashSet(0);
-//	private Set tbAdmPrerrequisitosesForVrMateria = new HashSet(0);
-//	private Set tbAdmCorrequisitosesForVrCorrequisito = new HashSet(0);
-//	private Set tbAdmPrerrequisitosesForVrPrerrequisito = new HashSet(0);
-//	private Set tbAdmCorrequisitosesForVrMateria = new HashSet(0);
 
 	public TbAdmMateria() {
 	}

@@ -21,7 +21,6 @@ public class TbMicBibliografia implements java.io.Serializable {
 	private Character blTipo;
 	private String vrModusuario;
 	private Date dtModfecha;
-//	private Set tbMicBiblioxunidads = new HashSet(0);
 
 	
 	public TbMicBibliografia() {

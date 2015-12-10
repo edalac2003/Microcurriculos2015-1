@@ -19,10 +19,7 @@ public class TbMicPensum implements java.io.Serializable {
 	private Date dtFechainicio;
 	private Date dtFechafin;
 	private String vrModusuario;
-	private Date dtModfecha;
-//	private Set tbMicMateriasxpensums = new HashSet(0);
-
-	
+	private Date dtModfecha;	
 	public TbMicPensum() {
 		super();
 	}

@@ -344,4 +344,11 @@
         </plugins>
     </build>       
 
+	<distributionManagement>
+	    <repository>
+	        <id>srvlin01.ingenieriacreativa.com</id>
+	        <name>srvlin01.ingenieriacreativa.com-releases</name>
+	        <url>http://192.168.16.120:8081/artifactory/ext-release-local</url>
+	    </repository>
+	</distributionManagement>
 </project>
