@@ -41,7 +41,7 @@ import com.udea.proint1.microcurriculo.util.exception.ExcepcionesLogica;
 /**
  * Gestiona la carga de datos a las vistas: listado, duplicado y consulta de microcurriculos.
  * @author Elmer Urrea & Edwin Acosta
- *  prueba para jenkins
+ *  prueba para jenkins 2
  */
 @SuppressWarnings("rawtypes")
 public class CargarDatosFormas2 extends GenericForwardComposer{
