@@ -23,11 +23,5 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmDependencias" table="TB_ADM_DEPENDENCIA" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="VR_UNIDAD" length="2" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDependencia" />
-        </set>
     </class>
 </hibernate-mapping>

@@ -14,21 +14,15 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-	
-  <dependencies>  
+  <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
-    </dependency>    
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
     
-    <dependency>
-		<groupId>org.eclipse.jetty</groupId>
-		<artifactId>jetty-jndi</artifactId>
-		<version>9.3.0.M2</version>
-	</dependency>
-    
-<!--     DEPENDENCIAS DE HIBERNATE -->
+    <!--     DEPENDENCIAS DE HIBERNATE -->
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-annotations</artifactId>
@@ -66,69 +60,7 @@
 		<version>3.2.0.ga</version>
 	</dependency>
 	
-<!--    DEPENDENCIAS DE SPRING -->
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-aop</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-beans</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-context</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-core</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-expression</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-jdbc</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-orm</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-test</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-tx</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-web</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-webmvc</artifactId>
-		<version>3.2.0.RELEASE</version>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-hibernate3</artifactId>
-		<version>2.0.8</version>
-	</dependency>
-	
-<!--     DEPENDENCIAS DE ZK -->
+	<!--     DEPENDENCIAS DE ZK -->
     <dependency>
 		<groupId>org.zkoss.common</groupId>
 		<artifactId>zcommon</artifactId>
@@ -139,6 +71,7 @@
 		<artifactId>zul</artifactId>
 		<version>7.0.3</version>
 	</dependency>
+
 	<dependency>
 		<groupId>org.zkoss.zk</groupId>
 		<artifactId>zk</artifactId>
@@ -170,12 +103,6 @@
 		<version>7.0.3</version>
 	</dependency>
 	
-<!-- 	ESTA ES NUEVA -->
-	<dependency>  
-	    <groupId>org.primefaces</groupId>  
-	    <artifactId>primefaces</artifactId>  
-	    <version>5.2</version>  
-	</dependency> 
 	
 <!-- 	DEPENDENCIAS COMMONS -->
 	<dependency>
@@ -203,11 +130,11 @@
 		<artifactId>commons-fileupload</artifactId>
 		<version>1.2</version>
 	</dependency>
-	<dependency>
+	<!--<dependency>
 		<groupId>com.google.code.maven-play-plugin.org.apache.commons</groupId>
 		<artifactId>commons-javaflow</artifactId>
 		<version>1209105</version>
-	</dependency>
+	</dependency> -->
 	<dependency>
 		<groupId>commons-pool</groupId>
 		<artifactId>commons-pool</artifactId>
@@ -255,41 +182,206 @@
 		<artifactId>jta</artifactId>
 		<version>1.1</version>
 	</dependency>
+	
+<!--    DEPENDENCIAS DE SPRING -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-aop</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-beans</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-expression</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>4.1.7.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-hibernate3</artifactId>
+		<version>2.0.8</version>
+	</dependency>		
+
+	<!-- the core, which includes Streaming API, shared low-level abstractions 
+		(but NOT data-binding) -->
 <!-- 	<dependency> -->
-<!-- 	    <groupId>com.oracle</groupId> -->
-<!-- 	    <artifactId>ojdbc6</artifactId> -->
-<!-- 	    <version>11.2.0.1.0</version> -->
-<!-- 	</dependency>     -->
+<!-- 		<groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 		<artifactId>jackson-core</artifactId> -->
+<!-- 		<version>2.1.4</version> -->
+<!-- 	</dependency> -->
+
+	<!-- Just the annotations; use this dependency if you want to attach annotations 
+		to classes without connecting them to the code. -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 		<artifactId>jackson-annotations</artifactId> -->
+<!-- 		<version>2.1.4</version> -->
+<!-- 	</dependency> -->
+
+	<!-- databinding; ObjectMapper, JsonNode and related classes are here -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>COM.FASTERXML.JACKSON.CORE</groupId> -->
+<!-- 		<artifactId>JACKSON-DATABIND</artifactId> -->
+<!-- 		<version>2.1.4</version> -->
+<!-- 	</dependency> -->
+	
+<!-- 	<dependency> -->
+<!-- 		<groupId>ORG.SPRINGFRAMEWORK.WS</groupId> -->
+<!-- 		<artifactId>SPRING-WS</artifactId> -->
+<!-- 		<version>2.1.4.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>ORG.SPRINGFRAMEWORK.BOOT</groupId> -->
+<!-- 		<ARTIFACTID>SPRING-BOOT-STARTER-WEB</ARTIFACTID> -->
+<!-- 		<VERSION>1.2.6.RELEASE</VERSION> -->
+<!-- 	</DEPENDENCY> -->
+
+        
   </dependencies>
   
-   <build>
-   		<plugins>
-        	<plugin>  
-		        <artifactId>maven-compiler-plugin</artifactId>  
-		        <configuration>  
-		          <source>1.8</source>  
-		          <target>1.8</target>  
-		        <encoding>UTF-8</encoding>  
-		        </configuration>  
-	      	</plugin>
+  
+  
+  <build>
+	<plugins>
+<!-- 		<plugin> -->
+<!-- 			<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 			<artifactId>maven-compiler-plugin</artifactId> -->
+<!-- 			<version>3.3</version> -->
+<!-- 			<configuration> -->
+<!-- 				<source>1.7</source> -->
+<!-- 				<target>1.7</target> -->
+<!-- 				<debug>true</debug> -->
+<!-- 				<compilerArgument>-Xlint:all</compilerArgument> -->
+<!-- 				<showWarnings>true</showWarnings> -->
+<!-- 				<showDeprecation>true</showDeprecation> -->
+<!-- 			</configuration> -->
+<!-- 		</plugin> -->
+
+<!--		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.5.1</version>
+			<configuration>
+				<source>1.7</source>
+				<target>1.7</target>
+				<compilerArgument>-Xlint:all</compilerArgument>
+				<showWarnings>true</showWarnings>
+				<showDeprecation>true</showDeprecation>
+			</configuration>
+		</plugin>	-->
+		
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-eclipse-plugin</artifactId>
+			<version>2.10</version>
+			<configuration>
+				<additionalProjectnatures>
+					<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+				</additionalProjectnatures>
+				<additionalBuildcommands>
+					<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+				</additionalBuildcommands>
+				<downloadSources>true</downloadSources>
+				<downloadJavadocs>true</downloadJavadocs>
+			</configuration>
+		</plugin>
+			
+		<plugin>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>2.6</version>
+		</plugin>
+	</plugins>
+<!--         <plugins> -->
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-compiler-plugin</artifactId> -->
+<!-- 				<version>3.3</version> -->
+<!-- 				<configuration> -->
+<!-- 					<source>1.7</source> -->
+<!-- 					<target>1.7</target> -->
+<!-- 			        <debug>true</debug> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
+
+<!-- 	      	<plugin> -->
+<!--                 <groupId>org.apache.maven.plugins</groupId> -->
+<!--                 <artifactId>maven-compiler-plugin</artifactId> -->
+<!--                 <version>2.5.1</version> -->
+<!--                 <configuration> -->
+<!--                     <source>1.7</source> -->
+<!--                     <target>1.7</target> -->
+<!--                     <compilerArgument>-Xlint:all</compilerArgument> -->
+<!--                     <showWarnings>true</showWarnings> -->
+<!--                     <showDeprecation>true</showDeprecation> -->
+<!--                 </configuration> -->
+<!--             </plugin> -->
+
 <!-- 	      	<plugin>   -->
-<!-- 		        <groupId>org.apache.maven.plugins</groupId>   -->
-<!-- 		        <artifactId>maven-resources-plugin</artifactId>   -->
+<!-- 		        <groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-resources-plugin</artifactId> -->
+<!-- 				<version>2.7</version>   -->
 <!-- 		        <configuration>   -->
 <!-- 		          <encoding>UTF-8</encoding>   -->
 <!-- 		        </configuration>   -->
 <!-- 	      	</plugin>  -->
 <!-- 	      	<plugin>   -->
-<!-- 		        <groupId>org.apache.maven.plugins</groupId>   -->
-<!-- 		        <artifactId>maven-site-plugin</artifactId>   -->
+<!-- 		        <groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-site-plugin</artifactId> -->
+<!-- 				<version>3.4</version>   -->
 <!-- 		        <configuration>   -->
 <!-- 		          <inputEncoding>UTF-8</inputEncoding>   -->
 <!-- 		          <outputEncoding>UTF-8</outputEncoding>   -->
 <!-- 		        </configuration>   -->
 <!--       		</plugin>   -->
 <!--             <plugin> -->
-<!--                 <artifactId>maven-eclipse-plugin</artifactId> -->
-<!--                 <version>2.9</version> -->
+<!--                 <groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-eclipse-plugin</artifactId> -->
+<!-- 				<version>2.10</version> -->
 <!--                 <configuration> -->
 <!--                     <additionalProjectnatures> -->
 <!--                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature> -->
@@ -301,22 +393,11 @@
 <!--                     <downloadJavadocs>true</downloadJavadocs> -->
 <!--                 </configuration> -->
 <!--             </plugin> -->
-<!--             <plugin> -->
-<!--                 <groupId>org.apache.maven.plugins</groupId> -->
-<!--                 <artifactId>maven-compiler-plugin</artifactId> -->
-<!--                 <version>2.5.1</version> -->
-<!--                 <configuration> -->
-<!--                     <source>1.6</source> -->
-<!--                     <target>1.6</target> -->
-<!--                     <compilerArgument>-Xlint:all</compilerArgument> -->
-<!--                     <showWarnings>true</showWarnings> -->
-<!--                     <showDeprecation>true</showDeprecation> -->
-<!--                 </configuration> -->
-<!--             </plugin> -->
+            
 <!--             <plugin> -->
 <!--                 <groupId>org.codehaus.mojo</groupId> -->
-<!--                 <artifactId>exec-maven-plugin</artifactId> -->
-<!--                 <version>1.2.1</version> -->
+<!-- 				<artifactId>exec-maven-plugin</artifactId> -->
+<!-- 				<version>1.4.0</version> -->
 <!--                 <configuration> -->
 <!--                     <mainClass>org.test.int1.Main</mainClass> -->
 <!--                 </configuration> -->
@@ -330,25 +411,25 @@
 <!-- 			           <dest>target/classes</dest>   -->
 <!-- 			      </configuration>   -->
 <!-- 			      <executions>   -->
-<!--  			           <execution> -->
-<!--  			                 <goals> -->
-<!--  			                       <goal>native2ascii</goal> -->
-<!--  			                 </goals> -->
-<!--  			                 <configuration> -->
-<!--  			                       <encoding>UTF8</encoding> -->
-<!--  			                       <includes>messages*.properties</includes> -->
-<!--  			                 </configuration> -->
-<!--  			           </execution>  -->
+<!-- 			           <execution>   -->
+<!-- 			                 <goals>   -->
+<!-- 			                       <goal>native2ascii</goal>   -->
+<!-- 			                 </goals>   -->
+<!-- 			                 <configuration>   -->
+<!-- 			                       <encoding>UTF8</encoding>   -->
+<!-- 			                       <includes>messages*.properties</includes>    -->
+<!-- 			                 </configuration>   -->
+<!-- 			           </execution>   -->
 <!-- 			      </executions>   -->
 <!-- 			</plugin> -->
-        </plugins>
-    </build>       
-
-	<distributionManagement>
-	    <repository>
-	        <id>srvlin01.ingenieriacreativa.com</id>
-	        <name>srvlin01.ingenieriacreativa.com-releases</name>
-	        <url>http://192.168.16.120:8081/artifactory/ext-release-local</url>
-	    </repository>
-	</distributionManagement>
+<!--         </plugins>     -->		
+    </build> 
+	
+<!--     <distributionManagement> -->
+<!-- 	    <repository> -->
+<!-- 	        <id>localhost.localdomain</id> -->
+<!-- 	        <name>localhost.localdomain-releases</name> -->
+<!-- 	        <url>http://192.168.16.121:8081/artifactory/ext-release-local</url> -->
+<!-- 	    </repository> -->
+<!-- 	</distributionManagement> -->
 </project>

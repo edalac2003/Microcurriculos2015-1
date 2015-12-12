@@ -17,11 +17,5 @@
         <property name="dtModfecha" type="java.util.Date">
             <column name="DT_MODFECHA" />
         </property>
-        <set name="tbMicMicroxevaluaciones" table="TB_MIC_EVALUACIONXMICRO" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_IDEVALUACION" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbMicEvaluacionxmicro" />
-        </set>
     </class>
 </hibernate-mapping>

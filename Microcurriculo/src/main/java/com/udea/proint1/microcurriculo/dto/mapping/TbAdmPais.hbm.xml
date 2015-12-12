@@ -17,11 +17,5 @@
         <property name="dtModfecha" type="date">
             <column name="DT_MODFECHA" length="7" />
         </property>
-        <set name="tbAdmDepartamentoses" table="TB_ADM_DEPARTAMENTOS" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="NB_PAIS" precision="22" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.udea.proint1.microcurriculo.dto.TbAdmDepartamento" />
-        </set>
     </class>
 </hibernate-mapping>
